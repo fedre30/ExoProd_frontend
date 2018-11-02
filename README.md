@@ -1,3 +1,15 @@
+# Exotic Production (ExoProd)
+
+Webdocumentary project of groupe 9, W2 Semester 1.
+
+## Team
+
+* Yasmine Adrar
+* Federica Alfano
+* Thomas Deruel
+* Andy Dodakal
+* Enzo Giordano
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
