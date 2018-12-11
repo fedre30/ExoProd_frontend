@@ -31,12 +31,12 @@ const HomeComponent = styled.div
   width: 100%;
   height: 100vh;
   background: url(${backgroundImage}) no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
  
   }
   
   .title-container {
-    margin: 40vh auto;
+    margin: 30vh auto;
     text-align: center;
     width: 100%;
     height: 6rem;
@@ -48,14 +48,34 @@ const HomeComponent = styled.div
     font-family: ${Fonts.title};
     text-transform: uppercase;
     font-size: 4.58rem;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
   .subtitle {
     color: ${Colors.text};
     font-family: ${Fonts.subtitle};
     font-size: 2.3rem;
+    font-weight: 200;
   }
   
+  @media(max-width: 560px) {
+   .header {
+    background-size: cover;
+   }
+   
+    .title {
+    width: 70%;
+   
+    font-size: 2.2rem;
+    margin-bottom: 3.5rem;
+    line-height: 3rem;
+    padding:  0 0 0 4rem;
+  }
+  .subtitle {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+  }
+  
+  }
 
   `
 ;

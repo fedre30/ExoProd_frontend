@@ -1,6 +1,6 @@
 const Fonts = {
-  title: 'Palanquin, sans-serif',
-  subtitle: 'Palanquin Dark, sans-serif',
+  title: 'Palanquin Dark, sans-serif',
+  subtitle: 'Palanquin, regular',
   logo: 'Monoton, sans-serif',
   text: 'Futura, sans-serif',
 };

@@ -4,48 +4,22 @@ import styled from "styled-components";
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 
-class Menu extends Component {
+class Thumbnail extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      menuItems: [
-        {
-          name: 'Accueil',
-          link: '/'
-        },
-        {
-          name: 'Instruments',
-          link: '/instruments'
-        },
-        {
-          name: 'StudioProd',
-          link: '/studio'
-        },
-        {
-          name: 'A propos',
-          link: '/'
-        },
 
-      ],
-
-    }
   }
 
   render() {
     return (
-      <MenuComponent>
-        <Link to="/"><div className="logo">exoprod</div></Link>
-        <ul className="menu-list">
-          {this.state.menuItems.map(item =>(
-            <Link to={item.link}><li className="menu-item">{item.name}</li></Link>
-          ))}
-        </ul>
-      </MenuComponent>
+      <ThumbnailComponent>
+
+      </ThumbnailComponent>
     );
   }
 }
 
-const MenuComponent = styled.div
+const ThumbnailComponent = styled.div
   `
   width: 100%;
   display: flex;
@@ -79,8 +53,16 @@ const MenuComponent = styled.div
   font-size: 1.2rem;
   }
   
+ @media(max-width: 560px) {
+   
+  .logo {
+  margin:  0 auto;
+  text-align: center;
+  }
+ }
+  
   `
 ;
 
 
-export default Menu;
+export default Thumbnail;
