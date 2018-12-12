@@ -1,23 +1,45 @@
-import React from "react";
+import React, {Component} from "react";
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
 import backgroundImage from '../../assets/img/background_home.jpg';
+import { Grid } from 'semantic-ui-react'
+import Paragraph from "../../components/paragraph/Paragraph";
 
 
-const Home = () => (
-  <HomeComponent>
-    <Header>
-      <Menu/>
-      <div className="title-container">
-        <h2 className="title">Une expérience musicale inédite</h2>
-        <h3 className="subtitle">Découvrez des instruments uniques et amusez vous avec…</h3>
-      </div>
-    </Header>
-  </HomeComponent>
-);
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstParagraph: {
+        title: "Lorem",
+        text: "lorem ipsum"
+      }
+    }
+  }
 
+  render(){
+    return(
+      <HomeComponent>
+        <Header>
+          <Menu/>
+          <div className="title-container">
+            <h2 className="title">Une expérience musicale inédite</h2>
+            <h3 className="subtitle">Découvrez des instruments uniques et amusez vous avec…</h3>
+          </div>
+        </Header>
+        <firstSection>
+          <Grid columns={2}>
+            <Grid.Column width={7}>
+              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}/>
+            </Grid.Column>
+          </Grid>
+        </firstSection>
+      </HomeComponent>
+    )
+  }
+}
 
 const HomeComponent = styled.div
   `
@@ -31,7 +53,7 @@ const HomeComponent = styled.div
   `
 
 
-  const Header = styled.div `  
+const Header = styled.div`  
  width: 100%;
   height: 100vh;
   background: url(${backgroundImage}) no-repeat;
@@ -77,9 +99,18 @@ const HomeComponent = styled.div
   }
   
   }
+  
+  
 
 `
 ;
+
+const firstSection = styled.div `  
+  width: 100%;
+  height: 100vh;
+  
+
+`
 
 
 export default Home;
