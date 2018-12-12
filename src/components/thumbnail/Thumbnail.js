@@ -13,7 +13,11 @@ class Thumbnail extends Component {
   render() {
     return (
       <ThumbnailComponent>
+        <div className="outer-circle">
+          <div className="inner-circle">
 
+          </div>
+        </div>
       </ThumbnailComponent>
     );
   }
@@ -22,43 +26,14 @@ class Thumbnail extends Component {
 const ThumbnailComponent = styled.div
   `
   width: 100%;
-  display: flex;
-  padding: 2rem 1rem;
-  .logo {
-    margin: 1.2rem 3rem;
-    font-size: 2rem;
-    text-transform: uppercase;
-    color: ${Colors.text};
-    font-family: ${Fonts.logo};
-    
-  }
-  .menu-list{
-  display: flex;
+ height: 40vh;
+ 
+ .outer-circle {
   width: 100%;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
-  
-  }
-  
-  .menu-item {
-    list-style: none;
-    margin: 1rem 3rem;
-    
-    
-  }
-  
-  a {
-  color: ${Colors.text};
-  text-decoration: none;
-  font-size: 1.2rem;
-  }
-  
- @media(max-width: 560px) {
-   
-  .logo {
-  margin:  0 auto;
-  text-align: center;
-  }
+ }
+ 
+ .inner-circle {
+ 
  }
   
   `
