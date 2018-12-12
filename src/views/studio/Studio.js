@@ -2,15 +2,18 @@ import React from "react";
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
+import AudioPlayer from '../../components/studio/AudioPlayer';
+import { Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Grid, Image, Button } from 'semantic-ui-react';
+
 
 const Studio = () => (
   <StudioComponent>
     <h1>Menu</h1>
     <h1 id="title">Mélodie</h1>
+    <AudioPlayer/>
     <Grid verticalAlign='middle' centered columns={3}>
       <Grid.Column textAlign='center' width={3}>
         <Button className="btn-audio" circular icon='info' size='large'/>
