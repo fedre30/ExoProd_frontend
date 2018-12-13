@@ -82,6 +82,22 @@ const FooterComponent = styled.div
     a:hover {
       color: ${Colors.fourth}
     }
+    
+    @media(max-width: 560px) {
+      .logo {
+      font-size: 1rem;
+      }
+      
+      .link {
+      font-size: 0.8rem;
+      margin: 0 0.5rem 0.5rem 0;
+      }
+      
+      .link::after{
+        margin-left: 0.5rem;
+        }
+      
+    }
   
   
   
