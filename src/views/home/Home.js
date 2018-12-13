@@ -6,6 +6,14 @@ import Colors from '../../styles/colors';
 import { Grid } from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
+import {
+  ComposableMap,
+  ZoomableGroup,
+  Geographies,
+  Geography,
+  Marker,
+  Markers
+} from "react-simple-maps"
 
 //IMAGES
 import backgroundImage from '../../assets/img/background_home.jpg';
@@ -66,7 +74,20 @@ class Home extends Component {
           <div className="heading">
             <h4 className="heading-title">lorem ipsum</h4>
           </div>
-          <div className="map"></div>
+          <div className="map">
+            <ComposableMap>
+              <ZoomableGroup>
+                <Geographies geography={ "/path/to/your/topojson-map-file.json or geography object" }>
+                  {(geographies, projection) => geographies.map(geography => (
+                    <Geography key={ geography.id } geography={ geography } projection={ projection } />
+                  ))}
+                </Geographies>
+                <Markers>
+                  <Marker />
+                </Markers>
+              </ZoomableGroup>
+            </ComposableMap>
+          </div>
         </Sectionmap>
         <Footer/>
 
@@ -78,7 +99,7 @@ class Home extends Component {
 const HomeComponent = styled.div
   `
   width: 100%;
-  height: 500vh;
+  height: 400vh;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
