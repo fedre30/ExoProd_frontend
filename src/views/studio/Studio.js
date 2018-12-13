@@ -13,20 +13,21 @@ const Studio = () => (
   <StudioComponent>
     <h1>Menu</h1>
     <h1 id="title">Mélodie</h1>
-    <AudioPlayer/>
-    <Grid verticalAlign='middle' centered columns={3}>
-      <Grid.Column textAlign='center' width={3}>
-        <Button className="btn-audio" circular icon='info' size='large'/>
-      </Grid.Column>
 
-      <Grid.Column textAlign='center'width={4}>
-        <Button className="btn-audio" circular icon='play' size='huge'/>
+      <AudioPlayer/>
+    <Grid centered columns={2}>
+      <Grid.Column  circulartextAlign='center'>
+        <div size='large' className="studio-displayInstrument">
+          
+        </div>
       </Grid.Column>
-
-      <Grid.Column textAlign='center' width={3} >
-        <Button className="btn-audio" circular icon='volume off' size='large'/>
-      </Grid.Column>
-
+      <Grid.Row verticalAlign='middle' centered columns={1}>
+        <Grid.Column textAlign='center' >
+          <Button className="studio-btn-audio" circular icon='info' size='large'/>
+          <Button className="studio-btn-audio" circular icon='play' size='huge'/>
+          <Button className="studio-btn-audio" circular icon='volume off' size='large'/>
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
 
   </StudioComponent>
@@ -38,21 +39,25 @@ const StudioComponent = styled.div
   background: ${Colors.primary};
   background: linear-gradient(21deg, rgba(153,11,223,1) 0%, rgba(152,35,141,1) 100%);
   
-  #title{
+  #title {
     text-align:center;
     font-size: 24px;
     margin-bottom:16px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
   }
-  .ui.button.btn-audio{
+  .ui.button.studio-btn-audio {
     transition: all 0.3s ease;
     background-color:rgba(0,0,0,0.39);
     color:#FFFCF2;
   }
-  .ui.button.btn-audio:hover{
+  .ui.button.studio-btn-audio:hover {
     background-color:rgba(0,0,0,0.8);
   }
+  .studio-btn-audio:nth-child(2){
+    margin: 0 16px;
+  }
+
   `
 
 export default Studio;
