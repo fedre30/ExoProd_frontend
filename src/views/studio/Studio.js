@@ -14,8 +14,8 @@ const Studio = () => (
     <h1>Menu</h1>
     <h1 id="title">Mélodie</h1>
 
-      <AudioPlayer/>
-    <Grid centered columns={2}>
+      
+    <Grid centered columns={3}>
       <Grid.Row columns={1}>
         <Grid.Column centered>
           <div className="studio-display-instrument mobile">
@@ -23,6 +23,9 @@ const Studio = () => (
           </div>
         </Grid.Column>
       </Grid.Row>
+      <Grid verticalAlign='middle'>
+        <AudioPlayer/>
+      </Grid>
       <Grid.Row verticalAlign='middle' columns={1}>
         <Grid.Column textAlign='center' >
           <Button className="studio-btn-audio mobile" circular icon='info' size='large'/>

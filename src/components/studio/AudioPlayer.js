@@ -7,11 +7,9 @@ const AudioPlayer = () => (
     <AudioPlayerStyle>
         <div class="audioplayer-container">
             <p>0:00</p>
-            <input 
-                id="audioPlay" 
-                type="range" 
-                min="0" 
-                max="100"/>
+            <div class="audioplayer-progressbar-container">
+                <span class="audioplayer-progressbar_interactive"></span>
+            </div>
             <p>0:00</p>
         </div>
     </AudioPlayerStyle>
@@ -23,15 +21,43 @@ const AudioPlayerStyle = styled.div
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 16px;
+        width:100%;
+        margin: 16px 0;
     }
 
     .audioplayer-container p {
-        margin: 0 16px;
         opacity: 0.7;
         color: ${Colors.text}
         font-family: ${Fonts.text};
         font-size: 14px;
+        margin: 0;
+    }
+    .audioplayer-progressbar-container {
+        width: 200px;
+        height: 3px;
+        background: rgba(112, 121, 140, 0.5);
+        margin: 0 16px;
+        border-radius: 50px;
+        position: relative;
+    }
+    .audioplayer-progressbar_interactive {
+        position:absolute;
+        width: 100%;
+        height: 100%;
+        background: #FFFCF2;
+        left: 0;
+        border-radius: 50px;
+    }
+    .audioplayer-progressbar_interactive::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        right: -4.5px;
+        top: -2.5px;
+        border-radius: 50%;
+        z-index: 1;
+        background: #EAD7D1;
+        position: absolute;
     }
     `
 ;
