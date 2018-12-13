@@ -8,7 +8,7 @@ import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
 
 //IMAGES
-import backgroundImage from '../../assets/img/background_home.jpg';
+import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import Footer from "../../components/footer/Footer";
 
@@ -35,21 +35,22 @@ class Home extends Component {
       <HomeComponent>
         <Header>
           <Menu/>
-          <div className="title-container">
-            <h2 className="title">Un voyage musical intemporel</h2>
-            <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
-          </div>
-        </Header>
-        <Firstsection>
-          <Grid columns={12}>
-            <Grid.Column width={7}>
-              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text} direction={this.state.firstParagraph.direction}/>
+          <div className="heading">
+          <Grid columns={2}>
+            <Grid.Column>
+              <div className="title-container">
+                <h2 className="title">Un voyage musical intemporel</h2>
+                <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
+              </div>
             </Grid.Column>
-            <Grid.Column width={5}>
-              <Thumbnail/>
+            <Grid.Column>
+              <div className="header-image">
+                <img src={backgroundImage} alt="music notes and people"/>
+              </div>
             </Grid.Column>
           </Grid>
-        </Firstsection>
+          </div>
+        </Header>
         <Secondsection>
           <Grid columns={12}>
             <Grid.Column width={5}>
@@ -62,6 +63,16 @@ class Home extends Component {
             </Grid.Column>
           </Grid>
         </Secondsection>
+        <Firstsection>
+          <Grid columns={12}>
+            <Grid.Column width={7}>
+              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text} direction={this.state.firstParagraph.direction}/>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <Thumbnail/>
+            </Grid.Column>
+          </Grid>
+        </Firstsection>
         <Sectionmap>
           <div className="heading">
             <h4 className="heading-title">lorem ipsum</h4>
@@ -91,15 +102,24 @@ const HomeComponent = styled.div
 const Header = styled.div`  
  width: 100%;
   height: 100vh;
-  background: url(${backgroundImage}) no-repeat;
-  background-size: 100% 100%;
   .title-container {
-    margin: 30vh auto;
-    text-align: center;
+    margin: 30vh 5rem;
+    text-align: left;
     width: 100%;
     height: 6rem;
+  }
+  
+  .heading {
+    margin-top: 5rem;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: 100vh;
     
-    
+    img {
+    width: 100%;
+    }
   }
   .title {
     color: ${Colors.text};
@@ -121,17 +141,16 @@ const Header = styled.div`
    }
    
     .title {
-    width: 70%;
-   
-    font-size: 2.2rem;
-    margin-bottom: 3.5rem;
-    line-height: 3rem;
-    padding:  0 0 0 4rem;
-  }
+      width: 100%;
+      margin: 0;
+      font-size: 2.2rem;
+      line-height: 3rem;
+      padding:  0 0 0 4rem;
+    }
   .subtitle {
     font-size: 1.5rem;
     line-height: 2.5rem;
-  }
+    }
   
   }
   
@@ -165,7 +184,7 @@ const Secondsection = styled.div `
   width: 100%;
   position: absolute;
   left: -100px;
-  top: -25vh;
+  top: 0;
   }
   
   @media(max-width: 560px) {
@@ -180,7 +199,7 @@ const Sectionmap = styled.div `
   height: 100vh;
   
   .heading {
-  
+    
   }
   
   .heading-title{
