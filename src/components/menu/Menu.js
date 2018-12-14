@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import styled from "styled-components";
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
+import { Dropdown } from 'semantic-ui-react';
 
 class Menu extends Component {
   constructor(props) {
@@ -11,11 +12,26 @@ class Menu extends Component {
       menuItems: [
         {
           name: 'Accueil',
-          link: '/'
+          link: '/',
+
         },
         {
           name: 'Instruments',
-          link: '/instruments'
+          link: '/instruments',
+          dropdown: [
+            {
+              text: "Test1",
+              link:'/test1'
+            },
+            {
+              text: "Test2",
+              link:'/test2'
+            },
+            {
+              text: "Test3",
+              link:'/test3'
+            }
+          ]
         },
         {
           name: 'StudioProd',
@@ -37,6 +53,7 @@ class Menu extends Component {
     this.setState({ show: !this.state.show })
   }
 
+
   render() {
     return (
       <MenuComponent>
@@ -51,9 +68,20 @@ class Menu extends Component {
         <div className={'menu-container ' + (this.state.show ? 'show' : '')}>
           <ul className="menu-list">
             {this.state.menuItems.map(item => (
-              <Link to={item.link}>
+              !item.dropdown ? (<Link to={item.link}>
                 <li className="menu-item">{item.name}</li>
-              </Link>
+              </Link>) : (
+                <Dropdown text={item.name} className="menu-link dropdown-link">
+                  <Dropdown.Menu>
+                    {item.dropdown.map(link => (
+                      <Route render={({history}) => (
+                        <Dropdown.Item text={link.text} onClick={() => history.push(link.link)}/>)}>
+                      </Route>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              )
+              
             ))}
           </ul>
         </div>
@@ -101,18 +129,30 @@ const MenuComponent = styled.div
     
   }
   
-  a {
+  .menu-item-dropdown {
+    color: black;
+    list-style: none;
+    margin: 0.5rem 2rem;
+  }
+  
+  a, .menu-link {
   color: ${Colors.text};
   text-decoration: none;
   font-size: 1.2rem;
   transition: color .2s ease;
   }
   
-  a:hover {
+  a:hover, .menu-link:hover {
   color: ${Colors.fourth};
  
  
   }
+  
+  .dropdown-link {
+  margin-top: 1rem;
+  }
+ 
+  
   
   @media(max-width: 560px) {
   
