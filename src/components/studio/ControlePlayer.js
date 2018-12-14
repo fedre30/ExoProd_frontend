@@ -16,7 +16,7 @@ class ControlePlayer extends Component {
 
     /**
      * Gestion du bouton play
-     * met en pause le player ou met en play le player
+     * je mets en pause/play le player audio
      */
     handlePlay = () => {
         let {playStatus} = this.state;
@@ -28,14 +28,14 @@ class ControlePlayer extends Component {
         })
     }
     /**
-     * 
+     * Gestion du progressbar
      * @param {*} position 
      * @param {*} duration 
-     * met à jour l'état progressbar, retourn le pourcentage
+     * je mets à jour l'état progressbar, je retourne le pourcentage
      */
     handleSongPlaying(position,duration){
         let {progressbar} = this.state;
-        progressbar = Math.round((position/duration*100000))/1000; // pas opti mais ça marche, regarder cycle de vie
+        progressbar = Math.round((position/duration*100000))/1000;
         console.log(progressbar)
         this.setState({
             progressbar
@@ -54,7 +54,7 @@ class ControlePlayer extends Component {
                         <input type="range" 
                         min='0'
                         max='100' 
-                        step="0.001"  // j'aimerais arondir au 1000 ième pres
+                        step="0.001"  // j'aimerais arrondir au 1000 ième près
                         value={progressbar}
                         class="ControlePlayer-progressbar-interactive_range"/>
                         <span style={{width: `${progressbar}%`}} class="ControlePlayer-progressbar-interactive"></span>
