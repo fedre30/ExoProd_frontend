@@ -67,6 +67,7 @@ const MenuComponent = styled.div
   width: 100%;
   display: flex;
   padding: 2rem 1rem;
+  z-index: 10000;
   
   .burger {
   display: none;
@@ -116,7 +117,7 @@ const MenuComponent = styled.div
   @media(max-width: 560px) {
   
   .logo {
-  margin: 1rem 0;
+    margin: 1rem 0;
   }
     .burger {
     display: block;
