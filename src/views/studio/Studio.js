@@ -1,42 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
-import AudioPlayer from '../../components/studio/AudioPlayer';
+import AudioPlayer from '../../components/studio/ControlePlayer';
+
+import protosound from '../../assets/proto-sound/silence-voice.mp3';
 import { Grid, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ControlePlayer from "../../components/studio/ControlePlayer";
 
 
+class Studio extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-const Studio = () => (
-  <StudioComponent>
-    <h1>Menu</h1>
-    <h1 id="title">Mélodie</h1>
+  state = {
+    isPlaying: false,
+    isMute: false,
+    isResume: true,
+    isStoped: false,
+    playStatus: false,
+  }
 
-      
-    <Grid centered columns={3}>
-      <Grid.Row columns={1}>
-        <Grid.Column centered>
-          <div className="studio-display-instrument mobile">
-            <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
-          </div>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid verticalAlign='middle'>
-        <AudioPlayer/>
-      </Grid>
-      <Grid.Row verticalAlign='middle' columns={1}>
-        <Grid.Column textAlign='center' >
-          <Button className="studio-btn-audio mobile" circular icon='info' size='large'/>
-          <Button className="studio-btn-audio mobile" circular icon='play' size='huge'/>
-          <Button className="studio-btn-audio mobile" circular icon='volume off' size='large'/>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-
-  </StudioComponent>
-);
+  render(){
+    return (
+      <StudioComponent>
+        <h1>Menu</h1>
+        <h1 id="title">Mélodie</h1>
+        <Grid centered={true} columns={3}>
+          <Grid.Row columns={1}>
+            <Grid.Column centered={true}>
+              <div className="studio-display-instrument mobile">
+                <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+          <ControlePlayer
+          url={protosound}
+          />
+        </Grid>
+      </StudioComponent>
+    )
+  }
+};
 
 const StudioComponent = styled.div
   `
