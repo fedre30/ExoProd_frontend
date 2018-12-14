@@ -123,19 +123,22 @@ const ControlePlayerStyle = styled.div
         position: relative;
     }
     .ControlePlayer-progressbar-interactive {
-        position:absolute;
+        position: absolute;
         height: 100%;
         background: #FFFCF2;
         left: 0;
-        border-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        z-index: 1;
     }
 
     .ControlePlayer-progressbar-interactive_range {
-        width:100%;
-        position:absolute;
+        width: 100%;
+        position: absolute;
         height: 100%;
         left: 0;
         background: rgba(0, 0, 0, 0);
+        z-index: 2;
     }
     `
 ;
