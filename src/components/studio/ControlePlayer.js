@@ -41,6 +41,11 @@ class ControlePlayer extends Component {
             progressbar
         })
     }
+    /**
+     * Je reset mes états
+     * playStatus se met en pause
+     * progressbar se met à 0
+     */
     handleSongFinishedPlaying = () => {
         this.setState({
             playStatus: Sound.status.PAUSED,
