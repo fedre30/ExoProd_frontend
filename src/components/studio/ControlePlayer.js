@@ -8,15 +8,26 @@ import '../../styles/range.css';
 import PropTypes from 'prop-types';
 
 class ControlePlayer extends Component {
+
+    //note: j'ai initialisé le state position (qui est passé par notre dépendance Sound)
+    //      uniquement pour rendre dynamique notre progressbar, je n'ai pas trouvé de moyens
+    //      plus 'jolie' pour mettre en place cette fonction, en tout cas, cela marche parfaitement
     state = {
         playStatus: Sound.status.PAUSED,
         ismute: false,
         progressbar: 0,
+        position: 0,
+        duration: 0
     }
 
+    initPlayer = (duration) => {
+        this.setState({
+            duration
+        })
+    }
     /**
      * Gestion du bouton play
-     * je mets en pause/play le player audio
+     * je mets en pause/play (toggle) le player audio
      */
     handlePlay = () => {
         let {playStatus} = this.state;
@@ -32,13 +43,14 @@ class ControlePlayer extends Component {
      * @param {*} position 
      * @param {*} duration 
      * je mets à jour l'état progressbar, je retourne le pourcentage
+     * je souhaite avoir cette valeur précis au millième près
      */
     handleSongPlaying(position,duration){
         let {progressbar} = this.state;
         progressbar = Math.round((position/duration*100000))/1000;
-        console.log(progressbar)
         this.setState({
-            progressbar
+            progressbar,
+            position
         })
     }
     /**
@@ -51,6 +63,21 @@ class ControlePlayer extends Component {
             playStatus: Sound.status.PAUSED,
             progressbar: 0
         })
+    }
+    /**
+     * Ce référencer à la formule écrite dans la méthode handleSongPlaying
+     * Je mets à jour la position & le progressbar
+     */
+    handleValueRange = (event) => {
+        let {progressbar, position} = this.state;
+        progressbar = event.target.value;
+        position = (parseFloat(event.target.value)*100*parseFloat(this.state.duration))/10000
+        this.setState({
+            progressbar,
+            position
+        })
+
+        //console.log((Number(event.target.value)*100*Number(this.state.duration))/10000)
     }
     render(){
         const {progressbar,playStatus} = this.state;
@@ -66,6 +93,7 @@ class ControlePlayer extends Component {
                         max='100' 
                         step="0.001"  // j'aimerais arrondir au 1000 ième près
                         value={progressbar}
+                        onChange={this.handleValueRange}
                         class="ControlePlayer-progressbar-interactive_range"/>
                         <span style={{width: `${progressbar}%`}} class="ControlePlayer-progressbar-interactive"></span>
                     </div>
@@ -101,6 +129,8 @@ class ControlePlayer extends Component {
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
                     onFinishedPlaying={this.handleSongFinishedPlaying}
+                    onLoading={({duration}) => this.initPlayer(duration)}
+                    position={this.state.position}
                 />
             </ControlePlayerStyle>    
         )
