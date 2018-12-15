@@ -41,7 +41,12 @@ class ControlePlayer extends Component {
             progressbar
         })
     }
-
+    handleSongFinishedPlaying = () => {
+        this.setState({
+            playStatus: Sound.status.PAUSED,
+            progressbar: 0
+        })
+    }
     render(){
         const {progressbar,playStatus} = this.state;
         const playing = playStatus === Sound.status.PLAYING;
@@ -90,6 +95,7 @@ class ControlePlayer extends Component {
                     url={this.props.url}
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
+                    onFinishedPlaying={this.handleSongFinishedPlaying}
                 />
             </ControlePlayerStyle>    
         )
