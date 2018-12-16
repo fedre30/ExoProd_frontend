@@ -29,9 +29,9 @@ class Studio extends Component {
       <StudioComponent>
         <h1>Menu</h1>
         <h1 id="title">Mélodie</h1>
-        <Grid centered={true} columns={3}>
+        <Grid centered columns={3}>
           <Grid.Row columns={1}>
-            <Grid.Column centered={true}>
+            <Grid.Column >
               <div className="studio-display-instrument mobile">
                 <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
               </div>

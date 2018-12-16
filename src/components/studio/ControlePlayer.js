@@ -17,14 +17,47 @@ class ControlePlayer extends Component {
         ismute: false,
         progressbar: 0,
         position: 0,
-        duration: 0
+        duration: 0,
+        total: '0:00',
+        current: '0:00'
     }
 
-    initPlayer = (duration) => {
+    /**
+     * j'initialise le temps total de mon audio
+     */
+    componentDidMount(){
+        let option = { audio:new Audio(this.props.url),remove:false};
+        option.audio.addEventListener('loadedmetadata', () => {
+            this.setState({
+                total: this.convertToTimer(option.audio.duration)
+            })
+            option.audio.remove = true;
+        })
+        if(option.remove) option = undefined;
+    }
+
+    /**
+     * 
+     * @param {*} duration
+     * fonction que j'appelle lorsque je monte mon component
+     */
+    initPlayer(duration){
         this.setState({
             duration
         })
     }
+
+    /**
+     * Converstion de ma position en timer
+     */
+    convertToTimer = (timer, round= 1) =>{
+        const time =  Math.round(timer/round)
+        let seconde = time % 60;
+        const minute = parseInt(time/60);
+        return `${minute}:${seconde < 10 ? '0'+seconde : seconde}`;
+    }
+
+
     /**
      * Gestion du bouton play
      * je mets en pause/play (toggle) le player audio
@@ -46,22 +79,26 @@ class ControlePlayer extends Component {
      * je souhaite avoir cette valeur précis au millième près
      */
     handleSongPlaying(position,duration){
-        let {progressbar} = this.state;
+        let {progressbar,current} = this.state;
         progressbar = Math.round((position/duration*100000))/1000;
         this.setState({
             progressbar,
-            position
+            position,
+            current: this.convertToTimer(position,1000)
         })
     }
+
     /**
      * Je reset mes états
      * playStatus se met en pause
-     * progressbar se met à 0
+     * progressbar se met à 
+     * current se met à 0:00
      */
     handleSongFinishedPlaying = () => {
         this.setState({
             playStatus: Sound.status.PAUSED,
-            progressbar: 0
+            progressbar: 0,
+            current: '0:00'
         })
     }
     /**
@@ -76,28 +113,26 @@ class ControlePlayer extends Component {
             progressbar,
             position
         })
-
-        //console.log((Number(event.target.value)*100*Number(this.state.duration))/10000)
     }
     render(){
-        const {progressbar,playStatus} = this.state;
+        const {progressbar,playStatus, endTimer} = this.state;
         const playing = playStatus === Sound.status.PLAYING;
         
         return (
             <ControlePlayerStyle>
-                <div class="ControlePlayer-container">
-                    <p>0:00</p>
-                    <div class="ControlePlayer-progressbar-container">
+                <div className="ControlePlayer-container">
+                    <p>{this.state.current}</p>
+                    <div className="ControlePlayer-progressbar-container">
                         <input type="range" 
                         min='0'
                         max='100' 
                         step="0.001"  // j'aimerais arrondir au 1000 ième près
                         value={progressbar}
                         onChange={this.handleValueRange}
-                        class="ControlePlayer-progressbar-interactive_range"/>
-                        <span style={{width: `${progressbar}%`}} class="ControlePlayer-progressbar-interactive"></span>
+                        className="ControlePlayer-progressbar-interactive_range"/>
+                        <span style={{width: `${progressbar}%`}} className="ControlePlayer-progressbar-interactive"></span>
                     </div>
-                    <p>0:00</p>
+                    <p>{this.state.total}</p>
                 </div>
                 <Grid.Row verticalAlign='middle' columns={1}>
                     <Grid.Column textAlign='center' >
@@ -130,6 +165,7 @@ class ControlePlayer extends Component {
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
                     onFinishedPlaying={this.handleSongFinishedPlaying}
                     onLoading={({duration}) => this.initPlayer(duration)}
+                    onPause={this.test}
                     position={this.state.position}
                 />
             </ControlePlayerStyle>    
