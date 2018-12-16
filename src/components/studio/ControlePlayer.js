@@ -13,13 +13,14 @@ class ControlePlayer extends Component {
     //      uniquement pour rendre dynamique notre progressbar, je n'ai pas trouvé de moyens
     //      plus 'jolie' pour mettre en place cette fonction, en tout cas, cela marche parfaitement
     state = {
-        playStatus: Sound.status.PAUSED,
+        playStatus: Sound.status.STOPPED,
         ismute: false,
         progressbar: 0,
         position: 0,
         duration: 0,
         total: '0:00',
-        current: '0:00'
+        current: '0:00',
+        volume: 100
     }
 
     /**
@@ -34,6 +35,7 @@ class ControlePlayer extends Component {
             option.audio.remove = true;
         })
         if(option.remove) option = undefined;
+
     }
 
     /**
@@ -57,6 +59,13 @@ class ControlePlayer extends Component {
         return `${minute}:${seconde < 10 ? '0'+seconde : seconde}`;
     }
 
+    handleVolume = () => {
+        let volume = this.state.volume;
+        volume === 100 ? volume = 0 : volume = 100
+        this.setState({
+            volume
+        })
+    }
 
     /**
      * Gestion du bouton play
@@ -79,7 +88,7 @@ class ControlePlayer extends Component {
      * je souhaite avoir cette valeur précis au millième près
      */
     handleSongPlaying(position,duration){
-        let {progressbar,current} = this.state;
+        let {progressbar} = this.state;
         progressbar = Math.round((position/duration*100000))/1000;
         this.setState({
             progressbar,
@@ -96,7 +105,7 @@ class ControlePlayer extends Component {
      */
     handleSongFinishedPlaying = () => {
         this.setState({
-            playStatus: Sound.status.PAUSED,
+            playStatus: Sound.status.STOPPED,
             progressbar: 0,
             current: '0:00'
         })
@@ -106,27 +115,35 @@ class ControlePlayer extends Component {
      * Je mets à jour la position & le progressbar
      */
     handleValueRange = (event) => {
-        let {progressbar, position} = this.state;
-        progressbar = event.target.value;
-        position = (parseFloat(event.target.value)*100*parseFloat(this.state.duration))/10000
-        this.setState({
-            progressbar,
-            position
-        })
+        let {progressbar, position, playStatus} = this.state;
+        if(playStatus !== Sound.status.STOPPED){
+            progressbar = Number(event.target.value);
+            position = (progressbar*100*parseFloat(this.state.duration))/10000
+            this.setState({
+                progressbar,
+                position
+            })
+        }
     }
+
     render(){
-        const {progressbar,playStatus, endTimer} = this.state;
-        const playing = playStatus === Sound.status.PLAYING;
-        
+        const {progressbar,playStatus, volume} = this.state;
+        const controller = {
+            playing: playStatus === Sound.status.PLAYING,
+            isMute: volume === 0 ? true : false
+        }
+
+
         return (
             <ControlePlayerStyle>
                 <div className="ControlePlayer-container">
                     <p>{this.state.current}</p>
                     <div className="ControlePlayer-progressbar-container">
-                        <input type="range" 
+                        <input type="range"
+                        id='input-range'
                         min='0'
                         max='100' 
-                        step="0.001"  // j'aimerais arrondir au 1000 ième près
+                        step="0.00001"
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
@@ -146,7 +163,7 @@ class ControlePlayer extends Component {
                         <Button 
                         className="studio-btn-audio mobile" 
                         circular 
-                        icon={playing ? 'pause' : 'play' } 
+                        icon={controller.playing ? 'pause' : 'play' } 
                         size='huge'
                         onClick={this.handlePlay}
                         />
@@ -154,8 +171,10 @@ class ControlePlayer extends Component {
                         <Button 
                         className="studio-btn-audio mobile" 
                         circular 
-                        icon='volume off' 
-                        size='large'/>
+                        icon={controller.isMute ? 'volume off' : 'volume up'} 
+                        size='large'
+                        onClick={this.handleVolume}
+                        />
                     </Grid.Column>
                 </Grid.Row>
                 <Sound
@@ -164,9 +183,11 @@ class ControlePlayer extends Component {
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
                     onFinishedPlaying={this.handleSongFinishedPlaying}
-                    onLoading={({duration}) => this.initPlayer(duration)}
-                    onPause={this.test}
+                    onLoading={({duration,position}) => this.initPlayer(duration,position)}
+                    playFromPosition={this.test}
+                    autoLoad={true}
                     position={this.state.position}
+                    volume={this.state.volume}
                 />
             </ControlePlayerStyle>    
         )
