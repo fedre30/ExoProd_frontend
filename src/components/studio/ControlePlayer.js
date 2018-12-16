@@ -114,7 +114,7 @@ class ControlePlayer extends Component {
      * Ce référencer à la formule écrite dans la méthode handleSongPlaying
      * Je mets à jour la position & le progressbar
      */
-    handleValueRange = (event) => {
+     handleValueRange = (event) => {
         let {progressbar, position, playStatus} = this.state;
         if(playStatus !== Sound.status.STOPPED){
             progressbar = Number(event.target.value);
@@ -130,7 +130,7 @@ class ControlePlayer extends Component {
         const {progressbar,playStatus, volume} = this.state;
         const controller = {
             playing: playStatus === Sound.status.PLAYING,
-            isMute: volume === 0 ? true : false
+            isMute: volume === 0
         }
 
 
