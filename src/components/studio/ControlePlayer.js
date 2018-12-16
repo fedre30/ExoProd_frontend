@@ -143,7 +143,7 @@ class ControlePlayer extends Component {
                         id='input-range'
                         min='0'
                         max='100' 
-                        step="0.00001"
+                        step="0.001"
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
