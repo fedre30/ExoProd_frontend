@@ -11,33 +11,40 @@ class Menu extends Component {
     this.state = {
       menuItems: [
         {
+          id: 0,
           name: 'Accueil',
           link: '/',
 
         },
         {
+          id: 1,
           name: 'Instruments',
           link: '/instruments',
           dropdown: [
             {
+              id: 0,
               text: "Test1",
               link:'/test1'
             },
             {
+              id: 1,
               text: "Test2",
               link:'/test2'
             },
             {
+              id: 2,
               text: "Test3",
               link:'/test3'
             }
           ]
         },
         {
+          id: 2,
           name: 'StudioProd',
           link: '/studio'
         },
         {
+          id: 3,
           name: 'A propos',
           link: '/'
         },
@@ -69,13 +76,13 @@ class Menu extends Component {
           <ul className="menu-list">
             {this.state.menuItems.map(item => (
               !item.dropdown ? (<Link to={item.link}>
-                <li className="menu-item">{item.name}</li>
+                <li className="menu-item" key={item.id}>{item.name}</li>
               </Link>) : (
                 <Dropdown text={item.name} className="menu-link dropdown-link">
                   <Dropdown.Menu>
                     {item.dropdown.map(link => (
                       <Route render={({history}) => (
-                        <Dropdown.Item text={link.text} onClick={() => history.push(link.link)}/>)}>
+                        <Dropdown.Item key={link.id} text={link.text} onClick={() => history.push(link.link)}/>)}>
                       </Route>
                     ))}
                   </Dropdown.Menu>
@@ -96,6 +103,7 @@ const MenuComponent = styled.div
   display: flex;
   padding: 2rem 1rem;
   z-index: 10000;
+  position: relative;
   
   .burger {
   display: none;

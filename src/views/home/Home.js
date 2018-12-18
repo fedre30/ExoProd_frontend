@@ -6,10 +6,21 @@ import Colors from '../../styles/colors';
 import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
+import {
+  ComposableMap,
+  ZoomableGroup,
+  Geographies,
+  Geography,
+  Marker,
+  Markers,
+} from "react-simple-maps";
+import geography from '../../utils/topoJSON';
+
 
 //IMAGES
 import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
+import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 
 
@@ -26,9 +37,32 @@ class Home extends Component {
         title: "Lorem",
         text: "lorem ipsum",
         direction: "right"
-      }
+      },
+      markers: [
+        { markerOffset: -25, name: "Buenos Aires", coordinates: [-58.3816, -34.6037] },
+        { markerOffset: -25, name: "La Paz", coordinates: [-68.1193, -16.4897] },
+        { markerOffset: 35, name: "Brasilia", coordinates: [-47.8825, -15.7942] },
+        { markerOffset: 35, name: "Santiago", coordinates: [-70.6693, -33.4489] },
+        { markerOffset: 35, name: "Bogota", coordinates: [-74.0721, 4.7110] },
+        { markerOffset: 35, name: "Quito", coordinates: [-78.4678, -0.1807] },
+        { markerOffset: -25, name: "Georgetown", coordinates: [-58.1551, 6.8013] },
+        { markerOffset: -25, name: "Asuncion", coordinates: [-57.5759, -25.2637] },
+        { markerOffset: 35, name: "Paramaribo", coordinates: [-55.2038, 5.8520] },
+        { markerOffset: 35, name: "Montevideo", coordinates: [-56.1645, -34.9011] },
+        { markerOffset: -25, name: "Caracas", coordinates: [-66.9036, 10.4806] },
+      ]
     }
+
   }
+
+  // METHODS
+
+  handleClickMarker(marker, e) {
+    console.log("Marker data: ", marker)
+  }
+
+
+  // RENDER
 
   render() {
     return (
@@ -49,49 +83,111 @@ class Home extends Component {
                 </div>
               </Grid.Column>
             </Grid>
-        </div>
-      </Header>
-    <Secondsection>
-      <Grid columns={12}>
-        <Grid.Column width={5}>
-          <div className="triangle">
-            <img src={triangle} alt=""/>
           </div>
-        </Grid.Column>
-        <Grid.Column width={7}>
-          <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
-                     direction={this.state.secondParagraph.direction}/>
-        </Grid.Column>
-      </Grid>
-    </Secondsection>
-    <Firstsection>
-      <Grid columns={12}>
-        <Grid.Column width={7}>
-          <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
-                     direction={this.state.firstParagraph.direction}/>
-        </Grid.Column>
-        <Grid.Column width={5}>
-          <Thumbnail/>
-        </Grid.Column>
-      </Grid>
-    </Firstsection>
-    <Sectionmap>
-      <div className="heading">
-        <h4 className="heading-title">lorem ipsum</h4>
-      </div>
-      <div className="map"></div>
-    </Sectionmap>
-    <Footer/>
+        </Header>
+        <Secondsection>
+          <Grid columns={12}>
+            <Grid.Column width={5}>
+              <div className="triangle">
+                <img src={triangle} alt=""/>
+              </div>
+            </Grid.Column>
+            <Grid.Column width={7}>
+              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
+                         direction={this.state.secondParagraph.direction}/>
+            </Grid.Column>
+          </Grid>
+        </Secondsection>
+        <Firstsection>
+          <Grid columns={12}>
+            <Grid.Column width={7}>
+              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
+                         direction={this.state.firstParagraph.direction}/>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <Thumbnail image={thumbnail}/>
+            </Grid.Column>
+          </Grid>
+        </Firstsection>
+        <Sectionmap>
+          <div className="heading">
+            <h4 className="heading-title">lorem ipsum</h4>
+          </div>
+          <div className="map">
+            <ComposableMap projectionConfig={{
+              scale: 250,
+              rotation: [-10,0,0],
+            }} width={1400} height={800} projection="robinson">
+              <ZoomableGroup>
+                <Geographies geography={geography}>
+                  {(geographies, projection) => geographies.map(geography => (
+                    <Geography key={ geography.id } geography={ geography } projection={ projection } style={{
+                      default: {
+                        fill: '#CEA6E9',
+                        stroke: "#570AB8",
+                        strokeWidth: 0.3,
+                        outline: "none"
+                      },
+                      hover: {
+                        fill: '#CEA6E9',
+                        stroke: "#570AB8",
+                        strokeWidth: 0.3
+                      },
+                      pressed: {
+                        fill: '#CEA6E9'
+                      }
+                    }}/>
+                  ))}
+                </Geographies>
+                <Markers>
+                  {this.state.markers.map((marker, i) => (
+                    <Marker
+                      key={i}
+                      marker={marker}
+                      style={{
+                        default: { fill: Colors.tertiary },
+                        hover: { fill: "#FFFFFF" },
+                        pressed: { fill: "#FFFFFF" },
+                      }}
+                    >
+                      <circle
+                        cx={0}
+                        cy={0}
+                        r={10}
+                        style={{
+                          stroke: Colors.tertiary,
+                          strokeWidth: 3,
+                          opacity: 0.9,
+                        }}
+                      />
+                      <text
+                        textAnchor="middle"
+                        y={marker.markerOffset}
+                        style={{
+                          fontFamily: "Roboto, sans-serif",
+                          fill: "#FFF",
+                        }}
+                      >
+                        {marker.name}
+                      </text>
+                    </Marker>
+                  ))}
+                </Markers>
+              </ZoomableGroup>
+            </ComposableMap>
+          </div>
+        </Sectionmap>
+        <Footer/>
 
-  </HomeComponent>
-  )
+      </HomeComponent>
+    )
   }
 }
 
 const HomeComponent = styled.div
   `
   width: 100%;
-  height: 500vh;
+  height: 400vh;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
@@ -214,11 +310,22 @@ const Sectionmap = styled.div`
   height: 100vh;
   
   .heading {
-    
+    margin-bottom: 3rem;
   }
   
   .heading-title{
+    font-size: 3rem;
+    color: ${Colors.text};
+    text-align: right;
+    margin-right: 3rem;
+  }
   
+  .map {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    text-align: center;
+ 
   }
   
   
