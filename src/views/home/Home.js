@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
-import { Grid } from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
 import {
@@ -12,11 +12,13 @@ import {
   Geographies,
   Geography,
   Marker,
-  Markers
-} from "react-simple-maps"
+  Markers,
+} from "react-simple-maps";
+import geography from '../../utils/topoJSON';
+
 
 //IMAGES
-import backgroundImage from '../../assets/img/background_home.jpg';
+import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import Footer from "../../components/footer/Footer";
 
@@ -38,26 +40,27 @@ class Home extends Component {
     }
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <HomeComponent>
         <Header>
           <Menu/>
-          <div className="title-container">
-            <h2 className="title">Un voyage musical intemporel</h2>
-            <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
+          <div className="heading">
+            <Grid columns={2}>
+              <Grid.Column>
+                <div className="title-container">
+                  <h2 className="title">Un voyage musical intemporel</h2>
+                  <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
+                </div>
+              </Grid.Column>
+              <Grid.Column>
+                <div className="header-image">
+                  <img src={backgroundImage} alt="music notes and people"/>
+                </div>
+              </Grid.Column>
+            </Grid>
           </div>
         </Header>
-        <Firstsection>
-          <Grid columns={12}>
-            <Grid.Column width={7}>
-              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text} direction={this.state.firstParagraph.direction}/>
-            </Grid.Column>
-            <Grid.Column width={5}>
-              <Thumbnail/>
-            </Grid.Column>
-          </Grid>
-        </Firstsection>
         <Secondsection>
           <Grid columns={12}>
             <Grid.Column width={5}>
@@ -66,10 +69,22 @@ class Home extends Component {
               </div>
             </Grid.Column>
             <Grid.Column width={7}>
-              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text} direction={this.state.secondParagraph.direction}/>
+              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
+                         direction={this.state.secondParagraph.direction}/>
             </Grid.Column>
           </Grid>
         </Secondsection>
+        <Firstsection>
+          <Grid columns={12}>
+            <Grid.Column width={7}>
+              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
+                         direction={this.state.firstParagraph.direction}/>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <Thumbnail/>
+            </Grid.Column>
+          </Grid>
+        </Firstsection>
         <Sectionmap>
           <div className="heading">
             <h4 className="heading-title">lorem ipsum</h4>
@@ -77,7 +92,7 @@ class Home extends Component {
           <div className="map">
             <ComposableMap>
               <ZoomableGroup>
-                <Geographies geography={ "/path/to/your/topojson-map-file.json or geography object" }>
+                <Geographies geography={geography}>
                   {(geographies, projection) => geographies.map(geography => (
                     <Geography key={ geography.id } geography={ geography } projection={ projection } />
                   ))}
@@ -112,15 +127,24 @@ const HomeComponent = styled.div
 const Header = styled.div`  
  width: 100%;
   height: 100vh;
-  background: url(${backgroundImage}) no-repeat;
-  background-size: 100% 100%;
   .title-container {
-    margin: 30vh auto;
-    text-align: center;
+    margin: 30vh 5rem;
+    text-align: left;
     width: 100%;
     height: 6rem;
+  }
+  
+  .heading {
+    margin-top: 5rem;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: 100vh;
     
-    
+    img {
+    width: 100%;
+    }
   }
   .title {
     color: ${Colors.text};
@@ -141,18 +165,30 @@ const Header = styled.div`
     background-size: cover;
    }
    
-    .title {
-    width: 70%;
+   .title-container {
+    margin-top: 40vh;
+    padding: 0;
+    margin-left: 2rem;
+   }
    
-    font-size: 2.2rem;
-    margin-bottom: 3.5rem;
-    line-height: 3rem;
-    padding:  0 0 0 4rem;
-  }
+    .title {
+      width: 90vw;
+      margin: 0;
+      font-size: 2.2rem;
+      line-height: 3rem;
+      padding:  0;
+      
+    }
   .subtitle {
     font-size: 1.5rem;
     line-height: 2.5rem;
-  }
+    width: 90vw;
+    }
+    
+    .header-image {
+      margin: 5vw 0 10vw -50vw;
+      width: 100vw;
+    }
   
   }
   
@@ -161,7 +197,7 @@ const Header = styled.div`
 `
 ;
 
-const Firstsection = styled.div `  
+const Firstsection = styled.div`  
   width: 100%;
   height: 100vh;
   padding: 8rem;
@@ -175,7 +211,7 @@ const Firstsection = styled.div `
 
 `
 
-const Secondsection = styled.div `  
+const Secondsection = styled.div`  
   width: 100%;
   height: 100vh;
   padding: 8rem;
@@ -186,7 +222,7 @@ const Secondsection = styled.div `
   width: 100%;
   position: absolute;
   left: -100px;
-  top: -25vh;
+  top: 0;
   }
   
   @media(max-width: 560px) {
@@ -196,12 +232,12 @@ const Secondsection = styled.div `
 
 `
 
-const Sectionmap = styled.div `  
+const Sectionmap = styled.div`  
   width: 100%;
   height: 100vh;
   
   .heading {
-  
+    
   }
   
   .heading-title{
@@ -216,7 +252,6 @@ const Sectionmap = styled.div `
   
 
 `
-
 
 
 export default Home;
