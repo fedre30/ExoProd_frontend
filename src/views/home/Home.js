@@ -129,10 +129,12 @@ class Home extends Component {
                         outline: "none"
                       },
                       hover: {
-                        fill: Colors.tertiary
+                        fill: '#CEA6E9',
+                        stroke: "#570AB8",
+                        strokeWidth: 0.3
                       },
                       pressed: {
-                        fill: Colors.tertiary
+                        fill: '#CEA6E9'
                       }
                     }}/>
                   ))}
