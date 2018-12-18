@@ -4,7 +4,8 @@ import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import ovale from '../../assets/img/ovale-dotted.png'
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid, Button } from 'semantic-ui-react';
+import { Grid, Button, Image } from 'semantic-ui-react';
+import img from '../../assets/img/instruments/Bagpipes-portrait.png';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ControlePlayer from "../../components/studio/ControlePlayer";
@@ -14,13 +15,15 @@ class Studio extends Component {
   constructor(props) {
     super(props);
   }
-
+  state = {
+    images:['../../assets/img/instruments/Bagpipes-portrait.png','../../assets/img/instruments/Maracas.png','../../assets/img/instruments/taiko.png']
+  }
   render(){
     return (
       <StudioComponent>
         <h1>Menu</h1>
         <h1 id="title">Mélodie</h1>
-        <Grid centered columns={3}>
+        <Grid centered columns={4}>
           <Grid.Row columns={1}>
             <Grid.Column >
               <div className="studio-display-container">
@@ -34,6 +37,22 @@ class Studio extends Component {
           <ControlePlayer
           url={protosound}
           />
+          <Grid.Row columns={4}>
+
+            <Image  size="tiny" style={{background:'red',width:30px}}circular src={img}/>
+
+
+
+            <Image size="tiny" style={{background:'red',width:30px}}circular src={img}/>
+
+
+
+            <Image  size="tiny" style={{background:'red',width:30px}}circular src={img}/>
+
+
+
+            <Image size="tiny" style={{background:'red',width:30px}}circular src={img}/>
+          </Grid.Row>
         </Grid>
       </StudioComponent>
     )
@@ -86,6 +105,16 @@ const StudioComponent = styled.div
     color: ${Colors.text};
     font-family: ${Fonts.title};
     font-size: 16px;
+  }
+  .btn-instrument.mobile {
+    width:32px;
+    height:32px;
+    border-radius:50%;
+  }
+
+  .studio-chose-instrument-items img{
+    margin: auto;
+    overflow:hidden;
   }
   `
 const imageStyle ={
