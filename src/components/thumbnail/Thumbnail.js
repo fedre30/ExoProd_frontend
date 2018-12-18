@@ -1,8 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import styled from "styled-components";
 import Colors from '../../styles/colors';
-import Fonts from '../../styles/fonts';
 import dotted from '../../assets/img/Oval.png';
 
 
@@ -21,7 +19,7 @@ const ThumbnailComponent = styled.div
   width: 100%;
  height: 60vh;
  position: absolute;
- right: -600px;
+ right: -450px;
 
  
  .outer-circle {
@@ -39,9 +37,12 @@ const ThumbnailComponent = styled.div
  border-radius: 200vw;
  background-color: ${Colors.tertiary};
  transform: translateY(10%);
+ overflow: hidden;
+
  
  img {
- width: 100%;
+ width: 150%;
+ overflow: hidden;
  }
  
  }
