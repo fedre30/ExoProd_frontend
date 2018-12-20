@@ -3,21 +3,53 @@ import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import ovale from '../../assets/img/ovale-dotted.png'
+import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid, Button, Image } from 'semantic-ui-react';
-import img from '../../assets/img/instruments/Bagpipes-portrait.png';
+import { Grid } from 'semantic-ui-react';
+//import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ControlePlayer from "../../components/studio/ControlePlayer";
+
 
 
 class Studio extends Component {
   constructor(props) {
     super(props);
+
+    this.buttons = []; //initialisation de mes buttons
+
+    // je sélectionne tous mes boutons ('équivalent d'un querySelectorAll('button') grace à l'attribut ref que j'ai placé soigneusement dans chaque boutton
+    // ainsi qu'a l'initialisation de mon tableau')
+    this.selectorButtons = element => {
+      this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
+    };
+  }
+
+  selectInstrument(id) {
+    // à faire: changement de style
+    console.log(this.buttons[id])
   }
   state = {
-    images:['../../assets/img/instruments/Bagpipes-portrait.png','../../assets/img/instruments/Maracas.png','../../assets/img/instruments/taiko.png']
+    // données statiques, on fera une boucle par la suite
+    instruments: [
+      {
+        name:"Bagpipes",
+        img: 'Bagpipes-portrait.png',
+        details: "yooo"
+      },
+      {
+        name:"Bagpipes",
+        img: 'Bagpipes-portrait.png',
+        details: "yooo"
+      },
+      {
+        name:"Bagpipes",
+        img: 'Bagpipes-portrait.png',
+        details: "yooo"
+      },
+    ]
   }
+
   render(){
     return (
       <StudioComponent>
@@ -39,19 +71,15 @@ class Studio extends Component {
           />
           <Grid.Row columns={4}>
 
-            <Image  size="tiny" style={{background:'red',width:30px}}circular src={img}/>
-
-
-
-            <Image size="tiny" style={{background:'red',width:30px}}circular src={img}/>
-
-
-
-            <Image  size="tiny" style={{background:'red',width:30px}}circular src={img}/>
-
-
-
-            <Image size="tiny" style={{background:'red',width:30px}}circular src={img}/>
+            {this.state.instruments.map((intrument,i) =>(
+              <button
+              key={i} //à référencer quand on map du html (cf react)
+              ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
+              onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
+              className="chooseInstrument-btn" >
+                <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
+              </button>
+            ))}
           </Grid.Row>
         </Grid>
       </StudioComponent>
@@ -116,6 +144,20 @@ const StudioComponent = styled.div
     margin: auto;
     overflow:hidden;
   }
+  .chooseInstrument-btn {
+    width:64px;
+    height:64px;
+    border-radius: 50%;
+    margin: 0 8px;
+    cursor: pointer;
+    border:0;
+    padding: 12px;
+    background: rgba(0,0,0,0.4)
+  }
+
+  .chooseInstrument-btn img {
+    height: 100%;
+  }
   `
 const imageStyle ={
   position:'absolute',
@@ -130,4 +172,6 @@ const imageStyle ={
   WebkitUserSelect: 'none',
   userSelect: 'none',
 }
+
+
 export default Studio;
