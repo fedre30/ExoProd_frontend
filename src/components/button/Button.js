@@ -28,6 +28,7 @@ const ButtonComponent = styled.div
   `
    width: 300px;
  height: 150px;
+ margin: 0 auto;
  
 
  

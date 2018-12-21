@@ -36,8 +36,9 @@ class Home extends Component {
         direction: "left"
       },
       secondParagraph: {
-        title: "Lorem",
-        text: "lorem ipsum",
+        title: "Prenez en main les instruments et créez votre propre son",
+        text: "Explorez le potentiel des ces instruments à travers vos chansons préférées, en modifiant la mélodie, les accords ou d’autres pistes avec l’instrument le plus souhaitable à votre goût.\n" +
+          "Transformez un morceau pop actuel en un oeuvre qui va au-delà de toute limite spatio-temporelle pour un résultat époustouflant ! \n",
         direction: "right"
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
@@ -95,7 +96,7 @@ class Home extends Component {
                 <img src={triangle} alt=""/>
               </div>
             </Grid.Column>
-            <Grid.Column width={7}>
+            <Grid.Column width={9}>
               <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
                          direction={this.state.firstParagraph.direction}/>
             </Grid.Column>
@@ -103,7 +104,7 @@ class Home extends Component {
         </Firstsection>
         <Secondsection>
           <Grid columns={12}>
-            <Grid.Column width={7}>
+            <Grid.Column width={9}>
               <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
                          direction={this.state.secondParagraph.direction}/>
               <Button link={'/studio'} text={'Decouvrir le studio'}/>
@@ -115,7 +116,7 @@ class Home extends Component {
         </Secondsection>
         <Sectionmap>
           <div className="heading">
-            <h4 className="heading-title">lorem ipsum</h4>
+            <h4 className="heading-title">{this.state.mapTitle}</h4>
           </div>
           <div className="map">
             <ComposableMap projectionConfig={{
@@ -324,6 +325,7 @@ const Sectionmap = styled.div`
     color: ${Colors.text};
     text-align: right;
     margin-right: 3rem;
+    margin-bottom: 3rem;
   }
   
   .map {

@@ -26,12 +26,15 @@ const ParagraphComponent = styled.div
     font-weight: 600;
     font-size: 3.5rem;
     color: ${Colors.text};
+    margin-bottom: 3rem;
   }
   
   .text {
     font-size: 1.5rem;
     line-height: 2.5rem;
     color: ${Colors.text};
+    font-weight: 200;
+    margin-bottom: 3rem;
   }
   
   .right {
@@ -48,6 +51,7 @@ const ParagraphComponent = styled.div
     }
     .text {
     font-size: 1rem;
+    line-height: 1.5rem;
     }
   }
 
