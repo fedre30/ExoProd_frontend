@@ -4,7 +4,8 @@ const Colors = {
   secondary: "#35007B",
   tertiary: "#5B09BA",
   fourth: "#BF00D2",
-  text: "#FFF"
+  text: "#FFF",
+  footer: "#150034"
 };
 
 export default Colors;
