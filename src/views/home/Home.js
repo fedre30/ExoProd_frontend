@@ -24,6 +24,8 @@ import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 import Button from "../../components/button/Button";
 
+//API
+import api from '../../helpers/api';
 
 class Home extends Component {
   constructor(props) {
@@ -65,7 +67,15 @@ class Home extends Component {
     console.log("Marker data: ", marker)
   }
 
+  // MOUNTED
 
+  async componentDidMount() {
+    const response = await api.getmarkers();
+    const data = await response.data;
+    this.setState({
+      markers: [...this.state.markers,...data]
+    })
+  }
   // RENDER
 
   render() {
