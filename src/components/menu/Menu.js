@@ -184,7 +184,7 @@ const MenuComponent = styled.div
         height: 3px;
         background: white;
         margin-bottom: 0.5rem;
-        
+
     }
     
     .line2 {
@@ -195,7 +195,9 @@ const MenuComponent = styled.div
       width: 100%;
       height: 100vh;
       position: fixed;
+      display: none;
       opacity: 0;
+      z-index: -999;
       top: 0;
       left: 0;
       background: ${Colors.primary};

@@ -9,7 +9,7 @@ import { Grid } from 'semantic-ui-react';
 //import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import Menu from '../../components/menu/Menu';
 
 
 class Studio extends Component {
@@ -53,7 +53,7 @@ class Studio extends Component {
   render(){
     return (
       <StudioComponent>
-        <h1>Menu</h1>
+        <Menu/>
         <h1 id="title">Mélodie</h1>
         <Grid centered columns={4}>
           <Grid.Row columns={1}>
@@ -96,6 +96,7 @@ const StudioComponent = styled.div
   #title {
     text-align:center;
     font-size: 24px;
+    margin-top: 42px;
     margin-bottom:16px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -152,7 +153,8 @@ const StudioComponent = styled.div
     cursor: pointer;
     border:0;
     padding: 12px;
-    background: rgba(0,0,0,0.4)
+    background: rgba(0,0,0,0.4);
+    cursoir: pointer;
   }
 
   .chooseInstrument-btn img {
