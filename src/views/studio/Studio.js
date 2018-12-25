@@ -24,19 +24,26 @@ class Studio extends Component {
       this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
     };
   }
-
+  removeButtonClasse(index,className){
+    if(this.buttons[index].classList.contains(className)) {
+      this.buttons[index].classList.remove(className)
+    }
+  }
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
+    if(current_btn.classList.contains('selected')) {
+      console.log('this button is alreated selected')
+      return false;
+    }
     const instrumentName = this.state.instruments[id].name;
     this.buttons.map((button,i) => {
       if(current_btn === button) {
         button.classList.add('selected')
-        if(button.classList.contains('unselected')) {
-          button.classList.remove('unselected')
-        }
+        this.removeButtonClasse(i,'unselected')
       } else {
         button.classList.add('unselected')
+        this.removeButtonClasse(i,'selected')
       }
     })
   }
