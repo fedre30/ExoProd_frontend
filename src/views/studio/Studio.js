@@ -9,7 +9,7 @@ import { Grid } from 'semantic-ui-react';
 //import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import Menu from '../../components/menu/Menu';
 
 
 class Studio extends Component {
@@ -24,26 +24,44 @@ class Studio extends Component {
       this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
     };
   }
-
+  removeButtonClasse(index,className){
+    if(this.buttons[index].classList.contains(className)) {
+      this.buttons[index].classList.remove(className)
+    }
+  }
   selectInstrument(id) {
     // à faire: changement de style
-    console.log(this.buttons[id])
+    const current_btn = this.buttons[id];
+    if(current_btn.classList.contains('selected')) {
+      console.log('this button is alreated selected')
+      return false;
+    }
+    const instrumentName = this.state.instruments[id].name;
+    this.buttons.map((button,i) => {
+      if(current_btn === button) {
+        button.classList.add('selected')
+        this.removeButtonClasse(i,'unselected')
+      } else {
+        button.classList.add('unselected')
+        this.removeButtonClasse(i,'selected')
+      }
+    })
   }
   state = {
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
-        name:"Bagpipes",
+        name:"instrument 1",
         img: 'Bagpipes-portrait.png',
         details: "yooo"
       },
       {
-        name:"Bagpipes",
+        name:"instrument 2",
         img: 'Bagpipes-portrait.png',
         details: "yooo"
       },
       {
-        name:"Bagpipes",
+        name:"instrument 3",
         img: 'Bagpipes-portrait.png',
         details: "yooo"
       },
@@ -53,7 +71,7 @@ class Studio extends Component {
   render(){
     return (
       <StudioComponent>
-        <h1>Menu</h1>
+        <Menu/>
         <h1 id="title">Mélodie</h1>
         <Grid centered columns={4}>
           <Grid.Row columns={1}>
@@ -76,7 +94,8 @@ class Studio extends Component {
               key={i} //à référencer quand on map du html (cf react)
               ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
-              className="chooseInstrument-btn" >
+              className={`chooseInstrument-btn`}
+              >
                 <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
               </button>
             ))}
@@ -90,24 +109,23 @@ class Studio extends Component {
 const StudioComponent = styled.div
   `
   height:100vh;
-  background: ${Colors.primary};
+  background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   
   #title {
     text-align:center;
     font-size: 24px;
+    margin-top: 42px;
     margin-bottom:16px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
   }
   .ui.button.studio-btn-audio.mobile {
     transition: all 0.3s ease;
-    background-color:rgba(0,0,0,0.39);
+    background-color: #741AB0;
     color:#FFFCF2;
   }
-  .ui.button.studio-btn-audio.mobile:hover {
-    background-color:rgba(0,0,0,0.8);
-  }
+
   .studio-btn-audio.mobile:nth-child(2){
     margin: 0 24px;
   }
@@ -123,7 +141,7 @@ const StudioComponent = styled.div
     width: 240px;
     height: 240px;
     border-radius:50%;
-    background-color:rgba(0,0,0,0.39);
+    background-color:rgba(100,100,100,0.39);
     margin: 0 auto;
     display:flex;
     align-items:center;
@@ -145,16 +163,25 @@ const StudioComponent = styled.div
     overflow:hidden;
   }
   .chooseInstrument-btn {
-    width:64px;
-    height:64px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;
-    border:0;
+    border: 0;
     padding: 12px;
-    background: rgba(0,0,0,0.4)
+    background-color: rgba(216,216,216,0.20);
+    cursoir: pointer;
+    transition: all 0.4s ease;
   }
 
+  .chooseInstrument-btn.selected {
+    background-color: rgba(216,216,216,0.4);
+  }
+
+  .chooseInstrument-btn.unselected {
+    opacity:0.5;
+  }
   .chooseInstrument-btn img {
     height: 100%;
   }
