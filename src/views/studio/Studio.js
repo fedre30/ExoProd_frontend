@@ -76,6 +76,11 @@ class Studio extends Component {
         img: 'Bagpipes-portrait.png',
         details: "yooo"
       },
+      {
+        name:"instrument 3",
+        img: 'Bagpipes-portrait.png',
+        details: "yooo"
+      },
     ]
   }
 
@@ -84,42 +89,26 @@ class Studio extends Component {
       <StudioComponent>
         <Menu/>
         <h1 id="title">Mélodie</h1>
-        <Grid centered mobile={4} tablet={3} >
-          <Grid.Row centered mobile={16} >
-            <Grid.Column mobile={16} tablet={6} >
+        <Grid centered >
+          <Grid.Row centered columns={16} >
+            <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
               <div className="studio-display-container">
                 <div className="studio-display-instrument">
                   <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
                   <img className="studio-display-instrument-img" src={ovale}/>
                 </div>
               </div>
-            </Grid.Column>
-            <Responsive verticalAlign="middle" as={Grid.Column} minWidth={768} tablet={3} stretched onUpdate={()=>this.test}>
-              <Grid.Row  >
-                {this.state.instruments.map((intrument,i) =>(
-                <Grid.Column >
-                <button
-                key={i} //à référencer quand on map du html (cf react)
-                ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
-                onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
-                className={`chooseInstrument-btn`}
-                >
-                <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
-                </button>
-                </Grid.Column>
-                ))}
-              </Grid.Row>
-            </Responsive>
-          </Grid.Row>
-          <ControlePlayer
-          url={protosound}
-          selected={this.state.selected}
-          />
-          <Grid.Row columns={4} only='mobile'>
-           
+              <h1>Viva la vida</h1>
+              <h1>CODPLAY</h1>
+              <ControlePlayer
+              url={protosound}
+              selected={this.state.selected}
+              />
+          </Grid.Column>
+          <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center'  mobile={16} tablet={1} computer={1} >
             {this.state.instruments.map((intrument,i) =>(
               <button
-              key={i+'mobile'} //à référencer quand on map du html (cf react)
+              key={i} //à référencer quand on map du html (cf react)
               ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
@@ -127,6 +116,7 @@ class Studio extends Component {
                 <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
               </button>
             ))}
+          </Grid.Column>
           </Grid.Row>
         </Grid>
       </StudioComponent>
@@ -139,11 +129,11 @@ const StudioComponent = styled.div
   height:100vh;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
-  
+
   #title {
     text-align:center;
     font-size: 24px;
-    margin-top: 42px;
+    margin-top: 48px;
     margin-bottom:16px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -240,8 +230,28 @@ const StudioComponent = styled.div
   .chooseInstrument-btn img {
     height: 100%;
   }
-  `
-
-
+  @media screen and (min-width:768px){
+    .chooseInstrument-container {
+      position: relative;
+      top: 200px;
+      transform: translateY(-50%);
+    }
+    .chooseInstrument-btn {
+      width: 72px;
+      height: 72px;
+    }
+    .chooseInstrument-btn:not(:first-child),
+    .chooseInstrument-btn:not(:last-child)
+     {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .chooseInstrument-btn:first-child,
+    .chooseInstrument-btn:last-child
+     {
+      margin-left:-50%;
+    }
+  }
+  `;
 
 export default Studio;
