@@ -5,7 +5,7 @@ import Fonts from '../../styles/fonts';
 import ovale from '../../assets/img/ovale-dotted.png'
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Responsive } from 'semantic-ui-react';
 //import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -29,8 +29,18 @@ class Studio extends Component {
       this.buttons[index].classList.remove(className)
     }
   }
+  test = () =>{
+    console.log('test')
+  }
+  setButtons(){
+    this.buttons = [];
+    this.selectorButtons = element => {
+      this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
+    };
+  }
   selectInstrument(id) {
     // à faire: changement de style
+    console.log(this)
     const current_btn = this.buttons[id];
     if(current_btn.classList.contains('selected')) {
       console.log('this button is alreated selected')
@@ -48,6 +58,7 @@ class Studio extends Component {
     })
   }
   state = {
+    selected: false,
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
@@ -73,25 +84,42 @@ class Studio extends Component {
       <StudioComponent>
         <Menu/>
         <h1 id="title">Mélodie</h1>
-        <Grid centered columns={4}>
-          <Grid.Row columns={1}>
-            <Grid.Column >
+        <Grid centered mobile={4} tablet={3} >
+          <Grid.Row centered mobile={16} >
+            <Grid.Column mobile={16} tablet={6} >
               <div className="studio-display-container">
-                <div className="studio-display-instrument mobile">
+                <div className="studio-display-instrument">
                   <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
+                  <img className="studio-display-instrument-img" src={ovale}/>
                 </div>
-                <img style={imageStyle}src={ovale}/>
               </div>
             </Grid.Column>
+            <Responsive verticalAlign="middle" as={Grid.Column} minWidth={768} tablet={3} stretched onUpdate={()=>this.test}>
+              <Grid.Row  >
+                {this.state.instruments.map((intrument,i) =>(
+                <Grid.Column >
+                <button
+                key={i} //à référencer quand on map du html (cf react)
+                ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
+                onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
+                className={`chooseInstrument-btn`}
+                >
+                <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
+                </button>
+                </Grid.Column>
+                ))}
+              </Grid.Row>
+            </Responsive>
           </Grid.Row>
           <ControlePlayer
           url={protosound}
+          selected={this.state.selected}
           />
-          <Grid.Row columns={4}>
-
+          <Grid.Row columns={4} only='mobile'>
+           
             {this.state.instruments.map((intrument,i) =>(
               <button
-              key={i} //à référencer quand on map du html (cf react)
+              key={i+'mobile'} //à référencer quand on map du html (cf react)
               ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
@@ -135,7 +163,7 @@ const StudioComponent = styled.div
     margin-bottom: 12px;
     width:100%;
   }
-  .studio-display-instrument.mobile {
+  .studio-display-instrument {
     position:relative;
     z-index:1;
     width: 240px;
@@ -147,10 +175,37 @@ const StudioComponent = styled.div
     align-items:center;
     justify-content:center;
   }
+  .studio-display-instrument-img {
+    position:absolute;
+    z-index:0;
+    width:304px;
+    height:304px;
+    transform:translate(-50%;-50%);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  @media screen and (min-width:768px) {
+    .studio-display-instrument {
+      width: 320px;
+      height: 320px;
+    }
+    .studio-display-instrument-img {
+      width: 400px;
+      height: 400px;
+    }        
+  }
+
+
   .studio-display-instrument-instruction {
     color: ${Colors.text};
     font-family: ${Fonts.title};
     font-size: 16px;
+    position: relative;
+    z-index:1;
   }
   .btn-instrument.mobile {
     width:32px;
@@ -186,19 +241,7 @@ const StudioComponent = styled.div
     height: 100%;
   }
   `
-const imageStyle ={
-  position:'absolute',
-  zIndex:0,top:'50%',
-  left:'50%',
-  width:'304px',
-  height:'304px',
-  transform:'translate(-50%,-50%)',
-  KhtmlUserSelect: 'none',
-  OUserSelect: 'none',
-  MozUserSelect: 'none',
-  WebkitUserSelect: 'none',
-  userSelect: 'none',
-}
+
 
 
 export default Studio;
