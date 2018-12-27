@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
@@ -8,7 +9,6 @@ import protosound from '../../assets/proto-sound/silence-voice.mp3';
 import { Grid, Responsive } from 'semantic-ui-react';
 //import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Menu from '../../components/menu/Menu';
 
 
@@ -18,10 +18,10 @@ class Studio extends Component {
 
     this.buttons = []; //initialisation de mes buttons
 
-    // je sélectionne tous mes boutons ('équivalent d'un querySelectorAll('button') grace à l'attribut ref que j'ai placé soigneusement dans chaque boutton
+    // je sélectionne tous mes boutons ('équivalent d'un querySelectorAll('button') grace à l'attribut ref que j'ai placé soigneusement dans chaque bouton
     // ainsi qu'a l'initialisation de mon tableau')
     this.selectorButtons = element => {
-      this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
+      this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus badass
     };
   }
   state = {
@@ -55,20 +55,13 @@ class Studio extends Component {
       },
     ]
   }
+
   removeButtonClasse(index,className){
     if(this.buttons[index].classList.contains(className)) {
       this.buttons[index].classList.remove(className)
     }
   }
-  test = () =>{
-    console.log('test')
-  }
-  setButtons(){
-    this.buttons = [];
-    this.selectorButtons = element => {
-      this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
-    };
-  }
+
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
@@ -76,11 +69,13 @@ class Studio extends Component {
       console.log('this button is alreated selected')
       return false;
     }
-    const instrumentName = this.state.instruments[id].name;
+
     this.buttons.map((button,i) => {
       if(current_btn === button) {
         button.classList.add('selected')
         this.removeButtonClasse(i,'unselected')
+
+        //j'insere mon instrument dans l'état select
         const name = this.state.instruments[id].name;
         const img = this.state.instruments[id].img;
         const details = this.state.instruments[id].details;
@@ -89,6 +84,7 @@ class Studio extends Component {
           select: {name,img,details}
         })
       } else {
+        //du style css
         button.classList.add('unselected')
         this.removeButtonClasse(i,'selected')
       }
@@ -227,7 +223,7 @@ const StudioComponent = styled.div
   .studio-display-instrument-instruction {
     color: ${Colors.text};
     font-family: ${Fonts.title};
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
     z-index:1;
   }
