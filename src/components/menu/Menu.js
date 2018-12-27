@@ -63,7 +63,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <MenuComponent>
+      <MenuComponent className={ (this.state.show ? 'show' : '')}>
         <Link to="/">
           <div className="logo">exoprod</div>
         </Link>
@@ -103,14 +103,16 @@ const MenuComponent = styled.div
   display: flex;
   padding: 2rem 1rem;
   z-index: 10000;
-  position: relative;
+  position: fixed;
+  top: 0.5rem;
   
   .burger {
   display: none;
   }
   .logo {
     position: fixed;
-    margin: 1.3rem 3rem;
+    top: 3rem;
+    margin: 0 3rem;
     font-size: 2rem;
     text-transform: uppercase;
     color: ${Colors.text};
@@ -126,7 +128,7 @@ const MenuComponent = styled.div
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   
   }
   
@@ -163,9 +165,8 @@ const MenuComponent = styled.div
   
   
   @media(max-width: 560px) {
-  
   .logo {
-    margin: 1rem 0;
+    margin: -3rem 0;
   }
     .burger {
     display: block;
@@ -194,7 +195,6 @@ const MenuComponent = styled.div
     .menu-container {
       width: 100%;
       height: 100vh;
-      position: fixed;
       opacity: 0;
       top: 0;
       left: 0;
@@ -214,14 +214,24 @@ const MenuComponent = styled.div
     margin: 2rem;
     }
     
+    .dropdown-link {
+      margin: 2rem 2rem;
+    }
+    
     .show {
     transition-duration: 0.3s;
     opacity: 1;
     display: block;
+    position: fixed;
     }
     
+    .relative {
+      position: relative;
+    }
+    
+    
     .lineOpen-1{
-      transform: rotate(45deg) translate(0, 8px);
+      transform: rotate(45deg) translate(-1px , 7px);
       transition-duration: 0.5s;
       transform-origin: left;
     } 

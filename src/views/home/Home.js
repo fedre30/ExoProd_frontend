@@ -22,22 +22,28 @@ import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
+import Button from "../../components/button/Button";
 
+
+// STATE
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       firstParagraph: {
-        title: "Lorem",
-        text: "lorem ipsum",
+        title: "De nouvelles sonorités à travers les instruments d’autres pays du monde",
+        text: " Le concept de “Production exotique” consiste à proposer une expérience de découverte d’instruments méconnus, soi-disant exotiques.\n" +
+          "Analyser comment les styles et les instruments d’outre-mer ont eu un impact sur la musique actuelle et rester émerveillé de la quantité d’artistes qui experiment avec ces instruments pour enrichir leur musique.",
         direction: "left"
       },
       secondParagraph: {
-        title: "Lorem",
-        text: "lorem ipsum",
+        title: "Prenez en main les instruments et créez votre propre son",
+        text: "Explorez le potentiel des ces instruments à travers vos chansons préférées, en modifiant la mélodie, les accords ou d’autres pistes avec l’instrument le plus souhaitable à votre goût.\n" +
+          "Transformez un morceau pop actuel en un oeuvre qui va au-delà de toute limite spatio-temporelle pour un résultat époustouflant ! \n",
         direction: "right"
       },
+      mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: [
         { markerOffset: -25, name: "Buenos Aires", coordinates: [-58.3816, -34.6037] },
         { markerOffset: -25, name: "La Paz", coordinates: [-68.1193, -16.4897] },
@@ -85,33 +91,34 @@ class Home extends Component {
             </Grid>
           </div>
         </Header>
-        <Secondsection>
+        <Firstsection>
           <Grid columns={12}>
             <Grid.Column width={5}>
               <div className="triangle">
                 <img src={triangle} alt=""/>
               </div>
             </Grid.Column>
-            <Grid.Column width={7}>
-              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
-                         direction={this.state.secondParagraph.direction}/>
-            </Grid.Column>
-          </Grid>
-        </Secondsection>
-        <Firstsection>
-          <Grid columns={12}>
-            <Grid.Column width={7}>
+            <Grid.Column computer={9} mobile={16}>
               <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
                          direction={this.state.firstParagraph.direction}/>
+            </Grid.Column>
+          </Grid>
+        </Firstsection>
+        <Secondsection>
+          <Grid columns={12}>
+            <Grid.Column computer={9} mobile={16}>
+              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
+                         direction={this.state.secondParagraph.direction}/>
+              <Button link={'/studio'} text={'Decouvrir le studio'}/>
             </Grid.Column>
             <Grid.Column width={5}>
               <Thumbnail image={thumbnail}/>
             </Grid.Column>
           </Grid>
-        </Firstsection>
+        </Secondsection>
         <Sectionmap>
           <div className="heading">
-            <h4 className="heading-title">lorem ipsum</h4>
+            <h4 className="heading-title">{this.state.mapTitle}</h4>
           </div>
           <div className="map">
             <ComposableMap projectionConfig={{
@@ -184,6 +191,9 @@ class Home extends Component {
   }
 }
 
+
+// STYLES
+
 const HomeComponent = styled.div
   `
   width: 100%;
@@ -192,6 +202,10 @@ const HomeComponent = styled.div
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
   position: relative;
+  
+  @media(max-width: 560px) {
+    height: 500vh;
+  }
  
 
   `
@@ -270,21 +284,8 @@ const Header = styled.div`
 `
 ;
 
+
 const Firstsection = styled.div`  
-  width: 100%;
-  height: 100vh;
-  padding: 8rem;
-  position: relative;
-  z-index: 0;
-  
-  @media(max-width: 560px) {
-    padding: 2rem;
-  }
-  
-
-`
-
-const Secondsection = styled.div`  
   width: 100%;
   height: 100vh;
   padding: 8rem;
@@ -305,6 +306,22 @@ const Secondsection = styled.div`
 
 `
 
+
+const Secondsection = styled.div`  
+  width: 100%;
+  height: 100vh;
+  padding: 8rem;
+  position: relative;
+  z-index: 0;
+  
+  @media(max-width: 560px) {
+    padding: 2rem;
+    height: 120vh;
+  }
+  
+
+`
+
 const Sectionmap = styled.div`  
   width: 100%;
   height: 100vh;
@@ -318,6 +335,7 @@ const Sectionmap = styled.div`
     color: ${Colors.text};
     text-align: right;
     margin-right: 3rem;
+    margin-bottom: 3rem;
   }
   
   .map {
@@ -331,6 +349,14 @@ const Sectionmap = styled.div`
   
  
   @media(max-width: 560px) {
+  
+  .heading-title {
+    font-size: 2rem;
+  }
+  
+  .map {
+    display: none;
+  }
     
   }
   
