@@ -24,6 +24,37 @@ class Studio extends Component {
       this.buttons = [...this.buttons,element] // à chaque boucle j'insère mes boutons dans mon tableau, remarque: on peut simplement faire un push(element) mais je trouve ça plus stylé
     };
   }
+  state = {
+    isSelected: false,
+    select:{
+      name:'',
+      img:'',
+      details:'',
+    },
+    // données statiques, on fera une boucle par la suite
+    instruments: [
+      {
+        name:"Bag pipes",
+        img: 'Bagpipes-portrait.png',
+        details: "yooo"
+      },
+      {
+        name:"Nani",
+        img: 'file.png',
+        details: "yooo"
+      },
+      {
+        name:"Latin Percu",
+        img: 'latin-percu.png',
+        details: "yooo"
+      },
+      {
+        name:"Taiko",
+        img: 'taiko.png',
+        details: "yooo"
+      },
+    ]
+  }
   removeButtonClasse(index,className){
     if(this.buttons[index].classList.contains(className)) {
       this.buttons[index].classList.remove(className)
@@ -40,7 +71,6 @@ class Studio extends Component {
   }
   selectInstrument(id) {
     // à faire: changement de style
-    console.log(this)
     const current_btn = this.buttons[id];
     if(current_btn.classList.contains('selected')) {
       console.log('this button is alreated selected')
@@ -51,44 +81,23 @@ class Studio extends Component {
       if(current_btn === button) {
         button.classList.add('selected')
         this.removeButtonClasse(i,'unselected')
+        const name = this.state.instruments[id].name;
+        const img = this.state.instruments[id].img;
+        const details = this.state.instruments[id].details;
+        this.setState({
+          isSelected: true,
+          select: {name,img,details}
+        })
       } else {
         button.classList.add('unselected')
         this.removeButtonClasse(i,'selected')
       }
     })
   }
-  state = {
-    isSelected: false,
-    selected: {
-      name:'',
-      title:''
-    },
-    // données statiques, on fera une boucle par la suite
-    instruments: [
-      {
-        name:"instrument 1",
-        img: 'Bagpipes-portrait.png',
-        details: "yooo"
-      },
-      {
-        name:"instrument 2",
-        img: 'Bagpipes-portrait.png',
-        details: "yooo"
-      },
-      {
-        name:"instrument 3",
-        img: 'Bagpipes-portrait.png',
-        details: "yooo"
-      },
-      {
-        name:"instrument 3",
-        img: 'Bagpipes-portrait.png',
-        details: "yooo"
-      },
-    ]
-  }
+
 
   render(){
+    const {isSelected,select} = this.state;
     return (
       <StudioComponent>
         <Menu/>
@@ -98,7 +107,14 @@ class Studio extends Component {
             <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
               <div className="studio-display-container">
                 <div className="studio-display-instrument">
+                {!isSelected ? (
                   <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
+                ):
+                <div className='studio-display-instrument_selected'>
+                  <h2>{select.name}</h2>
+                  <img src={require(`../../assets/img/instruments/${select.img}`)}/>
+                </div>
+                }
                   <img className="studio-display-instrument-img" src={ovale}/>
                 </div>
               </div>
@@ -249,7 +265,7 @@ const StudioComponent = styled.div
     height: 100%;
   }
   .chooseInstrument-container {
-    padding-top:6px;
+    padding-top:12px;
   }
   @media screen and (min-width:768px){
     .chooseInstrument-container {
@@ -272,6 +288,34 @@ const StudioComponent = styled.div
     .chooseInstrument-btn:last-child
      {
       margin-left:-50%;
+    }
+  }
+  .studio-display-instrument_selected {
+    width:100%;
+    height:80%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+    position: relative;
+    z-index:5;
+  }
+  .studio-display-instrument_selected h2 {
+    color: ${Colors.text};
+    font-family: ${Fonts.title};
+    font-weight:400;
+    font-size: 18px;
+  }
+  .studio-display-instrument_selected img {
+    height:120px;
+  }
+  @media screen and (min-width:768px) {
+    .studio-display-instrument_selected {
+      height: 90%;
+    }
+
+    .studio-display-instrument_selected img {
+      height:180px;
     }
   }
   `;
