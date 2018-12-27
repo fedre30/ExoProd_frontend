@@ -38,12 +38,13 @@ const FooterComponent = styled.div
   width: 100%;
   height: 3rem;
   display: flex;
-  padding: 2rem 2rem;
+  padding: 2rem 2rem 3rem 2rem;
   background-color: ${Colors.footer};
   position: absolute;
   bottom: 0;
   justify-content: space-between;
   color: ${Colors.text};
+  
   
   .logo {
     font-size: 2rem;

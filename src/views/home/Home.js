@@ -25,6 +25,8 @@ import Footer from "../../components/footer/Footer";
 import Button from "../../components/button/Button";
 
 
+// STATE
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -96,7 +98,7 @@ class Home extends Component {
                 <img src={triangle} alt=""/>
               </div>
             </Grid.Column>
-            <Grid.Column width={9}>
+            <Grid.Column computer={9} mobile={16}>
               <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
                          direction={this.state.firstParagraph.direction}/>
             </Grid.Column>
@@ -104,7 +106,7 @@ class Home extends Component {
         </Firstsection>
         <Secondsection>
           <Grid columns={12}>
-            <Grid.Column width={9}>
+            <Grid.Column computer={9} mobile={16}>
               <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
                          direction={this.state.secondParagraph.direction}/>
               <Button link={'/studio'} text={'Decouvrir le studio'}/>
@@ -189,6 +191,9 @@ class Home extends Component {
   }
 }
 
+
+// STYLES
+
 const HomeComponent = styled.div
   `
   width: 100%;
@@ -197,6 +202,10 @@ const HomeComponent = styled.div
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
   position: relative;
+  
+  @media(max-width: 560px) {
+    height: 500vh;
+  }
  
 
   `
@@ -307,6 +316,7 @@ const Secondsection = styled.div`
   
   @media(max-width: 560px) {
     padding: 2rem;
+    height: 120vh;
   }
   
 
@@ -339,6 +349,14 @@ const Sectionmap = styled.div`
   
  
   @media(max-width: 560px) {
+  
+  .heading-title {
+    font-size: 2rem;
+  }
+  
+  .map {
+    display: none;
+  }
     
   }
   
