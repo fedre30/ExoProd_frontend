@@ -202,7 +202,7 @@ const ControlePlayerStyle = styled.div
         align-items: center;
         justify-content: center;
         width:100%;
-        margin: 16px 0;
+        margin: 12px 0 6px 0;
     }
 
     .ControlePlayer-container p {

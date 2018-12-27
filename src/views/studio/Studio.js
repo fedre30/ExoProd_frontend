@@ -58,7 +58,11 @@ class Studio extends Component {
     })
   }
   state = {
-    selected: false,
+    isSelected: false,
+    selected: {
+      name:'',
+      title:''
+    },
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
@@ -98,11 +102,11 @@ class Studio extends Component {
                   <img className="studio-display-instrument-img" src={ovale}/>
                 </div>
               </div>
-              <h1>Viva la vida</h1>
-              <h1>CODPLAY</h1>
+              <h1 className="studio-title">{this.props.title}</h1>
+              <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
               url={protosound}
-              selected={this.state.selected}
+              selected={this.state.isSelected}
               />
           </Grid.Column>
           <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center'  mobile={16} tablet={1} computer={1} >
@@ -132,8 +136,8 @@ const StudioComponent = styled.div
 
   #title {
     text-align:center;
-    font-size: 24px;
-    margin-top: 48px;
+    font-size: 18px;
+    margin-top: 28px;
     margin-bottom:16px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -153,11 +157,25 @@ const StudioComponent = styled.div
     margin-bottom: 12px;
     width:100%;
   }
+  .studio-title,
+  .studio-artist {
+    color: ${Colors.text};
+    font-family: ${Fonts.title};
+    font-size:18px;
+    font-weight:400;
+    margin-bottom:0;
+  }
+  .studio-title{
+    margin-top:44px;
+  }
+  .studio-artist {
+    margin-top:0;
+  }
   .studio-display-instrument {
     position:relative;
     z-index:1;
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
     border-radius:50%;
     background-color:rgba(100,100,100,0.39);
     margin: 0 auto;
@@ -168,8 +186,8 @@ const StudioComponent = styled.div
   .studio-display-instrument-img {
     position:absolute;
     z-index:0;
-    width:304px;
-    height:304px;
+    width:284px;
+    height:284px;
     transform:translate(-50%;-50%);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -193,7 +211,7 @@ const StudioComponent = styled.div
   .studio-display-instrument-instruction {
     color: ${Colors.text};
     font-family: ${Fonts.title};
-    font-size: 16px;
+    font-size: 18px;
     position: relative;
     z-index:1;
   }
@@ -230,8 +248,12 @@ const StudioComponent = styled.div
   .chooseInstrument-btn img {
     height: 100%;
   }
+  .chooseInstrument-container {
+    padding-top:6px;
+  }
   @media screen and (min-width:768px){
     .chooseInstrument-container {
+      padding-top:0;
       position: relative;
       top: 200px;
       transform: translateY(-50%);
