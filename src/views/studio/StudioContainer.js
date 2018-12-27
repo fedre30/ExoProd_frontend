@@ -5,7 +5,8 @@ import API from '../../helpers/api'
 
 class StudioContainer extends React.Component {
   state = {
-
+    title:"Viva la vida",
+    artist: "COLDPLAY", 
   }
   componentDidMount(){
 
@@ -13,7 +14,10 @@ class StudioContainer extends React.Component {
 
   }
   render() {
-    return <Studio />;
+    return <Studio 
+            title={this.state.title}
+            artist={this.state.artist}
+            />;
   }
 }
 export default withRouter(StudioContainer);
