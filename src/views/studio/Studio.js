@@ -28,30 +28,35 @@ class Studio extends Component {
     isSelected: false,
     select:{
       name:'',
-      img:'',
-      details:'',
+      img: '',
+      details: '',
+      sound:null
     },
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
         name:"Bag pipes",
         img: 'Bagpipes-portrait.png',
-        details: "yooo"
+        details: "yooo",
+        sound:require('../../assets/proto-sound/majiko.mp3')
       },
       {
         name:"Nani",
         img: 'file.png',
-        details: "yooo"
+        details: "yooo",
+        sound:require('../../assets/proto-sound/nier.mp3')
       },
       {
         name:"Latin Percu",
         img: 'latin-percu.png',
-        details: "yooo"
+        details: "yooo",
+        sound:require('../../assets/proto-sound/silence-voice.mp3')
       },
       {
         name:"Taiko",
         img: 'taiko.png',
-        details: "yooo"
+        details: "yooo",
+        sound:require('../../assets/proto-sound/zankyo.mp3')
       },
     ]
   }
@@ -76,12 +81,9 @@ class Studio extends Component {
         this.removeButtonClasse(i,'unselected')
 
         //j'insere mon instrument dans l'état select
-        const name = this.state.instruments[id].name;
-        const img = this.state.instruments[id].img;
-        const details = this.state.instruments[id].details;
         this.setState({
           isSelected: true,
-          select: {name,img,details}
+          select: this.state.instruments[id]
         })
       } else {
         //du style css
@@ -119,6 +121,7 @@ class Studio extends Component {
               <ControlePlayer
               url={protosound}
               selected={this.state.isSelected}
+              select={this.state.select}
               />
           </Grid.Column>
           <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center'  mobile={16} tablet={1} computer={1} >
@@ -157,6 +160,7 @@ const StudioComponent = styled.div
   .ui.button.studio-btn-audio.mobile {
     transition: all 0.3s ease;
     background-color: #741AB0;
+    border: 1px solid rgba(255,255,255,0.2);
     color:#FFFCF2;
   }
 
@@ -238,6 +242,7 @@ const StudioComponent = styled.div
     overflow:hidden;
   }
   .chooseInstrument-btn {
+    outline:0;
     width: 64px;
     height: 64px;
     border-radius: 50%;

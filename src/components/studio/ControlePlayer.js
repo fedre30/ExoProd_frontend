@@ -20,35 +20,33 @@ class ControlePlayer extends Component {
         duration: 0,
         total: '0:00',
         current: '0:00',
-        volume: 100
-    }
-
-    /**
-     * j'initialise le temps total de mon audio
-     */
-    componentDidMount(){
-        let option = { audio:new Audio(this.props.url),remove:false};
-        option.audio.addEventListener('loadedmetadata', () => {
-            this.setState({
-                total: this.convertToTimer(option.audio.duration)
-            })
-            option.audio.remove = true;
-        })
-        if(option.remove) option = undefined;
-
+        volume: 100,
     }
 
     /**
      * 
      * @param {*} duration
-     * fonction que j'appelle lorsque je monte mon component
+     * fonction que j'appelle lorsque je charge le son
      */
     initPlayer(duration){
         this.setState({
-            duration
+            duration,
         })
     }
+    endLoading = ()=>{
+        if(this.props.select.sound !== null){
+            let option = { audio:new Audio(this.props.select.sound),remove:false};
+            option.audio.addEventListener('loadedmetadata', () => {
+                this.setState({
+                    total: this.convertToTimer(option.audio.duration)
+                })
+                option.audio.remove = true;
+            })
+            if(option.remove) option = undefined;
+        }
 
+        this.handleSongFinishedPlaying();
+    }
     /**
      * Converstion de ma position en timer
      */
@@ -107,6 +105,7 @@ class ControlePlayer extends Component {
         this.setState({
             playStatus: Sound.status.STOPPED,
             progressbar: 0,
+            position:0,
             current: '0:00'
         })
     }
@@ -144,6 +143,7 @@ class ControlePlayer extends Component {
                         min='0'
                         max='100' 
                         step="0.001"
+                        disabled={this.props.selected ? false : true}
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
@@ -155,14 +155,16 @@ class ControlePlayer extends Component {
                     <Grid.Column textAlign='center' >
                         <Button 
                         className="studio-btn-audio mobile"
-                        circular 
+                        circular
+                        disabled={this.props.selected ? false : true}
                         icon='info' 
                         size='large'
                         />
 
                         <Button 
                         className="studio-btn-audio mobile" 
-                        circular 
+                        circular
+                        disabled={this.props.selected ? false : true}
                         icon={controller.playing ? 'pause' : 'play' } 
                         size='huge'
                         onClick={this.handlePlay}
@@ -170,7 +172,8 @@ class ControlePlayer extends Component {
 
                         <Button 
                         className="studio-btn-audio mobile" 
-                        circular 
+                        circular
+                        disabled={this.props.selected ? false : true}
                         icon={controller.isMute ? 'volume off' : 'volume up'} 
                         size='large'
                         onClick={this.handleVolume}
@@ -179,11 +182,12 @@ class ControlePlayer extends Component {
                 </Grid.Row>
                 <Sound
                     ignoreMobileRestrictions={true}
-                    url={this.props.url}
+                    url={this.props.select.sound}
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
                     onFinishedPlaying={this.handleSongFinishedPlaying}
                     onLoading={({duration,position}) => this.initPlayer(duration,position)}
+                    onLoad={this.endLoading}
                     playFromPosition={this.test}
                     autoLoad={true}
                     position={this.state.position}
