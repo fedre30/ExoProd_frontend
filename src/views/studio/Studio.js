@@ -72,7 +72,7 @@ class Studio extends Component {
       this.buttons[index].classList.remove(className)
     }
   }
-  setTimeoutExit = () =>{
+  settiemout = () =>{
     setTimeout(()=>{
       const {img,name} = this.state.prevSelect;
       this.setState({
@@ -137,7 +137,7 @@ class Studio extends Component {
                 in={!isSelected}
                 timeout={300}
                 unmountOnExit
-                onExit={this.setTimeoutExit}
+                onExit={this.settiemout}
                 classNames='instrument'
                 >
                 <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
@@ -148,8 +148,8 @@ class Studio extends Component {
                 timeout={300}
                 unmountOnExit
                 onEntering={this.setTimeoutEnter}
-                onExit={this.setTimeoutExit}
-                classNames='test'>
+                onExit={this.settiemout}
+                classNames='instrument'>
                     <div className='studio-display-instrument_selected'>
                       <h2>{this.state.name}</h2>
                       <img src={this.state.img}/>
