@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import ovale from '../../assets/img/ovale-dotted.png'
+import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid, Responsive } from 'semantic-ui-react';
+import { Grid} from 'semantic-ui-react';
+import { CSSTransition } from 'react-transition-group';
 //import Button from '../../components/studio/Button';
 import { Link } from 'react-router-dom';
 import Menu from '../../components/menu/Menu';
+import { setTimeout } from "timers";
 
 
 class Studio extends Component {
@@ -17,7 +20,6 @@ class Studio extends Component {
     super(props);
 
     this.buttons = []; //initialisation de mes buttons
-
     // je sélectionne tous mes boutons ('équivalent d'un querySelectorAll('button') grace à l'attribut ref que j'ai placé soigneusement dans chaque bouton
     // ainsi qu'a l'initialisation de mon tableau')
     this.selectorButtons = element => {
@@ -26,35 +28,39 @@ class Studio extends Component {
   }
   state = {
     isSelected: false,
+    showInstrument: false,
+    prevSelect:{},
+    name:'',
+    img:null,
     select:{
       name:'',
       img: '',
       details: '',
-      sound:null
+      sound:null,
     },
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
         name:"Bag pipes",
-        img: 'Bagpipes-portrait.png',
+        img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/majiko.mp3')
       },
       {
         name:"Nani",
-        img: 'file.png',
+        img: require('../../assets/img/instruments/file.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/nier.mp3')
       },
       {
         name:"Latin Percu",
-        img: 'latin-percu.png',
+        img: require('../../assets/img/instruments/latin-percu.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/silence-voice.mp3')
       },
       {
         name:"Taiko",
-        img: 'taiko.png',
+        img: require('../../assets/img/instruments/taiko.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/zankyo.mp3')
       },
@@ -66,7 +72,25 @@ class Studio extends Component {
       this.buttons[index].classList.remove(className)
     }
   }
-
+  setTimeoutExit = () =>{
+    setTimeout(()=>{
+      const {img,name} = this.state.prevSelect;
+      this.setState({
+        showInstrument: true,
+        img,
+        name
+      })
+    }
+    ,500)
+  }
+  setTimeoutEnter = () => {
+    const {img,name} = this.state.select
+    this.setState({
+      img,
+      name
+    })
+  }  
+  
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
@@ -81,9 +105,13 @@ class Studio extends Component {
         this.removeButtonClasse(i,'unselected')
 
         //j'insere mon instrument dans l'état select
-        this.setState({
-          isSelected: true,
-          select: this.state.instruments[id]
+        this.setState(prev=>{
+          return{
+            isSelected: true,
+            showInstrument: false,
+            select: this.state.instruments[id],
+            PrevSelect: {img:prev.select.img,name:prev.select.name}
+          }
         })
       } else {
         //du style css
@@ -105,14 +133,28 @@ class Studio extends Component {
             <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
               <div className="studio-display-container">
                 <div className="studio-display-instrument">
-                {!isSelected ? (
-                  <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
-                ):
-                <div className='studio-display-instrument_selected'>
-                  <h2>{select.name}</h2>
-                  <img src={require(`../../assets/img/instruments/${select.img}`)}/>
-                </div>
-                }
+                <CSSTransition
+                in={!isSelected}
+                timeout={300}
+                unmountOnExit
+                onExit={this.setTimeoutExit}
+                classNames='instrument'
+                >
+                <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
+                </CSSTransition>
+        
+                <CSSTransition
+                in={this.state.showInstrument}
+                timeout={300}
+                unmountOnExit
+                onEntering={this.setTimeoutEnter}
+                onExit={this.setTimeoutExit}
+                classNames='test'>
+                    <div className='studio-display-instrument_selected'>
+                      <h2>{this.state.name}</h2>
+                      <img src={this.state.img}/>
+                    </div>
+                </CSSTransition>
                   <img className="studio-display-instrument-img" src={ovale}/>
                 </div>
               </div>
@@ -132,7 +174,7 @@ class Studio extends Component {
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
               >
-                <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
+                <img src={intrument.img}/>
               </button>
             ))}
           </Grid.Column>
@@ -197,6 +239,8 @@ const StudioComponent = styled.div
     margin: 0 auto;
     display:flex;
     align-items:center;
+    flex-direction:column;
+    overflow:hidden;
     justify-content:center;
   }
   .studio-display-instrument-img {
