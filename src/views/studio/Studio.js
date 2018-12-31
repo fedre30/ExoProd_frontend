@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
-import ovale from '../../assets/img/ovale-dotted.png'
+import DisplayInstrument from '../../components/studio/DisplayInstrument';
+//import ovale from '../../assets/img/ovale-dotted.png'
+import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid, Responsive } from 'semantic-ui-react';
+import { Grid} from 'semantic-ui-react';
+//import { CSSTransition } from 'react-transition-group';
 //import Button from '../../components/studio/Button';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Menu from '../../components/menu/Menu';
+import { setTimeout } from "timers";
 
 
 class Studio extends Component {
@@ -17,7 +20,6 @@ class Studio extends Component {
     super(props);
 
     this.buttons = []; //initialisation de mes buttons
-
     // je sélectionne tous mes boutons ('équivalent d'un querySelectorAll('button') grace à l'attribut ref que j'ai placé soigneusement dans chaque bouton
     // ainsi qu'a l'initialisation de mon tableau')
     this.selectorButtons = element => {
@@ -26,35 +28,40 @@ class Studio extends Component {
   }
   state = {
     isSelected: false,
+    showInstrument: false,
+    prevSelect:{},
+    name:'',
+    img:null,
+    details:'',
     select:{
       name:'',
       img: '',
       details: '',
-      sound:null
+      sound:null,
     },
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
         name:"Bag pipes",
-        img: 'Bagpipes-portrait.png',
+        img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/majiko.mp3')
       },
       {
         name:"Nani",
-        img: 'file.png',
+        img: require('../../assets/img/instruments/file.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/nier.mp3')
       },
       {
         name:"Latin Percu",
-        img: 'latin-percu.png',
+        img: require('../../assets/img/instruments/latin-percu.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/silence-voice.mp3')
       },
       {
         name:"Taiko",
-        img: 'taiko.png',
+        img: require('../../assets/img/instruments/taiko.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/zankyo.mp3')
       },
@@ -66,7 +73,27 @@ class Studio extends Component {
       this.buttons[index].classList.remove(className)
     }
   }
-
+  settiemout = () =>{
+    setTimeout(()=>{
+      const {img,name,details} = this.state.prevSelect;
+      this.setState({
+        showInstrument: true,
+        img,
+        name,
+        details
+      })
+    }
+    ,500)
+  }
+  setTimeoutEnter = () => {
+    const {img,name,details} = this.state.select
+    this.setState({
+      img,
+      name,
+      details
+    })
+  }  
+  
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
@@ -81,9 +108,13 @@ class Studio extends Component {
         this.removeButtonClasse(i,'unselected')
 
         //j'insere mon instrument dans l'état select
-        this.setState({
-          isSelected: true,
-          select: this.state.instruments[id]
+        this.setState(prev=>{
+          return{
+            isSelected: true,
+            showInstrument: false,
+            select: this.state.instruments[id],
+            PrevSelect: {img:prev.select.img,name:prev.select.name,details:prev.select.details}
+          }
         })
       } else {
         //du style css
@@ -103,19 +134,17 @@ class Studio extends Component {
         <Grid centered >
           <Grid.Row centered columns={16} >
             <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
-              <div className="studio-display-container">
-                <div className="studio-display-instrument">
-                {!isSelected ? (
-                  <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
-                ):
-                <div className='studio-display-instrument_selected'>
-                  <h2>{select.name}</h2>
-                  <img src={require(`../../assets/img/instruments/${select.img}`)}/>
-                </div>
-                }
-                  <img className="studio-display-instrument-img" src={ovale}/>
-                </div>
-              </div>
+            
+              <DisplayInstrument
+              isSelected={isSelected}
+              showInstrument={this.state.showInstrument}
+              enter={this.setTimeoutEnter}
+              exit={this.settiemout}
+              name={this.state.name}
+              img={this.state.img}
+              details={this.state.details}
+              />
+
               <h1 className="studio-title">{this.props.title}</h1>
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
@@ -132,7 +161,7 @@ class Studio extends Component {
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
               >
-                <img src={require(`../../assets/img/instruments/${intrument.img}`)}/>
+                <img src={intrument.img}/>
               </button>
             ))}
           </Grid.Column>
@@ -167,12 +196,7 @@ const StudioComponent = styled.div
   .studio-btn-audio.mobile:nth-child(2){
     margin: 0 24px;
   }
-  .studio-display-container {
-    position:relative;
-    margin-top: 32px;
-    margin-bottom: 12px;
-    width:100%;
-  }
+
   .studio-title,
   .studio-artist {
     color: ${Colors.text};
@@ -181,56 +205,15 @@ const StudioComponent = styled.div
     font-weight:400;
     margin-bottom:0;
   }
+
   .studio-title{
     margin-top:44px;
   }
   .studio-artist {
     margin-top:0;
   }
-  .studio-display-instrument {
-    position:relative;
-    z-index:1;
-    width: 220px;
-    height: 220px;
-    border-radius:50%;
-    background-color:rgba(100,100,100,0.39);
-    margin: 0 auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .studio-display-instrument-img {
-    position:absolute;
-    z-index:0;
-    width:284px;
-    height:284px;
-    transform:translate(-50%;-50%);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  @media screen and (min-width:768px) {
-    .studio-display-instrument {
-      width: 320px;
-      height: 320px;
-    }
-    .studio-display-instrument-img {
-      width: 400px;
-      height: 400px;
-    }        
-  }
 
-
-  .studio-display-instrument-instruction {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
-    position: relative;
-    z-index:1;
-  }
+  
   .btn-instrument.mobile {
     width:32px;
     height:32px;
@@ -289,34 +272,6 @@ const StudioComponent = styled.div
     .chooseInstrument-btn:last-child
      {
       margin-left:-50%;
-    }
-  }
-  .studio-display-instrument_selected {
-    width:100%;
-    height:80%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items:center;
-    position: relative;
-    z-index:5;
-  }
-  .studio-display-instrument_selected h2 {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-weight:400;
-    font-size: 18px;
-  }
-  .studio-display-instrument_selected img {
-    height:120px;
-  }
-  @media screen and (min-width:768px) {
-    .studio-display-instrument_selected {
-      height: 90%;
-    }
-
-    .studio-display-instrument_selected img {
-      height:180px;
     }
   }
   `;
