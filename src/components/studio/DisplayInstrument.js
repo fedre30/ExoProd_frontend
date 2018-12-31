@@ -6,9 +6,9 @@ import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
+import { Icon } from 'semantic-ui-react'
 
-
-const DisplayInstrument = ({isSelected,showInstrument,exit,enter,name,img}) => {
+const DisplayInstrument = ({isSelected,showInstrument,exit,enter,name,img,details}) => {
 return(
   <DisplayInstrumentComponent>
   <div className="studio-display-container">
@@ -30,10 +30,20 @@ return(
       onEntering={enter}
       onExit={exit}
       classNames='instrument'>
-        <div className='studio-display-instrument_selected'>
-          <h2>{name}</h2>
-          <img src={img}/>
-        </div>  
+        <div className="studio-display-instrument_selected-container">
+        <Icon className="right"  name='angle right' link  size="large" />
+        <Icon className="left"  name='angle left' link  size="large" /> 
+          <div className="studio-display-instrument_selected-wrapper">
+            <div className='studio-display-instrument_selected'>
+              <h2>{name}</h2>
+              <img src={img}/>
+            </div>          
+            <div className='studio-display-instrument_selected'>
+              <p>{details}</p>
+              <a>en savoir plus :)</a>
+            </div>
+          </div>
+        </div>
     </CSSTransition>
 
     </div>
@@ -47,7 +57,8 @@ DisplayInstrument.propTypes = {
   showInstrument:  PropTypes.bool.isRequired,
   enter: PropTypes.func.isRequired,
   exit:  PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  details: PropTypes.string.isRequired
 };
 const DisplayInstrumentComponent = styled.div
   `
@@ -117,15 +128,30 @@ const DisplayInstrumentComponent = styled.div
     position: relative;
     z-index:1;
   }
-  .studio-display-instrument_selected {
+  .studio-display-instrument_selected-container{
+    position:relative;
     width:100%;
+    height:100%;
+  }
+  
+  .studio-display-instrument_selected-wrapper{
+    max-width:100%;
+    margin:0 auto;
+    flex-wrap: nowrap;
+    display:flex;
+    height:100%;
+    align-items:center;
+    position:relative;
+  }
+  .studio-display-instrument_selected {
+    min-width:100%;
     height:80%;
     display:flex;
     flex-direction: column;
     justify-content: space-around;
     align-items:center;
-    position: relative;
-    z-index:5;
+    position:relative;
+
   }
   .studio-display-instrument_selected h2 {
     color: ${Colors.text};
@@ -144,6 +170,26 @@ const DisplayInstrumentComponent = styled.div
     .studio-display-instrument_selected img {
       height:180px;
     }
+  }
+  .studio-display-instrument_selected-container .right{
+    position:absolute;
+    z-index:10;
+    top:50%;
+    right:0;
+    margin-right:5%;
+    z-index:1;
+    color: white;
+    transform:translateY(-50%);
+  }
+  .studio-display-instrument_selected-container .left{
+    position:absolute;
+    z-index:10;
+    top:50%;
+    left:0;
+    margin-left:5%;
+    z-index:1;
+    color: white;
+    transform:translateY(-50%);
   }
   `;
 

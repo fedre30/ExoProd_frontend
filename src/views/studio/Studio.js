@@ -32,6 +32,7 @@ class Studio extends Component {
     prevSelect:{},
     name:'',
     img:null,
+    details:'',
     select:{
       name:'',
       img: '',
@@ -74,20 +75,22 @@ class Studio extends Component {
   }
   settiemout = () =>{
     setTimeout(()=>{
-      const {img,name} = this.state.prevSelect;
+      const {img,name,details} = this.state.prevSelect;
       this.setState({
         showInstrument: true,
         img,
-        name
+        name,
+        details
       })
     }
     ,500)
   }
   setTimeoutEnter = () => {
-    const {img,name} = this.state.select
+    const {img,name,details} = this.state.select
     this.setState({
       img,
-      name
+      name,
+      details
     })
   }  
   
@@ -110,7 +113,7 @@ class Studio extends Component {
             isSelected: true,
             showInstrument: false,
             select: this.state.instruments[id],
-            PrevSelect: {img:prev.select.img,name:prev.select.name}
+            PrevSelect: {img:prev.select.img,name:prev.select.name,details:prev.select.details}
           }
         })
       } else {
@@ -139,6 +142,7 @@ class Studio extends Component {
               exit={this.settiemout}
               name={this.state.name}
               img={this.state.img}
+              details={this.state.details}
               />
 
               <h1 className="studio-title">{this.props.title}</h1>
