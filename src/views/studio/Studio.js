@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
-import ovale from '../../assets/img/ovale-dotted.png'
+import DisplayInstrument from '../../components/studio/DisplayInstrument';
+//import ovale from '../../assets/img/ovale-dotted.png'
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
 import { Grid} from 'semantic-ui-react';
-import { CSSTransition } from 'react-transition-group';
+//import { CSSTransition } from 'react-transition-group';
 //import Button from '../../components/studio/Button';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Menu from '../../components/menu/Menu';
 import { setTimeout } from "timers";
 
@@ -131,33 +131,16 @@ class Studio extends Component {
         <Grid centered >
           <Grid.Row centered columns={16} >
             <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
-              <div className="studio-display-container">
-                <div className="studio-display-instrument">
-                <CSSTransition
-                in={!isSelected}
-                timeout={300}
-                unmountOnExit
-                onExit={this.settiemout}
-                classNames='instrument'
-                >
-                <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
-                </CSSTransition>
-        
-                <CSSTransition
-                in={this.state.showInstrument}
-                timeout={300}
-                unmountOnExit
-                onEntering={this.setTimeoutEnter}
-                onExit={this.settiemout}
-                classNames='instrument'>
-                    <div className='studio-display-instrument_selected'>
-                      <h2>{this.state.name}</h2>
-                      <img src={this.state.img}/>
-                    </div>
-                </CSSTransition>
-                  <img className="studio-display-instrument-img" src={ovale}/>
-                </div>
-              </div>
+            
+              <DisplayInstrument
+              isSelected={isSelected}
+              showInstrument={this.state.showInstrument}
+              enter={this.setTimeoutEnter}
+              exit={this.settiemout}
+              name={this.state.name}
+              img={this.state.img}
+              />
+
               <h1 className="studio-title">{this.props.title}</h1>
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
@@ -209,12 +192,7 @@ const StudioComponent = styled.div
   .studio-btn-audio.mobile:nth-child(2){
     margin: 0 24px;
   }
-  .studio-display-container {
-    position:relative;
-    margin-top: 32px;
-    margin-bottom: 12px;
-    width:100%;
-  }
+
   .studio-title,
   .studio-artist {
     color: ${Colors.text};
@@ -223,58 +201,15 @@ const StudioComponent = styled.div
     font-weight:400;
     margin-bottom:0;
   }
+
   .studio-title{
     margin-top:44px;
   }
   .studio-artist {
     margin-top:0;
   }
-  .studio-display-instrument {
-    position:relative;
-    z-index:1;
-    width: 220px;
-    height: 220px;
-    border-radius:50%;
-    background-color:rgba(100,100,100,0.39);
-    margin: 0 auto;
-    display:flex;
-    align-items:center;
-    flex-direction:column;
-    overflow:hidden;
-    justify-content:center;
-  }
-  .studio-display-instrument-img {
-    position:absolute;
-    z-index:0;
-    width:284px;
-    height:284px;
-    transform:translate(-50%;-50%);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  @media screen and (min-width:768px) {
-    .studio-display-instrument {
-      width: 320px;
-      height: 320px;
-    }
-    .studio-display-instrument-img {
-      width: 400px;
-      height: 400px;
-    }        
-  }
 
-
-  .studio-display-instrument-instruction {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
-    position: relative;
-    z-index:1;
-  }
+  
   .btn-instrument.mobile {
     width:32px;
     height:32px;
@@ -333,34 +268,6 @@ const StudioComponent = styled.div
     .chooseInstrument-btn:last-child
      {
       margin-left:-50%;
-    }
-  }
-  .studio-display-instrument_selected {
-    width:100%;
-    height:80%;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items:center;
-    position: relative;
-    z-index:5;
-  }
-  .studio-display-instrument_selected h2 {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-weight:400;
-    font-size: 18px;
-  }
-  .studio-display-instrument_selected img {
-    height:120px;
-  }
-  @media screen and (min-width:768px) {
-    .studio-display-instrument_selected {
-      height: 90%;
-    }
-
-    .studio-display-instrument_selected img {
-      height:180px;
     }
   }
   `;
