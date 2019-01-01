@@ -33,34 +33,40 @@ class Studio extends Component {
     name:'',
     img:null,
     details:'',
+    id:'',
     select:{
       name:'',
       img: '',
       details: '',
+      id:'',
       sound:null,
     },
     // données statiques, on fera une boucle par la suite
     instruments: [
       {
-        name:"Bag pipes",
+        name:"Cornemuse",
+        id:'15656546',
         img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
-        details: "yooo",
+        details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
         sound:require('../../assets/proto-sound/majiko.mp3')
       },
       {
         name:"Nani",
+        id:'54599494949',
         img: require('../../assets/img/instruments/file.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/nier.mp3')
       },
       {
         name:"Latin Percu",
+        id:'56665461651',
         img: require('../../assets/img/instruments/latin-percu.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/silence-voice.mp3')
       },
       {
         name:"Taiko",
+        id:'65546546546',
         img: require('../../assets/img/instruments/taiko.png'),
         details: "yooo",
         sound:require('../../assets/proto-sound/zankyo.mp3')
@@ -75,22 +81,24 @@ class Studio extends Component {
   }
   settiemout = () =>{
     setTimeout(()=>{
-      const {img,name,details} = this.state.prevSelect;
+      const {img,name,details, id} = this.state.prevSelect;
       this.setState({
         showInstrument: true,
         img,
         name,
-        details
+        details,
+        id
       })
     }
     ,500)
   }
   setTimeoutEnter = () => {
-    const {img,name,details} = this.state.select
+    const {img,name,details, id} = this.state.select
     this.setState({
       img,
       name,
-      details
+      details,
+      id
     })
   }  
   
@@ -113,7 +121,12 @@ class Studio extends Component {
             isSelected: true,
             showInstrument: false,
             select: this.state.instruments[id],
-            PrevSelect: {img:prev.select.img,name:prev.select.name,details:prev.select.details}
+            PrevSelect: {
+              img:prev.select.img,
+              name:prev.select.name,
+              details:prev.select.details,
+              id:prev.select.id
+            }
           }
         })
       } else {
@@ -143,6 +156,7 @@ class Studio extends Component {
               name={this.state.name}
               img={this.state.img}
               details={this.state.details}
+              id={this.state.id}
               />
 
               <h1 className="studio-title">{this.props.title}</h1>
@@ -206,14 +220,19 @@ const StudioComponent = styled.div
     margin-bottom:0;
   }
 
-  .studio-title{
+
+  .studio-title {
     margin-top:44px;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-title {
+      margin-top:56px;
+    }
   }
   .studio-artist {
     margin-top:0;
   }
 
-  
   .btn-instrument.mobile {
     width:32px;
     height:32px;
