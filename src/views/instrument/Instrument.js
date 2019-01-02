@@ -15,7 +15,7 @@ import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import title from '../../assets/img/fiche_title.svg';
-
+import instrument from '../../assets/img/banjo.jpg';
 
 
 // STATE
@@ -32,7 +32,8 @@ class Instrument extends Component {
       year: 'XVIIIe',
       description: {
         title: 'Un instrument pas seulement utilisé dans la musique country',
-        text: 'lorem ipsum'
+        text: 'lLe banjo est un instrument de musique à cordes pincées nord-américain. Avec sa table d\'harmonie à membrane, on le distingue facilement de la guitare. Cet instrument serait un dérivé du luth ouest-africain ekonting apporté par les esclaves noirs (ou plus vraisemblablement recréé par certains d\'entre eux) et qui aurait suscité la création des premiers gourd-banjos (« banjo en gourde »).\n' +
+          'L\'origine de l\'instrument moderne remonte d\'abord aux années 1830-1840 durant lesquelles ont commencé l\'industrialisation et la commercialisation d\'un instrument plus ancien (xviie siècle) utilisé par les esclaves africains déportés aux États-Unis. La source iconographique la plus ancienne se trouve dans un récit de voyage écrit par Sir Hans Sloane en 1688 et publié à Londres en 1707. Les musiciens noirs exploitèrent l\'aspect rythmique de l\'instrument avec un tel succès que les blancs du Sud des États-Unis s\'y intéressèrent. '
       },
       artists: [
         'Taylor Swift',
@@ -95,8 +96,19 @@ class Instrument extends Component {
           <div className="header-thumbnail">
             <Thumbnail image={thumbnail}/>
           </div>
-
         </Header>
+        <DescriptionSection>
+          <Grid columns={12}>
+            <Grid.Column computer={6} mobile={12}>
+             <img src={instrument} alt=""/>
+            </Grid.Column>
+            <Grid.Column computer={9} mobile={12}>
+              <Paragraph title={this.state.description.title} text={this.state.description.text}
+                         direction="right"/>
+            </Grid.Column>
+          </Grid>
+        </DescriptionSection>
+
 
 
 
@@ -132,7 +144,7 @@ const CardComponent = styled.div
 
 const Header = styled.div`  
  width: 100%;
-  height: 70vh;
+  height: 120vh;
   position: relative;
   
   .heading {
@@ -163,7 +175,7 @@ const Header = styled.div`
   
   .infos {
     width: 40%;
-    height: 50%;
+    height: 400px;
     background-color: ${Colors.primary};
     margin: 5rem 3rem;
     padding: 3rem;
@@ -198,14 +210,21 @@ const Header = styled.div`
   justify-content: flex-end;
    
   }
-  
-
-
-
 
 `
 ;
 
+const DescriptionSection = styled.div`
+width: 100%;
+height: 100vh;
+padding: 3rem;
+
+
+  img {
+  width: 100%;
+  }
+
+`
 
 
 
