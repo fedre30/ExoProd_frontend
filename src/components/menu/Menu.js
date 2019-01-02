@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import { Dropdown } from 'semantic-ui-react';
+import { CSSTransition } from 'react-transition-group';
 
 class Menu extends Component {
   constructor(props) {
@@ -103,7 +104,7 @@ const MenuComponent = styled.div
   display: flex;
   padding: 2rem 1rem;
   z-index: 10000;
-  position: fixed;
+  position: relative;
   top: 0.5rem;
   
   .burger {
@@ -123,6 +124,7 @@ const MenuComponent = styled.div
   .menu-container {
       position: fixed;
       right: 2rem;
+      display: none;
   }
   .menu-list{
   display: flex;
@@ -166,7 +168,7 @@ const MenuComponent = styled.div
   
   @media(max-width: 560px) {
   .logo {
-    margin: -3rem 0;
+    margin: 0 0;
   }
     .burger {
     display: block;
