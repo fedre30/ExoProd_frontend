@@ -186,9 +186,9 @@ class Instrument extends Component {
           />
 
           <div className="video-subtitle-container">
-            <div className="text-rectangle"></div>
             <div className="video-subtitle">
               Vous voulez participer à une expérience musicale?
+              <div className="text-rectangle"></div>
             </div>
           </div>
           <Button link={'/studio'} text={'Decouvrir le studio'}/>
@@ -403,17 +403,18 @@ text-align: center;
 }
 
 .video-subtitle {
-  z-index: -1;
+  z-index: 0;
+  position: relative;
 }
 
 .text-rectangle {
-  width: 300px;
-  height: 20px;
+  width: 450px;
+  height: 30px;
   background-color: ${Colors.fourth};
   position: absolute;
-  right: 50%;
+  right: 22%;
   top: 1rem;
-  z-index: 0;
+  z-index: -1;
  
 }
 
@@ -422,6 +423,14 @@ text-align: center;
     font-size: 1rem;
     
   }
+  
+  .text-rectangle {
+    width: 200px;
+   height: 20px;
+    right: 10%;
+    top: 0.5rem;
+ 
+}
 }
 
 
