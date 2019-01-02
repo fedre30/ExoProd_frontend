@@ -7,15 +7,21 @@ import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
 import Footer from "../../components/footer/Footer";
+import Sound from 'react-sound';
 import Button from "../../components/button/Button";
 
 
 //IMAGES
-import backgroundImage from '../../assets/img/header.svg';
-import triangle from '../../assets/img/Barres.png';
+import triangle from '../../assets/img/card_triangle.svg';
 import thumbnail from '../../assets/img/background_home.jpg';
 import title from '../../assets/img/fiche_title.svg';
 import instrument from '../../assets/img/banjo.jpg';
+import list from '../../assets/img/list.png';
+import play from '../../assets/img/play.svg';
+import pause from '../../assets/img/pause.svg';
+
+// SOUNDS
+import sound from '../../assets/sounds/Sitar.wav';
 
 
 // STATE
@@ -37,20 +43,32 @@ class Instrument extends Component {
       },
       artists: [
         'Taylor Swift',
-        'John Mayer'
+        'John Mayer',
+        'Keith Urban',
+        'Rod Stewart'
       ],
       sound: {
-        filePath: '',
-        type: 'mp3'
+        filePath: '../../assets/sounds/Sitar.wav',
+        type: 'audio/wav'
       },
-      videoUrl: ''
+      videoUrl: 'https://www.youtube.com/watch?time_continue=43&v=RQuY8kERaU0',
+
+      played: Sound.status.STOPPED
     }
-
-
 
   }
 
   // METHODS
+
+  handlePlay = () => {
+    let {played} = this.state;
+    played === Sound.status.PLAYING ?
+      played = Sound.status.PAUSED :
+      played = Sound.status.PLAYING;
+    this.setState({
+      played
+    })
+  }
 
 
 
@@ -108,6 +126,29 @@ class Instrument extends Component {
             </Grid.Column>
           </Grid>
         </DescriptionSection>
+        <SoundSection>
+          <Grid columns={12}>
+            <Grid.Column computer={6} mobile={12}>
+              <img src={triangle} alt=""/>
+              <div className="player-container">
+                <div className="button-player"><img src={this.state.played ? play : pause } alt=""/></div>
+                <div className="player">
+                
+                </div>
+              </div>
+            </Grid.Column>
+            <Grid.Column computer={9} mobile={12}>
+              <div className="artist-title">Le {this.state.title} aujourd'hui</div>
+              <ul className="artist-list">
+                {this.state.artists.map(artist =>
+                  (
+                    <li className="artist-item">{artist}</li>
+                  )
+                )}
+              </ul>
+            </Grid.Column>
+          </Grid>
+        </SoundSection>
 
 
 
@@ -144,7 +185,7 @@ const CardComponent = styled.div
 
 const Header = styled.div`  
  width: 100%;
-  height: 120vh;
+  height: 110vh;
   position: relative;
   
   .heading {
@@ -181,9 +222,6 @@ const Header = styled.div`
     padding: 3rem;
   }
   
-  .infos-list {
-  
-  }
   
   .infos-tag {
     flex-grow: 0;
@@ -226,12 +264,53 @@ padding: 3rem;
 
 `
 
+const SoundSection = styled.div`
+width: 100%;
+height: 100vh;
 
 
+.artist-list {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.artist-title {
+  text-align: right;
+  font-size: 3rem;
+  color: ${Colors.text};
+  margin: 4rem 0;
+}
+
+.artist-item {
+  font-size: 2rem;
+  color: ${Colors.text};
+  margin: 2rem 0;
+  list-style: url(${list}) inside;
+  text-align: right;
+}
+
+.player {
+  position: absolute;
+  top: 50%;
+  left: 6rem;
+  opacity: 1;
+}
+
+.button-player {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 48%;
+  left: 6rem;
+  
+  img {
+    width: 100%;
+  }
+}
 
 
-
-
+`;
 
 
 export default Instrument;
