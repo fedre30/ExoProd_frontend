@@ -9,6 +9,8 @@ import Thumbnail from "../../components/thumbnail/Thumbnail";
 import Footer from "../../components/footer/Footer";
 import Sound from 'react-sound';
 import Button from "../../components/button/Button";
+import ScrollAnimation from 'react-animate-on-scroll';
+import '../../styles/animation.css';
 
 
 //IMAGES
@@ -71,7 +73,6 @@ class Instrument extends Component {
   }
 
 
-
   // RENDER
 
   render() {
@@ -83,59 +84,73 @@ class Instrument extends Component {
             <div className="pronounciation">{this.state.pronounciation}</div>
             <div className="title">{this.state.title}</div>
           </div>
-          <div className="infos">
-            <ul className="infos-list">
-              <li>
-                <div className="infos-item"><div className="infos-tag">CLASSIFICATION</div>
-                  <div className="dots"></div>
-                  <div className="infos-data"> {this.state.type} </div>
-                </div>
-              </li>
-              <li>
-                <div className="infos-item"><div className="infos-tag">FORMES</div>
-                  <div className="dots"></div>
-                  <div className="infos-data"> {this.state.shape} </div>
-                </div>
-              </li>
-              <li>
-                <div className="infos-item"><div className="infos-tag">ORIGINES</div>
-                  <div className="dots"></div>
-                  <div className="infos-data"> {this.state.origin} </div>
-                </div>
-              </li>
-              <li>
-                <div className="infos-item"><div className="infos-tag">ANNEE</div>
-                  <div className="dots"></div>
-                  <div className="infos-data"> {this.state.year} </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <ScrollAnimation animateIn='fade-left'>
+            <div className="infos">
+              <ul className="infos-list">
+                <li>
+                  <div className="infos-item">
+                    <div className="infos-tag">CLASSIFICATION</div>
+                    <div className="dots"></div>
+                    <div className="infos-data"> {this.state.type} </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="infos-item">
+                    <div className="infos-tag">FORMES</div>
+                    <div className="dots"></div>
+                    <div className="infos-data"> {this.state.shape} </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="infos-item">
+                    <div className="infos-tag">ORIGINES</div>
+                    <div className="dots"></div>
+                    <div className="infos-data"> {this.state.origin} </div>
+                  </div>
+                </li>
+                <li>
+                  <div className="infos-item">
+                    <div className="infos-tag">ANNEE</div>
+                    <div className="dots"></div>
+                    <div className="infos-data"> {this.state.year} </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </ScrollAnimation>
+
           <div className="header-thumbnail">
-            <Thumbnail image={thumbnail}/>
+            <ScrollAnimation animateIn='fade-right'>
+              <Thumbnail image={thumbnail}/>
+            </ScrollAnimation>
           </div>
+
         </Header>
         <DescriptionSection>
           <Grid columns={12}>
             <Grid.Column computer={6} mobile={12}>
-             <img src={instrument} alt=""/>
+              <img src={instrument} alt=""/>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <Paragraph title={this.state.description.title} text={this.state.description.text}
-                         direction="right"/>
+              <ScrollAnimation animateIn="paragraph-right">
+                <Paragraph title={this.state.description.title} text={this.state.description.text}
+                           direction="right"/>
+              </ScrollAnimation>
             </Grid.Column>
           </Grid>
         </DescriptionSection>
         <SoundSection>
           <Grid columns={12}>
             <Grid.Column computer={6} mobile={12}>
-              <img src={triangle} alt=""/>
-              <div className="player-container">
-                <div className="button-player"><img src={this.state.played ? play : pause } alt=""/></div>
-                <div className="player">
+              <ScrollAnimation animateIn="fade-left">
+                <img src={triangle} alt=""/>
+                <div className="player-container">
+                  <div className="button-player"><img src={this.state.played ? play : pause} alt=""/></div>
+                  <div className="player">
 
+                  </div>
                 </div>
-              </div>
+              </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
               <div className="artist-title">Le {this.state.title} aujourd'hui</div>
@@ -149,11 +164,6 @@ class Instrument extends Component {
             </Grid.Column>
           </Grid>
         </SoundSection>
-
-
-
-
-
 
 
         <Footer/>
@@ -185,7 +195,7 @@ const CardComponent = styled.div
 
 const Header = styled.div`  
  width: 100%;
-  height: 110vh;
+  height: 115vh;
   position: relative;
   
   .heading {
@@ -209,14 +219,14 @@ const Header = styled.div`
   
   .header-thumbnail {
     position: absolute;
-    right: 40%;
+    right: 45%;
     top: 35%;
     
   }
   
   .infos {
     width: 40%;
-    height: 400px;
+    height: 350px;
     background-color: ${Colors.primary};
     margin: 5rem 3rem;
     padding: 3rem;

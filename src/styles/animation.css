@@ -1,4 +1,4 @@
-/* ANIMATION & CSS TRANSITION */
+/* INSTRUMENT */
 .instrument-enter {
     opacity:0;
     transform: translateY(50%);
@@ -22,7 +22,7 @@
   transition: all 300ms ease-out;
 }
 
-/* ANIMATION & CSS TRANSITION */
+/* BUTTON */
 .button-enter {
     opacity:0 !important;
     transition: all 500ms ease-out;
@@ -81,12 +81,13 @@
 /* PARAGRAPH */
 
 .paragraph-left {
-    -webkit-animation: paragraph-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: paragraph-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
+     -webkit-animation: fade-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+     animation: fade-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+ }
 
 
-@-webkit-keyframes paragraph-left {
+
+@-webkit-keyframes fade-left {
     0% {
         -webkit-transform: translateX(-50px);
         transform: translateX(-50px);
@@ -98,7 +99,7 @@
         opacity: 1;
     }
 }
-@keyframes paragraph-left {
+@keyframes fade-left {
     0% {
         -webkit-transform: translateX(-50px);
         transform: translateX(-50px);
@@ -112,12 +113,14 @@
 }
 
 .paragraph-right {
-    -webkit-animation: paragraph-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: paragraph-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
+      -webkit-animation: fade-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+      animation: fade-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  }
 
 
-@-webkit-keyframes paragraph-right {
+
+
+@-webkit-keyframes fade-right {
     0% {
         -webkit-transform: translateX(50px);
         transform: translateX(50px);
@@ -129,7 +132,7 @@
         opacity: 1;
     }
 }
-@keyframes paragraph-right {
+@keyframes fade-right {
     0% {
         -webkit-transform: translateX(50px);
         transform: translateX(50px);
@@ -172,6 +175,18 @@
         transform: translateZ(0);
         opacity: 1;
     }
+}
+
+/* GENERAL */
+
+.fade-right {
+    -webkit-animation: fade-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.fade-left {
+    -webkit-animation: fade-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 
