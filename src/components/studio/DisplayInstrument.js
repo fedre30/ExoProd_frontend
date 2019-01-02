@@ -1,0 +1,275 @@
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import '../../styles/animation.css';
+import ovale from '../../assets/img/ovale-dotted.png';
+import { CSSTransition } from 'react-transition-group';
+import styled from 'styled-components';
+import Colors from '../../styles/colors';
+import Fonts from '../../styles/fonts';
+import leftarrow from '../../assets/img/left-arrow.png';
+import rightarrow from '../../assets/img/right-arrow.png';
+import { Link } from "react-router-dom";
+class DisplayInstrument extends Component{
+
+state = {
+  index : 0,
+}
+swap = (index) => () => {this.setState({index})};
+
+render(){
+  const {isSelected,showInstrument,exit,enter,name,img,details,id} = this.props;
+  return(
+    <DisplayInstrumentComponent>
+    <div className="studio-display-container">
+      <div className="studio-display-instrument">
+        <CSSTransition
+          in={!isSelected}
+          timeout={300}
+          unmountOnExit
+          onExit={exit}
+          classNames='instrument'>
+          <p className="studio-display-instrument-instruction">Choisissez un instrument</p>
+        </CSSTransition>
+            
+        <CSSTransition
+          in={showInstrument}
+          timeout={300}
+          unmountOnExit
+          onEntering={enter}
+          onExit={exit}
+          classNames='instrument'>
+
+            <div className="studio-display-instrument_selected-container">
+            <CSSTransition
+            in={this.state.index !== 0}
+            timeout={500}
+            unmountOnExit
+            classNames='button'>
+            <button className="left" onClick={this.swap(0)}>
+              <img src={leftarrow} alt="previous" />
+            </button>
+            </CSSTransition>
+
+            <CSSTransition
+            in={this.state.index === 0}
+            timeout={500}
+            unmountOnExit
+            classNames='button'>
+            <button className="right" onClick={this.swap(1)}>
+              <img src={rightarrow} alt="next" />
+            </button>
+            </CSSTransition>
+
+              <div style={{left:`${this.state.index*-100}%`}} className="studio-display-instrument_selected-wrapper">
+                <div className='studio-display-instrument_selected'>
+                  <h2>{name}</h2>
+                  <img src={img} alt='instrument'/>
+                </div>          
+                <div className='studio-display-instrument_selected'>
+                  <h2>{name}</h2>
+                  <p>{details}</p>
+                  <Link className="studio-display-instrument-link" to={`/instruments/${id}`}>En savoir plus</Link>
+                </div>
+              </div>
+            </div>
+        </CSSTransition>
+      </div>
+  </div>
+    <img className="studio-display-instrument-img" src={ovale} alt=''/>
+  </DisplayInstrumentComponent>
+  )
+}
+
+};
+DisplayInstrument.propTypes = {
+  isSelected: PropTypes.bool.isRequired,
+  showInstrument:  PropTypes.bool.isRequired,
+  enter: PropTypes.func.isRequired,
+  exit:  PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  details: PropTypes.string.isRequired
+};
+const DisplayInstrumentComponent = styled.div`
+  position: relative;
+  .studio-display-container {
+    position: relative;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    width: 100%;
+    height: 100%;
+  }
+  .studio-display-instrument {
+    position: relative;
+    z-index: 1;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: rgba(100,100,100,0.39);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+  }
+  .studio-display-instrument .studio-display-instrument-img{
+    overflow: visible;
+  }
+  .studio-display-instrument-instruction {
+    color: ${Colors.text};
+    font-family: ${Fonts.title};
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .studio-display-instrument-img {
+    position: absolute;
+    z-index: 0;
+    width: 284px;
+    height: 284px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  @media screen and (min-width:768px) {
+    .studio-display-instrument {
+      width: 320px;
+      height: 320px;
+    }
+    .studio-display-instrument-img {
+      width: 400px;
+      height: 400px;
+    }        
+  }
+
+
+  .studio-display-instrument-instruction {
+    color: ${Colors.text};
+    font-family: ${Fonts.title};
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .studio-display-instrument_selected-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .studio-display-instrument_selected-wrapper{
+    max-width: 100%;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    position: relative;
+    transition: all 0.6s cubic-bezier(.6,.04,.46,.97);
+  }
+  .studio-display-instrument_selected {
+    min-width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+
+  }
+  .studio-display-instrument_selected h2,
+  .studio-display-instrument_selected p,
+  .studio-display-instrument-link {
+    color: ${Colors.text};
+    font-family: ${Fonts.title};
+  }
+  .studio-display-instrument_selected h2 {
+    font-weight: 400;
+    font-size: 18px;
+    margin: 0;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_selected h2 {
+      font-size: 20px;
+    }
+  }
+  .studio-display-instrument_selected p {
+    font-size: 12px;
+    margin: 0 20%;
+    text-align: left;
+    line-height:1.1
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_selected p {
+      font-size: 14px;
+      line-height: 1.3;
+      text-align: justify;
+    }    
+  }
+  .studio-display-instrument-link {
+    padding: 4px 16px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50px;
+    font-weight: 400;
+    font-size: 12px;
+    transition: all 0.4s ease;
+  }
+  .studio-display-instrument-link:hover {
+    background: rgba(255,255,255,1);
+    border: 1px solid rgba(255,255,255,1);
+    color: purple;
+    transition: all 0.4s ease;
+  }
+  .studio-display-instrument_selected img {
+    height: 120px;
+  }
+  @media screen and (min-width:768px) {
+    .studio-display-instrument_selected {
+      height: 90%;
+    }
+
+    .studio-display-instrument_selected img {
+      height: 180px;
+    }
+  }
+  .studio-display-instrument_selected-container .right{
+    right: 0;
+    margin-right: 5%;
+  }
+  .studio-display-instrument_selected-container .left{
+    left: 0;
+    margin-left: 5%;
+  }
+  .studio-display-instrument_selected-container .left,
+  .studio-display-instrument_selected-container .right{
+    background:none;
+    top: 50%;
+    position: absolute;
+    outline: 0;
+    border: 0;
+    z-index: 10;
+    cursor: pointer;
+    transform: translateY(-50%);
+    padding: 8px;
+  }
+  .studio-display-instrument_selected-container .right img,
+  .studio-display-instrument_selected-container .left img {
+    width: 12px;
+  }
+  @media screen and (min-width: 768px)
+  {
+    .studio-display-instrument_selected-container .right img,
+    .studio-display-instrument_selected-container .left img {
+      width: 16px;
+    }   
+  }
+  `;
+
+
+export default DisplayInstrument;

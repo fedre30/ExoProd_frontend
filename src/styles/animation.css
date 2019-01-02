@@ -1,0 +1,44 @@
+/* ANIMATION & CSS TRANSITION */
+.instrument-enter {
+    opacity:0;
+    transform: translateY(50%);
+}
+
+.instrument-enter-active {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 300ms ease-out;
+}
+
+.instrument-exit {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: all 300ms ease-out;
+}
+
+.instrument-exit-active {
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: all 300ms ease-out;
+}
+
+/* ANIMATION & CSS TRANSITION */
+.button-enter {
+    opacity:0 !important;
+    transition: all 500ms ease-out;
+}
+
+.button-enter-active {
+    opacity: 1 !important;
+    transition: all 500ms ease-out;
+}
+
+.button-exit {
+    opacity: 1 !important;
+    transition: all 500ms ease-out;
+}
+
+.button-exit-active {
+  opacity: 0 !important;
+  transition: all 500ms ease-out;
+}

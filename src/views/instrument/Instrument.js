@@ -133,7 +133,7 @@ class Instrument extends Component {
               <div className="player-container">
                 <div className="button-player"><img src={this.state.played ? play : pause } alt=""/></div>
                 <div className="player">
-                
+
                 </div>
               </div>
             </Grid.Column>

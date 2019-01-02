@@ -88,7 +88,7 @@ class Menu extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               )
-              
+
             ))}
           </ul>
         </div>
