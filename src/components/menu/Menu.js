@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import { Dropdown } from 'semantic-ui-react';
-import { CSSTransition } from 'react-transition-group';
+import '../../styles/animation.css';
 
 class Menu extends Component {
   constructor(props) {
@@ -53,6 +53,7 @@ class Menu extends Component {
       ],
 
       show: false,
+      active: false
 
     }
   }
@@ -61,25 +62,32 @@ class Menu extends Component {
     this.setState({ show: !this.state.show })
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', ev => {
+      window.scrollY > 900 ? this.setState({active: true}) : this.setState({active: false});
+    })
+  }
+
 
   render() {
     return (
-      <MenuComponent className={ (this.state.show ? 'show' : '')}>
+      <MenuComponent >
+        <div className={`menu ${this.state.active ? 'active' : ''}`}>
         <Link to="/">
-          <div className="logo">exoprod</div>
+          <div className="logo menu-expand">exoprod</div>
         </Link>
         <div className="burger" onClick={() => this.handleClick()}>
           <span className={'line1 ' + (this.state.show ? 'lineOpen-1' : '')}></span>
           <span className={'line2 ' + (this.state.show ? 'lineOpen-2' : '')}></span>
           <span className={'line3 ' + (this.state.show ? 'lineOpen-3' : '')}></span>
         </div>
-        <div className={'menu-container ' + (this.state.show ? 'show' : '')}>
+        <div className={'menu-container ' + (this.state.show ? 'show' : '')} >
           <ul className="menu-list">
             {this.state.menuItems.map(item => (
               !item.dropdown ? (<Link to={item.link}>
-                <li className="menu-item" key={item.id}>{item.name}</li>
+                <li className="menu-item menu-expand" key={item.id}>{item.name}</li>
               </Link>) : (
-                <Dropdown text={item.name} className="menu-link dropdown-link">
+                <Dropdown text={item.name} className="menu-link dropdown-link menu-expand">
                   <Dropdown.Menu>
                     {item.dropdown.map(link => (
                       <Route render={({history}) => (
@@ -93,6 +101,7 @@ class Menu extends Component {
             ))}
           </ul>
         </div>
+        </div>
       </MenuComponent>
     );
   }
@@ -100,15 +109,21 @@ class Menu extends Component {
 
 const MenuComponent = styled.div
   `
-  width: 100%;
-  display: flex;
-  padding: 2rem 1rem;
-  z-index: 10000;
-  position: relative;
-  top: 0.5rem;
+    
+  .menu {
+    width: 100%;
+    height: 6.5rem;
+    display: flex;
+    padding: 2rem 1rem;
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    transition: background-color .5s ease;
+    background: transparent;
+  }
   
   .burger {
-  display: none;
+    display: none;
   }
   .logo {
     position: fixed;
@@ -122,15 +137,15 @@ const MenuComponent = styled.div
   }
   
   .menu-container {
-      position: fixed;
-      right: 2rem;
-      display: none;
+    position: fixed;
+    right: 2rem;
+      
   }
   .menu-list{
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  padding: 0 2rem;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0 2rem;
   
   }
   
@@ -148,20 +163,26 @@ const MenuComponent = styled.div
   }
   
   a, .menu-link {
-  color: ${Colors.text};
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: color .2s ease;
+    color: ${Colors.text};
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color .2s ease;
   }
   
   a:hover, .menu-link:hover {
-  color: ${Colors.fourth};
- 
+   color: ${Colors.fourth};
  
   }
   
   .dropdown-link {
-  margin-top: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .active {
+    background-color: ${Colors.secondary};
+    opacity: 1;
+    transition: background-color .5s ease;
+    
   }
  
   
@@ -202,6 +223,7 @@ const MenuComponent = styled.div
       left: 0;
       background: ${Colors.primary};
       transition: opacity 0.3s ease;
+      display: none;
     }
     
     .menu-list {
@@ -247,6 +269,10 @@ const MenuComponent = styled.div
     
     } 
   }
+  
+  
+
+
   
   `
 ;
