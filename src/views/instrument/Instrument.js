@@ -64,10 +64,41 @@ class Instrument extends Component {
             <div className="pronounciation">{this.state.pronounciation}</div>
             <div className="title">{this.state.title}</div>
           </div>
+          <div className="infos">
+            <ul className="infos-list">
+              <li>
+                <div className="infos-item"><div className="infos-tag">CLASSIFICATION</div>
+                  <div className="dots"></div>
+                  <div className="infos-data"> {this.state.type} </div>
+                </div>
+              </li>
+              <li>
+                <div className="infos-item"><div className="infos-tag">FORMES</div>
+                  <div className="dots"></div>
+                  <div className="infos-data"> {this.state.shape} </div>
+                </div>
+              </li>
+              <li>
+                <div className="infos-item"><div className="infos-tag">ORIGINES</div>
+                  <div className="dots"></div>
+                  <div className="infos-data"> {this.state.origin} </div>
+                </div>
+              </li>
+              <li>
+                <div className="infos-item"><div className="infos-tag">ANNEE</div>
+                  <div className="dots"></div>
+                  <div className="infos-data"> {this.state.year} </div>
+                </div>
+              </li>
+            </ul>
+          </div>
           <div className="header-thumbnail">
             <Thumbnail image={thumbnail}/>
           </div>
+
         </Header>
+
+
 
 
 
@@ -130,6 +161,46 @@ const Header = styled.div`
     
   }
   
+  .infos {
+    width: 40%;
+    height: 50%;
+    background-color: ${Colors.primary};
+    margin: 5rem 3rem;
+    padding: 3rem;
+  }
+  
+  .infos-list {
+  
+  }
+  
+  .infos-tag {
+    flex-grow: 0;
+  }
+  
+  .dots {
+  flex-grow: 4;
+  border-bottom: 1px dotted ${Colors.text};
+
+  }
+  
+  .infos-item {
+    width: 100%;
+    font-weight: 300;
+    color: ${Colors.text};
+    font-size: 1.5rem;
+    display: flex;
+    margin: 2.7rem 0;  
+  }
+  
+  .infos-data {
+  flex-grow: 0;
+  display: flex;
+  justify-content: flex-end;
+   
+  }
+  
+
+
 
 
 `
