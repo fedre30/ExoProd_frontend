@@ -125,7 +125,8 @@ class Home extends Component {
         <ScrollAnimation animateIn='map-enter'>
         <Sectionmap>
           <div className="heading">
-            <h4 className="heading-title">{this.state.mapTitle}</h4>
+            <div className="heading-title">{this.state.mapTitle}</div>
+            <div className="text-rectangle"></div>
           </div>
           <div className="map">
             <ComposableMap projectionConfig={{
@@ -336,6 +337,7 @@ const Sectionmap = styled.div`
   
   .heading {
     margin-bottom: 3rem;
+    position: relative;
   }
   
   .heading-title{
@@ -355,11 +357,30 @@ const Sectionmap = styled.div`
   }
   
   
+.text-rectangle {
+  width: 450px;
+  height: 30px;
+  background-color: ${Colors.fourth};
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
+  z-index: -1;
+ 
+}
+  
+  
  
   @media(max-width: 560px) {
   
   .heading-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    line-height: 2rem;
+    text-align: center;
+    margin: 2rem 1rem;
+  }
+  
+  .text-rectangle {
+    display: none;
   }
   
   .map {

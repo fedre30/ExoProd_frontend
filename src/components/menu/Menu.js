@@ -72,7 +72,7 @@ class Menu extends Component {
   render() {
     return (
       <MenuComponent >
-        <div className={`menu ${this.state.active ? 'active' : ''}`}>
+        <div className={`menu-wrapper ${this.state.active ? 'active' : ''}`}>
         <Link to="/">
           <div className="logo menu-expand">exoprod</div>
         </Link>
@@ -110,7 +110,7 @@ class Menu extends Component {
 const MenuComponent = styled.div
   `
     
-  .menu {
+  .menu-wrapper {
     width: 100%;
     height: 6.5rem;
     display: flex;
@@ -159,7 +159,7 @@ const MenuComponent = styled.div
   .menu-item-dropdown {
     color: black;
     list-style: none;
-    margin: 0.5rem 2rem;
+    margin: 0.2rem 2rem;
   }
   
   a, .menu-link {
