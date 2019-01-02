@@ -11,6 +11,7 @@ import Sound from 'react-sound';
 import Button from "../../components/button/Button";
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../../styles/animation.css';
+import YouTube from 'react-youtube';
 
 
 //IMAGES
@@ -53,7 +54,7 @@ class Instrument extends Component {
         filePath: '../../assets/sounds/Sitar.wav',
         type: 'audio/wav'
       },
-      videoUrl: 'https://www.youtube.com/watch?time_continue=43&v=RQuY8kERaU0',
+      videoUrl: 'RQuY8kERaU0',
 
       played: Sound.status.STOPPED
     }
@@ -72,10 +73,23 @@ class Instrument extends Component {
     })
   }
 
+  _onReady(event) {
+    // access to player in all event handlers via event.target
+    event.target.mute();
+  }
+
 
   // RENDER
 
   render() {
+
+    const opts = {
+      height: '590',
+      width: '900',
+      playerVars: {
+        autoplay: 1
+      }
+    };
     return (
       <CardComponent>
         <Header>
@@ -128,10 +142,10 @@ class Instrument extends Component {
         </Header>
         <DescriptionSection>
           <Grid columns={12}>
-            <Grid.Column computer={6} mobile={12}>
+            <Grid.Column computer={6} mobile={16}>
               <img src={instrument} alt=""/>
             </Grid.Column>
-            <Grid.Column computer={9} mobile={12}>
+            <Grid.Column computer={9} mobile={16}>
               <ScrollAnimation animateIn="paragraph-right">
                 <Paragraph title={this.state.description.title} text={this.state.description.text}
                            direction="right"/>
@@ -143,7 +157,7 @@ class Instrument extends Component {
           <Grid columns={12}>
             <Grid.Column computer={6} mobile={12}>
               <ScrollAnimation animateIn="fade-left">
-                <img src={triangle} alt=""/>
+                <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
                   <div className="button-player"><img src={this.state.played ? play : pause} alt=""/></div>
                   <div className="player">
@@ -164,6 +178,21 @@ class Instrument extends Component {
             </Grid.Column>
           </Grid>
         </SoundSection>
+        <VideoSection>
+          <YouTube
+            videoId={this.state.videoUrl}
+            opts={opts}
+            onReady={this._onReady}
+          />
+
+          <div className="video-subtitle-container">
+            <div className="text-rectangle"></div>
+            <div className="video-subtitle">
+              Vous voulez participer à une expérience musicale?
+            </div>
+          </div>
+          <Button link={'/studio'} text={'Decouvrir le studio'}/>
+        </VideoSection>
 
 
         <Footer/>
@@ -179,7 +208,7 @@ class Instrument extends Component {
 const CardComponent = styled.div
   `
   width: 100%;
-  height: 400vh;
+  height: 450vh;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
@@ -258,6 +287,21 @@ const Header = styled.div`
   justify-content: flex-end;
    
   }
+  
+  @media(max-width: 560px) {
+  height: 120vh;
+  .heading {
+    background: none;
+  }
+    .infos {
+      width: 90%;
+      height: 50vh;
+    }
+    
+    .infos-item {
+    font-size: 1rem;
+    }
+  }
 
 `
 ;
@@ -270,6 +314,10 @@ padding: 3rem;
 
   img {
   width: 100%;
+  }
+  
+   @media(max-width: 560px) {
+  height: 130vh;
   }
 
 `
@@ -319,8 +367,65 @@ height: 100vh;
   }
 }
 
+@media(max-width: 560px) {
+  
+  .artist-item {
+    font-size: 1rem;
+    list-style: circle inside;
+    text-align: center;
+  }
+  
+  .artist-title {
+    font-size: 1.4rem;
+  }
+  
+  .triangle {
+    display: none;
+  }
+  
+  
+}
+
 
 `;
+
+const VideoSection = styled.div`
+width: 100%;
+height: 100vh;
+text-align: center;
+
+.video-subtitle-container {
+  font-size: 3rem;
+  color: ${Colors.text};
+  text-align: center;
+  margin: 5rem 0;
+  position: relative;
+}
+
+.video-subtitle {
+  z-index: -1;
+}
+
+.text-rectangle {
+  width: 300px;
+  height: 20px;
+  background-color: ${Colors.fourth};
+  position: absolute;
+  right: 50%;
+  top: 1rem;
+  z-index: 0;
+ 
+}
+
+@media(max-width: 560px) {
+  .video-subtitle {
+    font-size: 1rem;
+    
+  }
+}
+
+
+`
 
 
 export default Instrument;

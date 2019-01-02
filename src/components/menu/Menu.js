@@ -179,7 +179,7 @@ const MenuComponent = styled.div
   }
   
   .active {
-    background-color: ${Colors.secondary};
+    background-color: ${Colors.footer};
     opacity: 1;
     transition: background-color .5s ease;
     
