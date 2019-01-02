@@ -64,7 +64,11 @@ class Instrument extends Component {
             <div className="pronounciation">{this.state.pronounciation}</div>
             <div className="title">{this.state.title}</div>
           </div>
+          <div className="header-thumbnail">
+            <Thumbnail image={thumbnail}/>
+          </div>
         </Header>
+
 
 
 
@@ -98,13 +102,13 @@ const CardComponent = styled.div
 const Header = styled.div`  
  width: 100%;
   height: 70vh;
+  position: relative;
   
   .heading {
     width: 50%;
-    position: relative;
     background: url(${title}) no-repeat;
     background-size: 100% 100%;
-    padding: 30vh 4rem;
+    padding: 25vh 4rem;
   }
 
   .title {
@@ -117,6 +121,13 @@ const Header = styled.div`
   .pronounciation {
     font-size: 5rem;
     color: ${Colors.tertiary};
+  }
+  
+  .header-thumbnail {
+    position: absolute;
+    right: 40%;
+    top: 35%;
+    
   }
   
 
