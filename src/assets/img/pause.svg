@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="168px" height="168px" viewBox="0 0 168 168" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-8" transform="translate(-136.000000, -1996.000000)" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(138.000000, 1998.000000)">
+                <g id="Group-3">
+                    <circle id="Oval" fill="#741AB0" cx="82" cy="82" r="65"></circle>
+                    <path d="M82,164 C127.287349,164 164,127.287349 164,82 C164,36.7126505 127.287349,0 82,0 C36.7126505,0 0,36.7126505 0,82 C0,127.287349 36.7126505,164 82,164 Z" id="Oval" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="3,11"></path>
+                </g>
+                <rect id="Rectangle" fill="#FFFFFF" x="57" y="51" width="15" height="60"></rect>
+                <rect id="Rectangle-Copy" fill="#FFFFFF" x="92" y="51" width="15" height="60"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

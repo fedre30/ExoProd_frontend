@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Colors from '../../styles/colors';
 import PropTypes from "prop-types";
 
+
+
 const Paragraph = ({title, text, direction}) => (
   <ParagraphComponent>
-    <h3 className={`title  ${direction === 'left' ? 'left' : 'right'}`}>{title}</h3>
-    <p className={`text  ${direction === 'left' ? 'left' : 'right'}`}>{text}</p>
+      <h3 className={`title  ${direction === 'left' ? 'left' : 'right'}`}>{title}</h3>
+      <p className={`text  ${direction === 'left' ? 'left' : 'right'}`}>{text}</p>
   </ParagraphComponent>
 );
 
