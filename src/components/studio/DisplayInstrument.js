@@ -201,7 +201,7 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument_selected p {
     font-size: 12px;
     margin: 0 20%;
-    text-align: left;
+    text-align: center;
     line-height:1.1
   }
   @media screen and (min-width: 768px) {
