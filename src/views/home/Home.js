@@ -15,6 +15,8 @@ import {
   Markers,
 } from "react-simple-maps";
 import geography from '../../utils/topoJSON';
+import ScrollAnimation from 'react-animate-on-scroll';
+import '../../styles/animation.css';
 
 
 //IMAGES
@@ -24,6 +26,8 @@ import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 import Button from "../../components/button/Button";
 
+
+// STATE
 
 class Home extends Component {
   constructor(props) {
@@ -43,17 +47,17 @@ class Home extends Component {
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: [
-        { markerOffset: -25, name: "Buenos Aires", coordinates: [-58.3816, -34.6037] },
-        { markerOffset: -25, name: "La Paz", coordinates: [-68.1193, -16.4897] },
-        { markerOffset: 35, name: "Brasilia", coordinates: [-47.8825, -15.7942] },
-        { markerOffset: 35, name: "Santiago", coordinates: [-70.6693, -33.4489] },
-        { markerOffset: 35, name: "Bogota", coordinates: [-74.0721, 4.7110] },
-        { markerOffset: 35, name: "Quito", coordinates: [-78.4678, -0.1807] },
-        { markerOffset: -25, name: "Georgetown", coordinates: [-58.1551, 6.8013] },
-        { markerOffset: -25, name: "Asuncion", coordinates: [-57.5759, -25.2637] },
-        { markerOffset: 35, name: "Paramaribo", coordinates: [-55.2038, 5.8520] },
-        { markerOffset: 35, name: "Montevideo", coordinates: [-56.1645, -34.9011] },
-        { markerOffset: -25, name: "Caracas", coordinates: [-66.9036, 10.4806] },
+        {markerOffset: -25, name: "Buenos Aires", coordinates: [-58.3816, -34.6037]},
+        {markerOffset: -25, name: "La Paz", coordinates: [-68.1193, -16.4897]},
+        {markerOffset: 35, name: "Brasilia", coordinates: [-47.8825, -15.7942]},
+        {markerOffset: 35, name: "Santiago", coordinates: [-70.6693, -33.4489]},
+        {markerOffset: 35, name: "Bogota", coordinates: [-74.0721, 4.7110]},
+        {markerOffset: 35, name: "Quito", coordinates: [-78.4678, -0.1807]},
+        {markerOffset: -25, name: "Georgetown", coordinates: [-58.1551, 6.8013]},
+        {markerOffset: -25, name: "Asuncion", coordinates: [-57.5759, -25.2637]},
+        {markerOffset: 35, name: "Paramaribo", coordinates: [-55.2038, 5.8520]},
+        {markerOffset: 35, name: "Montevideo", coordinates: [-56.1645, -34.9011]},
+        {markerOffset: -25, name: "Caracas", coordinates: [-66.9036, 10.4806]},
       ]
     }
 
@@ -89,44 +93,50 @@ class Home extends Component {
             </Grid>
           </div>
         </Header>
-        <Firstsection>
-          <Grid columns={12}>
-            <Grid.Column width={5}>
-              <div className="triangle">
-                <img src={triangle} alt=""/>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={9}>
-              <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
-                         direction={this.state.firstParagraph.direction}/>
-            </Grid.Column>
-          </Grid>
-        </Firstsection>
-        <Secondsection>
-          <Grid columns={12}>
-            <Grid.Column width={9}>
-              <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
-                         direction={this.state.secondParagraph.direction}/>
-              <Button link={'/studio'} text={'Decouvrir le studio'}/>
-            </Grid.Column>
-            <Grid.Column width={5}>
-              <Thumbnail image={thumbnail}/>
-            </Grid.Column>
-          </Grid>
-        </Secondsection>
+        <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`}>
+          <Firstsection>
+            <Grid columns={12}>
+              <Grid.Column width={5}>
+                <div className="triangle">
+                  <img src={triangle} alt=""/>
+                </div>
+              </Grid.Column>
+              <Grid.Column computer={9} mobile={16}>
+                <Paragraph title={this.state.firstParagraph.title} text={this.state.firstParagraph.text}
+                           direction={this.state.firstParagraph.direction}/>
+              </Grid.Column>
+            </Grid>
+          </Firstsection>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn={`paragraph-${this.state.secondParagraph.direction}`}>
+          <Secondsection>
+            <Grid columns={12}>
+              <Grid.Column computer={9} mobile={16}>
+                <Paragraph title={this.state.secondParagraph.title} text={this.state.secondParagraph.text}
+                           direction={this.state.secondParagraph.direction}/>
+                <Button link={'/studio'} text={'Decouvrir le studio'}/>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <Thumbnail image={thumbnail}/>
+              </Grid.Column>
+            </Grid>
+          </Secondsection>
+        </ScrollAnimation>
+        <ScrollAnimation animateIn='map-enter'>
         <Sectionmap>
           <div className="heading">
-            <h4 className="heading-title">{this.state.mapTitle}</h4>
+            <div className="heading-title">{this.state.mapTitle}</div>
+            <div className="text-rectangle"></div>
           </div>
           <div className="map">
             <ComposableMap projectionConfig={{
               scale: 250,
-              rotation: [-10,0,0],
+              rotation: [-10, 0, 0],
             }} width={1400} height={800} projection="robinson">
               <ZoomableGroup>
                 <Geographies geography={geography}>
                   {(geographies, projection) => geographies.map(geography => (
-                    <Geography key={ geography.id } geography={ geography } projection={ projection } style={{
+                    <Geography key={geography.id} geography={geography} projection={projection} style={{
                       default: {
                         fill: '#CEA6E9',
                         stroke: "#570AB8",
@@ -150,9 +160,9 @@ class Home extends Component {
                       key={i}
                       marker={marker}
                       style={{
-                        default: { fill: Colors.tertiary },
-                        hover: { fill: "#FFFFFF" },
-                        pressed: { fill: "#FFFFFF" },
+                        default: {fill: Colors.tertiary},
+                        hover: {fill: "#FFFFFF"},
+                        pressed: {fill: "#FFFFFF"},
                       }}
                     >
                       <circle
@@ -182,12 +192,16 @@ class Home extends Component {
             </ComposableMap>
           </div>
         </Sectionmap>
+        </ScrollAnimation>
         <Footer/>
 
       </HomeComponent>
     )
   }
 }
+
+
+// STYLES
 
 const HomeComponent = styled.div
   `
@@ -197,6 +211,10 @@ const HomeComponent = styled.div
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
   position: relative;
+  
+  @media(max-width: 560px) {
+    height: 500vh;
+  }
  
 
   `
@@ -307,6 +325,7 @@ const Secondsection = styled.div`
   
   @media(max-width: 560px) {
     padding: 2rem;
+    height: 120vh;
   }
   
 
@@ -318,6 +337,7 @@ const Sectionmap = styled.div`
   
   .heading {
     margin-bottom: 3rem;
+    position: relative;
   }
   
   .heading-title{
@@ -337,8 +357,35 @@ const Sectionmap = styled.div`
   }
   
   
+.text-rectangle {
+  width: 450px;
+  height: 30px;
+  background-color: ${Colors.fourth};
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
+  z-index: -1;
+ 
+}
+  
+  
  
   @media(max-width: 560px) {
+  
+  .heading-title {
+    font-size: 1.7rem;
+    line-height: 2rem;
+    text-align: center;
+    margin: 2rem 1rem;
+  }
+  
+  .text-rectangle {
+    display: none;
+  }
+  
+  .map {
+    display: none;
+  }
     
   }
   

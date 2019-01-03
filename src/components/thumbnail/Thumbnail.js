@@ -49,7 +49,6 @@ const ThumbnailComponent = styled.div
  
  @media(max-width: 560px) {
   position: static;
-  left: -200px;
    .outer-circle {
     width: 300px;
     height: 300px;
