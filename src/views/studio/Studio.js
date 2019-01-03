@@ -3,15 +3,10 @@ import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import DisplayInstrument from '../../components/studio/DisplayInstrument';
-//import ovale from '../../assets/img/ovale-dotted.png'
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
 import { Grid} from 'semantic-ui-react';
-//import { CSSTransition } from 'react-transition-group';
-//import Button from '../../components/studio/Button';
-//import { Link } from 'react-router-dom';
-import Menu from '../../components/menu/Menu';
 import { setTimeout } from "timers";
 
 
@@ -142,12 +137,14 @@ class Studio extends Component {
     const {isSelected,select} = this.state;
     return (
       <StudioComponent>
-        <Menu/>
-        <h1 id="title">Mélodie</h1>
-        <Grid centered >
+        <Grid centered  columns='equal' className="studio-container">
           <Grid.Row centered columns={16} >
-            <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
-            
+            <Grid.Column mobile={16} tablet={1} computer={1}>
+              <Grid.Row> {/* A FAIRE*/}
+              <h1 id="title">Mélodie</h1>
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column textAlign='center' mobile={16} tablet={5} computer={5}>
               <DisplayInstrument
               isSelected={isSelected}
               showInstrument={this.state.showInstrument}
@@ -191,12 +188,17 @@ const StudioComponent = styled.div
   height:100vh;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
-
+  overflow: hidden;
+  .studio-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   #title {
     text-align:center;
     font-size: 18px;
-    margin-top: 28px;
     margin-bottom:16px;
+    margin-top: 24px;
     color: ${Colors.text};
     font-family: ${Fonts.title};
   }

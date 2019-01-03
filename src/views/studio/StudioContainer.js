@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import Studio from "./Studio";
 import API from '../../helpers/api'
-
+import Menu from '../../components/menu/Menu';
 class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
@@ -14,10 +14,15 @@ class StudioContainer extends React.Component {
 
   }
   render() {
-    return <Studio 
+    return (
+    <div>
+      <Menu/>
+      <Studio 
             title={this.state.title}
             artist={this.state.artist}
-            />;
+            />
+    </div>
+    )
   }
 }
 export default withRouter(StudioContainer);
