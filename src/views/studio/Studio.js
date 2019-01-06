@@ -6,7 +6,7 @@ import DisplayInstrument from '../../components/studio/DisplayInstrument';
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import {Grid, Rail, Segment} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 import {setTimeout} from "timers";
 
 
@@ -140,7 +140,7 @@ class Studio extends Component {
         <Grid className="studio-container">
           <Grid.Row centered columns={3}>
             <Grid.Column mobile={16} tablet={5} computer={5}>
-              <h1 id="title" class='only-mobile'>Mélodie</h1>
+              <h1 id="title" className='only-mobile'>Mélodie</h1>
             </Grid.Column>
             <Grid.Column textAlign='center' mobile={16} tablet={6} computer={6}>
               <DisplayInstrument
@@ -163,7 +163,7 @@ class Studio extends Component {
               />
           </Grid.Column>
           <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center' mobile={16} tablet={5} computer={5}>
-          <div class="test">
+          <div className="test">
             {this.state.instruments.map((intrument,i) =>(
               <button
               key={i} //à référencer quand on map du html (cf react)
@@ -186,8 +186,6 @@ class Studio extends Component {
 const StudioComponent = styled.div
   `
   height:100vh;
-  background: rgb(13,0,35);
-  background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
   min-height: 375px;
 
@@ -231,7 +229,7 @@ const StudioComponent = styled.div
 
 
   .studio-title {
-    margin-top:44px;
+    margin-top:32px;
   }
   @media screen and (min-width:768px) {
     .studio-title {
