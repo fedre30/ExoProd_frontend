@@ -34,7 +34,7 @@ class Instrument extends Component {
     super(props);
     this.state = {
       title: 'Banjo',
-      pronounciation: '[bɑ̃.dʒo]',
+      pronunciation: '[bɑ̃.dʒo]',
       type: 'Cordes frappées',
       shape: 'A queue ou droit',
       origin: 'Amérique du Nord',
@@ -95,7 +95,7 @@ class Instrument extends Component {
         <Header>
           <Menu/>
           <div className="heading">
-            <div className="pronounciation">{this.state.pronounciation}</div>
+            <div className="pronunciation">{this.state.pronunciation}</div>
             <div className="title">{this.state.title}</div>
           </div>
           <ScrollAnimation animateIn='fade-left'>
@@ -241,7 +241,7 @@ const Header = styled.div`
     
   }
   
-  .pronounciation {
+  .pronunciation {
     font-size: 5rem;
     color: ${Colors.tertiary};
   }
