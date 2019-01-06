@@ -29,7 +29,7 @@ const ButtonComponent = styled.div
    width: 300px;
  height: 150px;
  margin: 0 auto;
- 
+
 
  
  .outer {
@@ -71,6 +71,31 @@ const ButtonComponent = styled.div
   }
   
   @media(max-width: 560px) {
+  
+  
+  .outer {
+    width: 150px;
+    height: 80px;
+ 
+  }
+  
+  .inner {
+    width: 125px;
+    height: 40px;
+    border-radius: 50px;
+    transform: translateY(20%);
+  
+  }
+  
+  .button-text{
+    margin: 1rem auto;
+    
+  }
+  
+  a {
+  font-size: 0.6rem;
+    
+  }
    
   }
 
