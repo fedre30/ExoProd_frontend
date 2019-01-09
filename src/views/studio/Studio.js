@@ -111,11 +111,12 @@ class Studio extends Component {
         this.removeButtonClasse(i,'unselected')
 
         //j'insere mon instrument dans l'état select
+        const select = this.state.instruments[id];
         this.setState(prev=>{
           return{
             isSelected: true,
             showInstrument: false,
-            select: this.state.instruments[id],
+            select: select,
             PrevSelect: {
               img:prev.select.img,
               name:prev.select.name,
@@ -124,6 +125,7 @@ class Studio extends Component {
             }
           }
         })
+        this.props.handleSelected(select)
       } else {
         //du style css
         button.classList.add('unselected')

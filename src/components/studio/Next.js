@@ -1,13 +1,22 @@
 import React from 'react';
+import '../../styles/animation.css';
 import styled from 'styled-components';
 import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
 import arrowDown from '../../assets/img/down-arrow.png';
-const Next = ({handleIndex}) => {
+import { CSSTransition } from 'react-transition-group';
+const Next = ({handleIndex,check}) => {
     return(
+        <CSSTransition
+        in={check}
+        timeout={500}
+        classNames="button"
+        unmountOnExit
+        >
         <Button onClick={handleIndex}>
-            étape suivante
+            étape suivante {check}
         </Button>
+        </CSSTransition>
     )
 };
 
