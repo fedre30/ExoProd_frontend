@@ -1,5 +1,4 @@
 import React from "react";
-import update from 'immutability-helper'; // ES6
 import { withRouter } from "react-router-dom";
 import Studio from "./Studio";
 import { CSSTransition } from 'react-transition-group';
@@ -82,13 +81,13 @@ class StudioContainer extends React.Component {
       index={index}
       />
       <Responsive>
-        <div style={{transform:`translateY(${-index*20}%)`,...transition}}>
+        <div className='responsive-container' style={{transform:`translateY(${-index*20}%)`}}>
         <Studio 
               title={data[0].title}
               artist={data[0].artist}
               handleSelected={this.handleSelected}
               />
-        <Studio 
+        <Studio
               title={data[1].title}
               artist={data[1].title}
               handleSelected={this.handleSelected}
@@ -133,11 +132,11 @@ background: rgb(13,0,35);
 background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
 transition: all 0.5s ease;
 
+.responsive-container {
+  transition: all 0.5s ease;
+}
 `;
 
-const transition = {
-  transition: 'all 0.5s ease'
-}
  const todo = {
    display: 'flex',
    alignItems: 'center',

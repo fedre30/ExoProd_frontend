@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "immutability-helper": "^2.9.0",
     "react": "^16.6.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^16.6.0",
