@@ -1,4 +1,5 @@
 import React from "react";
+import update from 'immutability-helper'; // ES6
 import { withRouter } from "react-router-dom";
 import Studio from "./Studio";
 import { CSSTransition } from 'react-transition-group';
@@ -13,7 +14,7 @@ class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
     artist: "COLDPLAY",
-    selected:[],
+    selected:[[],[],[],[]],
     data:[
       {
         title:"Viva la vida",
@@ -34,35 +35,46 @@ class StudioContainer extends React.Component {
     ],
     loading:true,
     index:0,
+    check: false,
   }
   componentDidMount(){
 
 
   }
 
-  handleSelected(newSelect){
-    this.setState({
-      selected: [...this.state.selected,newSelect]
-    })
+  handleSelected = (newSelect) =>{
+    const {index} = this.state;
+      this.setState(prevState=>{
+        let selected = prevState.selected.slice(0);
+        selected.splice(index,1,newSelect);
+        return{
+          selected,
+          check: true
+        }
+      })
   }
-  shouldComponentUpdate(nextProps, nextState){
-    if (nextState.index < (this.state.data.length + 1)) {
-      return true;
-    }
-    return false;
-  }
+  
+
   exit = () => {
     this.setState(prevState=>{
       return{ index: prevState.index }
     })
   }
   handleIndex = () =>{
-    this.setState(prevState=>{
-      return{ index: prevState.index +=1}
-    })
+    if(!this.state.check){
+      return false;
+    }
+      this.setState(prevState=>{
+        return{
+          check: false,
+          index: prevState.index +=1
+        }
+      })
+    
   }
+
   render() {
-    const {data,index} = this.state;
+    const {data,index,selected,check} = this.state;
     return (
     <div>
       <Menu/>
@@ -104,7 +116,9 @@ class StudioContainer extends React.Component {
       unmountOnExit
       >
       <Next
-      handleIndex={this.handleIndex}/>
+      handleIndex={this.handleIndex}
+      check={check}
+      />
       </CSSTransition>
     </div>
     )
