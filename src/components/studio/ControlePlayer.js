@@ -224,6 +224,12 @@ const ControlePlayerStyle = styled.div
         border-radius: 50px;
         position: relative;
     }
+    @media screen and (min-width: 768px) {
+        .ControlePlayer-progressbar-container {
+            min-width: 200px;
+            width:20vw;
+        }       
+    }
     .ControlePlayer-progressbar-interactive {
         position: absolute;
         height: 100%;

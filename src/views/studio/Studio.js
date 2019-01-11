@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import DisplayInstrument from '../../components/studio/DisplayInstrument';
-//import ovale from '../../assets/img/ovale-dotted.png'
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import { Grid} from 'semantic-ui-react';
-//import { CSSTransition } from 'react-transition-group';
-//import Button from '../../components/studio/Button';
-//import { Link } from 'react-router-dom';
-import Menu from '../../components/menu/Menu';
-import { setTimeout } from "timers";
+import {Grid} from 'semantic-ui-react';
+import {setTimeout} from "timers";
 
 
 class Studio extends Component {
@@ -116,11 +111,12 @@ class Studio extends Component {
         this.removeButtonClasse(i,'unselected')
 
         //j'insere mon instrument dans l'état select
+        const select = this.state.instruments[id];
         this.setState(prev=>{
           return{
             isSelected: true,
             showInstrument: false,
-            select: this.state.instruments[id],
+            select: select,
             PrevSelect: {
               img:prev.select.img,
               name:prev.select.name,
@@ -129,6 +125,7 @@ class Studio extends Component {
             }
           }
         })
+        this.props.handleSelected(select)
       } else {
         //du style css
         button.classList.add('unselected')
@@ -142,12 +139,12 @@ class Studio extends Component {
     const {isSelected,select} = this.state;
     return (
       <StudioComponent>
-        <Menu/>
-        <h1 id="title">Mélodie</h1>
-        <Grid centered >
-          <Grid.Row centered columns={16} >
-            <Grid.Column textAlign='center' mobile={16} tablet={8} computer={5}>
-            
+        <Grid className="studio-container">
+          <Grid.Row centered columns={3}>
+            <Grid.Column mobile={16} tablet={5} computer={5}>
+              <h1 id="title" className='only-mobile'>Mélodie</h1>
+            </Grid.Column>
+            <Grid.Column textAlign='center' mobile={16} tablet={6} computer={6}>
               <DisplayInstrument
               isSelected={isSelected}
               showInstrument={this.state.showInstrument}
@@ -167,7 +164,8 @@ class Studio extends Component {
               select={this.state.select}
               />
           </Grid.Column>
-          <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center'  mobile={16} tablet={1} computer={1} >
+          <Grid.Column className="chooseInstrument-container" verticalAlign="middle" textAlign='center' mobile={16} tablet={5} computer={5}>
+          <div className="test">
             {this.state.instruments.map((intrument,i) =>(
               <button
               key={i} //à référencer quand on map du html (cf react)
@@ -178,6 +176,7 @@ class Studio extends Component {
                 <img src={intrument.img}/>
               </button>
             ))}
+            </div>
           </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -189,16 +188,26 @@ class Studio extends Component {
 const StudioComponent = styled.div
   `
   height:100vh;
-  background: rgb(13,0,35);
-  background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
+  overflow: hidden;
+  min-height: 375px;
 
+  .studio-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   #title {
-    text-align:center;
+    text-align: center;
     font-size: 18px;
-    margin-top: 28px;
     margin-bottom:16px;
+    margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
+  }
+  @media screen and (min-width: 768px) {
+    #title {
+      text-align: left;
+    }
   }
   .ui.button.studio-btn-audio.mobile {
     transition: all 0.3s ease;
@@ -222,9 +231,9 @@ const StudioComponent = styled.div
 
 
   .studio-title {
-    margin-top:44px;
+    margin-top:32px;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width:768px) {
     .studio-title {
       margin-top:56px;
     }
@@ -270,12 +279,19 @@ const StudioComponent = styled.div
   .chooseInstrument-container {
     padding-top:12px;
   }
+  
   @media screen and (min-width:768px){
     .chooseInstrument-container {
       padding-top:0;
       position: relative;
       top: 200px;
       transform: translateY(-50%);
+    }
+    .test{
+      display:flex;
+      width:10%;
+      flex-direction:column;
+      flex-wrap:wrap;
     }
     .chooseInstrument-btn {
       width: 72px;
@@ -292,6 +308,18 @@ const StudioComponent = styled.div
      {
       margin-left:-50%;
     }
+  }
+
+  @media screen and (min-width: 768px){
+    .only-mobile {
+      display:none ;
+    }
+    .only-desktop {
+      display:flex;
+      flex-direction: column;
+    }
+
+    
   }
   `;
 
