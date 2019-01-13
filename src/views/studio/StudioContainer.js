@@ -8,7 +8,7 @@ import Menu from '../../components/menu/Menu';
 import Step from '../../components/studio/Step';
 import Next from '../../components/studio/Next';
 import styled from 'styled-components';
-
+import Previous from '../../components/studio/Previous';
 class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
@@ -59,17 +59,54 @@ class StudioContainer extends React.Component {
       return{ index: prevState.index }
     })
   }
-  handleIndex = () =>{
-    if(!this.state.check){
-      return false;
+  previous = () => {
+    if(this.state.index === 0)return;
+    const isChecked = this.state.check === false;
+    if(isChecked) {
+      this.setState({
+          check: true
+      })   
     }
+      this.setState(prevState=>{
+        return{
+          index: prevState.index -=1
+        }
+      })
+  }
+  isSelectedempty(){
+    const {selected,index} = this.state;
+    if((index < selected.length-1) && selected[index+1].length !== 0) {
+      this.setState(prevState=>{
+        return{
+          check: false,
+        }  
+    })    
+    } else {
+      this.setState(prevState=>{
+        return{
+          check: true,
+        }  
+    }) 
+    }
+  }
+  handleIndex = () =>{
+    if(this.state.selected[this.state.index+1] !== undefined && this.state.selected[this.state.index+1].length !== 0){
+      this.setState(prevState=>{
+        return{
+          index: prevState.index +=1
+        }  
+      })
+    } else {
+      if(!this.state.check){
+        return false;
+      }
       this.setState(prevState=>{
         return{
           check: false,
           index: prevState.index +=1
-        }
+        }  
       })
-    
+    }
   }
 
   render() {
@@ -77,6 +114,10 @@ class StudioContainer extends React.Component {
     return (
     <div>
       <Menu/>
+      <Previous
+      index={this.state.index}
+      previous={this.previous}
+      />
       <Step
       index={index}
       />
@@ -130,7 +171,7 @@ height:100vh;
 overflow: hidden;
 background: rgb(13,0,35);
 background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
-transition: all 0.5s ease;
+
 
 .responsive-container {
   transition: all 0.5s ease;
