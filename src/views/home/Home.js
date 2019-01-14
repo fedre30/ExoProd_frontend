@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {withRouter} from 'react-router-dom'
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Fonts from '../../styles/fonts';
@@ -47,26 +48,28 @@ class Home extends Component {
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: [
-        {markerOffset: -25, name: "Buenos Aires", coordinates: [-58.3816, -34.6037]},
-        {markerOffset: -25, name: "La Paz", coordinates: [-68.1193, -16.4897]},
-        {markerOffset: 35, name: "Brasilia", coordinates: [-47.8825, -15.7942]},
-        {markerOffset: 35, name: "Santiago", coordinates: [-70.6693, -33.4489]},
-        {markerOffset: 35, name: "Bogota", coordinates: [-74.0721, 4.7110]},
-        {markerOffset: 35, name: "Quito", coordinates: [-78.4678, -0.1807]},
-        {markerOffset: -25, name: "Georgetown", coordinates: [-58.1551, 6.8013]},
-        {markerOffset: -25, name: "Asuncion", coordinates: [-57.5759, -25.2637]},
-        {markerOffset: 35, name: "Paramaribo", coordinates: [-55.2038, 5.8520]},
-        {markerOffset: 35, name: "Montevideo", coordinates: [-56.1645, -34.9011]},
-        {markerOffset: -25, name: "Caracas", coordinates: [-66.9036, 10.4806]},
-      ]
+        {markerOffset: -45, name: "Theremine", coordinates: [67.075459,37.933009], url: 'instrument'},
+        {markerOffset: -45, name: "Sitar", coordinates: [78.962880, 20.593684], url: 'instrument'},
+        {markerOffset: 55, name: "Dulcimer", coordinates: [12.340171, 62.278648], url: 'instrument'},
+        {markerOffset: 55, name: "Banjo", coordinates: [-95.712891, 37.090240], url: 'instrument'},
+        {markerOffset: 55, name: "Castanets", coordinates: [-3.749220, 40.463667], url: 'instrument'},
+        {markerOffset: 55, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument'},
+      ],
+
+      redirect: false
     }
 
   }
 
   // METHODS
 
-  handleClickMarker(marker, e) {
-    console.log("Marker data: ", marker)
+  handleClickMarker(marker)  {
+    const url = marker.url;
+    this.props.history.push(url);
+    window.scrollTo(0, 0);
+
+
+
   }
 
 
@@ -159,6 +162,7 @@ class Home extends Component {
                     <Marker
                       key={i}
                       marker={marker}
+                      onClick={ () => {this.handleClickMarker(marker)} }
                       style={{
                         default: {fill: Colors.tertiary},
                         hover: {fill: "#FFFFFF"},
@@ -168,7 +172,7 @@ class Home extends Component {
                       <circle
                         cx={0}
                         cy={0}
-                        r={10}
+                        r={30}
                         style={{
                           stroke: Colors.tertiary,
                           strokeWidth: 3,
@@ -181,6 +185,8 @@ class Home extends Component {
                         style={{
                           fontFamily: "Roboto, sans-serif",
                           fill: "#FFF",
+                          fontSize: "20",
+                          fontWeight: 'bold'
                         }}
                       >
                         {marker.name}
@@ -393,4 +399,4 @@ const Sectionmap = styled.div`
 `
 
 
-export default Home;
+export default withRouter(Home);

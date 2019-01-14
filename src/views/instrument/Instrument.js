@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
-import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
 import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
