@@ -56,10 +56,23 @@ class Home extends Component {
         {markerOffset: 55, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument'},
       ],
 
-      redirect: false
+      redirect: false,
+      width: window.innerWidth,
     }
 
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
   // METHODS
 
@@ -76,6 +89,8 @@ class Home extends Component {
   // RENDER
 
   render() {
+    const { width } = this.state;
+    const isMobile = width <= 500;
     return (
       <HomeComponent>
         <Header>
@@ -96,7 +111,7 @@ class Home extends Component {
             </Grid>
           </div>
         </Header>
-        <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`}>
+        <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`} duration={0.6} delay={0.2}>
           <Firstsection>
             <Grid columns={12}>
               <Grid.Column width={5}>
@@ -111,7 +126,7 @@ class Home extends Component {
             </Grid>
           </Firstsection>
         </ScrollAnimation>
-        <ScrollAnimation animateIn={`paragraph-${this.state.secondParagraph.direction}`}>
+        <ScrollAnimation animateIn={`paragraph-${this.state.secondParagraph.direction}`} duration={0.6} delay={0.2}>
           <Secondsection>
             <Grid columns={12}>
               <Grid.Column computer={9} mobile={16}>
@@ -125,79 +140,82 @@ class Home extends Component {
             </Grid>
           </Secondsection>
         </ScrollAnimation>
-        <ScrollAnimation animateIn='map-enter'>
-        <Sectionmap>
-          <div className="heading">
+        <ScrollAnimation animateIn='map-enter' duration={0.6} delay={0.2 }>
+            <Sectionmap>
+            <div className="heading">
             <div className="heading-title">{this.state.mapTitle}</div>
             <div className="text-rectangle"></div>
-          </div>
-          <div className="map">
+            </div>
+            <div className="map">
             <ComposableMap projectionConfig={{
-              scale: 250,
-              rotation: [-10, 0, 0],
-            }} width={1400} height={800} projection="robinson">
-              <ZoomableGroup>
-                <Geographies geography={geography}>
-                  {(geographies, projection) => geographies.map(geography => (
-                    <Geography key={geography.id} geography={geography} projection={projection} style={{
-                      default: {
-                        fill: '#CEA6E9',
-                        stroke: "#570AB8",
-                        strokeWidth: 0.3,
-                        outline: "none"
-                      },
-                      hover: {
-                        fill: '#CEA6E9',
-                        stroke: "#570AB8",
-                        strokeWidth: 0.3
-                      },
-                      pressed: {
-                        fill: '#CEA6E9'
-                      }
-                    }}/>
-                  ))}
-                </Geographies>
-                <Markers>
-                  {this.state.markers.map((marker, i) => (
-                    <Marker
-                      key={i}
-                      marker={marker}
-                      onClick={ () => {this.handleClickMarker(marker)} }
-                      style={{
-                        default: {fill: Colors.tertiary},
-                        hover: {fill: "#FFFFFF"},
-                        pressed: {fill: "#FFFFFF"},
-                      }}
-                    >
-                      <circle
-                        cx={0}
-                        cy={0}
-                        r={30}
-                        style={{
-                          stroke: Colors.tertiary,
-                          strokeWidth: 3,
-                          opacity: 0.9,
-                        }}
-                      />
-                      <text
-                        textAnchor="middle"
-                        y={marker.markerOffset}
-                        style={{
-                          fontFamily: "Roboto, sans-serif",
-                          fill: "#FFF",
-                          fontSize: "20",
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        {marker.name}
-                      </text>
-                    </Marker>
-                  ))}
-                </Markers>
-              </ZoomableGroup>
+            scale: 250,
+            rotation: [-10, 0, 0],
+          }} width={1400} height={800} projection="robinson">
+            <ZoomableGroup>
+            <Geographies geography={geography}>
+            {(geographies, projection) => geographies.map(geography => (
+              <Geography key={geography.id} geography={geography} projection={projection} style={{
+                default: {
+                  fill: '#CEA6E9',
+                  stroke: "#570AB8",
+                  strokeWidth: 0.3,
+                  outline: "none"
+                },
+                hover: {
+                  fill: '#CEA6E9',
+                  stroke: "#570AB8",
+                  strokeWidth: 0.3
+                },
+                pressed: {
+                  fill: '#CEA6E9'
+                }
+              }}/>
+            ))}
+            </Geographies>
+            <Markers>
+            {this.state.markers.map((marker, i) => (
+              <Marker
+                key={i}
+                marker={marker}
+                onClick={() => {
+                  this.handleClickMarker(marker)
+                }}
+                style={{
+                  default: {fill: Colors.tertiary},
+                  hover: {fill: "#FFFFFF"},
+                  pressed: {fill: "#FFFFFF"},
+                }}
+              >
+                <circle
+                  cx={0}
+                  cy={0}
+                  r={30}
+                  style={{
+                    stroke: Colors.tertiary,
+                    strokeWidth: 3,
+                    opacity: 0.9,
+                  }}
+                />
+                <text
+                  textAnchor="middle"
+                  y={marker.markerOffset}
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    fill: "#FFF",
+                    fontSize: "20",
+                    fontWeight: 'bold'
+                  }}
+                >
+                  {marker.name}
+                </text>
+              </Marker>
+            ))}
+            </Markers>
+            </ZoomableGroup>
             </ComposableMap>
-          </div>
-        </Sectionmap>
+            </div>
+            </Sectionmap>
+
         </ScrollAnimation>
         <Footer/>
 
@@ -212,7 +230,7 @@ class Home extends Component {
 const HomeComponent = styled.div
   `
   width: 100%;
-  height: 400vh;
+  height: auto;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
