@@ -25,17 +25,17 @@ class Menu extends Component {
             {
               id: 0,
               text: "Test1",
-              link:'/test1'
+              link:'/instrument'
             },
             {
               id: 1,
               text: "Test2",
-              link:'/test2'
+              link:'/instrument'
             },
             {
               id: 2,
               text: "Test3",
-              link:'/test3'
+              link:'/instrument'
             }
           ]
         },

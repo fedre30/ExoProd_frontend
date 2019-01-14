@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Colors from '../../styles/colors';
@@ -55,7 +56,7 @@ class Instrument extends Component {
       },
       videoUrl: 'RQuY8kERaU0',
 
-      played: Sound.status.STOPPED
+      playing: false
     }
 
   }
@@ -63,13 +64,17 @@ class Instrument extends Component {
   // METHODS
 
   handlePlay = () => {
-    let {played} = this.state;
-    played === Sound.status.PLAYING ?
-      played = Sound.status.PAUSED :
-      played = Sound.status.PLAYING;
-    this.setState({
-      played
-    })
+    const audio =  ReactDOM.findDOMNode(this.refs.audio);
+    if (audio.paused) {
+      audio.play();
+      this.setState(() => ({ playing: true }))
+      console.log(this.state.playing);
+    } else {
+      audio.pause();
+      this.setState(() => ({ playing: false }))
+      console.log(this.state.playing);
+    }
+
   }
 
   _onReady(event) {
@@ -158,8 +163,11 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="button-player"><img src={this.state.played ? play : pause} alt=""/></div>
+                  <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/></div>
                   <div className="player">
+                    <audio ref="audio">
+                      <source src={sound}></source>
+                    </audio>
 
                   </div>
                 </div>
@@ -350,7 +358,7 @@ height: 100vh;
 .player {
   position: absolute;
   top: 50%;
-  left: 6rem;
+  left: 8rem;
   opacity: 1;
 }
 
