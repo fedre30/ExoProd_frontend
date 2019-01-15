@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Router onUpdate={() => window.scrollTo(0, 0)}>
+        <Router>
           <Switch>
             <Route exact path="/" component={HomeContainer}/>
             <Route path="/instrument" component={InstrumentContainer}/>

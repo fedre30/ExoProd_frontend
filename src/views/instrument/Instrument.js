@@ -163,7 +163,11 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/></div>
+                  <div className="player-text">Cliquez ici pour écouter le {this.state.title}</div>
+                  <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/>
+
+                  </div>
+
                   <div className="player">
                     <audio ref="audio">
                       <source src={sound}></source>
@@ -360,6 +364,16 @@ height: 100vh;
   top: 50%;
   left: 8rem;
   opacity: 1;
+}
+
+.player-text {
+  color: ${Colors.text};
+  margin: 2rem 0;
+  width: 100%;
+  position: absolute;
+  left: 3rem;
+  top: 55%;
+  
 }
 
 .button-player {
