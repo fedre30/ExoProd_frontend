@@ -246,6 +246,7 @@ class Home extends Component {
                             {marker.name}
                           </text>
                         </Marker>
+
                       ))}
                     </Markers>
                   </ZoomableGroup>
