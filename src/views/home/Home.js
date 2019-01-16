@@ -29,8 +29,10 @@ import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 import ExoButton from "../../components/button/Button";
 
+
 //VIDEO
 import bgVideo from '../../assets/video/exo.mp4';
+
 
 
 
@@ -131,6 +133,7 @@ class Home extends Component {
       muted: true,
       loop: true,
     }
+
     const { width } = this.state;
     const isMobile = width <= 500;
     if(!isMobile) {
