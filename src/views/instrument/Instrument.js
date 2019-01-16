@@ -45,10 +45,10 @@ class Instrument extends Component {
           'L\'origine de l\'instrument moderne remonte d\'abord aux années 1830-1840 durant lesquelles ont commencé l\'industrialisation et la commercialisation d\'un instrument plus ancien (xviie siècle) utilisé par les esclaves africains déportés aux États-Unis. La source iconographique la plus ancienne se trouve dans un récit de voyage écrit par Sir Hans Sloane en 1688 et publié à Londres en 1707. Les musiciens noirs exploitèrent l\'aspect rythmique de l\'instrument avec un tel succès que les blancs du Sud des États-Unis s\'y intéressèrent. '
       },
       artists: [
-        'Taylor Swift',
-        'John Mayer',
-        'Keith Urban',
-        'Rod Stewart'
+        'Au début du 19e siècle, le banjo était mentionné dans 19 orthographes différentes, allant de «banza» à «bonjoe».\n',
+        'La preuve la plus ancienne de luths pincés provient de la Mésopotamie il y a environ 6000 ans.\n',
+        'Des recherches récentes sur la musique ouest-africaine montrent plus de 60 instruments de luth à cordes pincés, qui présentent tous, dans une certaine mesure, quelque ressemblance avec le banjo et sont donc probablement des précurseurs du banjo.',
+        'La première description définitive d\'un banjo précoce provient d\'un article de 1687 écrit par Sir Hans Sloane, un médecin anglais en visite en Jamaïque, qui qualifiait cet instrument afro-caribéen de «strum strump».'
       ],
       sound: {
         filePath: '../../assets/sounds/Sitar.wav',
@@ -203,7 +203,7 @@ class Instrument extends Component {
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">Le {this.state.title} aujourd'hui</div>
+              <div className="artist-title">"Fun Facts" sur le {this.state.title}</div>
               <ul className="artist-list">
                 {this.state.artists.map(artist =>
                   (
@@ -360,7 +360,7 @@ padding: 3rem;
 
 const SoundSection = styled.div`
 width: 100%;
-height: 100vh;
+height: auto;
 
 
 .artist-list {
@@ -377,11 +377,11 @@ height: 100vh;
 }
 
 .artist-item {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: ${Colors.text};
   margin: 2rem 0;
   list-style: url(${list}) inside;
-  text-align: right;
+  line-height: 2rem;
 }
 
 .player {
@@ -414,11 +414,16 @@ height: 100vh;
 }
 
 @media(max-width: 560px) {
-  
+  .artist-list {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 0 2rem 4rem;
+    
+  }
   .artist-item {
     font-size: 1rem;
     list-style: circle inside;
-    text-align: center;
+    margin: 0 auto;
   }
   
   .artist-title {
