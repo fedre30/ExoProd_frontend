@@ -37,36 +37,7 @@ class Studio extends Component {
       sound:null,
     },
     // données statiques, on fera une boucle par la suite
-    instruments: [
-      {
-        name:"Cornemuse",
-        id:'15656546',
-        img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
-        details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
-        sound:require('../../assets/proto-sound/majiko.mp3')
-      },
-      {
-        name:"Nani",
-        id:'54599494949',
-        img: require('../../assets/img/instruments/file.png'),
-        details: "yooo",
-        sound:require('../../assets/proto-sound/nier.mp3')
-      },
-      {
-        name:"Latin Percu",
-        id:'56665461651',
-        img: require('../../assets/img/instruments/latin-percu.png'),
-        details: "yooo",
-        sound:require('../../assets/proto-sound/silence-voice.mp3')
-      },
-      {
-        name:"Taiko",
-        id:'65546546546',
-        img: require('../../assets/img/instruments/taiko.png'),
-        details: "yooo",
-        sound:require('../../assets/proto-sound/zankyo.mp3')
-      },
-    ]
+    instruments: [...this.props.instruments]
   }
 
   removeButtonClasse(index,className){
@@ -101,7 +72,7 @@ class Studio extends Component {
     // à faire: changement de style
     const current_btn = this.buttons[id];
     if(current_btn.classList.contains('selected')) {
-      console.log('this button is alreated selected')
+
       return false;
     }
 
@@ -136,7 +107,7 @@ class Studio extends Component {
 
 
   render(){
-    const {isSelected,select} = this.state;
+    const {isSelected,select} = this.state; 
     return (
       <StudioComponent>
         <Grid className="studio-container">
@@ -159,6 +130,9 @@ class Studio extends Component {
               <h1 className="studio-title">{this.props.title}</h1>
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
+              insertsong={true}
+              reset={this.props.reset}
+              checkindex={this.props.checkindex}
               url={protosound}
               selected={this.state.isSelected}
               select={this.state.select}
@@ -187,14 +161,21 @@ class Studio extends Component {
 
 const StudioComponent = styled.div
   `
-  height:100vh;
+  height: 100vh;
   overflow: hidden;
   min-height: 375px;
-
+  @media screen and (min-width: 768px){
+    min-height: 600px;
+  }
   .studio-container {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+  }
+  @media screen and (min-width: 768px){
+    .studio-container {
+      padding-top:100px !important;
+    }
   }
   #title {
     text-align: center;
@@ -274,7 +255,7 @@ const StudioComponent = styled.div
     opacity:0.5;
   }
   .chooseInstrument-btn img {
-    height: 100%;
+    width: 100%;
   }
   .chooseInstrument-container {
     padding-top:12px;

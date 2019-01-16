@@ -1,7 +1,7 @@
 import React, {Component} from "react";
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
-import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
 import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
@@ -24,7 +24,7 @@ import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
 
 // SOUNDS
-import sound from '../../assets/sounds/Sitar.wav';
+import sound from '../../assets/sounds/Chords_dulcimer.wav';
 
 
 // STATE
@@ -45,10 +45,10 @@ class Instrument extends Component {
           'L\'origine de l\'instrument moderne remonte d\'abord aux années 1830-1840 durant lesquelles ont commencé l\'industrialisation et la commercialisation d\'un instrument plus ancien (xviie siècle) utilisé par les esclaves africains déportés aux États-Unis. La source iconographique la plus ancienne se trouve dans un récit de voyage écrit par Sir Hans Sloane en 1688 et publié à Londres en 1707. Les musiciens noirs exploitèrent l\'aspect rythmique de l\'instrument avec un tel succès que les blancs du Sud des États-Unis s\'y intéressèrent. '
       },
       artists: [
-        'Taylor Swift',
-        'John Mayer',
-        'Keith Urban',
-        'Rod Stewart'
+        'Au début du 19e siècle, le banjo était mentionné dans 19 orthographes différentes, allant de «banza» à «bonjoe».\n',
+        'La preuve la plus ancienne de luths pincés provient de la Mésopotamie il y a environ 6000 ans.\n',
+        'Des recherches récentes sur la musique ouest-africaine montrent plus de 60 instruments de luth à cordes pincés, qui présentent tous, dans une certaine mesure, quelque ressemblance avec le banjo et sont donc probablement des précurseurs du banjo.',
+        'La première description définitive d\'un banjo précoce provient d\'un article de 1687 écrit par Sir Hans Sloane, un médecin anglais en visite en Jamaïque, qui qualifiait cet instrument afro-caribéen de «strum strump».'
       ],
       sound: {
         filePath: '../../assets/sounds/Sitar.wav',
@@ -56,22 +56,40 @@ class Instrument extends Component {
       },
       videoUrl: 'RQuY8kERaU0',
 
-      played: Sound.status.STOPPED
+      playing: false,
+      width: window.innerWidth
     }
+
 
   }
 
   // METHODS
 
   handlePlay = () => {
-    let {played} = this.state;
-    played === Sound.status.PLAYING ?
-      played = Sound.status.PAUSED :
-      played = Sound.status.PLAYING;
-    this.setState({
-      played
-    })
+    const audio =  ReactDOM.findDOMNode(this.refs.audio);
+    if (audio.paused) {
+      audio.play();
+      this.setState(() => ({ playing: true }))
+      console.log(this.state.playing);
+    } else {
+      audio.pause();
+      this.setState(() => ({ playing: false }))
+      console.log(this.state.playing);
+    }
+
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
   _onReady(event) {
     // access to player in all event handlers via event.target
@@ -83,13 +101,24 @@ class Instrument extends Component {
 
   render() {
 
-    const opts = {
+    const desktopOpts = {
       height: '590',
       width: '900',
       playerVars: {
         autoplay: 1
       }
     };
+
+    const mobileOpts = {
+      height: '360',
+      width: '450',
+      playerVars: {
+        autoplay: 1
+      }
+    };
+
+    const { width } = this.state;
+    const isMobile = width <= 500;
     return (
       <CardComponent>
         <Header>
@@ -148,7 +177,7 @@ class Instrument extends Component {
             <Grid.Column computer={9} mobile={16}>
               <ScrollAnimation animateIn="paragraph-right">
                 <Paragraph title={this.state.description.title} text={this.state.description.text}
-                           direction="right"/>
+                           direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
           </Grid>
@@ -159,15 +188,22 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="button-player"><img src={this.state.played ? play : pause} alt=""/></div>
+                  <div className="player-text">Cliquez ici pour écouter le {this.state.title}</div>
+                  <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/>
+
+                  </div>
+
                   <div className="player">
+                    <audio ref="audio">
+                      <source src={sound}></source>
+                    </audio>
 
                   </div>
                 </div>
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">Le {this.state.title} aujourd'hui</div>
+              <div className="artist-title">"Fun Facts" sur le {this.state.title}</div>
               <ul className="artist-list">
                 {this.state.artists.map(artist =>
                   (
@@ -181,7 +217,7 @@ class Instrument extends Component {
         <VideoSection>
           <YouTube
             videoId={this.state.videoUrl}
-            opts={opts}
+            opts={isMobile ? mobileOpts : desktopOpts}
             onReady={this._onReady}
           />
 
@@ -208,7 +244,7 @@ class Instrument extends Component {
 const CardComponent = styled.div
   `
   width: 100%;
-  height: 450vh;
+  height: auto;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
@@ -324,7 +360,7 @@ padding: 3rem;
 
 const SoundSection = styled.div`
 width: 100%;
-height: 100vh;
+height: auto;
 
 
 .artist-list {
@@ -341,18 +377,28 @@ height: 100vh;
 }
 
 .artist-item {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: ${Colors.text};
   margin: 2rem 0;
   list-style: url(${list}) inside;
-  text-align: right;
+  line-height: 2rem;
 }
 
 .player {
   position: absolute;
   top: 50%;
-  left: 6rem;
+  left: 8rem;
   opacity: 1;
+}
+
+.player-text {
+  color: ${Colors.text};
+  margin: 2rem 0;
+  width: 100%;
+  position: absolute;
+  left: 3rem;
+  top: 55%;
+  
 }
 
 .button-player {
@@ -368,11 +414,16 @@ height: 100vh;
 }
 
 @media(max-width: 560px) {
-  
+  .artist-list {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 0 2rem 4rem;
+    
+  }
   .artist-item {
     font-size: 1rem;
     list-style: circle inside;
-    text-align: center;
+    margin: 0 auto;
   }
   
   .artist-title {
@@ -381,6 +432,25 @@ height: 100vh;
   
   .triangle {
     display: none;
+  }
+  
+  .player-container {
+    position: static;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .player-text {
+    position: static;
+    margin: 1rem auto;
+    text-align: center;
+  }
+  
+  .button-player {
+    position: static;
+    margin: 1rem auto;
+    text-align: center;
   }
   
   
@@ -412,13 +482,15 @@ text-align: center;
   height: 30px;
   background-color: ${Colors.fourth};
   position: absolute;
-  right: 22%;
+  right: 25%;
   top: 1rem;
   z-index: -1;
  
 }
 
 @media(max-width: 560px) {
+  width: 100%;
+  height: 40vh;
   .video-subtitle {
     font-size: 1rem;
     

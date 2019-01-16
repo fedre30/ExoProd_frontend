@@ -13,41 +13,13 @@ class Menu extends Component {
       menuItems: [
         {
           id: 0,
-          name: 'Accueil',
-          link: '/',
-
+          name: 'A propos',
+          link: '/'
         },
         {
           id: 1,
-          name: 'Instruments',
-          link: '/instruments',
-          dropdown: [
-            {
-              id: 0,
-              text: "Test1",
-              link:'/test1'
-            },
-            {
-              id: 1,
-              text: "Test2",
-              link:'/test2'
-            },
-            {
-              id: 2,
-              text: "Test3",
-              link:'/test3'
-            }
-          ]
-        },
-        {
-          id: 2,
           name: 'StudioProd',
           link: '/studio'
-        },
-        {
-          id: 3,
-          name: 'A propos',
-          link: '/'
         },
 
       ],

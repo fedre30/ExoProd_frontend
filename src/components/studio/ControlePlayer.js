@@ -8,7 +8,7 @@ import '../../styles/range.css';
 import PropTypes from 'prop-types';
 
 class ControlePlayer extends Component {
-
+   
     //note: j'ai initialisé le state position (qui est passé par notre dépendance Sound)
     //      uniquement pour rendre dynamique notre progressbar, je n'ai pas trouvé de moyens
     //      plus 'jolie' pour mettre en place cette fonction, en tout cas, cela marche parfaitement
@@ -23,6 +23,14 @@ class ControlePlayer extends Component {
         volume: 100,
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.reset && (this.props.checkindex !== nextProps.checkindex) ) {
+            if(this.state.playStatus !== Sound.status.STOPPED) {
+                this.handleSongFinishedPlaying();
+            } 
+        }
+      }   
+
     /**
      * 
      * @param {*} duration
@@ -33,7 +41,9 @@ class ControlePlayer extends Component {
             duration,
         })
     }
+    
     endLoading = ()=>{
+
         if(this.props.select.sound !== null){
             let option = { audio:new Audio(this.props.select.sound),remove:false};
             option.audio.addEventListener('loadedmetadata', () => {
@@ -131,8 +141,6 @@ class ControlePlayer extends Component {
             playing: playStatus === Sound.status.PLAYING,
             isMute: volume === 0
         }
-
-
         return (
             <ControlePlayerStyle>
                 <div className="ControlePlayer-container">
@@ -180,7 +188,7 @@ class ControlePlayer extends Component {
                         />
                     </Grid.Column>
                 </Grid.Row>
-                <Sound
+                    <Sound
                     ignoreMobileRestrictions={true}
                     url={this.props.select.sound}
                     playStatus={playStatus}
@@ -192,7 +200,7 @@ class ControlePlayer extends Component {
                     autoLoad={true}
                     position={this.state.position}
                     volume={this.state.volume}
-                />
+                    />                   
             </ControlePlayerStyle>    
         )
     }
