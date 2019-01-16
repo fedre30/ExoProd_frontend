@@ -56,8 +56,10 @@ class Instrument extends Component {
       },
       videoUrl: 'RQuY8kERaU0',
 
-      playing: false
+      playing: false,
+      width: window.innerWidth
     }
+
 
   }
 
@@ -77,6 +79,18 @@ class Instrument extends Component {
 
   }
 
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.mute();
@@ -87,13 +101,24 @@ class Instrument extends Component {
 
   render() {
 
-    const opts = {
+    const desktopOpts = {
       height: '590',
       width: '900',
       playerVars: {
         autoplay: 1
       }
     };
+
+    const mobileOpts = {
+      height: '360',
+      width: '450',
+      playerVars: {
+        autoplay: 1
+      }
+    };
+
+    const { width } = this.state;
+    const isMobile = width <= 500;
     return (
       <CardComponent>
         <Header>
@@ -152,7 +177,7 @@ class Instrument extends Component {
             <Grid.Column computer={9} mobile={16}>
               <ScrollAnimation animateIn="paragraph-right">
                 <Paragraph title={this.state.description.title} text={this.state.description.text}
-                           direction="right"/>
+                           direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
           </Grid>
@@ -192,7 +217,7 @@ class Instrument extends Component {
         <VideoSection>
           <YouTube
             videoId={this.state.videoUrl}
-            opts={opts}
+            opts={isMobile ? mobileOpts : desktopOpts}
             onReady={this._onReady}
           />
 
@@ -219,7 +244,7 @@ class Instrument extends Component {
 const CardComponent = styled.div
   `
   width: 100%;
-  height: 450vh;
+  height: auto;
   background: rgb(13,0,35);
   background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
   overflow: hidden;
@@ -404,6 +429,25 @@ height: 100vh;
     display: none;
   }
   
+  .player-container {
+    position: static;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .player-text {
+    position: static;
+    margin: 1rem auto;
+    text-align: center;
+  }
+  
+  .button-player {
+    position: static;
+    margin: 1rem auto;
+    text-align: center;
+  }
+  
   
 }
 
@@ -433,13 +477,15 @@ text-align: center;
   height: 30px;
   background-color: ${Colors.fourth};
   position: absolute;
-  right: 22%;
+  right: 25%;
   top: 1rem;
   z-index: -1;
  
 }
 
 @media(max-width: 560px) {
+  width: 100%;
+  height: 40vh;
   .video-subtitle {
     font-size: 1rem;
     

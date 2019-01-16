@@ -167,7 +167,7 @@ class Home extends Component {
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
-                  <Button key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
                 ))}
                 </div>
                 <Motion
@@ -311,6 +311,114 @@ class Home extends Component {
               </Grid>
             </div>
           </Header>
+          <ScrollAnimation animateIn='map-enter' duration={0.6} delay={0.2}>
+            <Sectionmap>
+              <div className="heading" id="map">
+                <div className="heading-title">{this.state.mapTitle}</div>
+                <div className="text-rectangle"></div>
+              </div>
+              <div className="paragraph-right">
+                <div className="buttons-zoom">
+                  <Button onClick={this.handleZoomIn}>
+                    { "Zoom in" }
+                  </Button>
+                  <Button onClick={this.handleZoomOut}>
+                    { "Zoom out" }
+                  </Button>
+                  <Button onClick={this.handleReset}>
+                    { "Reset" }
+                  </Button>
+                </div>
+                <div className="buttons-instruments">
+                  {this.state.markers.map((marker, i) => (
+                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                  ))}
+                </div>
+                <Motion
+                  defaultStyle={{
+                    zoom: 1,
+                    x: 0,
+                    y: 20,
+                  }}
+                  style={{
+                    zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
+                    x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
+                    y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+                  }}
+                >
+                  {({zoom,x,y}) => (
+                    <ComposableMap projectionConfig={{
+                      scale: 70
+                    }} width={360} height={300} projection="robinson">
+                      <ZoomableGroup center={[x,y]} zoom={zoom}>
+                        <Geographies geography={geography}>
+                          {(geographies, projection) => geographies.map(geography => (
+                            <Geography key={geography.id} geography={geography} projection={projection} style={{
+                              default: {
+                                fill: Colors.primary,
+                                stroke: Colors.fourth,
+                                strokeWidth: 0.3,
+                                outline: "none"
+                              },
+                              hover: {
+                                fill: Colors.text,
+                                stroke: Colors.fourth,
+                                strokeWidth: 0.3
+                              },
+                              pressed: {
+                                fill: '#CEA6E9'
+                              }
+                            }}/>
+                          ))}
+                        </Geographies>
+                        <Markers>
+                          {this.state.markers.map((marker, i) => (
+                            <Marker
+                              key={i}
+                              marker={marker}
+                              onClick={() => {
+                                this.handleClickMarker(marker)
+                              }}
+                              style={{
+                                default: {fill: Colors.tertiary},
+                                hover: {fill: Colors.fourth},
+                                pressed: {fill: "#FFFFFF"},
+                              }}
+                            >
+
+                              <circle
+                                cx={0}
+                                cy={0}
+                                r={15}
+                                style={{
+                                  stroke: Colors.tertiary,
+                                  strokeWidth: 3,
+                                  opacity: 0.9,
+                                }}
+                              />
+                              <image width="20" height="20" x="-10" y="-10" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
+                              <text
+                                textAnchor="middle"
+                                y={marker.markerOffset}
+                                style={{
+                                  fontFamily: "Roboto, sans-serif",
+                                  fill: Colors.text,
+                                  fontSize: "8",
+                                  fontWeight: 'bold'
+                                }}
+                              >
+                                {marker.name}
+                              </text>
+                            </Marker>
+                          ))}
+                        </Markers>
+                      </ZoomableGroup>
+                    </ComposableMap>)}
+                </Motion>
+              </div>
+            </Sectionmap>
+
+          </ScrollAnimation>
           <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`} duration={0.6} delay={0.2}>
             <Firstsection>
               <Grid columns={12}>
@@ -339,10 +447,6 @@ class Home extends Component {
                 </Grid.Column>
               </Grid>
             </Secondsection>
-          </ScrollAnimation>
-          <ScrollAnimation animateIn='map-enter' duration={0.6} delay={0.2 }>
-            <h3>MOBILE</h3>
-
           </ScrollAnimation>
           <Footer/>
 
@@ -442,6 +546,8 @@ const Header = styled.div`
     margin-top: 40vh;
     padding: 0;
     margin-left: 2rem;
+    background: none;
+    text-align: left;
    }
    
     .title {
@@ -450,12 +556,14 @@ const Header = styled.div`
       font-size: 2.2rem;
       line-height: 3rem;
       padding:  0;
+      color: white;
       
     }
   .subtitle {
     font-size: 1.5rem;
     line-height: 2.5rem;
     width: 90vw;
+    color: ${Colors.subtitle}
     }
     
     .header-image {
@@ -551,6 +659,11 @@ const Sectionmap = styled.div`
 
 .buttons-instruments {
   margin: 1rem 2rem;
+}
+
+
+.instrument-button {
+  margin: 2rem 0; !important;
 }
   
   
