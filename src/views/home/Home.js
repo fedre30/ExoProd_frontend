@@ -533,7 +533,7 @@ const Header = styled.div`
   }
   .subtitle {
     color: ${Colors.tertiary};
-    font-family: ${Fonts.subtitle};
+    font-family: ${Fonts.secondary};
     font-size: 2.3rem;
     font-weight: 200;
   }
@@ -546,7 +546,7 @@ const Header = styled.div`
    .title-container {
     margin-top: 40vh;
     padding: 0;
-    margin-left: 2rem;
+    margin-left: 1rem;
     background: none;
     text-align: left;
    }
@@ -564,7 +564,7 @@ const Header = styled.div`
     font-size: 1.5rem;
     line-height: 2.5rem;
     width: 90vw;
-    color: ${Colors.subtitle}
+    color: ${Colors.fourth}
     }
     
     .header-image {
