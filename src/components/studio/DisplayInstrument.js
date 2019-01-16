@@ -65,7 +65,9 @@ render(){
               <div style={{left:`${this.state.index*-100}%`}} className="studio-display-instrument_selected-wrapper">
                 <div className='studio-display-instrument_selected'>
                   <h2>{name}</h2>
-                  <img src={img} alt='instrument'/>
+                  <div className='studio-display-instrument_selected-img'>
+                    <img src={img} alt='instrument'/>
+                  </div>
                 </div>          
                 <div className='studio-display-instrument_selected'>
                   <h2>{name}</h2>
@@ -232,17 +234,25 @@ const DisplayInstrumentComponent = styled.div`
     color: purple;
     transition: all 0.4s ease;
   }
-  .studio-display-instrument_selected img {
-    height: 120px;
+
+  .studio-display-instrument_selected-img {
+    width:60%;
+    height:60%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .studio-display-instrument_selected-img img {
+    width:100%;
   }
   @media screen and (min-width:768px) {
     .studio-display-instrument_selected {
-      height: 90%;
+      width: 80%;
+    }
+    .studio-display-instrument_selected-img {
+      width:50%;
+      height:50%;
     }
 
-    .studio-display-instrument_selected img {
-      height: 180px;
-    }
   }
   .studio-display-instrument_selected-container .right{
     right: 0;

@@ -9,7 +9,7 @@ const Step = ({index}) => {
             <div className="desktop">
             <ul className="type-list-container">
             <li className='type-list-items' >
-                    <h2>Etape</h2>
+                    <h2>Etapes</h2>
                 </li>
                 <li className={`type-list-items ${index >= 0 ? 'actif' :''}`}>
                     <label>1</label>
@@ -64,7 +64,7 @@ display:none;
         margin: 0;
     }
     .type-list-items h2 {
-        opacity: 0.36;
+        color: white;
     }
     .type-list-items {
         display: flex;

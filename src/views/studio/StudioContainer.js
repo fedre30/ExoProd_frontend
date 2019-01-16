@@ -18,65 +18,65 @@ class StudioContainer extends React.Component {
     data: [
       [
          {
-         name:"Cornemuse",
+         name:"Guzheng",
          id:'15656546',
-         img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
-         details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
+         img: require('../../assets/img/instruments/Guzheng.png'),
+         details: "détail",
          sound:require('../../assets/sounds/Bass_guzheng.wav')
          },
          {
-         name:"Nani",
+         name:"Pipa",
          id:'54599494949',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         img: require('../../assets/img/instruments/pipa.png'),
+         details: "détail",
          sound:require('../../assets/sounds/Bass_pipa.wav')
          },
      ],
      [
          {
-         name:"Cornemuse",
+         name:"Dulcimer",
          id:'15656546',
-         img: require('../../assets/img/instruments/Bagpipes-portrait.png'),
-         details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
+         img: require('../../assets/img/instruments/dulcimer.png'),
+         details: "",
          sound:require('../../assets/sounds/Chords_dulcimer.wav')
          },
          {
-         name:"Nani",
+         name:"Koto",
          id:'54599494949',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         img: require('../../assets/img/instruments/koto.png'),
+         details: "détail",
          sound:require('../../assets/sounds/Chords_koto.wav')
          },
      ],
      [
          {
-         name:"Cornemuse",
+         name:"Cajon",
          id:'15656546',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
-         sound:require('../../assets/sounds/Bass_guzheng.wav')
+         img: require('../../assets/img/instruments/cajon.png'),
+         details: '',
+         sound:require('../../assets/sounds/Drums_cajon.wav')
          },
          {
-         name:"Nani",
+         name:"Castanet",
          id:'54599494949',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         img: require('../../assets/img/instruments/Castanet.png'),
+         details: "détail",
          sound:require('../../assets/sounds/Drums_castanets.wav')
          },
      ],
      [
          {
-         name:"Cornemuse",
+         name:"Sitar",
          id: '15656546',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "La cornemuse est un instrument à vent utilisant des anches fermées, alimentées par un réservoir constant d’air sous forme de sac.",
-         sound:require('../../assets/sounds/Bass_guzheng.wav')
+         img: require('../../assets/img/instruments/sitar.png'),
+         details:'détail',
+         sound:require('../../assets/sounds/Melody_sitar.wav')
          },
          {
-         name:"Nani",
+         name:"Theremine",
          id:'54599494949',
-         img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         img: require('../../assets/img/instruments/theremine.png'),
+         details: "détail",
          sound:require('../../assets/sounds/Melody_theremin.wav')
          },
      ]                        
