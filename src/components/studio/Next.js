@@ -13,7 +13,7 @@ const Next = ({handleIndex,check}) => {
         classNames="button"
         unmountOnExit
         >
-        <Button onClick={handleIndex}>
+        <Button className="next" onClick={handleIndex}>
             étape suivante {check}
         </Button>
         </CSSTransition>
@@ -23,7 +23,7 @@ const Next = ({handleIndex,check}) => {
 const Button = styled.button
 `
 position: absolute;
-bottom: 5.5vw;
+bottom: calc(1.8vw + 16px);
 left: 50%;
 transform: translateX(-50%);
 text-transform: uppercase;
@@ -35,6 +35,12 @@ background:0;
 font-weight:bolder;
 color:${Colors.text};
 outline: 0;
+@media screen and (min-width: 768px){
+    bottom: 28px;
+}
+@media screen and (min-width: 1100px){
+    bottom: 2vw;
+}
 :after{
     background-image:url('${arrowDown}');
     width: 16px;

@@ -19,6 +19,7 @@ swap = (index) => () => {this.setState({index})};
 
 render(){
   const {isSelected,showInstrument,exit,enter,name,img,details,id} = this.props;
+
   return(
     <DisplayInstrumentComponent>
     <div className="studio-display-container">
