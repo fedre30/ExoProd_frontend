@@ -14,6 +14,7 @@ class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
     artist: "COLDPLAY",
+    states:['Bass','Chor','Drum','Mélodie'],
     selected:[[],[],[],[]],
     data: [
       [
