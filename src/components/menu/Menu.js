@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import { Dropdown } from 'semantic-ui-react';
+import '../../styles/animation.css';
 
 class Menu extends Component {
   constructor(props) {
@@ -12,46 +13,19 @@ class Menu extends Component {
       menuItems: [
         {
           id: 0,
-          name: 'Accueil',
-          link: '/',
-
+          name: 'A propos',
+          link: '/'
         },
         {
           id: 1,
-          name: 'Instruments',
-          link: '/instruments',
-          dropdown: [
-            {
-              id: 0,
-              text: "Test1",
-              link:'/test1'
-            },
-            {
-              id: 1,
-              text: "Test2",
-              link:'/test2'
-            },
-            {
-              id: 2,
-              text: "Test3",
-              link:'/test3'
-            }
-          ]
-        },
-        {
-          id: 2,
           name: 'StudioProd',
           link: '/studio'
-        },
-        {
-          id: 3,
-          name: 'A propos',
-          link: '/'
         },
 
       ],
 
       show: false,
+      active: false
 
     }
   }
@@ -60,25 +34,32 @@ class Menu extends Component {
     this.setState({ show: !this.state.show })
   }
 
+  componentDidMount() {
+    window.addEventListener('scroll', ev => {
+      window.scrollY > 900 ? this.setState({active: true}) : this.setState({active: false});
+    })
+  }
+
 
   render() {
     return (
-      <MenuComponent>
+      <MenuComponent >
+        <div className={`menu-wrapper ${this.state.active ? 'active' : ''}`}>
         <Link to="/">
-          <div className="logo">exoprod</div>
+          <div className="logo menu-expand">exoprod</div>
         </Link>
         <div className="burger" onClick={() => this.handleClick()}>
           <span className={'line1 ' + (this.state.show ? 'lineOpen-1' : '')}></span>
           <span className={'line2 ' + (this.state.show ? 'lineOpen-2' : '')}></span>
           <span className={'line3 ' + (this.state.show ? 'lineOpen-3' : '')}></span>
         </div>
-        <div className={'menu-container ' + (this.state.show ? 'show' : '')}>
+        <div className={'menu-container ' + (this.state.show ? 'show' : '')} >
           <ul className="menu-list">
             {this.state.menuItems.map(item => (
               !item.dropdown ? (<Link to={item.link}>
-                <li className="menu-item" key={item.id}>{item.name}</li>
+                <li className="menu-item menu-expand" key={item.id}>{item.name}</li>
               </Link>) : (
-                <Dropdown text={item.name} className="menu-link dropdown-link">
+                <Dropdown text={item.name} className="menu-link dropdown-link menu-expand">
                   <Dropdown.Menu>
                     {item.dropdown.map(link => (
                       <Route render={({history}) => (
@@ -88,9 +69,10 @@ class Menu extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
               )
-              
+
             ))}
           </ul>
+        </div>
         </div>
       </MenuComponent>
     );
@@ -99,18 +81,26 @@ class Menu extends Component {
 
 const MenuComponent = styled.div
   `
-  width: 100%;
-  display: flex;
-  padding: 2rem 1rem;
-  z-index: 10000;
-  position: relative;
+    
+  .menu-wrapper {
+    width: 100%;
+    height: 6.5rem;
+    display: flex;
+    padding: 2rem 1rem;
+    z-index: 10000;
+    position: fixed;
+    top: 0;
+    transition: background-color .5s ease;
+    background: transparent;
+  }
   
   .burger {
-  display: none;
+    display: none;
   }
   .logo {
     position: fixed;
-    margin: 1.3rem 3rem;
+    top: 3rem;
+    margin: 0 3rem;
     font-size: 2rem;
     text-transform: uppercase;
     color: ${Colors.text};
@@ -119,14 +109,15 @@ const MenuComponent = styled.div
   }
   
   .menu-container {
-      position: fixed;
-      right: 2rem;
+    position: fixed;
+    right: 2rem;
+      
   }
   .menu-list{
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  padding: 1rem 2rem;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0 2rem;
   
   }
   
@@ -140,32 +131,37 @@ const MenuComponent = styled.div
   .menu-item-dropdown {
     color: black;
     list-style: none;
-    margin: 0.5rem 2rem;
+    margin: 0.2rem 2rem;
   }
   
   a, .menu-link {
-  color: ${Colors.text};
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: color .2s ease;
+    color: ${Colors.text};
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color .2s ease;
   }
   
   a:hover, .menu-link:hover {
-  color: ${Colors.fourth};
- 
+   color: ${Colors.fourth};
  
   }
   
   .dropdown-link {
-  margin-top: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .active {
+    background-color: ${Colors.footer};
+    opacity: 1;
+    transition: background-color .5s ease;
+    
   }
  
   
   
   @media(max-width: 560px) {
-  
   .logo {
-    margin: 1rem 0;
+    margin: 0 0;
   }
     .burger {
     display: block;
@@ -194,12 +190,12 @@ const MenuComponent = styled.div
     .menu-container {
       width: 100%;
       height: 100vh;
-      position: fixed;
       opacity: 0;
       top: 0;
       left: 0;
       background: ${Colors.primary};
       transition: opacity 0.3s ease;
+      display: none;
     }
     
     .menu-list {
@@ -214,14 +210,24 @@ const MenuComponent = styled.div
     margin: 2rem;
     }
     
+    .dropdown-link {
+      margin: 2rem 2rem;
+    }
+    
     .show {
     transition-duration: 0.3s;
     opacity: 1;
     display: block;
+    position: fixed;
     }
     
+    .relative {
+      position: relative;
+    }
+    
+    
     .lineOpen-1{
-      transform: rotate(45deg) translate(0, 8px);
+      transform: rotate(45deg) translate(-1px , 7px);
       transition-duration: 0.5s;
       transform-origin: left;
     } 
@@ -235,6 +241,10 @@ const MenuComponent = styled.div
     
     } 
   }
+  
+  
+
+
   
   `
 ;
