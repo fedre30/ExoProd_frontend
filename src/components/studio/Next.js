@@ -46,7 +46,7 @@ outline: 0;
     width: 16px;
     content: " ";
     position: absolute;
-    right: -16px;
+    right: -24px;
     height:16px;
     line-height: normal;
     animation: down 1.5s linear infinite;

@@ -25,10 +25,10 @@ class StudioContainer extends React.Component {
          sound:require('../../assets/sounds/Bass_guzheng.wav')
          },
          {
-         name:"Nani",
+         name:"Instrument",
          id:'54599494949',
          img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         details: "détail",
          sound:require('../../assets/sounds/Bass_pipa.wav')
          },
      ],
@@ -41,10 +41,10 @@ class StudioContainer extends React.Component {
          sound:require('../../assets/sounds/Chords_dulcimer.wav')
          },
          {
-         name:"Nani",
+         name:"Instrument",
          id:'54599494949',
          img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         details: "détail",
          sound:require('../../assets/sounds/Chords_koto.wav')
          },
      ],
@@ -57,10 +57,10 @@ class StudioContainer extends React.Component {
          sound:require('../../assets/sounds/Bass_guzheng.wav')
          },
          {
-         name:"Nani",
+         name:"Instrument",
          id:'54599494949',
          img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         details: "détail",
          sound:require('../../assets/sounds/Drums_castanets.wav')
          },
      ],
@@ -73,10 +73,10 @@ class StudioContainer extends React.Component {
          sound:require('../../assets/sounds/Bass_guzheng.wav')
          },
          {
-         name:"Nani",
+         name:"Instrument",
          id:'54599494949',
          img: require('../../assets/img/instruments/file.png'),
-         details: "yooo",
+         details: "détail",
          sound:require('../../assets/sounds/Melody_theremin.wav')
          },
      ]                        

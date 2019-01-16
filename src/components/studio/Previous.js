@@ -19,7 +19,7 @@ const Previous = ({previous,index}) => {
                 <img style={{position:'absolute'}} src={require('../../assets/img/mini-ovale-dotted.png')} alt='' />
             </ButtonMobile>
             <ButtonDesktop onClick={previous}>
-                étape précente
+                étape précédente
             </ButtonDesktop>
         </Responsive>
         </CSSTransition>
@@ -106,7 +106,7 @@ display:none;
         width: 16px;
         content: " ";
         position: absolute;
-        right: -16px;
+        right: -24px;
         height:16px;
         transform:rotate(180deg);
         line-height: normal;
