@@ -255,7 +255,7 @@ const StudioComponent = styled.div
     opacity:0.5;
   }
   .chooseInstrument-btn img {
-    height: 100%;
+    width: 100%;
   }
   .chooseInstrument-container {
     padding-top:12px;
