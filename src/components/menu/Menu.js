@@ -13,41 +13,13 @@ class Menu extends Component {
       menuItems: [
         {
           id: 0,
-          name: 'Accueil',
-          link: '/',
-
+          name: 'A propos',
+          link: '/'
         },
         {
           id: 1,
-          name: 'Instruments',
-          link: '/instruments',
-          dropdown: [
-            {
-              id: 0,
-              text: "Test1",
-              link:'/test1'
-            },
-            {
-              id: 1,
-              text: "Test2",
-              link:'/test2'
-            },
-            {
-              id: 2,
-              text: "Test3",
-              link:'/test3'
-            }
-          ]
-        },
-        {
-          id: 2,
           name: 'StudioProd',
           link: '/studio'
-        },
-        {
-          id: 3,
-          name: 'A propos',
-          link: '/'
         },
 
       ],
@@ -72,7 +44,7 @@ class Menu extends Component {
   render() {
     return (
       <MenuComponent >
-        <div className={`menu ${this.state.active ? 'active' : ''}`}>
+        <div className={`menu-wrapper ${this.state.active ? 'active' : ''}`}>
         <Link to="/">
           <div className="logo menu-expand">exoprod</div>
         </Link>
@@ -110,7 +82,7 @@ class Menu extends Component {
 const MenuComponent = styled.div
   `
     
-  .menu {
+  .menu-wrapper {
     width: 100%;
     height: 6.5rem;
     display: flex;
@@ -159,7 +131,7 @@ const MenuComponent = styled.div
   .menu-item-dropdown {
     color: black;
     list-style: none;
-    margin: 0.5rem 2rem;
+    margin: 0.2rem 2rem;
   }
   
   a, .menu-link {

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
-import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
 import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
@@ -24,7 +24,7 @@ import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
 
 // SOUNDS
-import sound from '../../assets/sounds/Sitar.wav';
+import sound from '../../assets/sounds/Chords_dulcimer.wav';
 
 
 // STATE
@@ -34,7 +34,7 @@ class Instrument extends Component {
     super(props);
     this.state = {
       title: 'Banjo',
-      pronounciation: '[bɑ̃.dʒo]',
+      pronunciation: '[bɑ̃.dʒo]',
       type: 'Cordes frappées',
       shape: 'A queue ou droit',
       origin: 'Amérique du Nord',
@@ -56,7 +56,7 @@ class Instrument extends Component {
       },
       videoUrl: 'RQuY8kERaU0',
 
-      played: Sound.status.STOPPED
+      playing: false
     }
 
   }
@@ -64,13 +64,17 @@ class Instrument extends Component {
   // METHODS
 
   handlePlay = () => {
-    let {played} = this.state;
-    played === Sound.status.PLAYING ?
-      played = Sound.status.PAUSED :
-      played = Sound.status.PLAYING;
-    this.setState({
-      played
-    })
+    const audio =  ReactDOM.findDOMNode(this.refs.audio);
+    if (audio.paused) {
+      audio.play();
+      this.setState(() => ({ playing: true }))
+      console.log(this.state.playing);
+    } else {
+      audio.pause();
+      this.setState(() => ({ playing: false }))
+      console.log(this.state.playing);
+    }
+
   }
 
   _onReady(event) {
@@ -95,7 +99,7 @@ class Instrument extends Component {
         <Header>
           <Menu/>
           <div className="heading">
-            <div className="pronounciation">{this.state.pronounciation}</div>
+            <div className="pronunciation">{this.state.pronunciation}</div>
             <div className="title">{this.state.title}</div>
           </div>
           <ScrollAnimation animateIn='fade-left'>
@@ -159,8 +163,15 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="button-player"><img src={this.state.played ? play : pause} alt=""/></div>
+                  <div className="player-text">Cliquez ici pour écouter le {this.state.title}</div>
+                  <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/>
+
+                  </div>
+
                   <div className="player">
+                    <audio ref="audio">
+                      <source src={sound}></source>
+                    </audio>
 
                   </div>
                 </div>
@@ -186,9 +197,9 @@ class Instrument extends Component {
           />
 
           <div className="video-subtitle-container">
-            <div className="text-rectangle"></div>
             <div className="video-subtitle">
               Vous voulez participer à une expérience musicale?
+              <div className="text-rectangle"></div>
             </div>
           </div>
           <Button link={'/studio'} text={'Decouvrir le studio'}/>
@@ -241,7 +252,7 @@ const Header = styled.div`
     
   }
   
-  .pronounciation {
+  .pronunciation {
     font-size: 5rem;
     color: ${Colors.tertiary};
   }
@@ -351,8 +362,18 @@ height: 100vh;
 .player {
   position: absolute;
   top: 50%;
-  left: 6rem;
+  left: 8rem;
   opacity: 1;
+}
+
+.player-text {
+  color: ${Colors.text};
+  margin: 2rem 0;
+  width: 100%;
+  position: absolute;
+  left: 3rem;
+  top: 55%;
+  
 }
 
 .button-player {
@@ -403,17 +424,18 @@ text-align: center;
 }
 
 .video-subtitle {
-  z-index: -1;
+  z-index: 0;
+  position: relative;
 }
 
 .text-rectangle {
-  width: 300px;
-  height: 20px;
+  width: 450px;
+  height: 30px;
   background-color: ${Colors.fourth};
   position: absolute;
-  right: 50%;
+  right: 22%;
   top: 1rem;
-  z-index: 0;
+  z-index: -1;
  
 }
 
@@ -422,6 +444,14 @@ text-align: center;
     font-size: 1rem;
     
   }
+  
+  .text-rectangle {
+    width: 200px;
+   height: 20px;
+    right: 10%;
+    top: 0.5rem;
+ 
+}
 }
 
 

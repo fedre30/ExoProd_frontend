@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import dotted from '../../assets/img/button_bg.svg';
 
-const Button = ({link, text}) => (
+const ExoButton = ({link, text}) => (
   <ButtonComponent>
     <div className="outer">
       <div className="inner">
@@ -16,7 +16,7 @@ const Button = ({link, text}) => (
 );
 
 
-Button.propTypes = {
+ExoButton.propTypes = {
 
   link: PropTypes.string,
   text: PropTypes.string,
@@ -105,4 +105,4 @@ const ButtonComponent = styled.div
 ;
 
 
-export default Button;
+export default ExoButton;

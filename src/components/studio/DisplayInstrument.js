@@ -8,6 +8,7 @@ import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import leftarrow from '../../assets/img/left-arrow.png';
 import rightarrow from '../../assets/img/right-arrow.png';
+
 import { Link } from "react-router-dom";
 class DisplayInstrument extends Component{
 
@@ -101,8 +102,8 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument {
     position: relative;
     z-index: 1;
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: rgba(100,100,100,0.39);
     margin: 0 auto;
@@ -125,8 +126,8 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument-img {
     position: absolute;
     z-index: 0;
-    width: 284px;
-    height: 284px;
+    width: 244px;
+    height: 244px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -139,12 +140,16 @@ const DisplayInstrumentComponent = styled.div`
   }
   @media screen and (min-width:768px) {
     .studio-display-instrument {
-      width: 320px;
-      height: 320px;
+      min-width: 320px;
+      min-height: 320px;
+      width:20vw;
+      height:20vw;
     }
     .studio-display-instrument-img {
-      width: 400px;
-      height: 400px;
+      min-width: 400px;
+      min-height: 400px;
+      width:24vw;
+      height:24vw;
     }        
   }
 
@@ -201,7 +206,7 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument_selected p {
     font-size: 12px;
     margin: 0 20%;
-    text-align: left;
+    text-align: center;
     line-height:1.1
   }
   @media screen and (min-width: 768px) {

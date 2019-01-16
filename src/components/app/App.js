@@ -5,7 +5,6 @@ import HomeContainer from "../../views/home/HomeContainer";
 import InstrumentContainer from "../../views/instrument/InstrumentContainer";
 import MapContainer from '../../views/map/MapContainer';
 import StudioContainer from '../../views/studio/StudioContainer';
-
 class App extends Component {
   render() {
     return (
