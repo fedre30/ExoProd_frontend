@@ -25,7 +25,6 @@ import secondaryKoto from '../assets/img/koto2.png';
 import thumbKoto from '../assets/img/instruments/koto.png';
 
 
-
 //SOUNDS
 
 import soundBanjo from '../assets/sounds/Bass_guzheng.wav';
@@ -60,7 +59,7 @@ const Instruments = [
       type: 'audio/wav'
     },
     videoUrl: 'RQuY8kERaU0',
-    coordinates: [-87.075459,37.933009],
+    coordinates: [-87.075459, 37.933009],
     mainImage: mainBanjo,
     secondaryImage: secondaryBanjo,
     thumbnail: thumbBanjo
@@ -89,7 +88,7 @@ const Instruments = [
       type: 'audio/wav'
     },
     videoUrl: '7EluXu6xg1c',
-    coordinates:  [ 65.751244, 77.618423],
+    coordinates: [65.751244, 77.618423],
     mainImage: mainTheremin,
     secondaryImage: secondaryTheremin,
     thumbnail: thumbTheremin
@@ -107,17 +106,17 @@ const Instruments = [
       text: ' Le sitār est un instrument à cordes de la famille des luths très répandu en Inde du Nord. Il mesure 1,2 m de longueur environ et comporte une caisse de résonance piriforme profonde en bois et en calebasse, un manche en bois, long, large et évidé, des chevilles frontales et latérales, et vingt frettes arquées mobiles. Le sitār est généralement muni de cinq cordes mélodiques métalliques, d\'une ou deux cordes métalliques servant aux variations rythmiques en bourdon et de neuf à treize cordes métalliques sympathiques placées sous les frettes dans le manche qui sont accordées sur les notes du rāga qui est joué. Les frettes, convexes, sont fixées par des liens tendus le long du manche, ce qui permet de les déplacer en fonction des besoins. Comme la vīnā classique, le sitār est souvent doté d\'une calebasse de résonance sous l\'extrémité du chevillier du manche.\n'
     },
     facts: [
-      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
-      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
-      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
-      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+      'Brain Jones, l\'un des membres originaux des Rolling Stones, a joué le sitar dans la chanson \'Paint it Black\'.',
+      'Le sitar est devenu populaire dans la musique moderne à une époque dans les années 1960, quand il a été utilisé dans la musique par les Rolling Stones, les Doors et les Beatles.',
+      'Le nom \'sitar\' est dérivé des mots persans \'seh\' et \'tar; qui signifie «trois chaînes» lorsqu\'il est traduit en anglais.',
+      'Le grand pont du sitar est réservé aux cordes principales et le petit pont aux cordes sympathiques.'
     ],
     sound: {
       filePath: soundSitar,
       type: 'audio/wav'
     },
     videoUrl: 'O4irXQhgMqg',
-    coordinates:  [78.962880, 20.593684],
+    coordinates: [78.962880, 20.593684],
     mainImage: mainSitar,
     secondaryImage: secondarySitar,
     thumbnail: thumbSitar
@@ -137,17 +136,17 @@ const Instruments = [
         'Les cordes sont fixés sur un manche intégré dans la caisse de résonance. Celle-ci est de taille réduite. De ce fait, le dulcimer n\'est pas un instrument puissant. Son succès dans la musique de danse, domaine réservé des bombardes et cornemuses est donc resté limité! Enfin, le dulcimer se décline généralement en deux formes: la forme de type pendule et la forme en goutte d\'eau.\n'
     },
     facts: [
-      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
-      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
-      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
-      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+'Une personne qui joue de cet instrument à cordes s\'appelle un dulcimeriste. Cependant, ce terme est rarement utilisé. La plupart des artistes se considèrent eux-mêmes comme des joueurs dulcimer.',
+      'Au fil des ans, le dulcimer a acquis un certain nombre de surnoms, notamment «harmonium», «hog fiddle», «boîte à musique», «boîte à harmonie» et «cithare de montagne».',
+      'Une fois que les dulcimers ont été produits en série, des modifications de conception ont permis de créer un instrument plus facile à construire et à jouer.',
+      'Le dulcimer est un instrument de musique à cordes de la famille des cithares. Contrairement à la cithare, le dulcimer est généralement caractérisé par trois ou quatre chaînes.'
     ],
     sound: {
       filePath: soundDulcimer,
       type: 'audio/wav'
     },
     videoUrl: 'gZa4mdWu6Gs',
-    coordinates:[12.340171, 62.278648],
+    coordinates: [12.340171, 62.278648],
     mainImage: mainDulcimer,
     secondaryImage: secondaryDulcimer,
     thumbnail: thumbDulcimer
@@ -169,10 +168,11 @@ const Instruments = [
         'Elles peuvent se jouer de plusieurs manières : classique, elles sont mises aux pouces, la main droite joue avec les 4 doigts en commençant par le petit doigt et la main gauche uniquement avec les deux doigts du milieu, la main droite fera une carretilla. Populaire, elles seront aux majeurs ; on les claque simultanément dans les deux mains en faisant deux allers et retours.'
     },
     facts: [
-      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
-      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
-      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
-      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+      'Le mot "castanet" est dérivé du mot espagnol "castaina" qui signifie "châtaigne".\n' +
+      'Les castagnettes moins chères en bois ou en plastique sont peu coûteuses et peuvent être vendues pour aussi peu que 10 $.\n',
+      'Bien que les castagnettes aient traditionnellement la forme d\'une coquille concave, elles le sont aussi aujourd\'hui sous d\'autres formes telles que rectangulaire, carrée ou même triangulaire.',
+      'Les danseurs utilisent des castagnettes pour accompagner leur danse, mais ils sont également utilisés dans d\'autres musiques, même dans les orchestres actuels.',
+      'Les castagnettes sont appelées pulgaretes quand elles sont attachées au pouce des danseuses.'
     ],
     sound: {
       filePath: soundCastanets,
@@ -201,10 +201,10 @@ const Instruments = [
         'Parmi les musiciens représentatifs du koto, on trouve d\'abord Yatsuhashi Kengyō (1614-1685) ; puis Michio Miyagi (1894-1956, prononcé Miyagui) et Fumiko Yonekawa, née en 1895 et qui avait, en 1983, 185 000 heures de pratique. Miyagi a développé le koto au début du xxe siècle, important ce langage musical en Europe. Son œuvre Haru no umi (La mer du printemps, pour koto et shakuhachi) est la plus connue des œuvres jouées au koto. Kimio Eto est un interprète moderne. La famille Kawai fait aussi partie des joueurs de koto moderne célèbres.\n'
     },
     facts: [
-      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
-      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
-      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
-      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+     'Les joueurs Kimonos traditionnels sont portés tout en jouant le koto.',
+      'Yatsuhashi Kengyo était responsable du dev du koto.\n',
+      'Au début de la période meiji, la musique occidentale a été introduite au Japon.',
+      'Le koto mesure 1,82 mètre.'
     ],
     sound: {
       filePath: soundKoto,
