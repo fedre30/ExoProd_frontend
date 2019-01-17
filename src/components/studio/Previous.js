@@ -14,10 +14,13 @@ const Previous = ({previous,index}) => {
         unmountOnExit
         >
         <Responsive>
-            <ButtonMobile onClick={previous}>
+            <ButtonMobileVTwo onClick={previous}>
+                étape précédente
+            </ButtonMobileVTwo>
+            {/*<ButtonMobile onClick={previous}>
                 <img src={require('../../assets/img/back.png')} alt='back' />
                 <img style={{position:'absolute'}} src={require('../../assets/img/mini-ovale-dotted.png')} alt='' />
-            </ButtonMobile>
+            </ButtonMobile>-->*/}
             <ButtonDesktop onClick={previous}>
                 étape précédente
             </ButtonDesktop>
@@ -25,15 +28,20 @@ const Previous = ({previous,index}) => {
         </CSSTransition>
     )
 };
+// to ButtonMobile, replace top to calc(50% - 200px)
+// and left: 15vw
+// remove transform
 const Responsive = styled.div
 `
 position:absolute;
 z-index: 999999;
-top:calc(50% - 200px);
-left:15vw;
+top:calc(14vh);
+left:50%;
+transform:translateX(-50%);
 button {
     outline: 0;
 }
+
 @media screen and (min-width: 768px){
     top:calc(3vw + 60px);
     left:50%;
@@ -41,6 +49,52 @@ button {
 }
 @media screen and (min-width: 920px){
     top:5vw;
+}
+
+`
+const ButtonMobileVTwo = styled.button
+`
+display:block;
+text-transform: uppercase;
+cursor: pointer;
+font:${Fonts.subtitle};
+border:0;
+font-size: 12px;
+background:0;
+font-weight:bolder;
+color:${Colors.text};
+:after{
+    background-image:url('${arrowDown}');
+    width: 16px;
+    content: " ";
+    position: absolute;
+    right: -24px;
+    height:16px;
+    transform:rotate(180deg);
+    line-height: normal;
+    animation: up 1.5s linear infinite;
+}
+@media screen and (min-width: 768px){
+    display:none;
+}
+@keyframes up{
+    0% {
+     bottom:-24px;
+     opacity: 0;
+    }
+    10%{
+     opacity: 0;
+    }
+    50%{
+    opacity:0.7;
+    }
+    90% {
+    opacity:0;
+    }
+    100% {
+    bottom: 12px;
+    opacity:0;
+    }
 }
 `
 const ButtonMobile = styled.button
@@ -55,6 +109,7 @@ display:flex;
 align-items:center;
 justify-content: center;
 
+
 img:first-child {
     width:20px;
     height: 20px;
@@ -62,30 +117,32 @@ img:first-child {
 }
 
 img:first-child{
-    animation: rotating 4s linear infinite;
+    position: absolute;
+    animation: up 2s linear infinite;
 }
 
-
-@keyframes rotating {
-   
-    from {
-      -ms-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -webkit-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    to {
-      -ms-transform: rotate(-360deg);
-      -moz-transform: rotate(-360deg);
-      -webkit-transform: rotate(-360deg);
-      -o-transform: rotate(-360deg);
-      transform: rotate(-360deg);
-    }
-}
 
 @media screen and (min-width: 768px){
     display:none;
+}
+@keyframes up{
+    0% {
+     bottom:-24px;
+     opacity: 0;
+    }
+    10%{
+     opacity: 0;
+    }
+    50%{
+    opacity:0.7;
+    }
+    90% {
+    opacity:0;
+    }
+    100% {
+    bottom: 12px;
+    opacity:0;
+    }
 }
 `
 const ButtonDesktop = styled.button

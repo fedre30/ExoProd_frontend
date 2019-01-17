@@ -23,7 +23,7 @@ const Next = ({handleIndex,check}) => {
 const Button = styled.button
 `
 position: absolute;
-bottom: calc(1.8vw + 16px);
+bottom: 5vh;
 left: 50%;
 transform: translateX(-50%);
 text-transform: uppercase;
@@ -37,6 +37,7 @@ color:${Colors.text};
 outline: 0;
 @media screen and (min-width: 768px){
     bottom: 28px;
+    bottom: calc(1.8vw + 16px);
 }
 @media screen and (min-width: 1100px){
     bottom: 2vw;

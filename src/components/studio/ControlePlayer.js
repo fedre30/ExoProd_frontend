@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
+import play from '../../assets/img/play.svg';
+import pause from '../../assets/img/pause.svg';
 import { Grid, Button } from 'semantic-ui-react';
 import Sound from 'react-sound';
 import '../../styles/range.css';
@@ -169,14 +171,13 @@ class ControlePlayer extends Component {
                         size='large'
                         />
 
-                        <Button 
-                        className="studio-btn-audio mobile" 
-                        circular
+                        <button
+                        className="studio-btn-playing mobile"
                         disabled={this.props.selected ? false : true}
-                        icon={controller.playing ? 'pause' : 'play' } 
-                        size='huge'
-                        onClick={this.handlePlay}
-                        />
+                        onClick={this.handlePlay} 
+                        >
+                            <img style={{opacity: this.props.selected ? '1' : '0.5'}} src={controller.playing ? pause : play }/>
+                        </button>
 
                         <Button 
                         className="studio-btn-audio mobile" 
@@ -247,7 +248,23 @@ const ControlePlayerStyle = styled.div
         border-bottom-left-radius: 50px;
         z-index: 1;
     }
-
+    .studio-btn-playing{
+        border:0;
+        outline:0;
+        cursor:pointer;
+        background:none;
+        vertical-align: middle
+        margin: 0 24px;
+    }
+    .studio-btn-playing[disabled]{
+        cursor: default;
+    }
+    .studio-btn-playing img {
+        width: 61px;
+        height: 61px;
+        border-radius: 50%;
+        transition: opacity 400ms ease;
+    }
     .ControlePlayer-progressbar-interactive_range {
         width: 100%;
         position: absolute;
