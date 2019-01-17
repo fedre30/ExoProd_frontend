@@ -12,7 +12,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={HomeContainer}/>
-            <Route path="/instrument" component={InstrumentContainer}/>
+            <Route path="/instrument/:id" component={InstrumentContainer}/>
             <Route exact path="/about" component={AboutContainer}/>
             <Route exact path="/studio" component={StudioContainer}/>
           </Switch>

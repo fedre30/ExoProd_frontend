@@ -31,8 +31,7 @@ class About extends Component {
         'Le concept de “Production exotique” consiste à proposer une expérience de découverte d’instruments méconnus, soi-disant exotiques. Analyser comment les styles et les instruments d’outre-mer ont eu un impact sur la musique actuelle et rester émerveillé de la quantité d’artistes qui experiment avec ces instruments pour enrichir leur musique.',
       secondParagraph: {
         title: "Prenez en main les instruments et créez votre propre son",
-        text: "Explorez le potentiel des ces instruments à travers vos chansons préférées, en modifiant la mélodie, les accords ou d’autres pistes avec l’instrument le plus souhaitable à votre goût.\n" +
-          "Transformez un morceau pop actuel en un oeuvre qui va au-delà de toute limite spatio-temporelle pour un résultat époustouflant ! \n",
+        text:"Le concept de “Production exotique” consiste à explorer et découvrir le potentiel d’instruments méconnus, soi-disant exotiques. Grâce à notre studio faites sortir vos âmes de musiciens comme les nombreux artistes qui expérimentent encore, de nos jours ces instruments peu communs. Jouez avec la mélodie, les accords, les basses et les percussions avec notre sélection d’instruments pour transformer vos musiques pop préférées du moment en une toute nouvelle expérience musicale, laissez-vous porter par cette richesse de savoir et de son.",
         direction: "left"
       },
     }

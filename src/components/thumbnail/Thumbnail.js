@@ -41,7 +41,7 @@ const ThumbnailComponent = styled.div
 
  
  img {
- width: 150%;
+ width: 100%;
  overflow: hidden;
  }
  

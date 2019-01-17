@@ -244,7 +244,7 @@ class Home extends Component {
                           <image width="50" height="50" x="-20" y="-40" href={marker.image} clip-path="url(#cut-off-bottom)"></image>
                           <text
                             textAnchor="middle"
-                            y={marker.markerOffset}
+                            y="35"
                             style={{
                                 fontFamily: "Roboto, sans-serif",
                                 fill: Colors.text,
@@ -409,7 +409,7 @@ class Home extends Component {
                               <image width="20" height="20" x="-10" y="-10" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
                               <text
                                 textAnchor="middle"
-                                y={marker.markerOffset}
+                                y="35"
                                 style={{
                                   fontFamily: "Roboto, sans-serif",
                                   fill: Colors.text,

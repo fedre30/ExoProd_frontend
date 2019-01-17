@@ -13,19 +13,15 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import '../../styles/animation.css';
 import YouTube from 'react-youtube';
 
+import Instruments from '../../helpers/api.js';
+
 
 //IMAGES
 import triangle from '../../assets/img/card_triangle.svg';
-import thumbnail from '../../assets/img/background_home.jpg';
 import title from '../../assets/img/fiche_title.svg';
-import instrument from '../../assets/img/banjo.jpg';
 import list from '../../assets/img/list.png';
 import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
-
-// SOUNDS
-import sound from '../../assets/sounds/Chords_dulcimer.wav';
-
 
 // STATE
 
@@ -33,29 +29,7 @@ class Instrument extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Banjo',
-      pronunciation: '[bɑ̃.dʒo]',
-      type: 'Cordes frappées',
-      shape: 'A queue ou droit',
-      origin: 'Amérique du Nord',
-      year: 'XVIIIe',
-      description: {
-        title: 'Un instrument pas seulement utilisé dans la musique country',
-        text: 'lLe banjo est un instrument de musique à cordes pincées nord-américain. Avec sa table d\'harmonie à membrane, on le distingue facilement de la guitare. Cet instrument serait un dérivé du luth ouest-africain ekonting apporté par les esclaves noirs (ou plus vraisemblablement recréé par certains d\'entre eux) et qui aurait suscité la création des premiers gourd-banjos (« banjo en gourde »).\n' +
-          'L\'origine de l\'instrument moderne remonte d\'abord aux années 1830-1840 durant lesquelles ont commencé l\'industrialisation et la commercialisation d\'un instrument plus ancien (xviie siècle) utilisé par les esclaves africains déportés aux États-Unis. La source iconographique la plus ancienne se trouve dans un récit de voyage écrit par Sir Hans Sloane en 1688 et publié à Londres en 1707. Les musiciens noirs exploitèrent l\'aspect rythmique de l\'instrument avec un tel succès que les blancs du Sud des États-Unis s\'y intéressèrent. '
-      },
-      artists: [
-        'Au début du 19e siècle, le banjo était mentionné dans 19 orthographes différentes, allant de «banza» à «bonjoe».\n',
-        'La preuve la plus ancienne de luths pincés provient de la Mésopotamie il y a environ 6000 ans.\n',
-        'Des recherches récentes sur la musique ouest-africaine montrent plus de 60 instruments de luth à cordes pincés, qui présentent tous, dans une certaine mesure, quelque ressemblance avec le banjo et sont donc probablement des précurseurs du banjo.',
-        'La première description définitive d\'un banjo précoce provient d\'un article de 1687 écrit par Sir Hans Sloane, un médecin anglais en visite en Jamaïque, qui qualifiait cet instrument afro-caribéen de «strum strump».'
-      ],
-      sound: {
-        filePath: '../../assets/sounds/Sitar.wav',
-        type: 'audio/wav'
-      },
-      videoUrl: 'RQuY8kERaU0',
-
+      id: 0,
       playing: false,
       width: window.innerWidth
     }
@@ -124,8 +98,8 @@ class Instrument extends Component {
         <Header>
           <Menu/>
           <div className="heading">
-            <div className="pronunciation">{this.state.pronunciation}</div>
-            <div className="title">{this.state.title}</div>
+            <div className="pronunciation">{Instruments[this.state.id].pronunciation}</div>
+            <div className="title">{Instruments[this.state.id].title}</div>
           </div>
           <ScrollAnimation animateIn='fade-left'>
             <div className="infos">
@@ -134,28 +108,28 @@ class Instrument extends Component {
                   <div className="infos-item">
                     <div className="infos-tag">CLASSIFICATION</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {this.state.type} </div>
+                    <div className="infos-data"> {Instruments[this.state.id].type} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">FORMES</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {this.state.shape} </div>
+                    <div className="infos-data"> {Instruments[this.state.id].shape} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">ORIGINES</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {this.state.origin} </div>
+                    <div className="infos-data"> {Instruments[this.state.id].origin} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">ANNEE</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {this.state.year} </div>
+                    <div className="infos-data"> {Instruments[this.state.id].year} </div>
                   </div>
                 </li>
               </ul>
@@ -164,7 +138,7 @@ class Instrument extends Component {
 
           <div className="header-thumbnail">
             <ScrollAnimation animateIn='fade-right'>
-              <Thumbnail image={thumbnail}/>
+              <Thumbnail image={Instruments[this.state.id].mainImage}/>
             </ScrollAnimation>
           </div>
 
@@ -172,11 +146,11 @@ class Instrument extends Component {
         <DescriptionSection>
           <Grid columns={12}>
             <Grid.Column computer={6} mobile={16}>
-              <img src={instrument} alt=""/>
+              <img src={Instruments[this.state.id].secondaryImage} alt=""/>
             </Grid.Column>
             <Grid.Column computer={9} mobile={16}>
               <ScrollAnimation animateIn="paragraph-right">
-                <Paragraph title={this.state.description.title} text={this.state.description.text}
+                <Paragraph title={Instruments[this.state.id].description.title} text={Instruments[this.state.id].description.text}
                            direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
@@ -188,14 +162,14 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="player-text">Cliquez ici pour écouter le {this.state.title}</div>
+                  <div className="player-text">Cliquez ici pour écouter le {Instruments[this.state.id].title}</div>
                   <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/>
 
                   </div>
 
                   <div className="player">
                     <audio ref="audio">
-                      <source src={sound}></source>
+                      <source src={Instruments[this.state.id].sound.filePath} type={Instruments[this.state.id].sound.type}></source>
                     </audio>
 
                   </div>
@@ -203,9 +177,9 @@ class Instrument extends Component {
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">"Fun Facts" sur le {this.state.title}</div>
+              <div className="artist-title">"Fun Facts" sur le {Instruments[this.state.id].title}</div>
               <ul className="artist-list">
-                {this.state.artists.map(artist =>
+                {Instruments[this.state.id].facts.map(artist =>
                   (
                     <li className="artist-item">{artist}</li>
                   )
@@ -216,7 +190,7 @@ class Instrument extends Component {
         </SoundSection>
         <VideoSection>
           <YouTube
-            videoId={this.state.videoUrl}
+            videoId={Instruments[this.state.id].videoUrl}
             opts={isMobile ? mobileOpts : desktopOpts}
             onReady={this._onReady}
           />
