@@ -14,7 +14,7 @@ import '../../styles/animation.css';
 
 
 //IMAGES
-import thumbnail from '../../assets/img/background_home.jpg';
+import thumbnail from '../../assets/img/piano.jpg';
 import title from '../../assets/img/fiche_title.svg';
 
 
@@ -27,8 +27,7 @@ class About extends Component {
       title: 'About',
       pronunciation: '[əˈbaʊt]',
       width: window.innerWidth,
-      text: 'De nouvelles sonorités à travers les instruments d’autres pays du monde\n' +
-        'Le concept de “Production exotique” consiste à proposer une expérience de découverte d’instruments méconnus, soi-disant exotiques. Analyser comment les styles et les instruments d’outre-mer ont eu un impact sur la musique actuelle et rester émerveillé de la quantité d’artistes qui experiment avec ces instruments pour enrichir leur musique.',
+      text: 'Le concept de “Production exotique” consiste à explorer et découvrir le potentiel d’instruments méconnus, soi-disant exotiques. Grâce à notre studio faites sortir vos âmes de musiciens comme les nombreux artistes qui expérimentent encore, de nos jours ces instruments peu communs. Jouez avec la mélodie, les accords, les basses et les percussions avec notre sélection d’instruments pour transformer vos musiques pop préférées du moment en une toute nouvelle expérience musicale, laissez-vous porter par cette richesse de savoir et de son.',
       secondParagraph: {
         title: "Prenez en main les instruments et créez votre propre son",
         text:"Le concept de “Production exotique” consiste à explorer et découvrir le potentiel d’instruments méconnus, soi-disant exotiques. Grâce à notre studio faites sortir vos âmes de musiciens comme les nombreux artistes qui expérimentent encore, de nos jours ces instruments peu communs. Jouez avec la mélodie, les accords, les basses et les percussions avec notre sélection d’instruments pour transformer vos musiques pop préférées du moment en une toute nouvelle expérience musicale, laissez-vous porter par cette richesse de savoir et de son.",

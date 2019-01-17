@@ -60,7 +60,7 @@ const Instruments = [
       type: 'audio/wav'
     },
     videoUrl: 'RQuY8kERaU0',
-    coordinates: [67.075459,37.933009],
+    coordinates: [-87.075459,37.933009],
     mainImage: mainBanjo,
     secondaryImage: secondaryBanjo,
     thumbnail: thumbBanjo
@@ -89,7 +89,7 @@ const Instruments = [
       type: 'audio/wav'
     },
     videoUrl: '7EluXu6xg1c',
-    coordinates:  [ -82.64, 27.773056],
+    coordinates:  [ 65.751244, 77.618423],
     mainImage: mainTheremin,
     secondaryImage: secondaryTheremin,
     thumbnail: thumbTheremin
@@ -127,7 +127,7 @@ const Instruments = [
     title: 'Dulcimer',
     pronunciation: '[ˈduls̠ime̞r]',
     type: 'Cordes frappées',
-    shape: 'Dulcimer des Appalaches, Dulcimer du Moyen âge, Hammered dulcimer ',
+    shape: 'Dulcimer des Appalaches, Hammered dulcimer ',
     origin: ' Europe du nord',
     year: ' Moyen  âge',
     description: {

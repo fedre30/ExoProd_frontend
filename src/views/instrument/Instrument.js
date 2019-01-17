@@ -188,6 +188,7 @@ class Instrument extends Component {
           </Grid>
         </SoundSection>
         <VideoSection>
+          <div className="video-title">Le {Instruments[this.props.location.state.id].title} aujourd'hui</div>
           <YouTube
             videoId={Instruments[this.props.location.state.id].videoUrl}
             opts={isMobile ? mobileOpts : desktopOpts}
@@ -317,7 +318,7 @@ const Header = styled.div`
 
 const DescriptionSection = styled.div`
 width: 100%;
-height: 100vh;
+height: 85vh;
 padding: 3rem;
 
 
@@ -333,7 +334,7 @@ padding: 3rem;
 
 const SoundSection = styled.div`
 width: 100%;
-height: auto;
+height: 85vh;
 
 
 .artist-list {
@@ -436,6 +437,14 @@ const VideoSection = styled.div`
 width: 100%;
 height: 100vh;
 text-align: center;
+
+.video-title {
+  font-size: 4rem;
+  color: ${Colors.text};
+  text-align: center;
+  font-weight: bold;
+  margin: 5rem 0;
+}
 
 .video-subtitle-container {
   font-size: 3rem;

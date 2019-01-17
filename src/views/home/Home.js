@@ -388,12 +388,12 @@ class Home extends Component {
                                 cy={0}
                                 r={15}
                                 style={{
-                                  stroke: Colors.tertiary,
+                                  stroke: Colors.text,
                                   strokeWidth: 3,
                                   opacity: 0.9,
                                 }}
                               />
-                              <image width="20" height="20" x="-10" y="-10" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
+                              <image width="20" height="20" x="-10" y="-10" href={marker.thumbnail} clip-path="url(#cut-off-bottom)"></image>
                               <text
                                 textAnchor="middle"
                                 y="35"
@@ -404,7 +404,7 @@ class Home extends Component {
                                   fontWeight: 'bold'
                                 }}
                               >
-                                {marker.name}
+                                {marker.title}
                               </text>
                             </Marker>
                           ))}
