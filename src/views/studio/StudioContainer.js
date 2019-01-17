@@ -183,6 +183,7 @@ class StudioContainer extends React.Component {
           {data.map((element,i)=>(
           <Studio
           key={i}
+          step={this.state.steps[i]}
           reset={this.resetSong}
           instruments={element}
           checkindex={i===index}

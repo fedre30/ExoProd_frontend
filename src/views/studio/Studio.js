@@ -113,7 +113,7 @@ class Studio extends Component {
         <Grid className="studio-container">
           <Grid.Row centered columns={3}>
             <Grid.Column mobile={16} tablet={5} computer={5}>
-              <h1 id="title" className='only-mobile'>Mélodie</h1>
+              <h1 id="title" className='only-mobile'>{this.props.step}</h1>
             </Grid.Column>
             <Grid.Column textAlign='center' mobile={16} tablet={6} computer={6}>
               <DisplayInstrument
@@ -184,6 +184,7 @@ const StudioComponent = styled.div
     margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
+    text-transform: uppercase;
   }
   @media screen and (min-width: 768px) {
     #title {
