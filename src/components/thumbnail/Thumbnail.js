@@ -19,7 +19,7 @@ const ThumbnailComponent = styled.div
   width: 100%;
  height: 60vh;
  position: absolute;
- right: -300px;
+ right: -400px;
 
  
  .outer-circle {

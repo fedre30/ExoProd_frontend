@@ -591,7 +591,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
@@ -633,6 +633,7 @@ const Sectionmap = styled.div`
   .heading {
     margin-bottom: 3rem;
     position: relative;
+    padding: 2rem 0;
   }
   
   .heading-title{
@@ -658,7 +659,7 @@ const Sectionmap = styled.div`
   background-color: ${Colors.fourth};
   position: absolute;
   right: 3rem;
-  top: 1rem;
+  top: 3rem;
   z-index: -1;
  
 }
