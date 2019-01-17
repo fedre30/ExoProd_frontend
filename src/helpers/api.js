@@ -8,12 +8,32 @@ import mainTheremin from '../assets/img/teheremin.jpg';
 import secondaryTheremin from '../assets/img/Thérémine-1-of-1.jpg';
 import thumbTheremin from '../assets/img/instruments/theremine.png';
 
+import mainSitar from '../assets/img/sitar_2.jpg';
+import secondarySitar from '../assets/img/Sitar.jpg';
+import thumbSitar from '../assets/img/instruments/sitar.png';
+
+import mainDulcimer from '../assets/img/dulcimer.jpg';
+import secondaryDulcimer from '../assets/img/dulcimer2.JPG';
+import thumbDulcimer from '../assets/img/instruments/dulcimer.png';
+
+import mainCastanets from '../assets/img/castagnet.jpg';
+import secondaryCastanets from '../assets/img/castagnet2.jpg';
+import thumbCastanets from '../assets/img/instruments/Castanet.png';
+
+import mainKoto from '../assets/img/koto.jpg';
+import secondaryKoto from '../assets/img/koto2.png';
+import thumbKoto from '../assets/img/instruments/koto.png';
+
 
 
 //SOUNDS
 
 import soundBanjo from '../assets/sounds/Bass_guzheng.wav';
 import soundTheremin from '../assets/sounds/Melody_theremin.wav';
+import soundSitar from '../assets/sounds/Melody_sitar.wav';
+import soundDulcimer from '../assets/sounds/Chords_dulcimer.wav';
+import soundCastanets from '../assets/sounds/Drums_castanets.wav';
+import soundKoto from '../assets/sounds/Chords_koto.wav';
 
 const Instruments = [
   {
@@ -49,7 +69,7 @@ const Instruments = [
   {
     id: 1,
     title: 'Theremine',
-    pronunciation: '[te.ʁe.min]',
+    pronunciation: '[ˈθɛə.ɹəˌmɪn]',
     type: 'Electronique',
     shape: 'A clavier ou violoncelle',
     origin: 'Russie',
@@ -73,8 +93,130 @@ const Instruments = [
     mainImage: mainTheremin,
     secondaryImage: secondaryTheremin,
     thumbnail: thumbTheremin
-
   },
+  {
+    id: 2,
+    title: 'Sitar',
+    pronunciation: '[ˈs̠it̪ɑr]',
+    type: 'Cordes pincées',
+    shape: 'Droit',
+    origin: 'Inde',
+    year: 'XIVe',
+    description: {
+      title: 'Un incontournable pour les Beatles',
+      text: ' Le sitār est un instrument à cordes de la famille des luths très répandu en Inde du Nord. Il mesure 1,2 m de longueur environ et comporte une caisse de résonance piriforme profonde en bois et en calebasse, un manche en bois, long, large et évidé, des chevilles frontales et latérales, et vingt frettes arquées mobiles. Le sitār est généralement muni de cinq cordes mélodiques métalliques, d\'une ou deux cordes métalliques servant aux variations rythmiques en bourdon et de neuf à treize cordes métalliques sympathiques placées sous les frettes dans le manche qui sont accordées sur les notes du rāga qui est joué. Les frettes, convexes, sont fixées par des liens tendus le long du manche, ce qui permet de les déplacer en fonction des besoins. Comme la vīnā classique, le sitār est souvent doté d\'une calebasse de résonance sous l\'extrémité du chevillier du manche.\n'
+    },
+    facts: [
+      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
+      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
+      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
+      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+    ],
+    sound: {
+      filePath: soundSitar,
+      type: 'audio/wav'
+    },
+    videoUrl: 'O4irXQhgMqg',
+    coordinates:  [78.962880, 20.593684],
+    mainImage: mainSitar,
+    secondaryImage: secondarySitar,
+    thumbnail: thumbSitar
+  },
+  {
+    id: 3,
+    title: 'Dulcimer',
+    pronunciation: '[ˈduls̠ime̞r]',
+    type: 'Cordes frappées',
+    shape: 'Dulcimer des Appalaches, Dulcimer du Moyen âge, Hammered dulcimer ',
+    origin: ' Europe du nord',
+    year: ' Moyen  âge',
+    description: {
+      title: 'Un instrument de rêverie',
+      text: 'Le Dulcimer fait partie d\'une famille d\'instruments d\'origine Celte que l\'on peut qualifier de "Cornemuses à cordes grattées". En effet, ces derniers associent, comme les Cornemuses, des cordes « bourdons » réalisant un accord d\'accompagnement, et une corde « chanterelle » souvent diatonique réservée à la mélodie.\n' +
+        'Le Dulcimer quant à lui, selon les versions, possède 3 ou 4 cordes: 2 cordes « bourdon » et une ou deux cordes « chanterelles ». Il est purement diatonique (les notes de la tonalité de base ne peuvent être altérées en dièses et en bémols). En ce sens et si on s\'en tient à une utilisation traditionnelle, les fausses notes sont impossibles (ce qui est bien pratique...). Cette caractéristique alliée à sa légèreté et son faible encombrement explique sans doute la popularité du dulcimer en son époque de gloire!\n' +
+        'Les cordes sont fixés sur un manche intégré dans la caisse de résonance. Celle-ci est de taille réduite. De ce fait, le dulcimer n\'est pas un instrument puissant. Son succès dans la musique de danse, domaine réservé des bombardes et cornemuses est donc resté limité! Enfin, le dulcimer se décline généralement en deux formes: la forme de type pendule et la forme en goutte d\'eau.\n'
+    },
+    facts: [
+      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
+      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
+      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
+      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+    ],
+    sound: {
+      filePath: soundDulcimer,
+      type: 'audio/wav'
+    },
+    videoUrl: 'gZa4mdWu6Gs',
+    coordinates:[12.340171, 62.278648],
+    mainImage: mainDulcimer,
+    secondaryImage: secondaryDulcimer,
+    thumbnail: thumbDulcimer
+  },
+
+  {
+    id: 4,
+    title: 'Castanets',
+    pronunciation: '[ˌkæs.tə.ˈnɛts]',
+    type: 'Percussion idiophone',
+    shape: 'Castanyoles, Castanholas, Nacchere',
+    origin: 'Espagne, Italie, Grèce',
+    year: ' Inconnue',
+    description: {
+      title: 'Pas utilisé seulement pour le flamenco',
+      text: 'Les castagnettes (en espagnol : castañuelas, «châtaignes ») sont un instrument de musique à percussion idiophone, typique du folklore espagnol, portugais (castanholas) et italien (nacchere).\n' +
+        'Les castanyoles rectangulaires se rencontrent encore aux Îles Baléares.\n' +
+        'Elles sont généralement fabriquées en bois dur ou en ivoire et consistent en deux coquilles surmontées d\'une « oreja » (oreille), percées, suivant les modèles, de deux ou trois trous, reliées entre elles par un cordon, dont les faces creuses s\'entrechoquent.\n' +
+        'Elles peuvent se jouer de plusieurs manières : classique, elles sont mises aux pouces, la main droite joue avec les 4 doigts en commençant par le petit doigt et la main gauche uniquement avec les deux doigts du milieu, la main droite fera une carretilla. Populaire, elles seront aux majeurs ; on les claque simultanément dans les deux mains en faisant deux allers et retours.'
+    },
+    facts: [
+      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
+      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
+      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
+      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+    ],
+    sound: {
+      filePath: soundCastanets,
+      type: 'audio/wav'
+    },
+    videoUrl: 'jrVbawRPO7I',
+    coordinates: [-3.749220, 40.463667],
+    mainImage: mainCastanets,
+    secondaryImage: secondaryCastanets,
+    thumbnail: thumbCastanets
+  },
+
+  {
+    id: 5,
+    title: 'Koto',
+    pronunciation: '[ˈkoː.toː]',
+    type: 'Cordes pincées',
+    shape: ' Jūshichigen, Nijūgen, Nijūgogen',
+    origin: 'Japon',
+    year: '  VIIe siècle',
+    description: {
+      title: 'Un son hypnotisant directement du pays du soleil levant',
+      text: 'Le koto (琴 en japonais) est un instrument de musique à cordes pincées utilisé en musique japonaise traditionnelle, notamment dans le kabuki et le bunraku. Originaire de Chine (gŭzhēng), il fut introduit au Japon entre le viie et le viiie siècle et était joué principalement à la Cour impériale ; l\'usage s\'en est ensuite démocratisé.\n' +
+        'Le koto produit un son lyrique, comparable à celui d\'une harpe, ce qui peut expliquer le terme souvent rencontré de « harpe japonaise ».\n' +
+        'On le retrouve dans des morceaux traditionnels japonais tels que "Sakura" ou "Rokudan".\n' +
+        'Parmi les musiciens représentatifs du koto, on trouve d\'abord Yatsuhashi Kengyō (1614-1685) ; puis Michio Miyagi (1894-1956, prononcé Miyagui) et Fumiko Yonekawa, née en 1895 et qui avait, en 1983, 185 000 heures de pratique. Miyagi a développé le koto au début du xxe siècle, important ce langage musical en Europe. Son œuvre Haru no umi (La mer du printemps, pour koto et shakuhachi) est la plus connue des œuvres jouées au koto. Kimio Eto est un interprète moderne. La famille Kawai fait aussi partie des joueurs de koto moderne célèbres.\n'
+    },
+    facts: [
+      'Le theremin est monophonique, ce qui signifie qu’il utilise un seul canal de transmission pour créer un son.',
+      'Le thérémine fut rapidement repris par les compositeurs de films hollywoodiens, notamment dans la partition de Max Steiner pour King Kong (1933), de Franz Waxman pour Bride of Frankenstein (1935) et dans la partition de Bernard Herrmann pour The Day the Earth Stood Still (1951).\n',
+      'Le theremin est similaire à un récepteur radio. Il possède deux antennes: une à droite verticale et une à gauche en forme de boucle.',
+      'La première œuvre orchestrale avec un instrument électronique solo était Simfonicheskaya misteriya («Mystère symphonique») d’Andrey Pashchenko pour thérémine et orchestre, qui a été créée pour la première fois à Léningrad le 2 mai 1924. Lev Termen était un soliste'
+    ],
+    sound: {
+      filePath: soundKoto,
+      type: 'audio/wav'
+    },
+    videoUrl: 'HzdjMLKKdgk',
+    coordinates: [139.691706, 35.689487],
+    mainImage: mainKoto,
+    secondaryImage: secondaryKoto,
+    thumbnail: thumbKoto
+  },
+
 
 ];
 
