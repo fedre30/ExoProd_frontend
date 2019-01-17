@@ -17,6 +17,7 @@ class FinalMix extends Component {
         total: '0:00',
         current: '0:00',
         volume: 100,
+        isLoadingEnd: false,
     }
     /**
      * Ce référencer à la formule écrite dans la méthode handleSongPlaying
@@ -37,20 +38,22 @@ class FinalMix extends Component {
         })
     }
     
-    endLoading = ()=>{
-
-        if(this.props.selected.every(elem=> elem.length !== 0)){
-            let option = { audio:new Audio(this.props.selected[0].sound),remove:false};
-            option.audio.addEventListener('loadedmetadata', () => {
-                this.setState({
-                    total: this.convertToTimer(option.audio.duration)
+    endLoading = (endloading)=>{
+        if(endloading){
+            if(this.props.selected.every(elem=> elem.length !== 0)){
+                let option = { audio:new Audio(this.props.selected[0].sound),remove:false};
+                option.audio.addEventListener('loadedmetadata', () => {
+                    this.setState({
+                        total: this.convertToTimer(option.audio.duration)
+                    })
+                    option.audio.remove = true;
                 })
-                option.audio.remove = true;
-            })
-            if(option.remove) option = undefined;
+                if(option.remove) option = undefined;
+            }
+            this.setState({isLoadingEnd:true})
+            this.handleSongFinishedPlaying();
         }
 
-        this.handleSongFinishedPlaying();
     }
     /**
      * Converstion de ma positions en timer
@@ -157,7 +160,7 @@ class FinalMix extends Component {
                 <div className="display-instrument-container">
                     <button 
                     className="display-instrument"
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     onClick={this.handlePlay} 
                     >
                         <img src={controller.playing ? pause : play } alt='play button'/>
@@ -172,7 +175,7 @@ class FinalMix extends Component {
                         min='0'
                         max='100' 
                         step="0.001"
-                        disabled={this.props.selected ? false : true}
+                        disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
@@ -184,13 +187,13 @@ class FinalMix extends Component {
                     <Button
                     className="studio-btn-audio" 
                     circular
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     icon='info' 
                     size='large'  
                     /> 
                     <button
                     className="studio-btn-playing mobile"
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     onClick={this.handlePlay} 
                     >
                         <img src={controller.playing ? pause : play } alt='play button'/>
@@ -198,7 +201,7 @@ class FinalMix extends Component {
                     <Button
                     className="studio-btn-audio mobile" 
                     circular
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd? false : true}
                     icon={controller.isMute ? 'volume off' : 'volume up'} 
                     size='large'
                     onClick={this.handleVolume} 
@@ -214,7 +217,7 @@ class FinalMix extends Component {
                         onPlaying={({position,duration}) => this.handleSongPlaying(position,duration,i)}
                         onFinishedPlaying={this.handleSongFinishedPlaying}
                         onLoading={({duration,position}) => this.initPlayer(duration,position,i)}
-                        onLoad={this.endLoading}
+                        onLoad={({loaded}) => this.endLoading(loaded)}
                         autoLoad={true}
                         position={this.state.positions[i]}
                         volume={this.state.volume}
