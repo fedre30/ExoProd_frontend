@@ -176,7 +176,7 @@ class Instrument extends Component {
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">"Fun Facts" sur le {Instruments[this.props.location.state.id].title}</div>
+              <div className="artist-title"><i>Fun Facts</i> sur le {Instruments[this.props.location.state.id].title}</div>
               <ul className="artist-list">
                 {Instruments[this.props.location.state.id].facts.map(artist =>
                   (
