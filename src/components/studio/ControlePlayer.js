@@ -7,7 +7,6 @@ import pause from '../../assets/img/pause.svg';
 import { Grid, Button } from 'semantic-ui-react';
 import Sound from 'react-sound';
 import '../../styles/range.css';
-import PropTypes from 'prop-types';
 
 class ControlePlayer extends Component {
    
@@ -176,7 +175,7 @@ class ControlePlayer extends Component {
                         disabled={this.props.selected ? false : true}
                         onClick={this.handlePlay} 
                         >
-                            <img style={{opacity: this.props.selected ? '1' : '0.5'}} src={controller.playing ? pause : play }/>
+                            <img style={{opacity: this.props.selected ? '1' : '0.5'}} src={controller.playing ? pause : play } alt='play button'/>
                         </button>
 
                         <Button 
@@ -189,6 +188,7 @@ class ControlePlayer extends Component {
                         />
                     </Grid.Column>
                 </Grid.Row>
+                {this.props.url !== null && 
                     <Sound
                     ignoreMobileRestrictions={true}
                     url={this.props.select.sound}
@@ -201,79 +201,78 @@ class ControlePlayer extends Component {
                     autoLoad={true}
                     position={this.state.position}
                     volume={this.state.volume}
-                    />                   
+                    />  
+                }
+                 
             </ControlePlayerStyle>    
         )
     }
 };
 
+const ControlePlayerStyle = styled.div`
+.ControlePlayer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    margin: 12px 0 6px 0;
+}
 
-const ControlePlayerStyle = styled.div
-    `
-    .ControlePlayer-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:100%;
-        margin: 12px 0 6px 0;
-    }
-
-    .ControlePlayer-container p {
-        opacity: 0.7;
-        color: ${Colors.text}
-        font-family: ${Fonts.text};
-        font-size: 14px;
-        margin: 0;
-    }
+.ControlePlayer-container p {
+    opacity: 0.7;
+    color: ${Colors.text}
+    font-family: ${Fonts.text};
+    font-size: 14px;
+    margin: 0;
+}
+.ControlePlayer-progressbar-container {
+    width: 200px;
+    height: 4px;
+    background: rgba(112, 121, 140, 0.5);
+    margin: 0 16px;
+    border-radius: 50px;
+    position: relative;
+ }
+ @media screen and (min-width: 768px) {
     .ControlePlayer-progressbar-container {
-        width: 200px;
-        height: 4px;
-        background: rgba(112, 121, 140, 0.5);
-        margin: 0 16px;
-        border-radius: 50px;
-        position: relative;
-    }
-    @media screen and (min-width: 768px) {
-        .ControlePlayer-progressbar-container {
-            min-width: 200px;
-            width:20vw;
-        }       
-    }
-    .ControlePlayer-progressbar-interactive {
-        position: absolute;
-        height: 100%;
-        background: #FFFCF2;
-        left: 0;
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-        z-index: 1;
-    }
-    .studio-btn-playing{
-        border:0;
-        outline:0;
-        cursor:pointer;
-        background:none;
-        vertical-align: middle
-        margin: 0 24px;
-    }
-    .studio-btn-playing[disabled]{
-        cursor: default;
-    }
-    .studio-btn-playing img {
-        width: 61px;
-        height: 61px;
-        border-radius: 50%;
-        transition: opacity 400ms ease;
-    }
-    .ControlePlayer-progressbar-interactive_range {
-        width: 100%;
-        position: absolute;
-        height: 100%;
-        left: 0;
-        background: rgba(0, 0, 0, 0);
-        z-index: 2;
-    }
-    `
-;
+        min-width: 200px;
+        width:20vw;
+    }       
+ }
+ .ControlePlayer-progressbar-interactive {
+    position: absolute;
+    height: 100%;
+    background: #FFFCF2;
+    left: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    z-index: 1;
+ }
+ .studio-btn-playing{
+    border:0;
+    outline:0;
+    cursor:pointer;
+    background:none;
+    vertical-align: middle
+    margin: 0 24px;
+}
+.studio-btn-playing[disabled]{
+    cursor: default;
+}
+.studio-btn-playing img {
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+    transition: opacity 400ms ease;
+}
+.ControlePlayer-progressbar-interactive_range {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 2;
+}
+`;
 
 export default ControlePlayer;

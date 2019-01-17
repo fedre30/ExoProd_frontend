@@ -182,6 +182,7 @@ class StudioContainer extends React.Component {
         <div className='responsive-container' style={{transform:`translateY(${-index*20}%)`}}>
           {data.map((element,i)=>(
           <Studio
+          key={i}
           reset={this.resetSong}
           instruments={element}
           checkindex={i===index}

@@ -85,14 +85,15 @@ render(){
 }
 
 };
-DisplayInstrument.propTypes = {
-  isSelected: PropTypes.bool.isRequired,
-  showInstrument:  PropTypes.bool.isRequired,
-  enter: PropTypes.func.isRequired,
-  exit:  PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
-  details: PropTypes.string.isRequired
-};
+DisplayInstrument.defaultProps = {
+  isSelected: false,
+  showInstrument: false,
+  details: '',
+  text:'',
+
+
+}
+
 const DisplayInstrumentComponent = styled.div`
   position: relative;
   .studio-display-container {
