@@ -28,7 +28,7 @@ const ParagraphComponent = styled.div
     font-weight: 600;
     font-size: 3.5rem;
     color: ${Colors.text};
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
   }
   
   .text {

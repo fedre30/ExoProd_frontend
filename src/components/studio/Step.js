@@ -3,34 +3,20 @@ import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 
-const Step = ({index}) => {
+const Step = ({index,steps}) => {
     return (
         <StepContainer >
             <div className="desktop">
             <ul className="type-list-container">
             <li className='type-list-items' >
                     <h2>Etapes</h2>
-                </li>
-                <li className={`type-list-items ${index >= 0 ? 'actif' :''}`}>
-                    <label>1</label>
-                    <h3>melodie</h3>
-                </li>
-                <li className={`type-list-items ${index > 0 ? 'actif' :''}`}>
-                    <label>2</label>
-                    <h3>accord</h3>
-                </li>
-                <li className={`type-list-items ${index > 1  ? 'actif' :''}`}>
-                    <label>3</label>
-                    <h3>basse</h3>
-                </li>
-                <li className={`type-list-items ${index > 2 ? 'actif' :''}`}>
-                    <label>4</label>
-                    <h3>percussion</h3>
-                </li>
-                <li className={`type-list-items ${index > 3 ? 'actif' :''}`}>
-                    <label>5</label>
-                    <h3>fin</h3>
-                </li>
+            </li>
+                {steps.map((step,i)=>
+                    <li className={`type-list-items ${index >= i ? 'actif' :''}`}>
+                        <label>{i+1}</label>
+                        <h3>{step}</h3>
+                    </li>
+                )}
             </ul>
             </div>
         </StepContainer>

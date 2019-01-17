@@ -29,6 +29,9 @@ import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 import ExoButton from "../../components/button/Button";
 
+// INSTRUMENTS
+
+import Instruments  from '../../helpers/api';
 
 //VIDEO
 import bgVideo from '../../assets/video/exo.mp4';
@@ -53,14 +56,7 @@ class Home extends Component {
         direction: "right"
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
-      markers: [
-        {markerOffset: 35, name: "Theremine", coordinates: [67.075459,37.933009], url: 'instrument'},
-        {markerOffset: 35, name: "Sitar", coordinates: [78.962880, 20.593684], url: 'instrument'},
-        {markerOffset: 35, name: "Dulcimer", coordinates: [12.340171, 62.278648], url: 'instrument'},
-        {markerOffset: 35, name: "Banjo", coordinates: [-95.712891, 37.090240], url: 'instrument'},
-        {markerOffset: 35, name: "Castanets", coordinates: [-3.749220, 40.463667], url: 'instrument'},
-        {markerOffset: 35, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument'},
-      ],
+      markers: Instruments,
 
       width: window.innerWidth,
       center: [0,20],
@@ -91,8 +87,8 @@ class Home extends Component {
   // METHODS
 
   handleClickMarker(marker)  {
-    const url = marker.url;
-    this.props.history.push(url);
+    const url = marker.id;
+    this.props.history.push({pathname: `instrument/${url}`, state: {id: url}});
     window.scrollTo(0, 0);
 
   }
@@ -167,7 +163,7 @@ class Home extends Component {
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
-                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
                 ))}
                 </div>
                 <Motion
@@ -232,10 +228,10 @@ class Home extends Component {
                               opacity: 0.9,
                             }}
                           />
-                          <image width="50" height="50" x="-20" y="-40" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
+                          <image width="50" height="50" x="-20" y="-40" href={marker.thumbnail} clip-path="url(#cut-off-bottom)"></image>
                           <text
                             textAnchor="middle"
-                            y={marker.markerOffset}
+                            y="35"
                             style={{
                                 fontFamily: "Roboto, sans-serif",
                                 fill: Colors.text,
@@ -243,7 +239,7 @@ class Home extends Component {
                                 fontWeight: 'bold'
                             }}
                           >
-                            {marker.name}
+                            {marker.title}
                           </text>
                         </Marker>
 
@@ -332,7 +328,7 @@ class Home extends Component {
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
-                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
                   ))}
                 </div>
                 <Motion
@@ -392,15 +388,15 @@ class Home extends Component {
                                 cy={0}
                                 r={15}
                                 style={{
-                                  stroke: Colors.tertiary,
+                                  stroke: Colors.text,
                                   strokeWidth: 3,
                                   opacity: 0.9,
                                 }}
                               />
-                              <image width="20" height="20" x="-10" y="-10" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
+                              <image width="20" height="20" x="-10" y="-10" href={marker.thumbnail} clip-path="url(#cut-off-bottom)"></image>
                               <text
                                 textAnchor="middle"
-                                y={marker.markerOffset}
+                                y="35"
                                 style={{
                                   fontFamily: "Roboto, sans-serif",
                                   fill: Colors.text,
@@ -408,7 +404,7 @@ class Home extends Component {
                                   fontWeight: 'bold'
                                 }}
                               >
-                                {marker.name}
+                                {marker.title}
                               </text>
                             </Marker>
                           ))}
@@ -500,7 +496,7 @@ const Header = styled.div`
     height: auto;
     padding: 1rem;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(85, 11, 184, 0.6);
     
   }
   
@@ -525,15 +521,15 @@ const Header = styled.div`
     }
   }
   .title {
-    color: ${Colors.secondary};
+    color: ${Colors.text};
     font-family: ${Fonts.title};
     text-transform: uppercase;
     font-size: 4.58rem;
     margin-bottom: 3.5rem;
   }
   .subtitle {
-    color: ${Colors.tertiary};
-    font-family: ${Fonts.secondary};
+    color: ${Colors.text};
+    font-family: ${Fonts.subtitle};
     font-size: 2.3rem;
     font-weight: 200;
   }
@@ -582,7 +578,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
@@ -624,6 +620,7 @@ const Sectionmap = styled.div`
   .heading {
     margin-bottom: 3rem;
     position: relative;
+    padding: 2rem 0;
   }
   
   .heading-title{
@@ -649,7 +646,7 @@ const Sectionmap = styled.div`
   background-color: ${Colors.fourth};
   position: absolute;
   right: 3rem;
-  top: 1rem;
+  top: 3rem;
   z-index: -1;
  
 }
