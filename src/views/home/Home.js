@@ -29,6 +29,15 @@ import thumbnail from '../../assets/img/background_home.jpg';
 import Footer from "../../components/footer/Footer";
 import ExoButton from "../../components/button/Button";
 
+// INSTRUMENTS
+
+import castanets from '../../assets/img/instruments/Castanet.png';
+import koto from '../../assets/img/instruments/koto.png';
+import theremin from '../../assets/img/instruments/theremine.png';
+import sitar from '../../assets/img/instruments/sitar.png';
+import dulcimer from '../../assets/img/instruments/dulcimer.png';
+import banjo from '../../assets/img/instruments/banjo.png';
+
 
 //VIDEO
 import bgVideo from '../../assets/video/exo.mp4';
@@ -54,12 +63,12 @@ class Home extends Component {
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: [
-        {markerOffset: 35, name: "Theremine", coordinates: [67.075459,37.933009], url: 'instrument'},
-        {markerOffset: 35, name: "Sitar", coordinates: [78.962880, 20.593684], url: 'instrument'},
-        {markerOffset: 35, name: "Dulcimer", coordinates: [12.340171, 62.278648], url: 'instrument'},
-        {markerOffset: 35, name: "Banjo", coordinates: [-95.712891, 37.090240], url: 'instrument'},
-        {markerOffset: 35, name: "Castanets", coordinates: [-3.749220, 40.463667], url: 'instrument'},
-        {markerOffset: 35, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument'},
+        {markerOffset: 35, name: "Theremine", coordinates: [67.075459,37.933009], url: 'instrument', image: theremin},
+        {markerOffset: 35, name: "Sitar", coordinates: [78.962880, 20.593684], url: 'instrument', image: sitar },
+        {markerOffset: 35, name: "Dulcimer", coordinates: [12.340171, 62.278648], url: 'instrument', image: dulcimer},
+        {markerOffset: 35, name: "Banjo", coordinates: [-95.712891, 37.090240], url: 'instrument', image: banjo},
+        {markerOffset: 35, name: "Castanets", coordinates: [-3.749220, 40.463667], url: 'instrument', image: castanets},
+        {markerOffset: 35, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument', image: koto},
       ],
 
       width: window.innerWidth,
@@ -232,7 +241,7 @@ class Home extends Component {
                               opacity: 0.9,
                             }}
                           />
-                          <image width="50" height="50" x="-20" y="-40" href={thumbnail} clip-path="url(#cut-off-bottom)"></image>
+                          <image width="50" height="50" x="-20" y="-40" href={marker.image} clip-path="url(#cut-off-bottom)"></image>
                           <text
                             textAnchor="middle"
                             y={marker.markerOffset}
@@ -500,7 +509,7 @@ const Header = styled.div`
     height: auto;
     padding: 1rem;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(85, 11, 184, 0.6);
     
   }
   
@@ -525,15 +534,15 @@ const Header = styled.div`
     }
   }
   .title {
-    color: ${Colors.secondary};
+    color: ${Colors.text};
     font-family: ${Fonts.title};
     text-transform: uppercase;
     font-size: 4.58rem;
     margin-bottom: 3.5rem;
   }
   .subtitle {
-    color: ${Colors.tertiary};
-    font-family: ${Fonts.secondary};
+    color: ${Colors.text};
+    font-family: ${Fonts.subtitle};
     font-size: 2.3rem;
     font-weight: 200;
   }
