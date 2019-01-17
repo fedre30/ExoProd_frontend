@@ -256,6 +256,9 @@ const ControlePlayerStyle = styled.div
         vertical-align: middle
         margin: 0 24px;
     }
+    .studio-btn-playing[disabled]{
+        cursor: default;
+    }
     .studio-btn-playing img {
         width: 61px;
         height: 61px;
