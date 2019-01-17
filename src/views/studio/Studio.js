@@ -180,7 +180,7 @@ const StudioComponent = styled.div
   #title {
     text-align: center;
     font-size: 18px;
-    margin-bottom:16px;
+    margin-bottom: 8px;
     margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -188,6 +188,7 @@ const StudioComponent = styled.div
   @media screen and (min-width: 768px) {
     #title {
       text-align: left;
+      margin-bottom: 16px;
     }
   }
   .ui.button.studio-btn-audio.mobile {

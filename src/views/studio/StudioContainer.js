@@ -14,25 +14,27 @@ class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
     artist: "COLDPLAY",
+    steps:['melodie','accords','basse','percussion','fin'],
     selected:[[],[],[],[]],
-    data: [
+    data:
       [
-         {
-         name:"Guzheng",
-         id:'15656546',
-         img: require('../../assets/img/instruments/Guzheng.png'),
-         details: "détail",
-         sound:require('../../assets/sounds/Bass_guzheng.wav')
-         },
-         {
-         name:"Pipa",
-         id:'54599494949',
-         img: require('../../assets/img/instruments/pipa.png'),
-         details: "détail",
-         sound:require('../../assets/sounds/Bass_pipa.wav')
-         },
-     ],
-     [
+        [
+          {
+          name:"Sitar",
+          id: '15656546',
+          img: require('../../assets/img/instruments/sitar.png'),
+          details:'détail',
+          sound:require('../../assets/sounds/Melody_sitar.wav')
+          },
+          {
+          name:"Theremine",
+          id:'54599494949',
+          img: require('../../assets/img/instruments/theremine.png'),
+          details: "détail",
+          sound:require('../../assets/sounds/Melody_theremin.wav')
+          }
+        ],
+      [
          {
          name:"Dulcimer",
          id:'15656546',
@@ -46,7 +48,23 @@ class StudioContainer extends React.Component {
          img: require('../../assets/img/instruments/koto.png'),
          details: "détail",
          sound:require('../../assets/sounds/Chords_koto.wav')
-         },
+         }
+     ],
+     [
+      {
+      name:"Guzheng",
+      id:'15656546',
+      img: require('../../assets/img/instruments/Guzheng.png'),
+      details: "détail",
+      sound:require('../../assets/sounds/Bass_guzheng.wav')
+      },
+      {
+      name:"Pipa",
+      id:'54599494949',
+      img: require('../../assets/img/instruments/pipa.png'),
+      details: "détail",
+      sound:require('../../assets/sounds/Bass_pipa.wav')
+      }
      ],
      [
          {
@@ -62,24 +80,8 @@ class StudioContainer extends React.Component {
          img: require('../../assets/img/instruments/Castanet.png'),
          details: "détail",
          sound:require('../../assets/sounds/Drums_castanets.wav')
-         },
-     ],
-     [
-         {
-         name:"Sitar",
-         id: '15656546',
-         img: require('../../assets/img/instruments/sitar.png'),
-         details:'détail',
-         sound:require('../../assets/sounds/Melody_sitar.wav')
-         },
-         {
-         name:"Theremine",
-         id:'54599494949',
-         img: require('../../assets/img/instruments/theremine.png'),
-         details: "détail",
-         sound:require('../../assets/sounds/Melody_theremin.wav')
-         },
-     ]                        
+         }
+     ]                 
    ],
     loading:true,
     index:0,
@@ -173,6 +175,7 @@ class StudioContainer extends React.Component {
       previous={this.previous}
       />
       <Step
+      steps={this.state.steps}
       index={index}
       />
       <Responsive>

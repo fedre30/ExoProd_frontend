@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Map from "./Map";
+import Map from "./About";
 import API from '../../helpers/api'
 
-class MapContainer extends React.Component {
+class AboutContainer extends React.Component {
   state = {
 
   }
@@ -16,4 +16,4 @@ class MapContainer extends React.Component {
     return <Map />;
   }
 }
-export default withRouter(MapContainer);
+export default withRouter(AboutContainer);

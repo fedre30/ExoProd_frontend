@@ -1,5 +1,7 @@
 import React,{ Component} from 'react';
 import styled from 'styled-components';
+import play from '../../assets/img/play.svg';
+import pause from '../../assets/img/pause.svg';
 import oval from '../../assets/img/ovale-dotted.png';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
@@ -153,9 +155,13 @@ class FinalMix extends Component {
         return(
             <FinalMixContainer>
                 <div className="display-instrument-container">
-                    <div className="display-instrument">
-
-                    </div>
+                    <button 
+                    className="display-instrument"
+                    disabled={checkmusics ? false : true}
+                    onClick={this.handlePlay} 
+                    >
+                        <img src={controller.playing ? pause : play }/>
+                    </button>
                     <img src={oval} alt=''/>
                 </div>
                 <div className="ControlePlayer-container">
@@ -182,14 +188,13 @@ class FinalMix extends Component {
                     icon='info' 
                     size='large'  
                     /> 
-                    <Button
-                    className="studio-btn-audio mobile" 
-                    circular
+                    <button
+                    className="studio-btn-playing mobile"
                     disabled={checkmusics ? false : true}
-                    icon={controller.playing ? 'pause' : 'play' } 
-                    size='huge'
                     onClick={this.handlePlay} 
-                    />
+                    >
+                        <img src={controller.playing ? pause : play }/>
+                    </button>
                     <Button
                     className="studio-btn-audio mobile" 
                     circular
@@ -265,21 +270,53 @@ flex-direction: column;
     max-width: 300px;
     justify-content: space-around;
 }
+.display-instrument i{
+    color:white;
+}
+.studio-btn-playing{
+    border:0;
+    outline:0;
+    cursor:pointer;
+    background:none;
+}
+.studio-btn-playing img {
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+}
 .display-instrument {
     position: relative;
     z-index: 1;
-    width: 200px;
-    height: 200px;
+    border: 0;
+    outline:0;
+    cursor: pointer;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     border-radius: 50%;
-    background-color: rgba(100,100,100,0.39);
     margin: 0 auto;
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    overflow: hidden;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+    background:0;
+    width: 200px;
+    height: 200px;
+    min-width:200px;
+    min-height: 200px;
+    width: 30vw;
+    height: 30vw;
+}
+
+.display-instrument-container img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    min-width: 280px;
+    min-height: 240px;
+    transform: translate(-50%,-50%);
+    width:24vw;
+    height:24vw;
+}
   @media screen and (min-width:768px) {
     .display-instrument {
       min-width: 320px;
@@ -288,7 +325,6 @@ flex-direction: column;
       height:20vw;
     }
     .display-instrument-container img {
-        position: absolute;
         top:50%;
         left:50%;
         min-width: 380px;
@@ -343,6 +379,7 @@ flex-direction: column;
         background: rgba(0, 0, 0, 0);
         z-index: 2;
     }
+}
 `
 
 export default FinalMix;

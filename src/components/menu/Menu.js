@@ -14,7 +14,7 @@ class Menu extends Component {
         {
           id: 0,
           name: 'A propos',
-          link: '/'
+          link: '/about'
         },
         {
           id: 1,
