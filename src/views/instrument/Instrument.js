@@ -7,11 +7,11 @@ import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
 import Footer from "../../components/footer/Footer";
-import Sound from 'react-sound';
 import Button from "../../components/button/Button";
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../../styles/animation.css';
 import YouTube from 'react-youtube';
+import {withRouter} from 'react-router-dom';
 
 import Instruments from '../../helpers/api.js';
 
@@ -29,7 +29,7 @@ class Instrument extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,
+      id: 2,
       playing: false,
       width: window.innerWidth
     }
@@ -44,11 +44,9 @@ class Instrument extends Component {
     if (audio.paused) {
       audio.play();
       this.setState(() => ({ playing: true }))
-      console.log(this.state.playing);
     } else {
       audio.pause();
       this.setState(() => ({ playing: false }))
-      console.log(this.state.playing);
     }
 
   }
@@ -93,13 +91,14 @@ class Instrument extends Component {
 
     const { width } = this.state;
     const isMobile = width <= 500;
+    console.log(this.props);
     return (
       <CardComponent>
         <Header>
           <Menu/>
           <div className="heading">
-            <div className="pronunciation">{Instruments[this.state.id].pronunciation}</div>
-            <div className="title">{Instruments[this.state.id].title}</div>
+            <div className="pronunciation">{Instruments[this.props.location.state.id].pronunciation}</div>
+            <div className="title">{Instruments[this.props.location.state.id].title}</div>
           </div>
           <ScrollAnimation animateIn='fade-left'>
             <div className="infos">
@@ -108,28 +107,28 @@ class Instrument extends Component {
                   <div className="infos-item">
                     <div className="infos-tag">CLASSIFICATION</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {Instruments[this.state.id].type} </div>
+                    <div className="infos-data"> {Instruments[this.props.location.state.id].type} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">FORMES</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {Instruments[this.state.id].shape} </div>
+                    <div className="infos-data"> {Instruments[this.props.location.state.id].shape} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">ORIGINES</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {Instruments[this.state.id].origin} </div>
+                    <div className="infos-data"> {Instruments[this.props.location.state.id].origin} </div>
                   </div>
                 </li>
                 <li>
                   <div className="infos-item">
                     <div className="infos-tag">ANNEE</div>
                     <div className="dots"></div>
-                    <div className="infos-data"> {Instruments[this.state.id].year} </div>
+                    <div className="infos-data"> {Instruments[this.props.location.state.id].year} </div>
                   </div>
                 </li>
               </ul>
@@ -138,7 +137,7 @@ class Instrument extends Component {
 
           <div className="header-thumbnail">
             <ScrollAnimation animateIn='fade-right'>
-              <Thumbnail image={Instruments[this.state.id].mainImage}/>
+              <Thumbnail image={Instruments[this.props.location.state.id].mainImage}/>
             </ScrollAnimation>
           </div>
 
@@ -146,11 +145,11 @@ class Instrument extends Component {
         <DescriptionSection>
           <Grid columns={12}>
             <Grid.Column computer={6} mobile={16}>
-              <img src={Instruments[this.state.id].secondaryImage} alt=""/>
+              <img src={Instruments[this.props.location.state.id].secondaryImage} alt=""/>
             </Grid.Column>
             <Grid.Column computer={9} mobile={16}>
               <ScrollAnimation animateIn="paragraph-right">
-                <Paragraph title={Instruments[this.state.id].description.title} text={Instruments[this.state.id].description.text}
+                <Paragraph title={Instruments[this.props.location.state.id].description.title} text={Instruments[this.props.location.state.id].description.text}
                            direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
@@ -162,14 +161,14 @@ class Instrument extends Component {
               <ScrollAnimation animateIn="fade-left">
                 <img className="triangle" src={triangle} alt=""/>
                 <div className="player-container">
-                  <div className="player-text">Cliquez ici pour écouter le {Instruments[this.state.id].title}</div>
+                  <div className="player-text">Cliquez ici pour écouter le {Instruments[this.props.location.state.id].title}</div>
                   <div className="button-player" onClick={this.handlePlay}><img src={this.state.playing ? pause: play} alt=""/>
 
                   </div>
 
                   <div className="player">
                     <audio ref="audio">
-                      <source src={Instruments[this.state.id].sound.filePath} type={Instruments[this.state.id].sound.type}></source>
+                      <source src={Instruments[this.props.location.state.id].sound.filePath} type={Instruments[this.props.location.state.id].sound.type}></source>
                     </audio>
 
                   </div>
@@ -177,9 +176,9 @@ class Instrument extends Component {
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">"Fun Facts" sur le {Instruments[this.state.id].title}</div>
+              <div className="artist-title">"Fun Facts" sur le {Instruments[this.props.location.state.id].title}</div>
               <ul className="artist-list">
-                {Instruments[this.state.id].facts.map(artist =>
+                {Instruments[this.props.location.state.id].facts.map(artist =>
                   (
                     <li className="artist-item">{artist}</li>
                   )
@@ -190,7 +189,7 @@ class Instrument extends Component {
         </SoundSection>
         <VideoSection>
           <YouTube
-            videoId={Instruments[this.state.id].videoUrl}
+            videoId={Instruments[this.props.location.state.id].videoUrl}
             opts={isMobile ? mobileOpts : desktopOpts}
             onReady={this._onReady}
           />
@@ -483,4 +482,4 @@ text-align: center;
 `
 
 
-export default Instrument;
+export default withRouter(Instrument);

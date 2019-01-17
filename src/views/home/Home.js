@@ -31,13 +31,7 @@ import ExoButton from "../../components/button/Button";
 
 // INSTRUMENTS
 
-import castanets from '../../assets/img/instruments/Castanet.png';
-import koto from '../../assets/img/instruments/koto.png';
-import theremin from '../../assets/img/instruments/theremine.png';
-import sitar from '../../assets/img/instruments/sitar.png';
-import dulcimer from '../../assets/img/instruments/dulcimer.png';
-import banjo from '../../assets/img/instruments/banjo.png';
-
+import Instruments  from '../../helpers/api';
 
 //VIDEO
 import bgVideo from '../../assets/video/exo.mp4';
@@ -62,14 +56,7 @@ class Home extends Component {
         direction: "right"
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
-      markers: [
-        {markerOffset: 35, name: "Theremine", coordinates: [67.075459,37.933009], url: 'instrument', image: theremin},
-        {markerOffset: 35, name: "Sitar", coordinates: [78.962880, 20.593684], url: 'instrument', image: sitar },
-        {markerOffset: 35, name: "Dulcimer", coordinates: [12.340171, 62.278648], url: 'instrument', image: dulcimer},
-        {markerOffset: 35, name: "Banjo", coordinates: [-95.712891, 37.090240], url: 'instrument', image: banjo},
-        {markerOffset: 35, name: "Castanets", coordinates: [-3.749220, 40.463667], url: 'instrument', image: castanets},
-        {markerOffset: 35, name: "Koto", coordinates: [139.691706, 35.689487], url: 'instrument', image: koto},
-      ],
+      markers: Instruments,
 
       width: window.innerWidth,
       center: [0,20],
@@ -100,8 +87,8 @@ class Home extends Component {
   // METHODS
 
   handleClickMarker(marker)  {
-    const url = marker.url;
-    this.props.history.push(url);
+    const url = marker.id;
+    this.props.history.push({pathname: `instrument/${url}`, state: {id: url}});
     window.scrollTo(0, 0);
 
   }
@@ -176,7 +163,7 @@ class Home extends Component {
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
-                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
                 ))}
                 </div>
                 <Motion
@@ -241,7 +228,7 @@ class Home extends Component {
                               opacity: 0.9,
                             }}
                           />
-                          <image width="50" height="50" x="-20" y="-40" href={marker.image} clip-path="url(#cut-off-bottom)"></image>
+                          <image width="50" height="50" x="-20" y="-40" href={marker.thumbnail} clip-path="url(#cut-off-bottom)"></image>
                           <text
                             textAnchor="middle"
                             y="35"
@@ -252,7 +239,7 @@ class Home extends Component {
                                 fontWeight: 'bold'
                             }}
                           >
-                            {marker.name}
+                            {marker.title}
                           </text>
                         </Marker>
 
@@ -341,7 +328,7 @@ class Home extends Component {
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
-                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.name}</Button>
+                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
                   ))}
                 </div>
                 <Motion
