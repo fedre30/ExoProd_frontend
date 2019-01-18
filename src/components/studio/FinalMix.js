@@ -17,6 +17,7 @@ class FinalMix extends Component {
         total: '0:00',
         current: '0:00',
         volume: 100,
+        isLoadingEnd: false,
     }
     /**
      * Ce référencer à la formule écrite dans la méthode handleSongPlaying
@@ -37,20 +38,22 @@ class FinalMix extends Component {
         })
     }
     
-    endLoading = ()=>{
-
-        if(this.props.selected.every(elem=> elem.length !== 0)){
-            let option = { audio:new Audio(this.props.selected[0].sound),remove:false};
-            option.audio.addEventListener('loadedmetadata', () => {
-                this.setState({
-                    total: this.convertToTimer(option.audio.duration)
+    endLoading = (endloading)=>{
+        if(endloading){
+            if(this.props.selected.every(elem=> elem.length !== 0)){
+                let option = { audio:new Audio(this.props.selected[0].sound),remove:false};
+                option.audio.addEventListener('loadedmetadata', () => {
+                    this.setState({
+                        total: this.convertToTimer(option.audio.duration)
+                    })
+                    option.audio.remove = true;
                 })
-                option.audio.remove = true;
-            })
-            if(option.remove) option = undefined;
+                if(option.remove) option = undefined;
+            }
+            this.setState({isLoadingEnd:true})
+            this.handleSongFinishedPlaying();
         }
 
-        this.handleSongFinishedPlaying();
     }
     /**
      * Converstion de ma positions en timer
@@ -157,10 +160,10 @@ class FinalMix extends Component {
                 <div className="display-instrument-container">
                     <button 
                     className="display-instrument"
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     onClick={this.handlePlay} 
                     >
-                        <img src={controller.playing ? pause : play }/>
+                        <img src={controller.playing ? pause : play } alt='play button'/>
                     </button>
                     <img src={oval} alt=''/>
                 </div>
@@ -172,7 +175,7 @@ class FinalMix extends Component {
                         min='0'
                         max='100' 
                         step="0.001"
-                        disabled={this.props.selected ? false : true}
+                        disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
@@ -184,106 +187,94 @@ class FinalMix extends Component {
                     <Button
                     className="studio-btn-audio" 
                     circular
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     icon='info' 
                     size='large'  
                     /> 
                     <button
                     className="studio-btn-playing mobile"
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     onClick={this.handlePlay} 
                     >
-                        <img src={controller.playing ? pause : play }/>
+                        <img src={controller.playing ? pause : play } alt='play button'/>
                     </button>
                     <Button
                     className="studio-btn-audio mobile" 
                     circular
-                    disabled={checkmusics ? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd? false : true}
                     icon={controller.isMute ? 'volume off' : 'volume up'} 
                     size='large'
                     onClick={this.handleVolume} 
                     /> 
                 </div>
-                {this.props.selected.map((elem,i)=>
-                    <Sound
-                    key={i}
-                    ignoreMobileRestrictions={true}
-                    url={elem.sound}
-                    playStatus={playStatus}
-                    onPlaying={({position,duration}) => this.handleSongPlaying(position,duration,i)}
-                    onFinishedPlaying={this.handleSongFinishedPlaying}
-                    onLoading={({duration,position}) => this.initPlayer(duration,position,i)}
-                    onLoad={this.endLoading}
-                    autoLoad={true}
-                    position={this.state.positions[i]}
-                    volume={this.state.volume}
-                    />                
-                )}
+                {checkmusics && 
+                    this.props.selected.map((elem,i)=>
+                        <Sound
+                        key={i}
+                        ignoreMobileRestrictions={true}
+                        url={elem.sound}
+                        playStatus={playStatus}
+                        onPlaying={({position,duration}) => this.handleSongPlaying(position,duration,i)}
+                        onFinishedPlaying={this.handleSongFinishedPlaying}
+                        onLoading={({duration,position}) => this.initPlayer(duration,position,i)}
+                        onLoad={({loaded}) => this.endLoading(loaded)}
+                        autoLoad={true}
+                        position={this.state.positions[i]}
+                        volume={this.state.volume}
+                        />                
+                    )
+                }
+ 
             </FinalMixContainer>
         )
     }
 }
 
-const Big = styled.button
-`
-width:51px;
-height:51px;
-border-radius: 50%;
-cursor: pointer;
-border:0;
-outline:0;
-`;
-
-const Little = styled.button
-`
-width:41px;
-height:41px;
-border-radius: 50%;
-border:0;
-outline:0;
-cursor: pointer;
-`;
-
-const FinalMixContainer = styled.div
-`
+const FinalMixContainer = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
 width: 100%;
 height: 100vh;
 flex-direction: column;
+
 .studio-btn-audio {
     transition: all 0.3s ease !important;
     background-color: #741AB0 !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
     color:#FFFCF2 !important;
-  }
+}
+
 .display-instrument-container {
     position: relative;
     width: 100%;
     margin: 5vw 0;
 }
+
 .button-container{
     display:flex;
     align-items:center;
-    width: 30vw;
-    max-width: 300px;
+    width: 200px;
     justify-content: space-around;
 }
+
 .display-instrument i{
     color:white;
 }
+
 .studio-btn-playing{
     border:0;
     outline:0;
     cursor:pointer;
     background:none;
 }
+
 .studio-btn-playing img {
     width: 61px;
     height: 61px;
     border-radius: 50%;
 }
+
 .display-instrument {
     position: relative;
     z-index: 1;
@@ -317,13 +308,44 @@ flex-direction: column;
     width:24vw;
     height:24vw;
 }
-  @media screen and (min-width:768px) {
+
+.ControlePlayer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    margin: 24px 0;
+}
+@media screen and (min-width: 768px){
+    .ControlePlayer-container {
+        margin: 12px 0 6px 0;
+    }
+}
+.ControlePlayer-container p {
+    opacity: 0.7;
+    color: ${Colors.text}
+    font-family: ${Fonts.text};
+    font-size: 14px;
+    margin: 0;
+}
+
+.ControlePlayer-progressbar-container {
+    width: 200px;
+    height: 4px;
+    background: rgba(112, 121, 140, 0.5);
+    margin: 0 16px;
+    border-radius: 50px;
+    position: relative;
+}
+
+@media screen and (min-width:768px) {
     .display-instrument {
       min-width: 320px;
       min-height: 320px;
       width:20vw;
       height:20vw;
     }
+
     .display-instrument-container img {
         top:50%;
         left:50%;
@@ -333,53 +355,33 @@ flex-direction: column;
         width:24vw;
         height:24vw;
     }
-    .ControlePlayer-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:100%;
-        margin: 12px 0 6px 0;
-    }
-    .ControlePlayer-container p {
-        opacity: 0.7;
-        color: ${Colors.text}
-        font-family: ${Fonts.text};
-        font-size: 14px;
-        margin: 0;
-    }
-    .ControlePlayer-progressbar-container {
-        width: 200px;
-        height: 4px;
-        background: rgba(112, 121, 140, 0.5);
-        margin: 0 16px;
-        border-radius: 50px;
-        position: relative;
-    }
-    @media screen and (min-width: 768px) {
-        .ControlePlayer-progressbar-container {
-            min-width: 200px;
-            width:20vw;
-        }       
-    }
-    .ControlePlayer-progressbar-interactive {
-        position: absolute;
-        height: 100%;
-        background: #FFFCF2;
-        left: 0;
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-        z-index: 1;
-    }
-
-    .ControlePlayer-progressbar-interactive_range {
-        width: 100%;
-        position: absolute;
-        height: 100%;
-        left: 0;
-        background: rgba(0, 0, 0, 0);
-        z-index: 2;
-    }
 }
+
+@media screen and (min-width: 768px) {
+    .ControlePlayer-progressbar-container {
+        min-width: 200px;
+        width:20vw;
+    }       
+}
+.ControlePlayer-progressbar-interactive {
+    position: absolute;
+    height: 100%;
+    background: #FFFCF2;
+    left: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    z-index: 1;
+}
+
+.ControlePlayer-progressbar-interactive_range {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 2;
+}
+
 `
 
 export default FinalMix;

@@ -17,10 +17,6 @@ const Previous = ({previous,index}) => {
             <ButtonMobileVTwo onClick={previous}>
                 étape précédente
             </ButtonMobileVTwo>
-            {/*<ButtonMobile onClick={previous}>
-                <img src={require('../../assets/img/back.png')} alt='back' />
-                <img style={{position:'absolute'}} src={require('../../assets/img/mini-ovale-dotted.png')} alt='' />
-            </ButtonMobile>-->*/}
             <ButtonDesktop onClick={previous}>
                 étape précédente
             </ButtonDesktop>
@@ -97,54 +93,7 @@ color:${Colors.text};
     }
 }
 `
-const ButtonMobile = styled.button
-`
-position: relative;
-cursor: pointer;
-border: 1px solid white;
-background: none;
-border:0;
-border-radius: 50%;
-display:flex;
-align-items:center;
-justify-content: center;
 
-
-img:first-child {
-    width:20px;
-    height: 20px;
-    opacity:0.7;
-}
-
-img:first-child{
-    position: absolute;
-    animation: up 2s linear infinite;
-}
-
-
-@media screen and (min-width: 768px){
-    display:none;
-}
-@keyframes up{
-    0% {
-     bottom:-24px;
-     opacity: 0;
-    }
-    10%{
-     opacity: 0;
-    }
-    50%{
-    opacity:0.7;
-    }
-    90% {
-    opacity:0;
-    }
-    100% {
-    bottom: 12px;
-    opacity:0;
-    }
-}
-`
 const ButtonDesktop = styled.button
 `
 display:none;
