@@ -1,10 +1,8 @@
 
 import React, {Component} from "react";
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Colors from '../../styles/colors';
-import {Grid} from 'semantic-ui-react'
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
 import Footer from "../../components/footer/Footer";
@@ -112,7 +110,7 @@ const AboutComponent = styled.div
   position: relative;
   
   @media(max-width: 560px) {
-    height: 500vh;
+    height: auto;
   }
  
 
@@ -163,6 +161,12 @@ const Header = styled.div`
   .heading {
     background: none;
   }
+  .about-section {
+    
+  width: 70%;
+  margin: 10rem 1rem 3rem 5rem;
+    }
+  
     
 `
 ;

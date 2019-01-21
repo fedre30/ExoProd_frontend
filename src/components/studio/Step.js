@@ -12,7 +12,7 @@ const Step = ({index,steps}) => {
                     <h2>Etapes</h2>
             </li>
                 {steps.map((step,i)=>
-                    <li className={`type-list-items ${index >= i ? 'actif' :''}`}>
+                    <li key={i} className={`type-list-items ${index >= i ? 'actif' :''}`}>
                         <label>{i+1}</label>
                         <h3>{step}</h3>
                     </li>
