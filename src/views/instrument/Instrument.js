@@ -303,6 +303,10 @@ const Header = styled.div`
   .heading {
     background: none;
   }
+  
+  .pronunciation {
+    font-size: 4rem;
+  }
     .infos {
       width: 90%;
       height: 50vh;
@@ -327,7 +331,7 @@ padding: 3rem;
   }
   
    @media(max-width: 560px) {
-  height: 130vh;
+  height: auto;
   }
 
 `
@@ -388,6 +392,9 @@ height: 85vh;
 }
 
 @media(max-width: 560px) {
+width: 100%;
+height: auto;
+
   .artist-list {
     display: block;
     margin: 0 auto;
@@ -473,8 +480,14 @@ text-align: center;
 @media(max-width: 560px) {
   width: 100%;
   height: 40vh;
+  
+  .video-title {
+    font-size: 2rem;
+    line-height: 3rem;
+  }
   .video-subtitle {
     font-size: 1rem;
+    
     
   }
   

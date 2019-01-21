@@ -478,7 +478,7 @@ const HomeComponent = styled.div
   position: relative;
   
   @media(max-width: 560px) {
-    height: 500vh;
+    height: auto;
   }
  
 
@@ -580,7 +580,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
