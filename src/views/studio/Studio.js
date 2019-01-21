@@ -29,6 +29,7 @@ class Studio extends Component {
     img:null,
     details:'',
     id:'',
+    isLoadingEnd:true,
     select:{
       name:'',
       img: '',
@@ -44,6 +45,9 @@ class Studio extends Component {
     if(this.buttons[index].classList.contains(className)) {
       this.buttons[index].classList.remove(className)
     }
+  }
+  endloading = (isLoadingEnd) =>{
+    this.setState({isLoadingEnd})
   }
   settiemout = () =>{
     setTimeout(()=>{
@@ -71,7 +75,7 @@ class Studio extends Component {
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
-    if(current_btn.classList.contains('selected')) {
+    if(this.state.isLoadingEnd === false || current_btn.classList.contains('selected')) {
 
       return false;
     }
@@ -85,6 +89,7 @@ class Studio extends Component {
         const select = this.state.instruments[id];
         this.setState(prev=>{
           return{
+            isLoadingEnd: false,
             isSelected: true,
             showInstrument: false,
             select: select,
@@ -113,7 +118,7 @@ class Studio extends Component {
         <Grid className="studio-container">
           <Grid.Row centered columns={3}>
             <Grid.Column mobile={16} tablet={5} computer={5}>
-              <h1 id="title" className='only-mobile'>Mélodie</h1>
+              <h1 id="title" className='only-mobile'>{this.props.step}</h1>
             </Grid.Column>
             <Grid.Column textAlign='center' mobile={16} tablet={6} computer={6}>
               <DisplayInstrument
@@ -131,6 +136,8 @@ class Studio extends Component {
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
               insertsong={true}
+              isLoadingEnd={this.state.isLoadingEnd}
+              endloading={this.endloading}
               reset={this.props.reset}
               checkindex={this.props.checkindex}
               url={protosound}
@@ -144,6 +151,7 @@ class Studio extends Component {
               <button
               key={i} //à référencer quand on map du html (cf react)
               ref={this.selectorButtons} //ma référence me permet de cibler ce button pour récupérer des éléments de celui-ci
+              disabled={this.state.isLoadingEnd ? false : true}
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
               >
@@ -184,6 +192,7 @@ const StudioComponent = styled.div
     margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
+    text-transform: uppercase;
   }
   @media screen and (min-width: 768px) {
     #title {

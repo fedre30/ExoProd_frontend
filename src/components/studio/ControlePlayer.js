@@ -7,7 +7,6 @@ import pause from '../../assets/img/pause.svg';
 import { Grid, Button } from 'semantic-ui-react';
 import Sound from 'react-sound';
 import '../../styles/range.css';
-import PropTypes from 'prop-types';
 
 class ControlePlayer extends Component {
    
@@ -43,21 +42,23 @@ class ControlePlayer extends Component {
             duration,
         })
     }
-    
-    endLoading = ()=>{
 
-        if(this.props.select.sound !== null){
-            let option = { audio:new Audio(this.props.select.sound),remove:false};
-            option.audio.addEventListener('loadedmetadata', () => {
-                this.setState({
-                    total: this.convertToTimer(option.audio.duration)
+    endLoading = (loading)=>{
+        if(loading) {
+            console.log('chargement terminé')
+            if(this.props.select.sound !== null){
+                let option = { audio:new Audio(this.props.select.sound),remove:false};
+                option.audio.addEventListener('loadedmetadata', () => {
+                    this.setState({
+                        total: this.convertToTimer(option.audio.duration)
+                    })
+                    option.audio.remove = true;
                 })
-                option.audio.remove = true;
-            })
-            if(option.remove) option = undefined;
+                if(option.remove) option = undefined;
+            }
+            this.props.endloading(true);
+            this.handleSongFinishedPlaying();
         }
-
-        this.handleSongFinishedPlaying();
     }
     /**
      * Converstion de ma position en timer
@@ -143,6 +144,7 @@ class ControlePlayer extends Component {
             playing: playStatus === Sound.status.PLAYING,
             isMute: volume === 0
         }
+
         return (
             <ControlePlayerStyle>
                 <div className="ControlePlayer-container">
@@ -153,7 +155,7 @@ class ControlePlayer extends Component {
                         min='0'
                         max='100' 
                         step="0.001"
-                        disabled={this.props.selected ? false : true}
+                        disabled={this.props.selected && this.props.isLoadingEnd ? false : true}
                         value={progressbar}
                         onChange={this.handleValueRange}
                         className="ControlePlayer-progressbar-interactive_range"/>
@@ -166,23 +168,23 @@ class ControlePlayer extends Component {
                         <Button 
                         className="studio-btn-audio mobile"
                         circular
-                        disabled={this.props.selected ? false : true}
+                        disabled={this.props.selected && this.props.isLoadingEnd ? false : true}
                         icon='info' 
                         size='large'
                         />
 
                         <button
                         className="studio-btn-playing mobile"
-                        disabled={this.props.selected ? false : true}
+                        disabled={this.props.selected && this.props.isLoadingEnd ? false : true}
                         onClick={this.handlePlay} 
                         >
-                            <img style={{opacity: this.props.selected ? '1' : '0.5'}} src={controller.playing ? pause : play }/>
+                            <img style={{opacity: this.props.selected && this.props.isLoadingEnd ? '1' : '0.5'}} src={controller.playing ? pause : play } alt='play button'/>
                         </button>
 
                         <Button 
                         className="studio-btn-audio mobile" 
                         circular
-                        disabled={this.props.selected ? false : true}
+                        disabled={this.props.selected && this.props.isLoadingEnd ? false : true}
                         icon={controller.isMute ? 'volume off' : 'volume up'} 
                         size='large'
                         onClick={this.handleVolume}
@@ -196,84 +198,81 @@ class ControlePlayer extends Component {
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
                     onFinishedPlaying={this.handleSongFinishedPlaying}
                     onLoading={({duration,position}) => this.initPlayer(duration,position)}
-                    onLoad={this.endLoading}
+                    onLoad={({loaded}) =>this.endLoading(loaded)}
                     playFromPosition={this.test}
                     autoLoad={true}
                     position={this.state.position}
                     volume={this.state.volume}
-                    />                   
+                    />
             </ControlePlayerStyle>    
         )
     }
 };
 
+const ControlePlayerStyle = styled.div`
+.ControlePlayer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    margin: 12px 0 6px 0;
+}
 
-const ControlePlayerStyle = styled.div
-    `
-    .ControlePlayer-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:100%;
-        margin: 12px 0 6px 0;
-    }
-
-    .ControlePlayer-container p {
-        opacity: 0.7;
-        color: ${Colors.text}
-        font-family: ${Fonts.text};
-        font-size: 14px;
-        margin: 0;
-    }
+.ControlePlayer-container p {
+    opacity: 0.7;
+    color: ${Colors.text}
+    font-family: ${Fonts.text};
+    font-size: 14px;
+    margin: 0;
+}
+.ControlePlayer-progressbar-container {
+    width: 200px;
+    height: 4px;
+    background: rgba(112, 121, 140, 0.5);
+    margin: 0 16px;
+    border-radius: 50px;
+    position: relative;
+ }
+ @media screen and (min-width: 768px) {
     .ControlePlayer-progressbar-container {
-        width: 200px;
-        height: 4px;
-        background: rgba(112, 121, 140, 0.5);
-        margin: 0 16px;
-        border-radius: 50px;
-        position: relative;
-    }
-    @media screen and (min-width: 768px) {
-        .ControlePlayer-progressbar-container {
-            min-width: 200px;
-            width:20vw;
-        }       
-    }
-    .ControlePlayer-progressbar-interactive {
-        position: absolute;
-        height: 100%;
-        background: #FFFCF2;
-        left: 0;
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-        z-index: 1;
-    }
-    .studio-btn-playing{
-        border:0;
-        outline:0;
-        cursor:pointer;
-        background:none;
-        vertical-align: middle
-        margin: 0 24px;
-    }
-    .studio-btn-playing[disabled]{
-        cursor: default;
-    }
-    .studio-btn-playing img {
-        width: 61px;
-        height: 61px;
-        border-radius: 50%;
-        transition: opacity 400ms ease;
-    }
-    .ControlePlayer-progressbar-interactive_range {
-        width: 100%;
-        position: absolute;
-        height: 100%;
-        left: 0;
-        background: rgba(0, 0, 0, 0);
-        z-index: 2;
-    }
-    `
-;
+        min-width: 200px;
+        width:20vw;
+    }       
+ }
+ .ControlePlayer-progressbar-interactive {
+    position: absolute;
+    height: 100%;
+    background: #FFFCF2;
+    left: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    z-index: 1;
+ }
+ .studio-btn-playing{
+    border:0;
+    outline:0;
+    cursor:pointer;
+    background:none;
+    vertical-align: middle
+    margin: 0 24px;
+}
+.studio-btn-playing[disabled]{
+    cursor: default;
+}
+.studio-btn-playing img {
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+    transition: opacity 400ms ease;
+}
+.ControlePlayer-progressbar-interactive_range {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 2;
+}
+`;
 
 export default ControlePlayer;

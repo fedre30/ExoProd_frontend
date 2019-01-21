@@ -176,7 +176,7 @@ class Instrument extends Component {
               </ScrollAnimation>
             </Grid.Column>
             <Grid.Column computer={9} mobile={12}>
-              <div className="artist-title">"Fun Facts" sur le {Instruments[this.props.location.state.id].title}</div>
+              <div className="artist-title"><i>Fun Facts</i> sur le {Instruments[this.props.location.state.id].title}</div>
               <ul className="artist-list">
                 {Instruments[this.props.location.state.id].facts.map(artist =>
                   (
@@ -303,6 +303,10 @@ const Header = styled.div`
   .heading {
     background: none;
   }
+  
+  .pronunciation {
+    font-size: 4rem;
+  }
     .infos {
       width: 90%;
       height: 50vh;
@@ -327,7 +331,7 @@ padding: 3rem;
   }
   
    @media(max-width: 560px) {
-  height: 130vh;
+  height: auto;
   }
 
 `
@@ -388,6 +392,9 @@ height: 85vh;
 }
 
 @media(max-width: 560px) {
+width: 100%;
+height: auto;
+
   .artist-list {
     display: block;
     margin: 0 auto;
@@ -473,8 +480,14 @@ text-align: center;
 @media(max-width: 560px) {
   width: 100%;
   height: 40vh;
+  
+  .video-title {
+    font-size: 2rem;
+    line-height: 3rem;
+  }
   .video-subtitle {
     font-size: 1rem;
+    
     
   }
   
