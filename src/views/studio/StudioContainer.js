@@ -187,12 +187,14 @@ class StudioContainer extends React.Component {
           reset={this.resetSong}
           instruments={element}
           checkindex={i===index}
-          title={element.title}
-          artist={element.artist}
+          title={this.state.title}
+          artist={this.state.artist}
           handleSelected={this.handleSelected}
           />         
           ))}
           <FinalMix
+          title={this.state.title}
+          artist={this.state.artist}
           selected={this.state.selected}
           />
         </div>
