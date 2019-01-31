@@ -39,7 +39,7 @@ class StudioContainer extends React.Component {
          name:"Dulcimer",
          id:'15656546',
          img: require('../../assets/img/instruments/dulcimer.png'),
-         details: "",
+         details: "détail",
          sound:require('../../assets/sounds/Chords_dulcimer.wav')
          },
          {
