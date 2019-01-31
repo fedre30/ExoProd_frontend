@@ -227,7 +227,7 @@ const MenuComponent = styled.div
     
     
     .lineOpen-1{
-      transform: rotate(45deg) translate(-1px , 7px);
+      transform: rotate(45deg) translate(-2px , 7px);
       transition-duration: 0.5s;
       transform-origin: left;
     } 

@@ -60,7 +60,9 @@ class Home extends Component {
 
       width: window.innerWidth,
       center: [0,20],
-      zoom: 1
+      zoom: 1,
+      modal: '',
+      show: false
     }
 
     this.handleZoomIn = this.handleZoomIn.bind(this)
@@ -250,7 +252,6 @@ class Home extends Component {
                 </Motion>
               </div>
             </Sectionmap>
-
           </ScrollAnimation>
           <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`} duration={0.6} delay={0.2}>
             <Firstsection>
@@ -407,6 +408,7 @@ class Home extends Component {
                                 {marker.title}
                               </text>
                             </Marker>
+
                           ))}
                         </Markers>
                       </ZoomableGroup>
@@ -476,7 +478,7 @@ const HomeComponent = styled.div
   position: relative;
   
   @media(max-width: 560px) {
-    height: 500vh;
+    height: auto;
   }
  
 
@@ -578,7 +580,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 70vh;
+  height: 100vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
