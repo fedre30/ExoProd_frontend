@@ -20,14 +20,15 @@ import geography from '../../utils/topoJSON';
 import { Motion, spring } from "react-motion"
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../../styles/animation.css';
+import Footer from "../../components/footer/Footer";
+import ExoButton from "../../components/button/Button";
 
 
 //IMAGES
 import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
-import Footer from "../../components/footer/Footer";
-import ExoButton from "../../components/button/Button";
+import fingers from '../../assets/img/touch-and-scroll.png';
 
 // INSTRUMENTS
 
@@ -317,20 +318,24 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                  <Button onClick={this.handleZoomIn}>
+                  <button className="instrument-button" onClick={this.handleZoomIn}>
                     { "Zoom in" }
-                  </Button>
-                  <Button onClick={this.handleZoomOut}>
+                  </button>
+                  <button className="instrument-button" onClick={this.handleZoomOut}>
                     { "Zoom out" }
-                  </Button>
-                  <Button onClick={this.handleReset}>
+                  </button>
+                  <button className="instrument-button" onClick={this.handleReset}>
                     { "Reset" }
-                  </Button>
+                  </button>
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
-                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
+                    <button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</button>
                   ))}
+                </div>
+                <div className="map-help">
+                  <div className="map-help-text">Explorez la map</div>
+                  <div className="map-fingers"><img src={fingers} alt=""/></div>
                 </div>
                 <Motion
                   defaultStyle={{
@@ -346,7 +351,7 @@ class Home extends Component {
                 >
                   {({zoom,x,y}) => (
                     <ComposableMap projectionConfig={{
-                      scale: 70
+                      scale: 130
                     }} width={360} height={300} projection="robinson">
                       <ZoomableGroup center={[x,y]} zoom={zoom}>
                         <Geographies geography={geography}>
@@ -580,7 +585,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
@@ -593,6 +598,7 @@ const Firstsection = styled.div`
   }
   
   @media(max-width: 560px) {
+    height: auto;
     padding: 2rem;
   }
   
@@ -602,14 +608,14 @@ const Firstsection = styled.div`
 
 const Secondsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
   
   @media(max-width: 560px) {
     padding: 2rem;
-    height: 120vh;
+    height: auto;
   }
   
 
@@ -662,13 +668,11 @@ const Sectionmap = styled.div`
 }
 
 
-.instrument-button {
-  margin: 2rem 0; !important;
-}
   
   
  
   @media(max-width: 560px) {
+  height: auto;
   
   .heading-title {
     font-size: 1.7rem;
@@ -684,6 +688,37 @@ const Sectionmap = styled.div`
   .map {
     display: block;
   }
+  
+  
+.instrument-button {
+  width: 100px;
+  height: 50px;
+  background-color: ${Colors.text};
+  color: ${Colors.primary};
+  font-family: ${Fonts.subtitle};
+  border: 1px solid ${Colors.secondary};
+}
+
+.map-help {
+width: 100%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin: 2rem 0;
+
+}
+
+.map-help-text {
+color: ${Colors.text};
+font-size: 1.5rem;
+}
+
+.map-fingers{
+  width: 100px;
+  img {
+    width: 100%;
+  }
+}
     
   }
   
