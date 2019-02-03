@@ -1,9 +1,17 @@
 import React from 'react';
+import '../../styles/animation.css';
 import Fonts from '../../styles/fonts';
 import styled from 'styled-components';
+import { CSSTransition } from 'react-transition-group';
 
-const Modal = (props) => {
+const Modal = ({modal,handlerModal}) => {
     return (
+        <CSSTransition
+        in={modal}
+        timeout={300}
+        classNames="modal"
+        unmountOnExit
+        >
         <ModalComponent>
             <div className="modal-wrap">
                 <h3>Comment jouer ?</h3>
@@ -12,9 +20,10 @@ const Modal = (props) => {
                     <li>Choisissez un nouvel instrument pour customiser votre morceaux selon vos envies</li>
                     <li>Ecoutez le résultat final et enregistrer votre propre création !</li>
                 </ul>
-                <button>J'ai compris</button>
+                <button onClick={handlerModal}>J'ai compris</button>
             </div>
         </ModalComponent>
+        </CSSTransition>
     )
 };
 
@@ -24,7 +33,6 @@ height: 100vh;
 width: 100%;
 z-index: 99999999;
 background: rgba(0,0,0,0.4);
-
 .modal-wrap {
     position: relative;
     top: 50%;

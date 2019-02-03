@@ -122,11 +122,14 @@ class StudioContainer extends React.Component {
           check: true
       })   
     }
-      this.setState(prevState=>{
-        return{
-          index: prevState.index -=1
-        }
-      })
+    this.setState(prevState=> {
+      return {
+        index: prevState.index -=1
+      }
+    })
+  }
+  handlerModal = () => {
+    this.setState((prevState)=>({modal: !prevState.modal}))
   }
   isSelectedempty(){
     const {selected,index} = this.state;
@@ -168,10 +171,15 @@ class StudioContainer extends React.Component {
   }
 
   render() {
-    const {data,index,selected,check} = this.state;
+    const {data,index,selected,check, modal} = this.state;
     return (
     <div>
       <Menu/>
+
+        <Modal
+        modal={modal}
+        handlerModal={this.handlerModal}
+        />
       {/*<Modal/>*/}
       <Previous
       index={this.state.index}
@@ -186,6 +194,7 @@ class StudioContainer extends React.Component {
           {data.map((element,i)=>(
           <Studio
           key={i}
+          handlerModal={this.handlerModal}
           step={this.state.steps[i]}
           reset={this.resetSong}
           instruments={element}

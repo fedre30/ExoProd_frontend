@@ -168,7 +168,7 @@ class ControlePlayer extends Component {
                         <Button 
                         className="studio-btn-audio mobile"
                         circular
-                        disabled={this.props.selected && this.props.isLoadingEnd ? false : true}
+                        onClick={this.props.handlerModal}
                         icon='info' 
                         size='large'
                         />

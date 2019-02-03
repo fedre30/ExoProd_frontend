@@ -6,7 +6,6 @@ import DisplayInstrument from '../../components/studio/DisplayInstrument';
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
-import Modal from '../../components/studio/Modal';
 import {Grid} from 'semantic-ui-react';
 import {setTimeout} from "timers";
 
@@ -113,7 +112,7 @@ class Studio extends Component {
 
 
   render(){
-    const {isSelected,select,modal} = this.state;
+    const {isSelected} = this.state;
     return (
       <StudioComponent>
         <Grid className="studio-container">
@@ -137,6 +136,7 @@ class Studio extends Component {
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
               insertsong={true}
+              handlerModal={this.props.handlerModal}
               isLoadingEnd={this.state.isLoadingEnd}
               endloading={this.endloading}
               reset={this.props.reset}
@@ -156,7 +156,7 @@ class Studio extends Component {
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
               >
-                <img src={intrument.img}/>
+                <img src={intrument.img} alt='instrument'/>
               </button>
             ))}
             </div>
@@ -168,8 +168,7 @@ class Studio extends Component {
   }
 };
 
-const StudioComponent = styled.div
-  `
+const StudioComponent = styled.div`
   height: 100vh;
   overflow: hidden;
   min-height: 375px;
