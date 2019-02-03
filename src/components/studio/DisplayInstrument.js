@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import '../../styles/animation.css';
 import ovale from '../../assets/img/ovale-dotted.png';
@@ -15,6 +16,7 @@ class DisplayInstrument extends Component{
 state = {
   index : 0,
 }
+
 swap = (index) => () => {this.setState({index})};
 
 render(){
@@ -72,7 +74,15 @@ render(){
                 <div className='studio-display-instrument_selected'>
                   <h2>{name}</h2>
                   <p>{details}</p>
-                  <Link className="studio-display-instrument-link" to={`/instruments/${id}`}>En savoir plus</Link>
+                  <Link
+                    className="studio-display-instrument-link"
+                    to={{
+                      pathname: `/instrument/${id}`,
+                      state: { id }
+                    }}
+                  >
+                  En savoir plus
+                  </Link>
                 </div>
               </div>
             </div>
@@ -289,4 +299,4 @@ const DisplayInstrumentComponent = styled.div`
   `;
 
 
-export default DisplayInstrument;
+export default withRouter(DisplayInstrument);

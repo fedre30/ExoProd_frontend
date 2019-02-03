@@ -23,7 +23,7 @@ const Next = ({handleIndex,check}) => {
 const Button = styled.button
 `
 position: absolute;
-bottom: 5vh;
+bottom: 2vh;
 left: 50%;
 transform: translateX(-50%);
 text-transform: uppercase;

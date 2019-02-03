@@ -6,6 +6,7 @@ import DisplayInstrument from '../../components/studio/DisplayInstrument';
 import '../../styles/animation.css'; //animation instrument
 import ControlePlayer from "../../components/studio/ControlePlayer";
 import protosound from '../../assets/proto-sound/silence-voice.mp3';
+import Modal from '../../components/studio/Modal';
 import {Grid} from 'semantic-ui-react';
 import {setTimeout} from "timers";
 
@@ -112,7 +113,7 @@ class Studio extends Component {
 
 
   render(){
-    const {isSelected,select} = this.state; 
+    const {isSelected,select,modal} = this.state;
     return (
       <StudioComponent>
         <Grid className="studio-container">
@@ -187,8 +188,7 @@ const StudioComponent = styled.div
   }
   #title {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-size: 16px;
     margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -227,11 +227,11 @@ const StudioComponent = styled.div
 
 
   .studio-title {
-    margin-top:40px;
+    margin-top: 32px;
   }
   @media screen and (min-width:768px) {
     .studio-title {
-      margin-top:56px;
+      margin-top: 56px;
     }
     .studio-artist {
       margin-bottom: 24px;
@@ -278,7 +278,12 @@ const StudioComponent = styled.div
   .chooseInstrument-container {
     padding-top:12px;
   }
-  
+  .test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
   @media screen and (min-width:768px){
     .chooseInstrument-container {
       padding-top:0;
@@ -287,10 +292,11 @@ const StudioComponent = styled.div
       transform: translateY(-50%);
     }
     .test{
-      display:flex;
       width:10%;
+      justify-content: start;
       flex-direction:column;
       flex-wrap:wrap;
+      align-items: center;
     }
     .chooseInstrument-btn {
       width: 72px;

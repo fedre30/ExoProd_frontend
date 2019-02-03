@@ -33,8 +33,6 @@ class Instrument extends Component {
       playing: false,
       width: window.innerWidth
     }
-
-
   }
 
   // METHODS
