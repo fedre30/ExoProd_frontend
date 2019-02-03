@@ -173,14 +173,13 @@ class StudioContainer extends React.Component {
   render() {
     const {data,index,selected,check, modal} = this.state;
     return (
-    <div>
+    <div >
+      <Modal
+      modal={modal}
+      handlerModal={this.handlerModal}
+      />
+      <div style={modal ? {...blur} : {}}>
       <Menu/>
-
-        <Modal
-        modal={modal}
-        handlerModal={this.handlerModal}
-        />
-      {/*<Modal/>*/}
       <Previous
       index={this.state.index}
       previous={this.previous}
@@ -190,7 +189,7 @@ class StudioContainer extends React.Component {
       index={index}
       />
       <Responsive>
-        <div className={`responsive-container ${this.state.modal ? 'blur' : ''}`} style={{transform:`translateY(${-index*20}%)`}}>
+        <div className={`responsive-container`} style={{transform:`translateY(${-index*20}%)`}}>
           {data.map((element,i)=>(
           <Studio
           key={i}
@@ -222,20 +221,24 @@ class StudioContainer extends React.Component {
       check={check}
       />
       </CSSTransition>
+      </div>
     </div>
     )
   }
 };
 
+const blur = {
+  filter: 'blur(1px)',
+  WebkitFilter: 'blur(1px)',
+  transition: 'all 0.3s ease',
+};
 const Responsive = styled.div
 `
 height:100vh;
 overflow: hidden;
 background: rgb(13,0,35);
 background: linear-gradient(194deg, rgba(13,0,35,1) 0%, rgba(53,0,123,1) 26%, rgba(91,9,186,1) 58%, rgba(191,0,210,1) 100%);
-.blur{
-  filter: blur(5px);
-}
+
 .responsive-container {
   transition: all 0.5s ease;
 }
