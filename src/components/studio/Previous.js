@@ -31,7 +31,7 @@ const Responsive = styled.div
 `
 position:absolute;
 z-index: 999999;
-top:calc(14vh);
+top: calc(10vh + 10px);
 left:50%;
 transform:translateX(-50%);
 button {
@@ -40,6 +40,7 @@ button {
 
 @media screen and (min-width: 768px){
     top:calc(3vw + 60px);
+    top:14vh;
     left:50%;
     transform: translateX(-50%);
 }

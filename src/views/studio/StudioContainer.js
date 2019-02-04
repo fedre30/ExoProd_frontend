@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { withRouter } from "react-router-dom";
 import Studio from "./Studio";
 import { CSSTransition } from 'react-transition-group';
-import '../../styles/animation.css'
-import API from '../../helpers/api'
+import '../../styles/animation.css';
+import API from '../../helpers/api';
 import Menu from '../../components/menu/Menu';
 import Step from '../../components/studio/Step';
 import Next from '../../components/studio/Next';
+import Modal from '../../components/studio/Modal';
 import Previous from '../../components/studio/Previous';
 import FinalMix from '../../components/studio/FinalMix';
 class StudioContainer extends React.Component {
@@ -15,74 +16,75 @@ class StudioContainer extends React.Component {
     title:"Viva la vida",
     artist: "COLDPLAY",
     steps:['melodie','accords','basse','percussion','fin'],
+    modal: false,
     selected:[[],[],[],[]],
     data:
       [
         [
           {
-          name:"Sitar",
-          id: '15656546',
-          img: require('../../assets/img/instruments/sitar.png'),
-          details:'détail',
-          sound:require('../../assets/sounds/Melody_sitar.wav')
+            name:"Sitar",
+            id: 2,
+            img: require('../../assets/img/instruments/sitar.png'),
+            details:'Un incontournable pour les Beatles',
+            sound:require('../../assets/sounds/Melody_sitar.wav')
           },
           {
-          name:"Theremine",
-          id:'54599494949',
-          img: require('../../assets/img/instruments/theremine.png'),
-          details: "détail",
-          sound:require('../../assets/sounds/Melody_theremin.wav')
+            name:"Theremine",
+            id: 1,
+            img: require('../../assets/img/instruments/theremine.png'),
+            details: "Un son spatial qui se prête bien à la science fiction",
+            sound:require('../../assets/sounds/Melody_theremin.wav')
           }
         ],
-      [
-         {
-         name:"Dulcimer",
-         id:'15656546',
-         img: require('../../assets/img/instruments/dulcimer.png'),
-         details: "",
-         sound:require('../../assets/sounds/Chords_dulcimer.wav')
-         },
-         {
-         name:"Koto",
-         id:'54599494949',
-         img: require('../../assets/img/instruments/koto.png'),
-         details: "détail",
-         sound:require('../../assets/sounds/Chords_koto.wav')
-         }
-     ],
-     [
-      {
-      name:"Guzheng",
-      id:'15656546',
-      img: require('../../assets/img/instruments/Guzheng.png'),
-      details: "détail",
-      sound:require('../../assets/sounds/Bass_guzheng.wav')
-      },
-      {
-      name:"Pipa",
-      id:'54599494949',
-      img: require('../../assets/img/instruments/pipa.png'),
-      details: "détail",
-      sound:require('../../assets/sounds/Bass_pipa.wav')
-      }
-     ],
-     [
-         {
-         name:"Cajon",
-         id:'15656546',
-         img: require('../../assets/img/instruments/cajon.png'),
-         details: '',
-         sound:require('../../assets/sounds/Drums_cajon.wav')
-         },
-         {
-         name:"Castanet",
-         id:'54599494949',
-         img: require('../../assets/img/instruments/Castanet.png'),
-         details: "détail",
-         sound:require('../../assets/sounds/Drums_castanets.wav')
-         }
-     ]                 
-   ],
+        [
+          {
+            name:"Dulcimer",
+            id: 3,
+            img: require('../../assets/img/instruments/dulcimer.png'),
+            details: "Un instrument de rêverie",
+            sound:require('../../assets/sounds/Chords_dulcimer.wav')
+          },
+          {
+            name:"Koto",
+            id: 5,
+            img: require('../../assets/img/instruments/koto.png'),
+            details: "Un son hypnotisant directement du pays du soleil levant",
+            sound:require('../../assets/sounds/Chords_koto.wav')
+          }
+        ],
+        [
+          {
+            name:"Guzheng",
+            id: 0,
+            img: require('../../assets/img/instruments/Guzheng.png'),
+            details: "Guzheng",
+            sound:require('../../assets/sounds/Bass_guzheng.wav')
+          },
+          {
+            name:"Pipa",
+            id: 0,
+            img: require('../../assets/img/instruments/pipa.png'),
+            details: "Pipa",
+            sound:require('../../assets/sounds/Bass_pipa.wav')
+          }
+        ],
+        [
+          {
+            name:"Cajon",
+            id: 0,
+            img: require('../../assets/img/instruments/cajon.png'),
+            details: 'Cajon',
+            sound:require('../../assets/sounds/Drums_cajon.wav')
+          },
+          {
+            name:"Castanet",
+            id: 4,
+            img: require('../../assets/img/instruments/Castanet.png'),
+            details: "Pas utilisé seulement pour le flamenco ",
+            sound:require('../../assets/sounds/Drums_castanets.wav')
+          }
+        ]                 
+       ],
     loading:true,
     index:0,
     check: false,
@@ -120,11 +122,14 @@ class StudioContainer extends React.Component {
           check: true
       })   
     }
-      this.setState(prevState=>{
-        return{
-          index: prevState.index -=1
-        }
-      })
+    this.setState(prevState=> {
+      return {
+        index: prevState.index -=1
+      }
+    })
+  }
+  handlerModal = () => {
+    this.setState((prevState)=>({modal: !prevState.modal}))
   }
   isSelectedempty(){
     const {selected,index} = this.state;
@@ -166,9 +171,14 @@ class StudioContainer extends React.Component {
   }
 
   render() {
-    const {data,index,selected,check} = this.state;
+    const {data,index,selected,check, modal} = this.state;
     return (
-    <div>
+    <div >
+      <Modal
+      modal={modal}
+      handlerModal={this.handlerModal}
+      />
+      <div style={modal ? {...blur} : {}}>
       <Menu/>
       <Previous
       index={this.state.index}
@@ -179,10 +189,11 @@ class StudioContainer extends React.Component {
       index={index}
       />
       <Responsive>
-        <div className='responsive-container' style={{transform:`translateY(${-index*20}%)`}}>
+        <div className={`responsive-container`} style={{transform:`translateY(${-index*20}%)`}}>
           {data.map((element,i)=>(
           <Studio
           key={i}
+          handlerModal={this.handlerModal}
           step={this.state.steps[i]}
           reset={this.resetSong}
           instruments={element}
@@ -210,11 +221,17 @@ class StudioContainer extends React.Component {
       check={check}
       />
       </CSSTransition>
+      </div>
     </div>
     )
   }
 };
 
+const blur = {
+  filter: 'blur(1px)',
+  WebkitFilter: 'blur(1px)',
+  transition: 'all 0.3s ease',
+};
 const Responsive = styled.div
 `
 height:100vh;
