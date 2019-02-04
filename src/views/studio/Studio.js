@@ -214,19 +214,27 @@ const StudioComponent = styled.div
   .studio-title,
   .studio-artist {
     color: ${Colors.text};
-    font-family: ${Fonts.title};
     font-size:18px;
     font-weight:400;
     margin-bottom:0;
   }
+  .studio-artist {
+    font-family: ${Fonts.subtitle};
+  }
+  .studio-title{
+    font-family: ${Fonts.subtitle}
+  }
 
 
   .studio-title {
-    margin-top:32px;
+    margin-top:40px;
   }
   @media screen and (min-width:768px) {
     .studio-title {
       margin-top:56px;
+    }
+    .studio-artist {
+      margin-bottom: 24px;
     }
   }
   .studio-artist {

@@ -136,9 +136,7 @@ class Instrument extends Component {
           </ScrollAnimation>
 
           <div className="header-thumbnail">
-            <ScrollAnimation animateIn='fade-right'>
               <Thumbnail image={Instruments[this.props.location.state.id].mainImage}/>
-            </ScrollAnimation>
           </div>
 
         </Header>
@@ -225,7 +223,7 @@ const CardComponent = styled.div
   position: relative;
   
   @media(max-width: 560px) {
-    height: 500vh;
+    height: auto;
   }
  
 
@@ -306,6 +304,7 @@ const Header = styled.div`
   
   .pronunciation {
     font-size: 4rem;
+    width: 100vw;
   }
     .infos {
       width: 90%;
@@ -417,7 +416,7 @@ height: auto;
   
   .player-container {
     position: static;
-    margin: 0 auto;
+    margin: 0 3rem;
     text-align: center;
     width: 100%;
   }
@@ -479,7 +478,7 @@ text-align: center;
 
 @media(max-width: 560px) {
   width: 100%;
-  height: 40vh;
+  height: auto;
   
   .video-title {
     font-size: 2rem;

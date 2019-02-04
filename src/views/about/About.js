@@ -73,9 +73,7 @@ class About extends Component {
           </ScrollAnimation>
 
           <div className="header-thumbnail">
-            <ScrollAnimation animateIn='fade-right'>
               <Thumbnail image={thumbnail}/>
-            </ScrollAnimation>
           </div>
 
         </Header>

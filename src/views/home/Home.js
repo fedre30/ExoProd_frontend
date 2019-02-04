@@ -20,14 +20,16 @@ import geography from '../../utils/topoJSON';
 import { Motion, spring } from "react-motion"
 import ScrollAnimation from 'react-animate-on-scroll';
 import '../../styles/animation.css';
+import Footer from "../../components/footer/Footer";
+import ExoButton from "../../components/button/Button";
+
 
 
 //IMAGES
 import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
-import Footer from "../../components/footer/Footer";
-import ExoButton from "../../components/button/Button";
+import fingers from '../../assets/img/touch-and-scroll.png';
 
 // INSTRUMENTS
 
@@ -62,7 +64,8 @@ class Home extends Component {
       center: [0,20],
       zoom: 1,
       modal: '',
-      show: false
+      show: false,
+      currentID: undefined,
     }
 
     this.handleZoomIn = this.handleZoomIn.bind(this)
@@ -72,6 +75,17 @@ class Home extends Component {
 
   }
 
+  componentDidMount() {
+    for (let i = 0; i < document.querySelectorAll('.rsm-marker').length; i++) {
+      document.querySelectorAll('.rsm-marker')[i].setAttribute('data-id', i);
+      document.querySelectorAll('.rsm-marker')[i].addEventListener('mouseover', (e) => {
+        if (e.target.parentNode.getAttribute('class') === 'rsm-marker rsm-marker--hover') {
+          this.setState({currentID: e.target.parentNode.getAttribute('data-id')});
+          this.showModal(e.target.parentNode.getAttribute('data-id'));
+        }
+      })
+    }
+  }
 
 
   componentWillMount() {
@@ -117,6 +131,18 @@ class Home extends Component {
       zoom: 1,
     })
   }
+
+  showModal = id => {
+    console.log(id);
+    this.setState({show: true});
+    console.log(this.state.show);
+  };
+
+  hideModal = () => {
+    this.setState({show: false});
+    console.log(this.state.show);
+  };
+
 
 
 
@@ -213,10 +239,12 @@ class Home extends Component {
                           onClick={() => {
                             this.handleClickMarker(marker)
                           }}
+                          onMouseOver={() => this.showModal()}
+                          onMouseLeave={() => this.hideModal()}
                           style={{
-                            default: {fill: Colors.tertiary},
-                            hover: {fill: Colors.fourth},
-                            pressed: {fill: "#FFFFFF"},
+                            default: {fill: Colors.tertiary, cursor: "pointer"},
+                            hover: {fill: Colors.fourth, cursor: "pointer"},
+                            pressed: {fill: "#FFFFFF", cursor: "pointer", outline: "none"},
                           }}
                         >
 
@@ -251,6 +279,21 @@ class Home extends Component {
                 </ComposableMap>)}
                 </Motion>
               </div>
+              {this.state.show ? (
+                <div className="map-modal">
+                  <div className="map-modal-image"><img src={Instruments[this.state.currentID].secondaryImage} alt=""/></div>
+                  <h2 className="map-modal-title">{Instruments[this.state.currentID].title}</h2>
+                  <div className="map-modal-facts">Fun facts</div>
+                  <div className="map-modal-fact">{Instruments[this.state.currentID].facts[0]}</div>
+                  <div className="map-modal-fact">{Instruments[this.state.currentID].facts[1]}</div>
+                  <div className="map-modal-call">Pour en savoir plus cliquez sur l'instrument</div>
+
+
+
+              </div>
+                )
+                :
+                (<div></div>)}
             </Sectionmap>
           </ScrollAnimation>
           <ScrollAnimation animateIn={`paragraph-${this.state.firstParagraph.direction}`} duration={0.6} delay={0.2}>
@@ -284,7 +327,6 @@ class Home extends Component {
           </ScrollAnimation>
 
           <Footer/>
-
         </HomeComponent>
       )
     }
@@ -317,20 +359,24 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                  <Button onClick={this.handleZoomIn}>
+                  <button className="instrument-button" onClick={this.handleZoomIn}>
                     { "Zoom in" }
-                  </Button>
-                  <Button onClick={this.handleZoomOut}>
+                  </button>
+                  <button className="instrument-button" onClick={this.handleZoomOut}>
                     { "Zoom out" }
-                  </Button>
-                  <Button onClick={this.handleReset}>
+                  </button>
+                  <button className="instrument-button" onClick={this.handleReset}>
                     { "Reset" }
-                  </Button>
+                  </button>
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
-                    <Button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
+                    <button className="instrument-button" key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</button>
                   ))}
+                </div>
+                <div className="map-help">
+                  <div className="map-help-text">Explorez la map</div>
+                  <div className="map-fingers"><img src={fingers} alt=""/></div>
                 </div>
                 <Motion
                   defaultStyle={{
@@ -346,7 +392,7 @@ class Home extends Component {
                 >
                   {({zoom,x,y}) => (
                     <ComposableMap projectionConfig={{
-                      scale: 70
+                      scale: 130
                     }} width={360} height={300} projection="robinson">
                       <ZoomableGroup center={[x,y]} zoom={zoom}>
                         <Geographies geography={geography}>
@@ -580,7 +626,7 @@ const Header = styled.div`
 
 const Firstsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
@@ -593,6 +639,7 @@ const Firstsection = styled.div`
   }
   
   @media(max-width: 560px) {
+    height: auto;
     padding: 2rem;
   }
   
@@ -602,14 +649,14 @@ const Firstsection = styled.div`
 
 const Secondsection = styled.div`  
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   padding: 8rem;
   position: relative;
   z-index: 0;
   
   @media(max-width: 560px) {
     padding: 2rem;
-    height: 120vh;
+    height: auto;
   }
   
 
@@ -618,6 +665,7 @@ const Secondsection = styled.div`
 const Sectionmap = styled.div`  
   width: 100%;
   height: 100vh;
+  position: relative;
   
   .heading {
     margin-bottom: 3rem;
@@ -661,14 +709,59 @@ const Sectionmap = styled.div`
   margin: 1rem 2rem;
 }
 
+.map-modal {
+position: absolute;
+right: 5rem;
+top: 10rem;
+width: 500px;
+height: auto;
+background-color: ${Colors.secondary};
+color: ${Colors.text};
+transition: all .2s ease;
+padding: 2rem;
+border-radius: 1rem;
 
-.instrument-button {
-  margin: 2rem 0; !important;
 }
+
+.map-modal-title {
+  text-align: center;
+  font-size: 2rem;
+ 
+
+}
+
+.map-modal-image {
+width: 200px;
+margin: 0 auto;
+img {
+width: 100%;
+}
+}
+
+.map-modal-facts {
+font-size: 1.3rem;
+  color: ${Colors.text};
+  font-weight: bold;
+  margin: 2rem 0;
+}
+
+.map-modal-fact {
+  margin: 1rem 0;
+}
+
+.map-modal-call {
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 1.5rem;
+  color: ${Colors.fourth};
+}
+
+
   
   
  
   @media(max-width: 560px) {
+  height: auto;
   
   .heading-title {
     font-size: 1.7rem;
@@ -684,6 +777,37 @@ const Sectionmap = styled.div`
   .map {
     display: block;
   }
+  
+  
+.instrument-button {
+  width: 100px;
+  height: 50px;
+  background-color: ${Colors.text};
+  color: ${Colors.primary};
+  font-family: ${Fonts.subtitle};
+  border: 1px solid ${Colors.secondary};
+}
+
+.map-help {
+width: 100%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin: 2rem 0;
+
+}
+
+.map-help-text {
+color: ${Colors.text};
+font-size: 1.5rem;
+}
+
+.map-fingers{
+  width: 100px;
+  img {
+    width: 100%;
+  }
+}
     
   }
   
