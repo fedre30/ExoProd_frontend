@@ -70,8 +70,9 @@ class Studio extends Component {
       details,
       id
     })
-  }  
-  
+  }
+
+
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];

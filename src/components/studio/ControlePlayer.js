@@ -5,8 +5,14 @@ import Fonts from '../../styles/fonts';
 import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
 import { Grid, Button } from 'semantic-ui-react';
-import Sound from 'react-sound';
 import '../../styles/range.css';
+import Sound from 'react-sound';
+/* global soundManager:false */
+soundManager.setup({ ignoreMobileRestrictions : true, debugMode:false});
+
+
+
+
 
 class ControlePlayer extends Component {
    
@@ -45,7 +51,6 @@ class ControlePlayer extends Component {
 
     endLoading = (loading)=>{
         if(loading) {
-            console.log('chargement terminé')
             if(this.props.select.sound !== null){
                 let option = { audio:new Audio(this.props.select.sound),remove:false};
                 option.audio.addEventListener('loadedmetadata', () => {
@@ -138,7 +143,7 @@ class ControlePlayer extends Component {
         }
     }
 
-    render(){
+  render(){
         const {progressbar,playStatus, volume} = this.state;
         const controller = {
             playing: playStatus === Sound.status.PLAYING,
@@ -274,5 +279,7 @@ const ControlePlayerStyle = styled.div`
     z-index: 2;
 }
 `;
+
+
 
 export default ControlePlayer;
