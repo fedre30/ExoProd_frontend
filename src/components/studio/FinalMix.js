@@ -167,6 +167,10 @@ class FinalMix extends Component {
                     </button>
                     <img src={oval} alt=''/>
                 </div>
+                <div className="display-instrument-information-container">
+                    <h1 className="display-instrument-information-title">{this.props.title}</h1>
+                    <h2 className="display-instrument-information-artist">{this.props.artist}</h2>
+                </div>
                 <div className="ControlePlayer-container">
                     <p>{this.state.current}</p>
                     <div className="ControlePlayer-progressbar-container">
@@ -201,7 +205,7 @@ class FinalMix extends Component {
                     <Button
                     className="studio-btn-audio mobile" 
                     circular
-                    disabled={checkmusics && this.state.isLoadingEnd? false : true}
+                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
                     icon={controller.isMute ? 'volume off' : 'volume up'} 
                     size='large'
                     onClick={this.handleVolume} 
@@ -248,7 +252,7 @@ flex-direction: column;
 .display-instrument-container {
     position: relative;
     width: 100%;
-    margin: 5vw 0;
+    margin: 48px 0;
 }
 
 .button-container{
@@ -261,7 +265,23 @@ flex-direction: column;
 .display-instrument i{
     color:white;
 }
+.display-instrument-information-container {
+    margin-top: 24px;
+}
+@media screen and (min-width: 768px){
+    .display-instrument-information-container {
+        margin-top: 32px;
+        margin-bottom: 0.6vw;
+    }
+}
 
+.display-instrument-information-artist,
+.display-instrument-information-title {
+  color: ${Colors.text};
+  font-size:18px;
+  font-weight:400;
+  margin:0;
+}
 .studio-btn-playing{
     border:0;
     outline:0;
@@ -303,7 +323,7 @@ flex-direction: column;
     top:50%;
     left:50%;
     min-width: 280px;
-    min-height: 240px;
+    min-height: 280px;
     transform: translate(-50%,-50%);
     width:24vw;
     height:24vw;
