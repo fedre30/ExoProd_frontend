@@ -121,7 +121,7 @@ class Home extends Component {
   }
   handleCityClick(city) {
     this.setState({
-      zoom: 2,
+      zoom: 5,
       center: city.coordinates,
     })
   }
@@ -201,15 +201,15 @@ class Home extends Component {
                     y: 20,
                   }}
                   style={{
-                    zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
-                    x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
-                    y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+                    zoom: spring(this.state.zoom, {stiffness: 310, damping: 30}),
+                    x: spring(this.state.center[0], {stiffness: 310, damping: 30}),
+                    y: spring(this.state.center[1], {stiffness: 310, damping: 30}),
                   }}
                 >
                   {({zoom,x,y}) => (
                 <ComposableMap projectionConfig={{
                   scale: 250
-                }} width={1600} height={800} projection="robinson">
+                }} width={1920} height={800} projection="robinson">
                   <ZoomableGroup center={[x,y]} zoom={zoom}>
                     <Geographies geography={geography}>
                       {(geographies, projection) => geographies.map(geography => (
@@ -542,7 +542,7 @@ const Header = styled.div`
     text-align: center;
     width: 70%;
     height: auto;
-    padding: 1rem;
+    padding: 4rem 0;
     margin: 0 auto;
     background-color: rgba(85, 11, 184, 0.6);
     
@@ -555,9 +555,10 @@ const Header = styled.div`
   .video-background {
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
  
   }
   .header-image {
@@ -573,7 +574,6 @@ const Header = styled.div`
     font-family: ${Fonts.title};
     text-transform: uppercase;
     font-size: 4.58rem;
-    margin-bottom: 3.5rem;
   }
   .subtitle {
     color: ${Colors.text};

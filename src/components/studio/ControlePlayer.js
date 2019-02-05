@@ -197,7 +197,6 @@ class ControlePlayer extends Component {
                     </Grid.Column>
                 </Grid.Row>
                     <Sound
-                    ignoreMobileRestrictions={true}
                     url={this.props.select.sound}
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
