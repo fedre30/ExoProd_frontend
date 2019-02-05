@@ -8,9 +8,7 @@ import { Grid, Button } from 'semantic-ui-react';
 import '../../styles/range.css';
 import Sound from 'react-sound';
 /* global soundManager:false */
-soundManager.setup({ ignoreMobileRestrictions : true, debugMode:false});
-
-
+soundManager.setup({debugMode: false});
 
 
 
@@ -51,6 +49,7 @@ class ControlePlayer extends Component {
 
     endLoading = (loading)=>{
         if(loading) {
+            console.log('chargement terminé')
             if(this.props.select.sound !== null){
                 let option = { audio:new Audio(this.props.select.sound),remove:false};
                 option.audio.addEventListener('loadedmetadata', () => {
@@ -197,6 +196,7 @@ class ControlePlayer extends Component {
                     </Grid.Column>
                 </Grid.Row>
                     <Sound
+                    ignoreMobileRestrictions={true}
                     url={this.props.select.sound}
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}
