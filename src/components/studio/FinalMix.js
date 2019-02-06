@@ -69,7 +69,6 @@ class FinalMix extends Component {
 
     handleVolume = () => {
         let {isMute,volumes} = this.state;
-        console.log(isMute)
         const newVolumes = [];
         if(isMute) {
             isMute = false

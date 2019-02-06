@@ -252,8 +252,8 @@ const StudioComponent = styled.div`
   }
   .chooseInstrument-btn {
     outline:0;
-    width: 74px;
-    height: 74px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;
