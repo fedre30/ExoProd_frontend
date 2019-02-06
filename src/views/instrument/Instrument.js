@@ -140,16 +140,18 @@ class Instrument extends Component {
 
         </Header>
         <DescriptionSection>
-          <Grid columns={12}>
-            <Grid.Column computer={8} mobile={16}>
+          <Grid columns={16}>
+            <Grid.Row>
+            <Grid.Column computer={7} mobile={16} floated="left">
               <img src={Instruments[this.props.location.state.id].secondaryImage} alt=""/>
             </Grid.Column>
-            <Grid.Column computer={7} mobile={16}>
+            <Grid.Column computer={7} mobile={16} floated="right">
               <ScrollAnimation animateIn="paragraph-right">
                 <Paragraph title={Instruments[this.props.location.state.id].description.title} text={Instruments[this.props.location.state.id].description.text}
                            direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
+            </Grid.Row>
           </Grid>
         </DescriptionSection>
         <SoundSection>
