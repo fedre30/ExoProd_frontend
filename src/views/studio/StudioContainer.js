@@ -26,10 +26,10 @@ class StudioContainer extends React.Component {
             id: 2,
             img: require('../../assets/img/instruments/sitar.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Cordes pincées',
+              shape: 'Droit',
+              origin: 'Inde',
+              year: 'XIVe',
             },
             sound:require('../../assets/sounds/Melody_sitar.wav')
           },
@@ -52,10 +52,10 @@ class StudioContainer extends React.Component {
             id: 3,
             img: require('../../assets/img/instruments/dulcimer.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Cordes frappées',
+              shape: 'Dulcimer des Appalaches, Hammered dulcimer ',
+              origin: ' Europe du nord',
+              year: ' Moyen  âge',
             },
             sound:require('../../assets/sounds/Chords_dulcimer.wav')
           },
@@ -64,10 +64,10 @@ class StudioContainer extends React.Component {
             id: 5,
             img: require('../../assets/img/instruments/koto.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Cordes pincées',
+              shape: ' Jūshichigen, Nijūgen, Nijūgogen',
+              origin: 'Japon',
+              year: '  VIIe siècle',
             },
             sound:require('../../assets/sounds/Chords_koto.wav')
           }
@@ -78,10 +78,10 @@ class StudioContainer extends React.Component {
             id: 0,
             img: require('../../assets/img/instruments/Guzheng.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
             },
             sound:require('../../assets/sounds/Bass_guzheng.wav')
           },
@@ -90,10 +90,10 @@ class StudioContainer extends React.Component {
             id: 0,
             img: require('../../assets/img/instruments/pipa.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
             },
             sound:require('../../assets/sounds/Bass_pipa.wav')
           }
@@ -104,10 +104,10 @@ class StudioContainer extends React.Component {
             id: 0,
             img: require('../../assets/img/instruments/cajon.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
             },
             sound:require('../../assets/sounds/Drums_cajon.wav')
           },
@@ -116,10 +116,10 @@ class StudioContainer extends React.Component {
             id: 4,
             img: require('../../assets/img/instruments/Castanet.png'),
             details:{
-              type: 'Electronique',
-              shape: 'A clavier ou violoncelle',
-              origin: 'Russie',
-              year: '1920',
+              type: 'Percussion idiophone',
+              shape: 'Castanyoles, Castanholas, Nacchere',
+              origin: 'Espagne, Italie, Grèce',
+              year: ' Inconnue',
             },
             sound:require('../../assets/sounds/Drums_castanets.wav')
           }
