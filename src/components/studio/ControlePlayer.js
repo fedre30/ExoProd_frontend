@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../../styles/range.css';
 import styled from 'styled-components';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
@@ -6,10 +7,14 @@ import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
 import { Grid, Button } from 'semantic-ui-react';
 import Sound from 'react-sound';
-import '../../styles/range.css';
+/* global soundManager:false */
+
 
 class ControlePlayer extends Component {
-   
+    
+    componentDidUpdate() {
+        soundManager.setup({ ignoreMobileRestrictions : true, debugMode:false});
+    }
     //note: j'ai initialisé le state position (qui est passé par notre dépendance Sound)
     //      uniquement pour rendre dynamique notre progressbar, je n'ai pas trouvé de moyens
     //      plus 'jolie' pour mettre en place cette fonction, en tout cas, cela marche parfaitement
@@ -192,7 +197,6 @@ class ControlePlayer extends Component {
                     </Grid.Column>
                 </Grid.Row>
                     <Sound
-                    ignoreMobileRestrictions={true}
                     url={this.props.select.sound}
                     playStatus={playStatus}
                     onPlaying={({position,duration}) => this.handleSongPlaying(position,duration)}

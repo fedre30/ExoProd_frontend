@@ -39,7 +39,7 @@ display:none;
     min-height:400px;
 
     .type-list-container {
-        height: 400px;
+        height: 500px;
         display:flex;
         width: 20%;
         flex-direction: column;
@@ -56,8 +56,8 @@ display:none;
         display: flex;
         align-items: center;
         margin: 0;
-        padding: 4px 0;
-        width: 240px;
+        padding: 8px 0;
+        width: 280px;
         display: flex;
         position: relative;
         z-index:1;

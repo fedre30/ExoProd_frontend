@@ -132,7 +132,7 @@ const DisplayInstrumentComponent = styled.div`
   }
   .studio-display-instrument-instruction {
     color: ${Colors.text};
-    font-family: ${Fonts.title};
+    font-family: ${Fonts.text};
     font-size: 16px;
     position: relative;
     z-index: 1;
@@ -170,10 +170,11 @@ const DisplayInstrumentComponent = styled.div`
 
   .studio-display-instrument-instruction {
     color: ${Colors.text};
-    font-family: ${Fonts.title};
+    font-family: ${Fonts.text};
     font-size: 16px;
     position: relative;
     z-index: 1;
+    font-weight: 600;
   }
   .studio-display-instrument_selected-container{
     position: relative;

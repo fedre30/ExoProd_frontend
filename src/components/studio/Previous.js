@@ -54,7 +54,7 @@ const ButtonMobileVTwo = styled.button
 display:block;
 text-transform: uppercase;
 cursor: pointer;
-font:${Fonts.subtitle};
+font:${Fonts.text};
 border:0;
 font-size: 12px;
 background:0;
