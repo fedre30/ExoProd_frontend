@@ -30,6 +30,9 @@ import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import fingers from '../../assets/img/touch-and-scroll.png';
+import zoomin from '../../assets/img/zoomin.png';
+import zoomout from '../../assets/img/zoomout.png';
+import reset from '../../assets/img/reset.png';
 
 // INSTRUMENTS
 
@@ -49,13 +52,13 @@ class Home extends Component {
         title: "De nouvelles sonorités à travers les instruments d’autres pays du monde",
         text: " Le concept de “Production exotique” consiste à proposer une expérience de découverte d’instruments méconnus, soi-disant exotiques.\n" +
           "Analyser comment les styles et les instruments d’outre-mer ont eu un impact sur la musique actuelle et rester émerveillé de la quantité d’artistes qui experiment avec ces instruments pour enrichir leur musique.",
-        direction: "left"
+        direction: "right"
       },
       secondParagraph: {
         title: "Prenez en main les instruments et créez votre propre son",
         text: "Explorez le potentiel des ces instruments à travers vos chansons préférées, en modifiant la mélodie, les accords ou d’autres pistes avec l’instrument le plus souhaitable à votre goût.\n" +
           "Transformez un morceau pop actuel en un oeuvre qui va au-delà de toute limite spatio-temporelle pour un résultat époustouflant ! \n",
-        direction: "right"
+        direction: "left"
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: Instruments,
@@ -179,19 +182,19 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                <Button onClick={this.handleZoomIn}>
-                  { "Zoom in" }
-                </Button>
-                <Button onClick={this.handleZoomOut}>
-                  { "Zoom out" }
-                </Button>
-                <Button onClick={this.handleReset}>
-                  { "Reset" }
-                </Button>
+                <button className="ui icon button button-zoom" onClick={this.handleZoomIn}>
+                  <i className="zoom-in icon big violet"></i>
+                </button>
+                <button className="ui icon button button-zoom" onClick={this.handleZoomOut}>
+                  <i className="zoom-out icon big violet"></i>
+                </button>
+                <button className="ui icon button button-zoom" onClick={this.handleReset}>
+                  <i className="undo icon big violet"></i>
+                </button>
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
-                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
+                  <button className="instrument-button"  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</button>
                 ))}
                 </div>
                 <Motion
@@ -385,15 +388,15 @@ class Home extends Component {
                     y: 20,
                   }}
                   style={{
-                    zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
-                    x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
-                    y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+                    zoom: spring(this.state.zoom, {stiffness: 110, damping: 20}),
+                    x: spring(this.state.center[0], {stiffness: 110, damping: 20}),
+                    y: spring(this.state.center[1], {stiffness: 110, damping: 20}),
                   }}
                 >
                   {({zoom,x,y}) => (
                     <ComposableMap projectionConfig={{
                       scale: 130
-                    }} width={360} height={300} projection="robinson">
+                    }} width={380} height={300} projection="robinson">
                       <ZoomableGroup center={[x,y]} zoom={zoom}>
                         <Geographies geography={geography}>
                           {(geographies, projection) => geographies.map(geography => (
@@ -754,6 +757,22 @@ font-size: 1.3rem;
   text-align: center;
   font-size: 1.5rem;
   color: ${Colors.fourth};
+}
+
+.instrument-button {
+  width: 100px;
+  height: 50px;
+  background-color: ${Colors.text};
+  color: ${Colors.primary};
+  font-family: ${Fonts.subtitle};
+  border: 1px solid ${Colors.secondary};
+  border-radius: 0.4rem;
+  transition: all .2s ease;
+}
+
+.instrument-button:hover {
+  background-color: ${Colors.primary};
+  color: ${Colors.text};
 }
 
 

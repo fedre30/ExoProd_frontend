@@ -50,10 +50,12 @@ const ParagraphComponent = styled.div
   @media(max-width: 560px) {
     .title {
     font-size: 2.5rem;
+    text-align: left;
     }
     .text {
     font-size: 1rem;
     line-height: 1.5rem;
+    text-align: left;
     }
   }
 

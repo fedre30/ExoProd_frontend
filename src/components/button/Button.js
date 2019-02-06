@@ -71,7 +71,7 @@ const ButtonComponent = styled.div
   }
   
   @media(max-width: 560px) {
-  
+  width: 150px;
   
   .outer {
     width: 150px;

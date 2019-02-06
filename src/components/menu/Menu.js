@@ -171,6 +171,7 @@ const MenuComponent = styled.div
     right: -2rem;
     top: 3rem;
     z-index: 2;
+    cursor: pointer;
     
   
     }
