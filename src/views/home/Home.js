@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
-import {Grid, Button} from 'semantic-ui-react';
+import {Grid, Button, Icon} from 'semantic-ui-react';
 import Cover from 'react-video-cover';
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
@@ -182,15 +182,9 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                <button className="ui icon button button-zoom" onClick={this.handleZoomIn}>
-                  <i className="zoom-in icon big violet"></i>
-                </button>
-                <button className="ui icon button button-zoom" onClick={this.handleZoomOut}>
-                  <i className="zoom-out icon big violet"></i>
-                </button>
-                <button className="ui icon button button-zoom" onClick={this.handleReset}>
-                  <i className="undo icon big violet"></i>
-                </button>
+                <Button onClick={this.handleZoomIn}  color="white" icon="zoom-in icon big violet"/>
+                <Button onClick={this.handleZoomOut}  color="white" icon="zoom-out icon big violet"/>
+                <Button  onClick={this.handleReset}  color="white" icon="undo icon big violet"/>
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
@@ -362,15 +356,9 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                  <button className="instrument-button" onClick={this.handleZoomIn}>
-                    { "Zoom in" }
-                  </button>
-                  <button className="instrument-button" onClick={this.handleZoomOut}>
-                    { "Zoom out" }
-                  </button>
-                  <button className="instrument-button" onClick={this.handleReset}>
-                    { "Reset" }
-                  </button>
+                  <Button onClick={this.handleZoomIn}  color="white" icon="zoom-in icon big violet"/>
+                  <Button onClick={this.handleZoomOut}  color="white" icon="zoom-out icon big violet"/>
+                  <Button  onClick={this.handleReset}  color="white" icon="undo icon big violet"/>
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
