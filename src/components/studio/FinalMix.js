@@ -215,7 +215,9 @@ class FinalMix extends Component {
                         onClick={() => this.SelectThisSong(i)}
                         style={volume===0 ? {opacity:0.4}:{}}
                         >
-                        <img src={this.props.selected[i].img} className="btn-playing_volume" alt='instrument volume' />
+                        <div className="btn-playing-imgContainer">
+                            <img src={this.props.selected[i].img} className="btn-playing_volume" alt='instrument volume' />
+                        </div>
                         </button>
                         <input 
                         className="range-volume" 
@@ -356,9 +358,7 @@ flex-direction: column;
 }
 
 .studio-btn-playing img {
-    width: 61px;
-    height: 61px;
-    border-radius: 50%;
+    width: 80%;
 }
 
 .display-instrument {
@@ -455,8 +455,6 @@ flex-direction: column;
 }
 .btn-playing{
     outline:0;
-    width: 72px;
-    height: 72px;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;
@@ -475,6 +473,13 @@ flex-direction: column;
     border-radius: 14px;
     margin-top: 50px;
     max-width: 90px;
+}
+.btn-playing-imgContainer {
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    jusitfy-content: center;
 }
 `
 
