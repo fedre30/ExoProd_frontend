@@ -239,7 +239,7 @@ const Header = styled.div`
     width: 50%;
     background: url(${title}) no-repeat;
     background-size: 100% 100%;
-    padding: 25vh 4rem;
+    padding: 23vh 4rem;
   }
 
   .title {

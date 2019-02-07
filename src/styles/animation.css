@@ -244,12 +244,20 @@
     }
 }
 
+/* VIDEO */
+
+.intro-enter {
+    -webkit-animation: slide-in-fwd-center 1.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-fwd-center 1.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
 /* MAP */
 
 .map-enter {
-    -webkit-animation: slide-in-fwd-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: slide-in-fwd-center 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    -webkit-animation: slide-in-fwd-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-fwd-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
 
 @-webkit-keyframes slide-in-fwd-center {
     0% {

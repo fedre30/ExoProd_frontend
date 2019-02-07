@@ -167,7 +167,7 @@ class Home extends Component {
           <Header>
             <Menu/>
             <div className="video-background"><Cover videoOptions={videoOptions}/></div>
-            <div className="title-container">
+            <div className="title-container intro-enter">
               <h2 className="title">Un voyage musical intemporel</h2>
               <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
             </div>
