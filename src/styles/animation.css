@@ -116,13 +116,7 @@
     -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
     -o-transition: all 300ms ease; /* Opera */
 }
-.modal-enter .modal-wrap {
-    margin-top: -60px;
-    transition: all 300ms ease;
-    -moz-transition: all 300ms ease; /* Firefox 4 */
-    -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
-    -o-transition: all 300ms ease; /* Opera */
-}
+
 .modal-enter-active{
     opacity:1;
     transition: all 300ms ease;
@@ -131,13 +125,6 @@
     -o-transition: all 300ms ease; /* Opera */
 }
 
-.modal-enter-active .modal-wrap {
-    margin-top: 0;
-    transition: all 300ms ease;
-    -moz-transition: all 300ms ease; /* Firefox 4 */
-    -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
-    -o-transition: all 300ms ease; /* Opera */
-}
 .modal-exit {
     opacity:1;
     transition: all 300ms ease;
@@ -145,13 +132,7 @@
     -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
     -o-transition: all 300ms ease; /* Opera */
 }
-.modal-exit .modal-wrap {
-    margin-top: 0;
-    transition: all 300ms ease;
-    -moz-transition: all 300ms ease; /* Firefox 4 */
-    -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
-    -o-transition: all 300ms ease; /* Opera */
-}
+
 .modal-exit-active {
     opacity:0;
     transition: all 300ms ease;
@@ -160,13 +141,6 @@
     -o-transition: all 300ms ease; /* Opera */
 }
 
-.modal-exit-active .modal-wrap {
-    margin-top: 60px;
-    transition: all 300ms ease;
-    -moz-transition: all 300ms ease; /* Firefox 4 */
-    -webkit-transition: all 300ms ease; /* Safari 和 Chrome */
-    -o-transition: all 300ms ease; /* Opera */
-}
 /* MENU */
 
 
