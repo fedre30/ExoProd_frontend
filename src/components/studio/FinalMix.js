@@ -2,7 +2,6 @@ import React,{ Component} from 'react';
 import styled from 'styled-components';
 import play from '../../assets/img/play.svg';
 import pause from '../../assets/img/pause.svg';
-import oval from '../../assets/img/ovale-dotted.png';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import Sound from 'react-sound';
@@ -16,7 +15,8 @@ class FinalMix extends Component {
         durations: [0,0,0,0],
         total: '0:00',
         current: '0:00',
-        volume: 100,
+        isMute: false,
+        volumes: [100,100,100,100],
         isLoadingEnd: false,
     }
     /**
@@ -66,10 +66,22 @@ class FinalMix extends Component {
     }
 
     handleVolume = () => {
-        let volume = this.state.volume;
-        volume === 100 ? volume = 0 : volume = 100
+        let {isMute,volumes} = this.state;
+        const newVolumes = [];
+        if(isMute) {
+            isMute = false;
+            volumes.map(volume =>{
+                newVolumes.push(100);
+            })
+        } else {
+            isMute = true;
+            volumes.map(volume => {
+                newVolumes.push(0);
+            })
+        }
         this.setState({
-            volume
+            volumes: newVolumes,
+            isMute
         })
     }
 
@@ -107,6 +119,23 @@ class FinalMix extends Component {
         })
     }
 
+    SelectThisSong = (index) =>{
+        console.log('je suis dedans')
+            this.setState(prevState=>{
+                const volumes = prevState.volumes.slice(0);
+                // A FINALISER
+                const newVolumes = volumes.map((volume,i)=>{
+                    if(index === i) {
+                        return 100
+                    } else {
+                        return 0
+                    }
+                });
+                return {
+                    volumes: newVolumes
+                }
+            })
+    }
     /**
      * Je reset mes états
      * playStatus se met en pause
@@ -146,26 +175,62 @@ class FinalMix extends Component {
         }
     }
 
+    handleRangeVolume = (e) => {
+        const {value,id} = e.target
+        this.setState(prevstate=>{
+            const volumes = prevstate.volumes.slice(0);
+            volumes.splice(id,1, parseInt(value));
+            return {
+                volumes,
+            }
+            //isMute
+        })
+
+    }
+    componentDidUpdate(){
+        if(this.state.volumes.every(volume => volume === 0) && this.state.isMute === false) {
+            this.setState({
+                isMute: true
+            })
+        } else if (this.state.isMute === true && !this.state.volumes.every(volume => volume === 0)) {
+            this.setState({
+                isMute: false
+            })
+        }
+    }
     render(){
-        const {progressbar,playStatus, volume} = this.state;
+        const {progressbar,playStatus, volumes} = this.state;
         const controller = {
             playing: playStatus === Sound.status.PLAYING,
-            isMute: volume === 0
+            isMute: volumes.every(volume => volume === 0)
         }
         
         const checkmusics = this.props.selected.every(elem=> elem.length !== 0);
 
         return(
             <FinalMixContainer>
-                <div className="display-instrument-container">
-                    <button 
-                    className="display-instrument"
-                    disabled={checkmusics && this.state.isLoadingEnd ? false : true}
-                    onClick={this.handlePlay} 
-                    >
-                        <img src={controller.playing ? pause : play } alt='play button'/>
-                    </button>
-                    <img src={oval} alt=''/>
+                <div className="finalmix-container">
+                    {volumes.map((volume,i)=>(
+                    <div className="finalmix-container_items">
+                        <button className="btn-playing"
+                        onClick={() => this.SelectThisSong(i)}
+                        style={volume===0 ? {opacity:0.4}:{}}
+                        >
+                        <img src={this.props.selected[i].img} className="btn-playing_volume" alt='instrument volume' />
+                        </button>
+                        <input 
+                        className="range-volume" 
+                        value={volume}
+                        key={i}
+                        id={i}
+                        onInput={this.handleRangeVolume} 
+                        type="range"
+                        min='0'
+                        max='100'
+                        step='1'
+                        />
+                    </div> 
+                    ))}                                     
                 </div>
                 <div className="display-instrument-information-container">
                     <h1 className="display-instrument-information-title">{this.props.title}</h1>
@@ -224,7 +289,7 @@ class FinalMix extends Component {
                         onLoad={({loaded}) => this.endLoading(loaded)}
                         autoLoad={true}
                         position={this.state.positions[i]}
-                        volume={this.state.volume}
+                        volume={this.state.volumes[i]}
                         />                
                     )
                 }
@@ -249,10 +314,12 @@ flex-direction: column;
     color:#FFFCF2 !important;
 }
 
-.display-instrument-container {
+.finalmix-container {
     position: relative;
-    width: 100%;
-    margin: 48px 0;
+    width: 25vw;
+    margin: 48px auto;
+    display:flex;
+    justify-content:center
 }
 
 .button-container{
@@ -318,17 +385,6 @@ flex-direction: column;
     height: 30vw;
 }
 
-.display-instrument-container img {
-    position: absolute;
-    top:50%;
-    left:50%;
-    min-width: 280px;
-    min-height: 280px;
-    transform: translate(-50%,-50%);
-    width:24vw;
-    height:24vw;
-}
-
 .ControlePlayer-container {
     display: flex;
     align-items: center;
@@ -365,16 +421,6 @@ flex-direction: column;
       width:20vw;
       height:20vw;
     }
-
-    .display-instrument-container img {
-        top:50%;
-        left:50%;
-        min-width: 380px;
-        min-height: 380px;
-        transform: translate(-50%,-50%);
-        width:24vw;
-        height:24vw;
-    }
 }
 
 @media screen and (min-width: 768px) {
@@ -401,7 +447,36 @@ flex-direction: column;
     background: rgba(0, 0, 0, 0);
     z-index: 2;
 }
-
+.finalmix-container_items {
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    height: 15%;
+}
+.btn-playing{
+    outline:0;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 8px;
+    cursor: pointer;
+    border: 0;
+    padding: 12px;
+    background-color: rgba(216,216,216,0.20);
+    cursoir: pointer;
+    transition: all 0.4s ease;
+}
+.btn-playing_volume {
+    width: 80%;
+}
+.range-volume {
+    transform: rotate(270deg) translateY(-50%);
+    height: 4px;
+    border-radius: 14px;
+    margin-top: 50px;
+    max-width: 90px;
+}
 `
 
 export default FinalMix;

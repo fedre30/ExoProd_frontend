@@ -24,6 +24,18 @@ import mainKoto from '../assets/img/koto.jpg';
 import secondaryKoto from '../assets/img/koto2.png';
 import thumbKoto from '../assets/img/instruments/koto.png';
 
+import mainGuzheng from '../assets/img/guzheng.png';
+import secondaryGuzheng from '../assets/img/guzheng2.jpg';
+import thumbGuzheng from '../assets/img/instruments/Guzheng.png';
+
+import mainPipa from '../assets/img/pipa.jpeg';
+import secondaryPipa from '../assets/img/pipa2.jpg';
+import thumbPipa from '../assets/img/instruments/pipa.png';
+
+import mainCajon from '../assets/img/cajon.jpg';
+import secondaryCajon from '../assets/img/cajon2.jpg';
+import thumbCajon from '../assets/img/instruments/cajon.png';
+
 
 //SOUNDS
 
@@ -33,6 +45,9 @@ import soundSitar from '../assets/sounds/Melody_sitar.wav';
 import soundDulcimer from '../assets/sounds/Chords_dulcimer.wav';
 import soundCastanets from '../assets/sounds/Drums_castanets.wav';
 import soundKoto from '../assets/sounds/Chords_koto.wav';
+import soundGuzheng from '../assets/sounds/Bass_guzheng.wav';
+import soundPipa from '../assets/sounds/Bass_pipa.wav';
+import soundCajon from '../assets/sounds/Drums_cajon.wav';
 
 const Instruments = [
   {
@@ -216,7 +231,94 @@ const Instruments = [
     secondaryImage: secondaryKoto,
     thumbnail: thumbKoto
   },
+  {
+    id: 6,
+    title: 'Guhzeng',
+    pronunciation: '[kùʈʂə́ŋ]',
+    type: 'Cordes pincées',
+    shape: ' Ivoire, Tortoise, Guqin',
+    origin: 'Chine',
+    year: '  IIIe siècle',
+    description: {
+      title: 'La douceur de la Chine qui frappe le coeur',
+      text: 'Le guzheng (chinois simplifié : 古筝 ; chinois traditionnel : 古箏 ; pinyin : gǔzhēng) est un instrument de musique à cordes pincées traditionnel chinois de la famille des cithares sur table, dont les plus anciennes traces datent du iiie siècle avant notre ère. Gǔ signifie ancien et zhēng veut dire cithare.\n' +
+        '\n' +
+        'Selon une légende, il y avait un roi qui avait deux filles très douées qui adoraient jouer de cet instrument. Il est arrivé un temps où le roi devient trop vieux et il a envie de passer cet instrument à l\'une d’elles. Cependant, ses deux filles voulaient l’avoir. Le roi était vraiment triste de n’avoir qu\'un seul instrument, et pour finir, désespéré, il décida de couper cet instrument en deux. Une avait douze cordes et l’autre treize. À sa grande surprise, le nouvel instrument avait des sons doux et encore plus beaux que l’original. Le roi, tout content, donna un nouveau nom à ce nouvel instrument : « zheng ».'
+    },
+    facts: [
+      ' Les joueurs de Guzheng utilisent un ruban en tissu qui a été fabriqué pour coller les pics au-dessus de leurs doigts de la main droite. Pas tous, seulement les quatre premiers.',
+      'Yatsuhashi Kengyo était responsable du dev du koto.\n',
+      'Au début de la période meiji, la musique occidentale a été introduite au Japon.',
+      'Le koto mesure 1,82 mètre.'
+    ],
+    sound: {
+      filePath: soundGuzheng,
+      type: 'audio/wav'
+    },
+    videoUrl: '3UZH8AY5s4U',
+    coordinates: [104.306095, 43.552971],
+    mainImage: mainGuzheng,
+    secondaryImage: secondaryGuzheng,
+    thumbnail: thumbGuzheng
+  },
 
+  {
+    id: 7,
+    title: 'Pipa',
+    pronunciation: '[pʰȅi.pʰȁː]',
+    type: 'Cordes pincées',
+    shape: ' Biwa, đàn tỳ bà, Bipa',
+    origin: 'Chine',
+    year: '  IIe siècle',
+    description: {
+      title: 'Un son qui réprésente la tradition dans la culture asiatique',
+      text: 'Le pípa (chinois : 琵琶 ; pinyin : pípa) est un instrument de musique à cordes pincées traditionnel chinois de la famille du luth. Cet instrument apparaît pour la première fois dans des textes datant du iie siècle av. J.-C. La forme dérivée japonaise s\'appelle le biwa.\n' +
+        '\n' +
+        'Le bibacier (arbre à biba), également appelé néflier du Japon en Occident, tire son nom du chinois pípá guǒ 琵琶果, signifiant fruit [en forme de] pípá (琵琶). La graphie chinoise de l\'arbre a ensuite changé tout en remplaçant la clé des deux pièces de jades utilisé pour les instruments à cordes (珏) par celle du bois destiné aux arbres (木) la prononciation de l\'instrument y est conservée ; pípá 枇杷.'
+    },
+    facts: [
+      'Le pipa moderne s\'appelle le pipa quaxing («pipa au cou tordu») en Chine et a été introduit de l\'Inde en 346-53 de notre ère. Cependant, on dit qu\'il est originaire de l\'ancienne Perse.',
+      ' Le quxiang pipa était utilisé pendant les dynasties Sui et Tang à des fins de divertissement et était souvent associé à des chants et des danses ou accompagné d\'un ensemble.\n',
+      'Les formes traditionnelles du pipa sont encore utilisées dans le Fujian et le nord du Shaanxi, en dépit de la popularité croissante des formes fabriquées en usine.',
+    ],
+    sound: {
+      filePath: soundPipa,
+      type: 'audio/wav'
+    },
+    videoUrl: 'EAVop3YSebQ',
+    coordinates: [23.6978, 120.9605],
+    mainImage: mainPipa,
+    secondaryImage: secondaryPipa,
+    thumbnail: thumbPipa
+  },
+  {
+    id: 8,
+    title: 'Cajon',
+    pronunciation: '[kaˈxõn]',
+    type: 'Percussions',
+    shape: ' Bois, Métal',
+    origin: 'Peru',
+    year: '  XVIIIe siècle',
+    description: {
+      title: 'Tout le rythme sudamérican directement dans une caisse en bois ',
+      text: 'Le cajón est une caisse de résonance parallélépipède, de 50cm x 30cm x 30cm (hauteur/largeur/profondeur) en moyenne. La plaque de frappe (devant) est plus fine que les autres côtés, ce qui permet une élasticité et une résonance propre au cajón. Au dos, un trou d\'environ 10 cm de diamètre permet la sortie du son (même effet qu\'un évent de décompression d\'une enceinte de sono). Un timbre situé sous la plaque supérieure vibre lors de la frappe de l\'instrument. Il permet de différencier les cajones, tout en donnant au son cette ressemblance à la caisse claire de la batterie. '
+    },
+    facts: [
+      'Le mot «cajon» signifie «caisse, boîte ou tiroir».\n',
+      'Les premiers cajons étaient souvent fabriqués à partir de cartons d\'expédition apportés sur des navires espagnols de l\'Amérique coloniale espagnole. Les tiroirs de petite commode étaient souvent convertis en instruments aussi souvent que possible.',
+      'La musique folk irlandaise a adopté l\'utilisation du cajon dans une grande partie de sa musique.',
+      'La société Natur Concept à Boulazac Isle Manoire produit un cajón en carton pliable et biodégradable'
+    ],
+    sound: {
+      filePath: soundCajon,
+      type: 'audio/wav'
+    },
+    videoUrl: 'To2HY9i4ePA',
+    coordinates: [-69.1900, -15.0152],
+    mainImage: mainCajon,
+    secondaryImage: secondaryCajon,
+    thumbnail: thumbCajon
+  },
 
 ];
 

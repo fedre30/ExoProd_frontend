@@ -53,10 +53,6 @@ class About extends Component {
   // RENDER
 
   render() {
-
-
-    const { width } = this.state;
-    const isMobile = width <= 500;
     return (
       <AboutComponent>
         <Header>
@@ -98,8 +94,7 @@ class About extends Component {
 
 // STYLES
 
-const AboutComponent = styled.div
-  `
+const AboutComponent = styled.div`
   width: 100%;
   height: auto;
   background: rgb(13,0,35);

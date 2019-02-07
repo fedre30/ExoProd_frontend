@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import Studio from "./Studio";
 import { CSSTransition } from 'react-transition-group';
 import '../../styles/animation.css';
-import API from '../../helpers/api';
 import Menu from '../../components/menu/Menu';
 import Step from '../../components/studio/Step';
 import Next from '../../components/studio/Next';
@@ -25,14 +24,24 @@ class StudioContainer extends React.Component {
             name:"Sitar",
             id: 2,
             img: require('../../assets/img/instruments/sitar.png'),
-            details:'Un incontournable pour les Beatles',
+            details:{
+              type: 'Cordes pincées',
+              shape: 'Droit',
+              origin: 'Inde',
+              year: 'XIVe',
+            },
             sound:require('../../assets/sounds/Melody_sitar.wav')
           },
           {
             name:"Theremine",
             id: 1,
             img: require('../../assets/img/instruments/theremine.png'),
-            details: "Un son spatial qui se prête bien à la science fiction",
+            details:{
+              type: 'Electronique',
+              shape: 'A clavier ou violoncelle',
+              origin: 'Russie',
+              year: '1920',
+            },
             sound:require('../../assets/sounds/Melody_theremin.wav')
           }
         ],
@@ -41,14 +50,24 @@ class StudioContainer extends React.Component {
             name:"Dulcimer",
             id: 3,
             img: require('../../assets/img/instruments/dulcimer.png'),
-            details: "Un instrument de rêverie",
+            details:{
+              type: 'Cordes frappées',
+              shape: 'Dulcimer des Appalaches, Hammered dulcimer ',
+              origin: ' Europe du nord',
+              year: ' Moyen  âge',
+            },
             sound:require('../../assets/sounds/Chords_dulcimer.wav')
           },
           {
             name:"Koto",
             id: 5,
             img: require('../../assets/img/instruments/koto.png'),
-            details: "Un son hypnotisant directement du pays du soleil levant",
+            details:{
+              type: 'Cordes pincées',
+              shape: ' Jūshichigen, Nijūgen, Nijūgogen',
+              origin: 'Japon',
+              year: '  VIIe siècle',
+            },
             sound:require('../../assets/sounds/Chords_koto.wav')
           }
         ],
@@ -57,14 +76,24 @@ class StudioContainer extends React.Component {
             name:"Guzheng",
             id: 0,
             img: require('../../assets/img/instruments/Guzheng.png'),
-            details: "Guzheng",
+            details:{
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
+            },
             sound:require('../../assets/sounds/Bass_guzheng.wav')
           },
           {
             name:"Pipa",
             id: 0,
             img: require('../../assets/img/instruments/pipa.png'),
-            details: "Pipa",
+            details:{
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
+            },
             sound:require('../../assets/sounds/Bass_pipa.wav')
           }
         ],
@@ -73,14 +102,24 @@ class StudioContainer extends React.Component {
             name:"Cajon",
             id: 0,
             img: require('../../assets/img/instruments/cajon.png'),
-            details: 'Cajon',
+            details:{
+              type: 'Inconnu',
+              shape: 'Inconnu',
+              origin: 'Inconnu',
+              year: 'Inconnu',
+            },
             sound:require('../../assets/sounds/Drums_cajon.wav')
           },
           {
             name:"Castanet",
             id: 4,
             img: require('../../assets/img/instruments/Castanet.png'),
-            details: "Pas utilisé seulement pour le flamenco ",
+            details:{
+              type: 'Percussion idiophone',
+              shape: 'Castanyoles, Castanholas, Nacchere',
+              origin: 'Espagne, Italie, Grèce',
+              year: ' Inconnue',
+            },
             sound:require('../../assets/sounds/Drums_castanets.wav')
           }
         ]                 
@@ -171,7 +210,7 @@ class StudioContainer extends React.Component {
   }
 
   render() {
-    const {data,index,selected,check, modal} = this.state;
+    const {data,index,check, modal} = this.state;
     return (
     <div >
       <Modal
@@ -232,8 +271,7 @@ const blur = {
   WebkitFilter: 'blur(1px)',
   transition: 'all 0.3s ease',
 };
-const Responsive = styled.div
-`
+const Responsive = styled.div`
 height:100vh;
 overflow: hidden;
 background: rgb(13,0,35);

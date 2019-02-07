@@ -20,15 +20,14 @@ const Next = ({handleIndex,check}) => {
     )
 };
 
-const Button = styled.button
-`
+const Button = styled.button`
 position: absolute;
 bottom: 2vh;
 left: 50%;
 transform: translateX(-50%);
 text-transform: uppercase;
 cursor: pointer;
-font:${Fonts.subtitle};
+font:${Fonts.text};
 border:0;
 font-size: 12px;
 background:0;

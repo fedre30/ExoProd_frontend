@@ -219,10 +219,10 @@ const StudioComponent = styled.div`
     margin-bottom:0;
   }
   .studio-artist {
-    font-family: ${Fonts.subtitle};
+    font-family: ${Fonts.text};
   }
   .studio-title{
-    font-family: ${Fonts.subtitle}
+    font-family: ${Fonts.text}
   }
 
 
@@ -253,8 +253,8 @@ const StudioComponent = styled.div`
   }
   .chooseInstrument-btn {
     outline:0;
-    width: 64px;
-    height: 64px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
-import PropTypes from 'prop-types';
 import '../../styles/animation.css';
 import ovale from '../../assets/img/ovale-dotted.png';
 import { CSSTransition } from 'react-transition-group';
@@ -73,7 +72,12 @@ render(){
                 </div>          
                 <div className='studio-display-instrument_selected'>
                   <h2>{name}</h2>
-                  <p>{details}</p>
+                  <ul>
+                    <li className="studio-display-instrument_list"><b>Type:</b> {details.type}</li>
+                    <li className="studio-display-instrument_list"><b>Forme:</b> {details.shape}</li>
+                    <li className="studio-display-instrument_list"><b>Origine:</b> {details.origin}</li>
+                    <li className="studio-display-instrument_list"><b>Année:</b> {details.year}</li>
+                  </ul>
                   <Link
                     className="studio-display-instrument-link"
                     to={{
@@ -130,13 +134,7 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument .studio-display-instrument-img{
     overflow: visible;
   }
-  .studio-display-instrument-instruction {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
-    position: relative;
-    z-index: 1;
-  }
+
   .studio-display-instrument-img {
     position: absolute;
     z-index: 0;
@@ -170,10 +168,16 @@ const DisplayInstrumentComponent = styled.div`
 
   .studio-display-instrument-instruction {
     color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
+    font-family: ${Fonts.text};
+    font-size: 12px;
     position: relative;
     z-index: 1;
+    font-weight: 600;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument-instruction {
+      font-size: 16px;
+    }    
   }
   .studio-display-instrument_selected-container{
     position: relative;
@@ -206,6 +210,18 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument-link {
     color: ${Colors.text};
     font-family: ${Fonts.title};
+  }
+  .studio-display-instrument_list {
+    text-align:left;
+    font-family: ${Fonts.text};
+    color: ${Colors.text};
+    font-size: 12px;
+    margin-left: 16px;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_list { 
+      margin-left: 0;
+    }
   }
   .studio-display-instrument_selected h2 {
     font-weight: 400;
@@ -267,11 +283,9 @@ const DisplayInstrumentComponent = styled.div`
   }
   .studio-display-instrument_selected-container .right{
     right: 0;
-    margin-right: 5%;
   }
   .studio-display-instrument_selected-container .left{
     left: 0;
-    margin-left: 5%;
   }
   .studio-display-instrument_selected-container .left,
   .studio-display-instrument_selected-container .right{
@@ -291,6 +305,13 @@ const DisplayInstrumentComponent = styled.div`
   }
   @media screen and (min-width: 768px)
   {
+    .studio-display-instrument_selected-container .right{
+      margin-right: 5%;
+    }
+    .studio-display-instrument_selected-container .left{
+      margin-left: 5%;
+    }
+
     .studio-display-instrument_selected-container .right img,
     .studio-display-instrument_selected-container .left img {
       width: 16px;

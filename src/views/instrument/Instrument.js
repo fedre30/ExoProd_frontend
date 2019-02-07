@@ -214,8 +214,7 @@ class Instrument extends Component {
 
 // STYLES
 
-const CardComponent = styled.div
-  `
+const CardComponent = styled.div`
   width: 100%;
   height: auto;
   background: rgb(13,0,35);

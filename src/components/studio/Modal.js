@@ -16,7 +16,7 @@ const Modal = ({modal,handlerModal}) => {
             <div className="modal-wrap">
                 <h3>Comment jouer ?</h3>
                 <ul>
-                    <li>Vous avez la positibilité de modifier 4 parties: Mélodie, accord, basse...</li>
+                    <li>Vous avez la possibilité de modifier 4 parties: Mélodie, accord, basse...</li>
                     <li>Choisissez un nouvel instrument pour customiser votre morceaux selon vos envies</li>
                     <li>Ecoutez le résultat final et enregistrer votre propre création !</li>
                 </ul>

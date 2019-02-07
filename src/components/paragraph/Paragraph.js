@@ -22,8 +22,7 @@ Paragraph.propTypes = {
 
 };
 
-const ParagraphComponent = styled.div
-  `
+const ParagraphComponent = styled.div`
   .title {
     font-weight: 600;
     font-size: 3.5rem;

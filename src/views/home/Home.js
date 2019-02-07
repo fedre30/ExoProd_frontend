@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Menu from '../../components/menu/Menu';
 import Fonts from '../../styles/fonts';
 import Colors from '../../styles/colors';
-import {Grid, Button, Icon} from 'semantic-ui-react';
+import {Grid, Button} from 'semantic-ui-react';
 import Cover from 'react-video-cover';
 import Paragraph from "../../components/paragraph/Paragraph";
 import Thumbnail from "../../components/thumbnail/Thumbnail";
@@ -30,9 +30,7 @@ import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import fingers from '../../assets/img/touch-and-scroll.png';
-import zoomin from '../../assets/img/zoomin.png';
-import zoomout from '../../assets/img/zoomout.png';
-import reset from '../../assets/img/reset.png';
+
 
 // INSTRUMENTS
 
@@ -280,6 +278,7 @@ class Home extends Component {
                 <div className="map-modal">
                   <div className="map-modal-image"><img src={Instruments[this.state.currentID].secondaryImage} alt=""/></div>
                   <h2 className="map-modal-title">{Instruments[this.state.currentID].title}</h2>
+                  <div className="map-country">Pays: <span className="bold">{Instruments[this.state.currentID].origin}</span></div>
                   <div className="map-modal-facts">Fun facts</div>
                   <div className="map-modal-fact">{Instruments[this.state.currentID].facts[0]}</div>
                   <div className="map-modal-fact">{Instruments[this.state.currentID].facts[1]}</div>
@@ -496,17 +495,8 @@ class Home extends Component {
 
 // STYLES
 
-const videoStyle = {
-  width: '100vw',
-  height: '100vh',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: -1,
-};
 
-const HomeComponent = styled.div
-  `
+const HomeComponent = styled.div`
   width: 100%;
   height: auto;
   background: rgb(13,0,35);
@@ -761,6 +751,10 @@ font-size: 1.3rem;
 .instrument-button:hover {
   background-color: ${Colors.primary};
   color: ${Colors.text};
+}
+
+.bold {
+  font-weight: bold;
 }
 
 
