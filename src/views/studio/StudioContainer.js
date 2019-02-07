@@ -74,25 +74,25 @@ class StudioContainer extends React.Component {
         [
           {
             name:"Guzheng",
-            id: 0,
+            id: 6,
             img: require('../../assets/img/instruments/Guzheng.png'),
             details:{
-              type: 'Inconnu',
-              shape: 'Inconnu',
-              origin: 'Inconnu',
-              year: 'Inconnu',
+              type: 'Cordes pincées',
+              shape: ' Ivoire, Tortoise, Guqin',
+              origin: 'Chine',
+              year: '  IIIe siècle',
             },
             sound:require('../../assets/sounds/Bass_guzheng.wav')
           },
           {
             name:"Pipa",
-            id: 0,
+            id: 7,
             img: require('../../assets/img/instruments/pipa.png'),
             details:{
-              type: 'Inconnu',
-              shape: 'Inconnu',
-              origin: 'Inconnu',
-              year: 'Inconnu',
+              type: 'Cordes pincées',
+              shape: ' Biwa, đàn tỳ bà, Bipa',
+              origin: 'Chine',
+              year: '  IIe siècle',
             },
             sound:require('../../assets/sounds/Bass_pipa.wav')
           }
@@ -100,13 +100,13 @@ class StudioContainer extends React.Component {
         [
           {
             name:"Cajon",
-            id: 0,
+            id: 8,
             img: require('../../assets/img/instruments/cajon.png'),
             details:{
-              type: 'Inconnu',
-              shape: 'Inconnu',
-              origin: 'Inconnu',
-              year: 'Inconnu',
+              type: 'Percussions',
+              shape: ' Bois, Métal',
+              origin: 'Peru',
+              year: '  XVIIIe siècle',
             },
             sound:require('../../assets/sounds/Drums_cajon.wav')
           },

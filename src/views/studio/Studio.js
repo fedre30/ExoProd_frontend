@@ -80,8 +80,8 @@ class Studio extends Component {
 
       return false;
     }
-
-    this.buttons.map((button,i) => {
+    for(let i =0; i<this.buttons.length;i++){
+      const button = this.buttons[i];
       if(current_btn === button) {
         button.classList.add('selected')
         this.removeButtonClasse(i,'unselected')
@@ -108,7 +108,7 @@ class Studio extends Component {
         button.classList.add('unselected')
         this.removeButtonClasse(i,'selected')
       }
-    })
+    }
   }
 
 
