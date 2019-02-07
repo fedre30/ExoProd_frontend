@@ -41,11 +41,11 @@ background: rgba(0,0,0,0.4);
     left: 50%;
     border-radius: 8px;
     transform: translate(-50%,-50%);
-    height: 50vh;
+    height: 60vh;
     width: 80%;
     font-style:${Fonts.subtitle};
     max-width: 600px;
-    max-height: 320px;
+    max-height: 360px;
     background: rgb(95,6,163);
     background: linear-gradient(218deg, rgba(95,6,163,1) 0%, rgba(168,21,221,1) 100%);
     border: 1px solid rgba(255,255,255);
@@ -108,6 +108,7 @@ li {
     position:absolute;
     left: 50%;
     bottom: -24px;
+    white-space: nowrap;
     transform: translate(-50%, -8px);
 }
 @media screen and (min-width: 768px) {
