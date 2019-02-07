@@ -14,7 +14,7 @@ class StudioContainer extends React.Component {
   state = {
     title:"Viva la vida",
     artist: "COLDPLAY",
-    steps:['melodie','accords','basse','percussion','fin'],
+    steps:['melodie','accords','basse','percussions','fin'],
     modal: false,
     selected:[[],[],[],[]],
     data:
