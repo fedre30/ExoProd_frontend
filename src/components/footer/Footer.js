@@ -33,8 +33,7 @@ class Footer extends Component {
   }
 }
 
-const FooterComponent = styled.div
-  `
+const FooterComponent = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;

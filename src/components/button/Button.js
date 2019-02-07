@@ -24,8 +24,7 @@ ExoButton.propTypes = {
 
 };
 
-const ButtonComponent = styled.div
-  `
+const ButtonComponent = styled.div`
    width: 300px;
  height: 150px;
  margin: 0 auto;
@@ -71,7 +70,7 @@ const ButtonComponent = styled.div
   }
   
   @media(max-width: 560px) {
-  
+  width: 150px;
   
   .outer {
     width: 150px;

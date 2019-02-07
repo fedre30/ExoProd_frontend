@@ -79,8 +79,7 @@ class Menu extends Component {
   }
 }
 
-const MenuComponent = styled.div
-  `
+const MenuComponent = styled.div`
     
   .menu-wrapper {
     width: 100%;
@@ -171,6 +170,7 @@ const MenuComponent = styled.div
     right: -2rem;
     top: 3rem;
     z-index: 2;
+    cursor: pointer;
     
   
     }

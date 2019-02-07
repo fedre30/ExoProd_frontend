@@ -23,8 +23,7 @@ const Step = ({index,steps}) => {
  
     )
 };
-const StepContainer = styled.div
-`
+const StepContainer = styled.div`
 display:none;
 @media screen and (min-width: 768px){
     display: block;
@@ -39,7 +38,7 @@ display:none;
     min-height:400px;
 
     .type-list-container {
-        height: 400px;
+        height: 500px;
         display:flex;
         width: 20%;
         flex-direction: column;
@@ -56,8 +55,8 @@ display:none;
         display: flex;
         align-items: center;
         margin: 0;
-        padding: 4px 0;
-        width: 240px;
+        padding: 8px 0;
+        width: 280px;
         display: flex;
         position: relative;
         z-index:1;

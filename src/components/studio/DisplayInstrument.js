@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
 import '../../styles/animation.css';
 import ovale from '../../assets/img/ovale-dotted.png';
 import { CSSTransition } from 'react-transition-group';
@@ -15,6 +15,7 @@ class DisplayInstrument extends Component{
 state = {
   index : 0,
 }
+
 swap = (index) => () => {this.setState({index})};
 
 render(){
@@ -71,8 +72,21 @@ render(){
                 </div>          
                 <div className='studio-display-instrument_selected'>
                   <h2>{name}</h2>
-                  <p>{details}</p>
-                  <Link className="studio-display-instrument-link" to={`/instruments/${id}`}>En savoir plus</Link>
+                  <ul>
+                    <li className="studio-display-instrument_list"><b>Type:</b> {details.type}</li>
+                    <li className="studio-display-instrument_list"><b>Forme:</b> {details.shape}</li>
+                    <li className="studio-display-instrument_list"><b>Origine:</b> {details.origin}</li>
+                    <li className="studio-display-instrument_list"><b>Année:</b> {details.year}</li>
+                  </ul>
+                  <Link
+                    className="studio-display-instrument-link"
+                    to={{
+                      pathname: `/instrument/${id}`,
+                      state: { id }
+                    }}
+                  >
+                  En savoir plus
+                  </Link>
                 </div>
               </div>
             </div>
@@ -120,13 +134,7 @@ const DisplayInstrumentComponent = styled.div`
   .studio-display-instrument .studio-display-instrument-img{
     overflow: visible;
   }
-  .studio-display-instrument-instruction {
-    color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
-    position: relative;
-    z-index: 1;
-  }
+
   .studio-display-instrument-img {
     position: absolute;
     z-index: 0;
@@ -160,10 +168,16 @@ const DisplayInstrumentComponent = styled.div`
 
   .studio-display-instrument-instruction {
     color: ${Colors.text};
-    font-family: ${Fonts.title};
-    font-size: 16px;
+    font-family: ${Fonts.text};
+    font-size: 12px;
     position: relative;
     z-index: 1;
+    font-weight: 600;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument-instruction {
+      font-size: 16px;
+    }    
   }
   .studio-display-instrument_selected-container{
     position: relative;
@@ -197,6 +211,20 @@ const DisplayInstrumentComponent = styled.div`
     color: ${Colors.text};
     font-family: ${Fonts.title};
   }
+  .studio-display-instrument_list {
+    text-align:left;
+    font-family: ${Fonts.text};
+    color: ${Colors.text};
+    font-size: 12px;
+    margin-left: 16px;
+    margin-top: 2px;
+  }
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_list { 
+      font-size: 14px;
+      margin-top: 6px;
+    }
+  }
   .studio-display-instrument_selected h2 {
     font-weight: 400;
     font-size: 18px;
@@ -229,18 +257,29 @@ const DisplayInstrumentComponent = styled.div`
     font-size: 12px;
     transition: all 0.4s ease;
   }
-  .studio-display-instrument-link:hover {
-    background: rgba(255,255,255,1);
-    border: 1px solid rgba(255,255,255,1);
-    color: purple;
-    transition: all 0.4s ease;
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument-link:hover {
+      background: rgba(255,255,255,1);
+      border: 1px solid rgba(255,255,255,1);
+      color: purple;
+      transition: all 0.4s ease;
+    }
   }
 
+
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_selected ul {
+      width: 65%;
+      margin: 0 auto;
+    }    
+  }
   .studio-display-instrument_selected-img {
     width:60%;
     height:60%;
     max-width: 200px;
     max-height: 200px;
+    display: flex;
+    align-items: center;
   }
   .studio-display-instrument_selected-img img {
     width:100%;
@@ -248,20 +287,19 @@ const DisplayInstrumentComponent = styled.div`
   @media screen and (min-width:768px) {
     .studio-display-instrument_selected {
       width: 80%;
+      height: 70%;
     }
     .studio-display-instrument_selected-img {
       width:50%;
-      height:50%;
+      height:70%;
     }
 
   }
   .studio-display-instrument_selected-container .right{
     right: 0;
-    margin-right: 5%;
   }
   .studio-display-instrument_selected-container .left{
     left: 0;
-    margin-left: 5%;
   }
   .studio-display-instrument_selected-container .left,
   .studio-display-instrument_selected-container .right{
@@ -281,6 +319,13 @@ const DisplayInstrumentComponent = styled.div`
   }
   @media screen and (min-width: 768px)
   {
+    .studio-display-instrument_selected-container .right{
+      margin-right: 5%;
+    }
+    .studio-display-instrument_selected-container .left{
+      margin-left: 5%;
+    }
+
     .studio-display-instrument_selected-container .right img,
     .studio-display-instrument_selected-container .left img {
       width: 16px;
@@ -289,4 +334,4 @@ const DisplayInstrumentComponent = styled.div`
   `;
 
 
-export default DisplayInstrument;
+export default withRouter(DisplayInstrument);

@@ -31,6 +31,7 @@ import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import fingers from '../../assets/img/touch-and-scroll.png';
 
+
 // INSTRUMENTS
 
 import Instruments  from '../../helpers/api';
@@ -49,13 +50,13 @@ class Home extends Component {
         title: "De nouvelles sonorités à travers les instruments d’autres pays du monde",
         text: " Le concept de “Production exotique” consiste à proposer une expérience de découverte d’instruments méconnus, soi-disant exotiques.\n" +
           "Analyser comment les styles et les instruments d’outre-mer ont eu un impact sur la musique actuelle et rester émerveillé de la quantité d’artistes qui experiment avec ces instruments pour enrichir leur musique.",
-        direction: "left"
+        direction: "right"
       },
       secondParagraph: {
         title: "Prenez en main les instruments et créez votre propre son",
         text: "Explorez le potentiel des ces instruments à travers vos chansons préférées, en modifiant la mélodie, les accords ou d’autres pistes avec l’instrument le plus souhaitable à votre goût.\n" +
           "Transformez un morceau pop actuel en un oeuvre qui va au-delà de toute limite spatio-temporelle pour un résultat époustouflant ! \n",
-        direction: "right"
+        direction: "left"
       },
       mapTitle: 'Voyagez à travers le monde pour un tout nouveau son',
       markers: Instruments,
@@ -121,7 +122,7 @@ class Home extends Component {
   }
   handleCityClick(city) {
     this.setState({
-      zoom: 2,
+      zoom: 5,
       center: city.coordinates,
     })
   }
@@ -166,7 +167,7 @@ class Home extends Component {
           <Header>
             <Menu/>
             <div className="video-background"><Cover videoOptions={videoOptions}/></div>
-            <div className="title-container">
+            <div className="title-container intro-enter">
               <h2 className="title">Un voyage musical intemporel</h2>
               <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
             </div>
@@ -179,19 +180,13 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                <Button onClick={this.handleZoomIn}>
-                  { "Zoom in" }
-                </Button>
-                <Button onClick={this.handleZoomOut}>
-                  { "Zoom out" }
-                </Button>
-                <Button onClick={this.handleReset}>
-                  { "Reset" }
-                </Button>
+                <Button onClick={this.handleZoomIn}  color="white" icon="zoom-in icon big violet"/>
+                <Button onClick={this.handleZoomOut}  color="white" icon="zoom-out icon big violet"/>
+                <Button  onClick={this.handleReset}  color="white" icon="undo icon big violet"/>
                 </div>
                 <div className="buttons-instruments">
                 {this.state.markers.map((marker, i) => (
-                  <Button  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</Button>
+                  <button className="instrument-button"  key={i} onClick={() => {this.handleCityClick(marker)}}>{marker.title}</button>
                 ))}
                 </div>
                 <Motion
@@ -201,15 +196,15 @@ class Home extends Component {
                     y: 20,
                   }}
                   style={{
-                    zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
-                    x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
-                    y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+                    zoom: spring(this.state.zoom, {stiffness: 310, damping: 30}),
+                    x: spring(this.state.center[0], {stiffness: 310, damping: 30}),
+                    y: spring(this.state.center[1], {stiffness: 310, damping: 30}),
                   }}
                 >
                   {({zoom,x,y}) => (
                 <ComposableMap projectionConfig={{
                   scale: 250
-                }} width={1600} height={800} projection="robinson">
+                }} width={1920} height={800} projection="robinson">
                   <ZoomableGroup center={[x,y]} zoom={zoom}>
                     <Geographies geography={geography}>
                       {(geographies, projection) => geographies.map(geography => (
@@ -283,6 +278,7 @@ class Home extends Component {
                 <div className="map-modal">
                   <div className="map-modal-image"><img src={Instruments[this.state.currentID].secondaryImage} alt=""/></div>
                   <h2 className="map-modal-title">{Instruments[this.state.currentID].title}</h2>
+                  <div className="map-country">Pays: <span className="bold">{Instruments[this.state.currentID].origin}</span></div>
                   <div className="map-modal-facts">Fun facts</div>
                   <div className="map-modal-fact">{Instruments[this.state.currentID].facts[0]}</div>
                   <div className="map-modal-fact">{Instruments[this.state.currentID].facts[1]}</div>
@@ -359,15 +355,9 @@ class Home extends Component {
               </div>
               <div className="paragraph-right">
                 <div className="buttons-zoom">
-                  <button className="instrument-button" onClick={this.handleZoomIn}>
-                    { "Zoom in" }
-                  </button>
-                  <button className="instrument-button" onClick={this.handleZoomOut}>
-                    { "Zoom out" }
-                  </button>
-                  <button className="instrument-button" onClick={this.handleReset}>
-                    { "Reset" }
-                  </button>
+                  <Button onClick={this.handleZoomIn}  color="white" icon="zoom-in icon big violet"/>
+                  <Button onClick={this.handleZoomOut}  color="white" icon="zoom-out icon big violet"/>
+                  <Button  onClick={this.handleReset}  color="white" icon="undo icon big violet"/>
                 </div>
                 <div className="buttons-instruments">
                   {this.state.markers.map((marker, i) => (
@@ -385,15 +375,15 @@ class Home extends Component {
                     y: 20,
                   }}
                   style={{
-                    zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
-                    x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
-                    y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+                    zoom: spring(this.state.zoom, {stiffness: 110, damping: 20}),
+                    x: spring(this.state.center[0], {stiffness: 110, damping: 20}),
+                    y: spring(this.state.center[1], {stiffness: 110, damping: 20}),
                   }}
                 >
                   {({zoom,x,y}) => (
                     <ComposableMap projectionConfig={{
                       scale: 130
-                    }} width={360} height={300} projection="robinson">
+                    }} width={380} height={300} projection="robinson">
                       <ZoomableGroup center={[x,y]} zoom={zoom}>
                         <Geographies geography={geography}>
                           {(geographies, projection) => geographies.map(geography => (
@@ -505,17 +495,8 @@ class Home extends Component {
 
 // STYLES
 
-const videoStyle = {
-  width: '100vw',
-  height: '100vh',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: -1,
-};
 
-const HomeComponent = styled.div
-  `
+const HomeComponent = styled.div`
   width: 100%;
   height: auto;
   background: rgb(13,0,35);
@@ -542,7 +523,7 @@ const Header = styled.div`
     text-align: center;
     width: 70%;
     height: auto;
-    padding: 1rem;
+    padding: 4rem 0;
     margin: 0 auto;
     background-color: rgba(85, 11, 184, 0.6);
     
@@ -555,9 +536,10 @@ const Header = styled.div`
   .video-background {
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
  
   }
   .header-image {
@@ -573,7 +555,6 @@ const Header = styled.div`
     font-family: ${Fonts.title};
     text-transform: uppercase;
     font-size: 4.58rem;
-    margin-bottom: 3.5rem;
   }
   .subtitle {
     color: ${Colors.text};
@@ -754,6 +735,30 @@ font-size: 1.3rem;
   text-align: center;
   font-size: 1.5rem;
   color: ${Colors.fourth};
+}
+
+.instrument-button {
+  width: 100px;
+  height: 50px;
+  background-color: ${Colors.text};
+  color: ${Colors.primary};
+  font-family: ${Fonts.subtitle};
+  border: 1px solid ${Colors.secondary};
+  border-radius: 0.4rem;
+  transition: all .2s ease;
+}
+
+.instrument-button:hover {
+  background-color: ${Colors.primary};
+  color: ${Colors.text};
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.map-country {
+  font-weight: 2.5rem;
 }
 
 

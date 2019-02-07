@@ -27,11 +27,10 @@ const Previous = ({previous,index}) => {
 // to ButtonMobile, replace top to calc(50% - 200px)
 // and left: 15vw
 // remove transform
-const Responsive = styled.div
-`
+const Responsive = styled.div`
 position:absolute;
 z-index: 999999;
-top:calc(14vh);
+top: calc(10vh + 10px);
 left:50%;
 transform:translateX(-50%);
 button {
@@ -40,6 +39,7 @@ button {
 
 @media screen and (min-width: 768px){
     top:calc(3vw + 60px);
+    top:14vh;
     left:50%;
     transform: translateX(-50%);
 }
@@ -48,12 +48,11 @@ button {
 }
 
 `
-const ButtonMobileVTwo = styled.button
-`
+const ButtonMobileVTwo = styled.button`
 display:block;
 text-transform: uppercase;
 cursor: pointer;
-font:${Fonts.subtitle};
+font:${Fonts.text};
 border:0;
 font-size: 12px;
 background:0;
@@ -94,8 +93,7 @@ color:${Colors.text};
 }
 `
 
-const ButtonDesktop = styled.button
-`
+const ButtonDesktop = styled.button`
 display:none;
 @media screen and (min-width: 768px){
     display:block;
