@@ -217,10 +217,12 @@ const DisplayInstrumentComponent = styled.div`
     color: ${Colors.text};
     font-size: 12px;
     margin-left: 16px;
+    margin-top: 2px;
   }
   @media screen and (min-width: 768px) {
     .studio-display-instrument_list { 
-      margin-left: 0;
+      font-size: 14px;
+      margin-top: 6px;
     }
   }
   .studio-display-instrument_selected h2 {
@@ -255,18 +257,29 @@ const DisplayInstrumentComponent = styled.div`
     font-size: 12px;
     transition: all 0.4s ease;
   }
-  .studio-display-instrument-link:hover {
-    background: rgba(255,255,255,1);
-    border: 1px solid rgba(255,255,255,1);
-    color: purple;
-    transition: all 0.4s ease;
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument-link:hover {
+      background: rgba(255,255,255,1);
+      border: 1px solid rgba(255,255,255,1);
+      color: purple;
+      transition: all 0.4s ease;
+    }
   }
 
+
+  @media screen and (min-width: 768px) {
+    .studio-display-instrument_selected ul {
+      width: 65%;
+      margin: 0 auto;
+    }    
+  }
   .studio-display-instrument_selected-img {
     width:60%;
     height:60%;
     max-width: 200px;
     max-height: 200px;
+    display: flex;
+    align-items: center;
   }
   .studio-display-instrument_selected-img img {
     width:100%;
@@ -274,10 +287,11 @@ const DisplayInstrumentComponent = styled.div`
   @media screen and (min-width:768px) {
     .studio-display-instrument_selected {
       width: 80%;
+      height: 70%;
     }
     .studio-display-instrument_selected-img {
       width:50%;
-      height:50%;
+      height:70%;
     }
 
   }

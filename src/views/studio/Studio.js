@@ -219,6 +219,7 @@ const StudioComponent = styled.div`
     margin-bottom:0;
   }
   .studio-artist {
+    margin-top: 8px;
     font-family: ${Fonts.text};
   }
   .studio-title{
@@ -231,14 +232,11 @@ const StudioComponent = styled.div`
   }
   @media screen and (min-width:768px) {
     .studio-title {
-      margin-top: 56px;
+      margin-top: 66px;
     }
     .studio-artist {
       margin-bottom: 24px;
     }
-  }
-  .studio-artist {
-    margin-top:0;
   }
 
   .btn-instrument.mobile {
