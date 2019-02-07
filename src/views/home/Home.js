@@ -30,6 +30,7 @@ import backgroundImage from '../../assets/img/header.svg';
 import triangle from '../../assets/img/Barres.png';
 import thumbnail from '../../assets/img/background_home.jpg';
 import fingers from '../../assets/img/touch-and-scroll.png';
+import chevron from '../../assets/img/down-chevron.svg';
 
 
 // INSTRUMENTS
@@ -171,6 +172,7 @@ class Home extends Component {
               <h2 className="title">Un voyage musical intemporel</h2>
               <h3 className="subtitle">Découvrez des instruments uniques et amusez-vous avec…</h3>
             </div>
+            <div className="scroll scale-down-center"><img src={chevron} alt=""/></div>
           </Header>
           <ScrollAnimation animateIn='map-enter' duration={0.6} delay={0.2}>
             <Sectionmap>
@@ -561,6 +563,17 @@ const Header = styled.div`
     font-family: ${Fonts.subtitle};
     font-size: 2.3rem;
     font-weight: 200;
+  }
+  
+  .scroll {
+  margin: 0 auto;
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  width: 3rem;
+  img {
+    width: 100%;
+  }
   }
   
   @media(max-width: 560px) {

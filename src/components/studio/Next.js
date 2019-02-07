@@ -37,9 +37,11 @@ outline: 0;
 @media screen and (min-width: 768px){
     bottom: 28px;
     bottom: calc(1.8vw + 16px);
+    font-size: 14px;
+    font-weight: 400;
 }
 @media screen and (min-width: 1100px){
-    bottom: 2vw;
+    bottom: 3vw;
 }
 :after{
     background-image:url('${arrowDown}');
@@ -51,24 +53,6 @@ outline: 0;
     line-height: normal;
     animation: down 1.5s linear infinite;
 }
-@keyframes down{
-    0% {
-     top:-12px;
-     opacity: 0;
-    }
-    10%{
-     opacity: 0;
-    }
-    50%{
-    opacity:1;
-    }
-    90% {
-    opacity:0;
-    }
-    100% {
-    top: 12px;
-    opacity:0;
-    }
-}
+
 `
 export default Next;

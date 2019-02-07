@@ -322,7 +322,12 @@ flex-direction: column;
     display:flex;
     justify-content:center
 }
-
+@media screen and (min-width: 768px) {
+    .finalmix-container { 
+        width: 45vw;
+        justify-content: space-evenly;
+    }
+}
 .button-container{
     display:flex;
     align-items:center;
@@ -445,6 +450,13 @@ flex-direction: column;
     left: 0;
     background: rgba(0, 0, 0, 0);
     z-index: 2;
+}
+@media screen and (min-width: 768px) {
+    input[type=range].ControlePlayer-progressbar-interactive_range::-webkit-slider-runnable-track,
+    input[type=range].ControlePlayer-progressbar-interactive_range::-moz-range-thumb,
+    input[type=range].ControlePlayer-progressbar-interactive_range::-ms-thumb,{
+        height: 20px;
+    }  
 }
 .finalmix-container_items {
     display:flex;
