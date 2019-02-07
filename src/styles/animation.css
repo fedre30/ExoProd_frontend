@@ -286,8 +286,47 @@
     animation: fade-left 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
+/* DOWN */
+@keyframes down{
+    0% {
+     top:-12px;
+     opacity: 0;
+    }
+    10%{
+     opacity: 0;
+    }
+    50%{
+    opacity:1;
+    }
+    90% {
+    opacity:0;
+    }
+    100% {
+    top: 12px;
+    opacity:0;
+    }
+}
 
-
+/* UP */
+@keyframes up{
+    0% {
+     bottom:-12px;
+     opacity: 0;
+    }
+    10%{
+     opacity: 0;
+    }
+    50%{
+    opacity:1;
+    }
+    90% {
+    opacity:0;
+    }
+    100% {
+    bottom: 12px;
+    opacity:0;
+    }
+}
 
 
 

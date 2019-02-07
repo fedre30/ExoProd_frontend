@@ -56,7 +56,7 @@ font:${Fonts.text};
 border:0;
 font-size: 12px;
 background:0;
-font-weight:bolder;
+font-weight: bolder;
 color:${Colors.text};
 :after{
     background-image:url('${arrowDown}');
@@ -71,25 +71,8 @@ color:${Colors.text};
 }
 @media screen and (min-width: 768px){
     display:none;
+    font-size: 14;
 }
-@keyframes up{
-    0% {
-     bottom:-24px;
-     opacity: 0;
-    }
-    10%{
-     opacity: 0;
-    }
-    50%{
-    opacity:0.7;
-    }
-    90% {
-    opacity:0;
-    }
-    100% {
-    bottom: 12px;
-    opacity:0;
-    }
 }
 `
 
@@ -101,9 +84,9 @@ display:none;
     cursor: pointer;
     font:${Fonts.subtitle};
     border:0;
-    font-size: 12px;
+    font-size: 14px;
     background:0;
-    font-weight:bolder;
+    font-weight: 400;
     color:${Colors.text};
     :after{
         background-image:url('${arrowDown}');
@@ -115,25 +98,6 @@ display:none;
         transform:rotate(180deg);
         line-height: normal;
         animation: up 1.5s linear infinite;
-    }
-    @keyframes up{
-        0% {
-         bottom:-12px;
-         opacity: 0;
-        }
-        10%{
-         opacity: 0;
-        }
-        50%{
-        opacity:1;
-        }
-        90% {
-        opacity:0;
-        }
-        100% {
-        bottom: 12px;
-        opacity:0;
-        }
     }
 }
 `
