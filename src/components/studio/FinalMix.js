@@ -69,12 +69,12 @@ class FinalMix extends Component {
         let {isMute,volumes} = this.state;
         if(isMute) {
             isMute = false;
-            volumes.map(volume =>{
+            volumes = volumes.map(volume =>{
                 return 100;
             })
         } else {
             isMute = true;
-            volumes.map(volume => {
+            volumes = volumes.map(volume => {
                 return 0;
             })
         }
