@@ -286,7 +286,7 @@ const Instruments = [
       type: 'audio/wav'
     },
     videoUrl: 'EAVop3YSebQ',
-    coordinates: [23.6978, 120.9605],
+    coordinates: [113.6978, 5.9605],
     mainImage: mainPipa,
     secondaryImage: secondaryPipa,
     thumbnail: thumbPipa

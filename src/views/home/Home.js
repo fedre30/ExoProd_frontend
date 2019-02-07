@@ -757,6 +757,10 @@ font-size: 1.3rem;
   font-weight: bold;
 }
 
+.map-country {
+  font-weight: 2.5rem;
+}
+
 
   
   
