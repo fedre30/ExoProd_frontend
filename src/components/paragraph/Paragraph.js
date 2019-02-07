@@ -22,8 +22,7 @@ Paragraph.propTypes = {
 
 };
 
-const ParagraphComponent = styled.div
-  `
+const ParagraphComponent = styled.div`
   .title {
     font-weight: 600;
     font-size: 3.5rem;
@@ -50,10 +49,12 @@ const ParagraphComponent = styled.div
   @media(max-width: 560px) {
     .title {
     font-size: 2.5rem;
+    text-align: left;
     }
     .text {
     font-size: 1rem;
     line-height: 1.5rem;
+    text-align: left;
     }
   }
 

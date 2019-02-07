@@ -70,8 +70,9 @@ class Studio extends Component {
       details,
       id
     })
-  }  
-  
+  }
+
+
   selectInstrument(id) {
     // à faire: changement de style
     const current_btn = this.buttons[id];
@@ -79,8 +80,8 @@ class Studio extends Component {
 
       return false;
     }
-
-    this.buttons.map((button,i) => {
+    for(let i =0; i<this.buttons.length;i++){
+      const button = this.buttons[i];
       if(current_btn === button) {
         button.classList.add('selected')
         this.removeButtonClasse(i,'unselected')
@@ -107,12 +108,12 @@ class Studio extends Component {
         button.classList.add('unselected')
         this.removeButtonClasse(i,'selected')
       }
-    })
+    }
   }
 
 
   render(){
-    const {isSelected,select} = this.state; 
+    const {isSelected} = this.state;
     return (
       <StudioComponent>
         <Grid className="studio-container">
@@ -136,6 +137,7 @@ class Studio extends Component {
               <h2 className="studio-artist">{this.props.artist}</h2>
               <ControlePlayer
               insertsong={true}
+              handlerModal={this.props.handlerModal}
               isLoadingEnd={this.state.isLoadingEnd}
               endloading={this.endloading}
               reset={this.props.reset}
@@ -155,7 +157,7 @@ class Studio extends Component {
               onClick={() =>this.selectInstrument(i)} // quand je clique, je récupère mon button, à finir
               className={`chooseInstrument-btn`}
               >
-                <img src={intrument.img}/>
+                <img src={intrument.img} alt='instrument'/>
               </button>
             ))}
             </div>
@@ -167,8 +169,7 @@ class Studio extends Component {
   }
 };
 
-const StudioComponent = styled.div
-  `
+const StudioComponent = styled.div`
   height: 100vh;
   overflow: hidden;
   min-height: 375px;
@@ -187,8 +188,7 @@ const StudioComponent = styled.div
   }
   #title {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-size: 16px;
     margin-top: 18vw;
     color: ${Colors.text};
     font-family: ${Fonts.title};
@@ -219,26 +219,24 @@ const StudioComponent = styled.div
     margin-bottom:0;
   }
   .studio-artist {
-    font-family: ${Fonts.subtitle};
+    margin-top: 8px;
+    font-family: ${Fonts.text};
   }
   .studio-title{
-    font-family: ${Fonts.subtitle}
+    font-family: ${Fonts.text}
   }
 
 
   .studio-title {
-    margin-top:40px;
+    margin-top: 32px;
   }
   @media screen and (min-width:768px) {
     .studio-title {
-      margin-top:56px;
+      margin-top: 66px;
     }
     .studio-artist {
       margin-bottom: 24px;
     }
-  }
-  .studio-artist {
-    margin-top:0;
   }
 
   .btn-instrument.mobile {
@@ -253,8 +251,8 @@ const StudioComponent = styled.div
   }
   .chooseInstrument-btn {
     outline:0;
-    width: 64px;
-    height: 64px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     margin: 0 8px;
     cursor: pointer;
@@ -278,7 +276,12 @@ const StudioComponent = styled.div
   .chooseInstrument-container {
     padding-top:12px;
   }
-  
+  .test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
   @media screen and (min-width:768px){
     .chooseInstrument-container {
       padding-top:0;
@@ -287,10 +290,11 @@ const StudioComponent = styled.div
       transform: translateY(-50%);
     }
     .test{
-      display:flex;
       width:10%;
+      justify-content: start;
       flex-direction:column;
       flex-wrap:wrap;
+      align-items: center;
     }
     .chooseInstrument-btn {
       width: 72px;

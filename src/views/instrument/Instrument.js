@@ -33,8 +33,6 @@ class Instrument extends Component {
       playing: false,
       width: window.innerWidth
     }
-
-
   }
 
   // METHODS
@@ -69,6 +67,7 @@ class Instrument extends Component {
   }
 
 
+
   // RENDER
 
   render() {
@@ -85,7 +84,7 @@ class Instrument extends Component {
       height: '360',
       width: '450',
       playerVars: {
-        autoplay: 1
+        autoplay: 2
       }
     };
 
@@ -141,16 +140,18 @@ class Instrument extends Component {
 
         </Header>
         <DescriptionSection>
-          <Grid columns={12}>
-            <Grid.Column computer={6} mobile={16}>
+          <Grid columns={16}>
+            <Grid.Row>
+            <Grid.Column computer={7} mobile={16} floated="left">
               <img src={Instruments[this.props.location.state.id].secondaryImage} alt=""/>
             </Grid.Column>
-            <Grid.Column computer={9} mobile={16}>
+            <Grid.Column computer={7} mobile={16} floated="right">
               <ScrollAnimation animateIn="paragraph-right">
                 <Paragraph title={Instruments[this.props.location.state.id].description.title} text={Instruments[this.props.location.state.id].description.text}
                            direction={isMobile ? 'left' : 'right'}/>
               </ScrollAnimation>
             </Grid.Column>
+            </Grid.Row>
           </Grid>
         </DescriptionSection>
         <SoundSection>
@@ -213,8 +214,7 @@ class Instrument extends Component {
 
 // STYLES
 
-const CardComponent = styled.div
-  `
+const CardComponent = styled.div`
   width: 100%;
   height: auto;
   background: rgb(13,0,35);
@@ -239,7 +239,7 @@ const Header = styled.div`
     width: 50%;
     background: url(${title}) no-repeat;
     background-size: 100% 100%;
-    padding: 25vh 4rem;
+    padding: 23vh 4rem;
   }
 
   .title {
@@ -354,11 +354,11 @@ height: 85vh;
 }
 
 .artist-item {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: ${Colors.text};
-  margin: 2rem 0;
+  margin: 3rem 0;
   list-style: url(${list}) inside;
-  line-height: 2rem;
+  line-height: 2.4rem;
 }
 
 .player {
